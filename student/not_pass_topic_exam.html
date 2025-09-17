@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบการจัดการข้อมูลโครงงาน - ผลการสอบโครงงาน</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fff8f8 0%, #ffe6e6 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo::before {
+            content: "📋";
+            font-size: 20px;
+        }
+
+        .system-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border: 2px solid white;
+        }
+
+        .user-name {
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .content-area {
+            background: white;
+            border-radius: 20px;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(244, 67, 54, 0.1);
+            border: 1px solid rgba(244, 67, 54, 0.1);
+        }
+
+        .status-section {
+            text-align: center;
+            padding: 3rem;
+            width: 100%;
+        }
+
+        .status-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            background: rgba(244, 67, 54, 0.1);
+            border: 5px solid #f44336;
+            color: #f44336;
+            font-size: 50px;
+        }
+
+        .status-title {
+            color: #d32f2f;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status-subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .exam-info {
+            background: #F8F9FA;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 700px;
+            text-align: left;
+            border: 1px solid #E9ECEF;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #E9ECEF;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .info-label {
+            flex: 0 0 200px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .info-value {
+            flex: 1;
+            color: #212529;
+        }
+
+        .comments-section {
+            margin-top: 2rem;
+            background: #ffebee;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #f44336;
+        }
+
+        .comments-title {
+            color: #d32f2f;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .comment-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .comment-date {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .comment-content {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #2196F3;
+            color: #2196F3;
+        }
+
+        .btn-outline:hover {
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .info-row {
+                flex-direction: column;
+            }
+            
+            .info-label {
+                flex: none;
+                margin-bottom: 0.5rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .status-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 40px;
+            }
+            
+            .status-title {
+                font-size: 24px;
+            }
+            
+            .status-subtitle {
+                font-size: 16px;
+            }
+            
+            .comment-header {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+        }
+
+        /* Animation for status icon */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .status-icon {
+            animation: shake 0.8s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo"></div>
+                <h1 class="system-title">ระบบการจัดการข้อมูลโครงงาน</h1>
+            </div>
+            <div class="user-section">
+                <a href="profile.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                    <span class="user-name">Thanaboon Imcharoen</span>
+                    <div class="user-avatar">T</div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="content-area">
+            <div class="status-section">
+                <div class="status-icon">❌</div>
+                <h2 class="status-title">ผลการสอบ: ไม่ผ่าน</h2>
+                <p class="status-subtitle">ขออภัย การสอบหัวข้อโครงงานของคุณไม่ผ่านเกณฑ์การประเมิน กรุณาศึกษาคำแนะนำจากอาจารย์และส่งคำขอสอบครั้งที่ 2</p>
+                
+                <div class="exam-info">
+                    <h3 style="text-align: center; margin-bottom: 1.5rem; color: #2196F3;">รายละเอียดการสอบ</h3>
+                    
+                    <div class="info-row">
+                        <div class="info-label">วันที่สอบ:</div>
+                        <div class="info-value">25 พฤศจิกายน 2566</div>
+                    </div>
+                    
+                    <div class="info-row">
+                        <div class="info-label">หัวข้อโครงงาน:</div>
+                        <div class="info-value">ระบบจัดการคลังสินค้าอัจฉริยะด้วยเทคโนโลยี IoT</div>
+                    </div>
+                    
+                    <div class="info-row">
+                        <div class="info-label">สถานะ:</div>
+                        <div class="info-value" style="color: #f44336; font-weight: 600;">สอบไม่ผ่าน</div>
+                    </div>
+                    
+                    <div class="comments-section">
+                        <div class="comments-title">ความคิดเห็นจากคณะกรรมการ</div>
+                        <div class="comments-list">
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <span class="comment-author">รศ.ดร. เอกชัย วิบูลย์ธนากุล</span>
+                                    <span class="comment-date">25 พ.ย. 2566</span>
+                                </div>
+                                <div class="comment-content">
+                                    งานวิจัยยังขาดการทบทวนวรรณกรรมที่ลึกซึ้งพอ ควรเพิ่มการศึกษางานวิจัยที่เกี่ยวข้องให้มากขึ้นและนำมาสรุปเปรียบเทียบอย่างเป็นระบบ
+                                </div>
+                            </div>
+                            
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <span class="comment-author">ผศ.ดร. สมชาย ใจดี</span>
+                                    <span class="comment-date">25 พ.ย. 2566</span>
+                                </div>
+                                <div class="comment-content">
+                                    วิธีการวิจัยที่เสนอยังไม่ชัดเจนในขั้นตอนการเก็บข้อมูลและวิเคราะห์ข้อมูล ควรระบุรายละเอียดเครื่องมือและวิธีการวิเคราะห์ให้ชัดเจน
+                                </div>
+                            </div>
+                            
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <span class="comment-author">ดร. เกศินี จันทร์กระจ่าง</span>
+                                    <span class="comment-date">25 พ.ย. 2566</span>
+                                </div>
+                                <div class="comment-content">
+                                    ขอบเขตการวิจัยยังกว้างเกินไป ควรจำกัดขอบเขตให้แคบลงและมีความชัดเจนมากขึ้น เพื่อให้การวิจัยมีความลึกและเป็นไปได้จริง
+                                </div>
+                            </div>
+
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <span class="comment-author">ดร. สมหญิง เก่งมาก</span>
+                                    <span class="comment-date">25 พ.ย. 2566</span>
+                                </div>
+                                <div class="comment-content">
+                                    ขอบเขตการวิจัยยังกว้างเกินไป ควรจำกัดขอบเขตให้แคบลงและมีความชัดเจนมากขึ้น เพื่อให้การวิจัยมีความลึกและเป็นไปได้จริง
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="index_student.html" class="btn btn-primary">กลับไปหน้าหลักเพื่อขอสอบครั้งที่ 2</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function downloadComments() {
+            alert('กำลังดาวน์โหลดไฟล์ความคิดเห็นจากอาจารย์...');
+            // ฟังก์ชันสำหรับดาวน์โหลดความคิดเห็นทั้งหมด
+        }
+    </script>
+</body>
+</html>
