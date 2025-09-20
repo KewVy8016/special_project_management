@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ระบบการจัดการข้อมูลโครงงาน - รอการสอบจบโครงงาน</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+        min-height: 100vh;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+        padding: 1rem 2rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo {
+        width: 40px;
+        height: 40px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo::before {
+        content: "📋";
+        font-size: 20px;
+      }
+
+      .system-title {
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .user-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        border: 2px solid white;
+      }
+
+      .user-name {
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .main-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .content-area {
+        background: white;
+        border-radius: 20px;
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 10px 30px rgba(33, 150, 243, 0.1);
+        border: 1px solid rgba(33, 150, 243, 0.1);
+      }
+
+      .status-section {
+        text-align: center;
+        padding: 3rem;
+        width: 100%;
+      }
+
+      .status-icon {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        background: rgba(255, 193, 7, 0.1);
+        border: 5px solid #ffc107;
+        color: #ffc107;
+        font-size: 50px;
+      }
+
+      .status-title {
+        color: #333;
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .status-subtitle {
+        color: #666;
+        font-size: 18px;
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .exam-info {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 2rem;
+        margin: 2rem auto;
+        max-width: 700px;
+        text-align: left;
+        border: 1px solid #e9ecef;
+      }
+
+      .info-row {
+        display: flex;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .info-row:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      .info-label {
+        flex: 0 0 200px;
+        font-weight: 600;
+        color: #495057;
+      }
+
+      .info-value {
+        flex: 1;
+        color: #212529;
+      }
+
+      .committee-section {
+        margin-top: 2rem;
+      }
+
+      .committee-title {
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      .committee-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+      }
+
+      .committee-member {
+        background: white;
+        border-radius: 10px;
+        padding: 1rem;
+        width: 200px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e9ecef;
+      }
+
+      .member-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        margin: 0 auto 0.75rem;
+        font-size: 20px;
+      }
+
+      .member-name {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.25rem;
+      }
+
+      .member-position {
+        color: #666;
+        font-size: 14px;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 2px solid #f44336;
+        color: #f44336;
+      }
+
+      .btn-outline:hover {
+        background: rgba(244, 67, 54, 0.1);
+      }
+
+      .btn-edit {
+        background: transparent;
+        border: 2px solid #ff9800;
+        color: #ff9800;
+      }
+
+      .btn-edit:hover {
+        background: rgba(255, 152, 0, 0.1);
+      }
+
+      .countdown {
+        background: #fff3cd;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        text-align: center;
+        border: 1px solid #ffeaa7;
+      }
+
+      .countdown-title {
+        font-weight: 600;
+        color: #856404;
+        margin-bottom: 0.5rem;
+      }
+
+      .countdown-timer {
+        font-size: 24px;
+        font-weight: 700;
+        color: #856404;
+      }
+
+      .preparation-section {
+        background: #e3f2fd;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+        border-left: 4px solid #2196f3;
+      }
+
+      .preparation-title {
+        color: #1976d2;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .preparation-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .preparation-list li {
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+
+      .preparation-list li::before {
+        content: "📝";
+        position: absolute;
+        left: 0;
+      }
+
+      /* Responsive styles */
+      @media (max-width: 768px) {
+        .info-row {
+          flex-direction: column;
+        }
+
+        .info-label {
+          flex: none;
+          margin-bottom: 0.5rem;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+          width: 100%;
+          max-width: 300px;
+        }
+
+        .btn {
+          width: 100%;
+        }
+
+        .status-icon {
+          width: 100px;
+          height: 100px;
+          font-size: 40px;
+        }
+
+        .status-title {
+          font-size: 24px;
+        }
+
+        .status-subtitle {
+          font-size: 16px;
+        }
+
+        .committee-list {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .committee-member {
+          width: 100%;
+          max-width: 250px;
+        }
+      }
+
+      /* Animation for status icon */
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .status-icon {
+        animation: pulse 2s infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-section">
+          <div class="logo"></div>
+          <h1 class="system-title">ระบบการจัดการข้อมูลโครงงาน</h1>
+        </div>
+        <div class="user-section">
+          <a
+            href="profile.html"
+            style="
+              text-decoration: none;
+              display: flex;
+              align-items: center;
+              gap: 12px;
+            "
+          >
+            <span class="user-name">Thanaboon Imcharoen</span>
+            <div class="user-avatar">T</div>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <div class="content-area">
+        <div class="status-section">
+          <div class="status-icon">⏳</div>
+          <h2 class="status-title">รอการสอบจบโครงงาน</h2>
+          <p class="status-subtitle">
+            ขณะนี้การขอสอบจบโครงงานของคุณผ่านการอนุมัติแล้วและกำลังรอการสอบ
+            โปรดเตรียมตัวให้พร้อมสำหรับการนำเสนอและการสอบจบ
+          </p>
+
+          <div class="countdown">
+            <div class="countdown-title">การสอบจบจะเริ่มในอีก:</div>
+            <div class="countdown-timer" id="countdown">
+              7 วัน 15 ชั่วโมง 30 นาที
+            </div>
+          </div>
+
+          <div class="exam-info">
+            <h3
+              style="text-align: center; margin-bottom: 1.5rem; color: #2196f3"
+            >
+              รายละเอียดการสอบจบโครงงาน
+            </h3>
+
+            <div class="info-row">
+              <div class="info-label">วันที่สอบ:</div>
+              <div class="info-value">15 มีนาคม 2567</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">เวลาสอบ:</div>
+              <div class="info-value">09:00 - 11:30 น.</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">สถานที่สอบ:</div>
+              <div class="info-value">ห้อง IT-301 อาคารเทคโนโลยีสารสนเทศ</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">รูปแบบการสอบ:</div>
+              <div class="info-value">
+                นำเสนอโครงงาน 45 นาที, ซักถาม 30 นาที, การสาธิต 15 นาที
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">ชื่อโครงงาน:</div>
+              <div class="info-value">ระบบจัดการคลังสินค้าอัจฉริยะด้วยเทคโนโลยี IoT</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">สถานะ:</div>
+              <div class="info-value" style="color: #ffc107; font-weight: 600">
+                รอสอบจบ
+              </div>
+            </div>
+
+            <div class="committee-section">
+              <div class="committee-title">คณะกรรมการสอบจบโครงงาน</div>
+              <div class="committee-list">
+                <div class="committee-member">
+                  <div class="member-avatar">อ.1</div>
+                  <div class="member-name">รศ.ดร. วิชาญ เสรีภาพ</div>
+                  <div class="member-position">ประธานกรรมการ</div>
+                </div>
+                <div class="committee-member">
+                  <div class="member-avatar">อ.2</div>
+                  <div class="member-name">ผศ.ดร. สมชาย ใจดี</div>
+                  <div class="member-position">กรรมการ</div>
+                </div>
+
+                <div class="committee-member">
+                  <div class="member-avatar">อ.3</div>
+                  <div class="member-name">ดร. Jane Smith</div>
+                  <div class="member-position">กรรมการ</div>
+                </div>
+
+                <div class="committee-member">
+                  <div class="member-avatar">อ.4</div>
+                  <div class="member-name">ดร. สุภาพ เทคโนโลยี</div>
+                  <div class="member-position">กรรมการ</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="preparation-section">
+              <div class="preparation-title">สิ่งที่ต้องเตรียมสำหรับการสอบจบ:</div>
+              <ul class="preparation-list">
+                <li>รายงานโครงงานฉบับสมบูรณ์ จำนวน 5 เล่ม</li>
+                <li>ไฟล์นำเสนอ (PowerPoint) และอุปกรณ์สำหรับการสาธิต</li>
+                <li>ซอร์สโค้ดและเอกสารประกอบการพัฒนา</li>
+                <li>โปสเตอร์สำหรับการนำเสนอ</li>
+                <li>บทคัดย่อภาษาไทยและภาษาอังกฤษ</li>
+                <li>เอกสารการทดสอบและประเมินผลระบบ</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // จำลองการสอบจบ - หลังจาก 3 วินาที จะแสดงปุ่มผลการสอบ
+      setTimeout(function () {
+        const actionButtons = document.createElement("div");
+        actionButtons.className = "action-buttons";
+
+        const passButton = document.createElement("button");
+        passButton.className = "btn btn-primary";
+        passButton.textContent = "✓ ผ่าน";
+        passButton.onclick = function () {
+          window.location.href = "pass_final_exam.html";
+        };
+
+        const failButton = document.createElement("button");
+        failButton.className = "btn btn-outline";
+        failButton.textContent = "✗ ไม่ผ่าน";
+        failButton.onclick = function () {
+          window.location.href = "not_pass_defense_exam.html";
+        };
+
+        const passEditButton = document.createElement("button");
+        passEditButton.className = "btn btn-edit";
+        passEditButton.textContent = "📝 ผ่านแก้ไข";
+        passEditButton.onclick = function () {
+          window.location.href = "pass_edit_defense_exam.html";
+        };
+
+        actionButtons.appendChild(passButton);
+        actionButtons.appendChild(failButton);
+        actionButtons.appendChild(passEditButton);
+
+        document.querySelector(".status-section").appendChild(actionButtons);
+      }, 3000);
+
+      // ฟังก์ชันนับถอยหลัง
+      function updateCountdown() {
+        const examDate = new Date('2567-03-15T09:00:00');
+        const now = new Date();
+        const timeDiff = examDate - now;
+
+        if (timeDiff > 0) {
+          const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+
+          document.getElementById('countdown').textContent = 
+            `${days} วัน ${hours} ชั่วโมง ${minutes} นาที`;
+        } else {
+          document.getElementById('countdown').textContent = 'ถึงเวลาสอบแล้ว!';
+        }
+      }
+
+      // อัพเดทนับถอยหลังทุกนาที
+      setInterval(updateCountdown, 60000);
+      updateCountdown();
+
+      // แสดงข้อความแจ้งเตือนการเตรียมตัว
+      setInterval(function() {
+        const subtitle = document.querySelector('.status-subtitle');
+        const originalText = subtitle.textContent;
+        subtitle.textContent = 'โปรดเตรียมเอกสารและอุปกรณ์ให้พร้อมสำหรับการสอบจบ';
+        subtitle.style.color = '#2196F3';
+        
+        setTimeout(function() {
+          subtitle.textContent = originalText;
+          subtitle.style.color = '#666';
+        }, 4000);
+      }, 45000);
+    </script>
+  </body>
+</html>

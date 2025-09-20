@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ระบบการจัดการข้อมูลโครงงาน - รายงานสัปดาห์ที่ 5</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        color: #333;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      /* Header */
+      .header {
+        background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+        padding: 1rem 2rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo {
+        width: 45px;
+        height: 45px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        font-size: 22px;
+      }
+
+      .system-title {
+        color: white;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .user-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .user-avatar {
+        width: 45px;
+        height: 45px;
+        background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        font-size: 18px;
+      }
+
+      .user-name {
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      /* Container */
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .breadcrumb {
+        margin-bottom: 2rem;
+      }
+
+      .breadcrumb a {
+        color: #1976d2;
+        text-decoration: none;
+        margin-right: 0.5rem;
+      }
+
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+
+      .breadcrumb span {
+        color: #666;
+        margin: 0 0.5rem;
+      }
+
+      /* Report Header */
+      .report-header {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-top: 5px solid #4caf50;
+      }
+
+      .report-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1976d2;
+        margin-bottom: 1rem;
+      }
+
+      .report-meta {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .meta-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem;
+        background: #f8f9fa;
+        border-radius: 10px;
+        border-left: 4px solid #2196f3;
+      }
+
+      .meta-label {
+        font-weight: 600;
+        color: #666;
+        font-size: 14px;
+      }
+
+      .meta-value {
+        color: #333;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .status-badge {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+
+      .topic-section {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e9ecef;
+      }
+
+      .topic-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .topic-content {
+        color: #666;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+
+      .topic-description {
+        color: #777;
+        font-size: 14px;
+        font-style: italic;
+        line-height: 1.5;
+      }
+
+      /* Work Details Section */
+      .work-details-section {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-left: 5px solid #ff9800;
+      }
+
+      .work-details-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .work-detail-item {
+        margin-bottom: 2rem;
+      }
+
+      .work-detail-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .work-detail-label {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .work-detail-content {
+        background: #f8f9fa;
+        padding: 1.25rem;
+        border-radius: 12px;
+        border-left: 4px solid #ff9800;
+        color: #555;
+        line-height: 1.6;
+      }
+
+      /* Files Section */
+      .files-section {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-left: 5px solid #9c27b0;
+      }
+
+      .files-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .file-category {
+        margin-bottom: 2rem;
+      }
+
+      .file-category:last-child {
+        margin-bottom: 0;
+      }
+
+      .file-category-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .file-list {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .file-item {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        transition: all 0.3s ease;
+      }
+
+      .file-item:hover {
+        background: #e3f2fd;
+        border-color: #2196f3;
+        transform: translateX(5px);
+      }
+
+      .file-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 16px;
+      }
+
+      .file-info {
+        flex: 1;
+      }
+
+      .file-name {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.25rem;
+      }
+
+      .file-size {
+        font-size: 12px;
+        color: #666;
+      }
+
+      .file-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .file-action {
+        padding: 0.25rem 0.5rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.2s ease;
+      }
+
+      .file-download {
+        background: #e3f2fd;
+        color: #1976d2;
+      }
+
+      .file-download:hover {
+        background: #1976d2;
+        color: white;
+      }
+
+      .file-view {
+        background: #f3e5f5;
+        color: #7b1fa2;
+      }
+
+      .file-view:hover {
+        background: #7b1fa2;
+        color: white;
+      }
+
+      /* Image Gallery */
+      .image-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .image-item {
+        background: #f8f9fa;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .image-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .image-thumbnail {
+        width: 100%;
+        height: 150px;
+        background: linear-gradient(45deg, #e1bee7, #f3e5f5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #7b1fa2;
+        font-size: 2rem;
+      }
+
+      .image-info {
+        padding: 1rem;
+      }
+
+      .image-name {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+        font-size: 14px;
+      }
+
+      .image-size {
+        font-size: 12px;
+        color: #666;
+      }
+
+      /* Progress Section */
+      .progress-section {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-left: 5px solid #4caf50;
+      }
+
+      .progress-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .progress-item {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .progress-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .progress-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .progress-label {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .progress-percentage {
+        font-size: 18px;
+        font-weight: 700;
+        color: #2e7d32;
+      }
+
+      .progress-bar {
+        height: 10px;
+        background: #e9ecef;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #4caf50, #2e7d32);
+        border-radius: 5px;
+        transition: width 0.8s ease;
+      }
+
+      .progress-note {
+        font-size: 14px;
+        color: #666;
+        font-style: italic;
+      }
+
+      /* Comments Section */
+      .comments-section {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .comments-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .comment-item {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+
+      .comment-item.advisor {
+        border-left: 4px solid #4caf50;
+      }
+
+      .comment-item.instructor {
+        border-left: 4px solid #2196f3;
+      }
+
+      .comment-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .comment-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
+
+      .comment-author-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .comment-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      .comment-avatar.advisor {
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+      }
+
+      .comment-avatar.instructor {
+        background: linear-gradient(135deg, #2196f3, #1976d2);
+      }
+
+      .author-details {
+        flex: 1;
+      }
+
+      .author-name {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.25rem;
+      }
+
+      .author-role {
+        font-size: 12px;
+        color: #666;
+        font-weight: 500;
+      }
+
+      .comment-date {
+        font-size: 14px;
+        color: #666;
+      }
+
+      .comment-text {
+        color: #555;
+        line-height: 1.6;
+        font-size: 15px;
+        margin-bottom: 1rem;
+      }
+
+      .comment-rating {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .stars {
+        color: #ffc107;
+        font-size: 16px;
+      }
+
+      .rating-text {
+        font-size: 14px;
+        color: #666;
+        font-weight: 500;
+      }
+
+      /* Action Buttons */
+      .action-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+
+      .btn {
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        min-width: 150px;
+      }
+
+      .btn-submit {
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        color: white;
+      }
+
+      .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+      }
+
+      .btn-cancel {
+        background: linear-gradient(135deg, #9e9e9e, #757575);
+        color: white;
+      }
+
+      .btn-cancel:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(158, 158, 158, 0.3);
+      }
+
+      .btn-edit {
+        background: linear-gradient(135deg, #2196f3, #1976d2);
+        color: white;
+      }
+
+      .btn-edit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(33, 150, 243, 0.3);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .container {
+          padding: 1rem;
+        }
+
+        .report-meta {
+          grid-template-columns: 1fr;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+        }
+
+        .image-gallery {
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        }
+      }
+
+      /* Loading States */
+      .loading {
+        opacity: 0.6;
+        pointer-events: none;
+      }
+
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #2196f3;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 0.5rem;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-section">
+          <div class="logo">📊</div>
+          <h1 class="system-title">ระบบการจัดการข้อมูลโครงงาน</h1>
+        </div>
+        <div class="user-section">
+          <span class="user-name">Thanaboon Imcharoen</span>
+          <div class="user-avatar">T</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <nav class="breadcrumb">
+        <a href="dashboard.html">Dashboard</a>
+        <span>›</span>
+        <a href="report_week.html">รายงานประจำสัปดาห์</a>
+        <span>›</span>
+        <span>สัปดาห์ที่ 5</span>
+      </nav>
+
+      <!-- Report Header -->
+      <div class="report-header">
+        <h1 class="report-title">รายงานสัปดาห์ที่ 5</h1>
+        <div class="report-meta">
+          <div class="meta-item">
+            <span class="meta-label">ระยะเวลา</span>
+            <span class="meta-value">5 - 12 กันยายน 2566</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">วันที่ส่ง</span>
+            <span class="meta-value">12 กันยายน 2566</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">สถานะ</span>
+            <span class="status-badge">ส่งแล้ว</span>
+          </div>
+        </div>
+        
+        <!-- Topic Section -->
+        <div class="topic-section">
+          <div class="topic-title">
+            <i class="fas fa-lightbulb"></i>
+            หัวข้อการทำงานสัปดาห์นี้
+          </div>
+          <div class="topic-content">
+            การพัฒนาส่วนติดต่อผู้ใช้และทดสอบระบบแดชบอร์ด
+          </div>
+          <div class="topic-description">
+            พัฒนาและปรับปรุง User Interface สำหรับระบบแดชบอร์ดหลัก รวมถึงการทดสอบการทำงานของระบบและการปรับปรุงประสบการณ์ผู้ใช้ให้มีความสะดวกและใช้งานง่ายมากขึ้น
+          </div>
+        </div>
+      </div>
+
+      <!-- Work Details Section -->
+      <div class="work-details-section">
+        <h2 class="work-details-title">
+          <i class="fas fa-tasks"></i>
+          รายละเอียดการทำงานในสัปดาห์นี้
+        </h2>
+        
+        <div class="work-detail-item">
+          <div class="work-detail-label">
+            <i class="fas fa-check-circle"></i>
+            สิ่งที่ทำสำเร็จในสัปดาห์นี้
+          </div>
+          <div class="work-detail-content">
+            ในสัปดาห์นี้ได้พัฒนาส่วนติดต่อผู้ใช้หลักของระบบแดชบอร์ดสำเร็จ โดยออกแบบ UI/UX ที่ทันสมัยและใช้งานง่าย ได้ทำการ implement responsive design ที่รองรับการใช้งานบนอุปกรณ์หลากหลายขนาด รวมถึงการทดสอบการทำงานของระบบ navigation และ data visualization components ต่างๆ ผลลัพธ์ที่ได้คือระบบที่มีประสิทธิภาพและสวยงาม
+          </div>
+        </div>
+
+        <div class="work-detail-item">
+          <div class="work-detail-label">
+            <i class="fas fa-exclamation-triangle"></i>
+            ปัญหาและอุปสรรคที่พบ
+          </div>
+          <div class="work-detail-content">
+            พบปัญหาในเรื่อง state management เมื่อมีการ update ข้อมูลแบบ real-time และปัญหา performance เมื่อมีข้อมูลจำนวนมาก นอกจากนี้ยังพบปัญหา compatibility issues กับ browser บางตัว ได้แก้ไขโดยการใช้ Redux สำหรับจัดการ state และ implement pagination พร้อม lazy loading เพื่อเพิ่มประสิทธิภาพ รวมถึงเพิ่ม polyfills สำหรับรองรับ browser เก่า
+          </div>
+        </div>
+
+        <div class="work-detail-item">
+          <div class="work-detail-label">
+            <i class="fas fa-calendar-alt"></i>
+            แผนงานสำหรับสัปดาห์หน้า
+          </div>
+          <div class="work-detail-content">
+            สัปดาห์หน้าจะเน้นไปที่การพัฒนาระบบ authentication และ user management รวมถึงการทำ unit testing และ integration testing ให้ครอบคลุม นอกจากนี้จะทำการปรับปรุง accessibility features และเพิ่มระบบ notification แบบ real-time เพื่อให้ระบบมีความสมบูรณ์มากขึ้น
+          </div>
+        </div>
+      </div>
+
+      <!-- Files Section -->
+      <div class="files-section">
+        <h2 class="files-title">
+          <i class="fas fa-folder-open"></i>
+          เอกสารและภาพประกอบ
+        </h2>
+
+        <!-- Documents -->
+        <div class="file-category">
+          <div class="file-category-title">
+            <i class="fas fa-file-alt"></i>
+            รูปเล่มและเอกสารประกอบ
+          </div>
+          <div class="file-list">
+            <div class="file-item">
+              <div class="file-icon">
+                <i class="fas fa-file-pdf"></i>
+              </div>
+              <div class="file-info">
+                <div class="file-name">รายงานสัปดาห์ที่ 5 - UI Development.pdf</div>
+                <div class="file-size">2.3 MB</div>
+              </div>
+              <div class="file-actions">
+                <button class="file-action file-download">
+                  <i class="fas fa-download"></i>
+                </button>
+                <button class="file-action file-view">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="file-item">
+              <div class="file-icon">
+                <i class="fas fa-file-word"></i>
+              </div>
+              <div class="file-info">
+                <div class="file-name">Technical Documentation - Dashboard System.docx</div>
+                <div class="file-size">1.8 MB</div>
+              </div>
+              <div class="file-actions">
+                <button class="file-action file-download">
+                  <i class="fas fa-download"></i>
+                </button>
+                <button class="file-action file-view">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Images -->
+        <div class="file-category">
+          <div class="file-category-title">
+            <i class="fas fa-images"></i>
+            ภาพการทำงานในสัปดาห์นี้
+          </div>
+          <div class="image-gallery">
+            <div class="image-item">
+              <div class="image-thumbnail">
+                <i class="fas fa-image"></i>
+              </div>
+              <div class="image-info">
+                <div class="image-name">dashboard-mockup.png</div>
+                <div class="image-size">856 KB</div>
+              </div>
+            </div>
+            
+            <div class="image-item">
+              <div class="image-thumbnail">
+                <i class="fas fa-image"></i>
+              </div>
+              <div class="image-info">
+                <div class="image-name">responsive-design-test.jpg</div>
+                <div class="image-size">1.2 MB</div>
+              </div>
+            </div>
+            
+            <div class="image-item">
+              <div class="image-thumbnail">
+                <i class="fas fa-image"></i>
+              </div>
+              <div class="image-info">
+                <div class="image-name">user-interface-components.png</div>
+                <div class="image-size">734 KB</div>
+              </div>
+            </div>
+            
+            <div class="image-item">
+              <div class="image-thumbnail">
+                <i class="fas fa-image"></i>
+              </div>
+              <div class="image-info">
+                <div class="image-name">testing-results.jpg</div>
+                <div class="image-size">645 KB</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comments Section -->
+      <div class="comments-section">
+        <h2 class="comments-title">
+          <i class="fas fa-comments"></i>
+          ความคิดเห็นจากอาจารย์
+        </h2>
+
+        <!-- Advisor Comment -->
+        <div class="comment-item advisor">
+          <div class="comment-header">
+            <div class="comment-author-info">
+              <div class="comment-avatar advisor">อ</div>
+              <div class="author-details">
+                <div class="author-name">รศ.ดร. เอกชัย วิบูลย์ธนากุล</div>
+                <div class="author-role">อาจารย์ที่ปรึกษา</div>
+              </div>
+            </div>
+            <div class="comment-date">12 กันยายน 2566 | 14:30</div>
+          </div>
+          <p class="comment-text">
+            การพัฒนาส่วนติดต่อผู้ใช้มีความคืบหน้าดีมาก UI/UX ออกแบบได้สวยงามและใช้งานง่าย 
+            แต่ยังควรปรับปรุงการจัดการ state management และเพิ่มการตรวจสอบ input validation 
+            ให้มากขึ้น รวมถึงการทดสอบ responsive design บนอุปกรณ์ขนาดต่างๆ 
+            โดยรวมแล้วงานมีคุณภาพและน่าพอใจ การแก้ไขปัญหาต่างๆ ที่เกิดขึ้นแสดงให้เห็นถึง
+            ความสามารถในการแก้ปัญหาและการเรียนรู้ที่ดี
+          </p>
+        </div>
+
+        <!-- Instructor Comment -->
+        <div class="comment-item instructor">
+          <div class="comment-header">
+            <div class="comment-author-info">
+              <div class="comment-avatar instructor">อ</div>
+              <div class="author-details">
+                <div class="author-name">ผศ.ดร. สมชาย ใจดี</div>
+                <div class="author-role">อาจารย์ประจำวิชา</div>
+              </div>
+            </div>
+            <div class="comment-date">13 กันยายน 2566 | 09:15</div>
+          </div>
+          <p class="comment-text">
+            เห็นด้วยกับความเห็นของอาจารย์ที่ปรึกษา การออกแบบ UI มีความสวยงามและทันสมัย 
+            อย่างไรก็ตาม ควรใส่ใจเรื่องการจัดการ error handling และ loading states 
+            ให้มากขึ้น เพื่อประสบการณ์ผู้ใช้ที่ดีขึ้น นอกจากนี้ควรพิจารณาเพิ่ม 
+            accessibility features สำหรับผู้ใช้พิการด้วย การวางแผนงานสำหรับสัปดาห์หน้า
+            มีความชัดเจนและสอดคล้องกับเป้าหมายของโครงงาน
+          </p>
+        </div>
+      </div>
+
+      <!-- Action Buttons for Submitted Report -->
+      <div class="action-buttons" id="submittedActions">
+        <button class="btn btn-cancel" onclick="goBack()">
+          <i class="fas fa-arrow-left"></i>
+          กลับ
+        </button>
+      </div>
+    </main>
+
+    <script>
+      // Initialize page
+      document.addEventListener('DOMContentLoaded', function() {
+        // Add click handlers for file actions
+        document.querySelectorAll('.file-download').forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const fileName = this.closest('.file-item').querySelector('.file-name').textContent;
+            showNotification(`กำลังดาวน์โหลด: ${fileName}`, 'info');
+          });
+        });
+
+        document.querySelectorAll('.file-view').forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const fileName = this.closest('.file-item').querySelector('.file-name').textContent;
+            showNotification(`กำลังเปิดดู: ${fileName}`, 'info');
+          });
+        });
+
+        // Add click handlers for images
+        document.querySelectorAll('.image-item').forEach(item => {
+          item.addEventListener('click', function() {
+            const imageName = this.querySelector('.image-name').textContent;
+            showImageModal(imageName);
+          });
+        });
+
+        // Animate progress bars
+        setTimeout(() => {
+          document.querySelectorAll('.progress-fill').forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0%';
+            setTimeout(() => {
+              bar.style.width = width;
+            }, 500);
+          });
+        }, 1000);
+      });
+
+      function goBack() {
+        window.location.href = 'report_week.html';
+      }
+
+      function showNotification(message, type = 'success') {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: ${type === 'success' ? '#4caf50' : '#2196f3'};
+          color: white;
+          padding: 1rem 2rem;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+          z-index: 1000;
+          transform: translateX(400px);
+          transition: transform 0.3s ease;
+        `;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        // Show notification
+        setTimeout(() => {
+          notification.style.transform = 'translateX(0)';
+        }, 100);
+        
+        // Hide notification after 3 seconds
+        setTimeout(() => {
+          notification.style.transform = 'translateX(400px)';
+          setTimeout(() => {
+            document.body.removeChild(notification);
+          }, 300);
+        }, 3000);
+      }
+
+      function showImageModal(imageName) {
+        // Create modal overlay
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0,0,0,0.8);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        `;
+
+        const modalContent = document.createElement('div');
+        modalContent.style.cssText = `
+          background: white;
+          padding: 2rem;
+          border-radius: 12px;
+          max-width: 80%;
+          max-height: 80%;
+          text-align: center;
+          transform: scale(0.7);
+          transition: transform 0.3s ease;
+        `;
+
+        modalContent.innerHTML = `
+          <div style="font-size: 4rem; color: #9c27b0; margin-bottom: 1rem;">
+            <i class="fas fa-image"></i>
+          </div>
+          <h3 style="margin-bottom: 1rem; color: #333;">${imageName}</h3>
+          <p style="color: #666; margin-bottom: 2rem;">ตัวอย่างการแสดงภาพ</p>
+          <button onclick="this.closest('.modal-overlay').remove()" 
+                  style="background: #2196f3; color: white; border: none; padding: 0.75rem 1.5rem; 
+                         border-radius: 6px; cursor: pointer;">
+            <i class="fas fa-times"></i> ปิด
+          </button>
+        `;
+
+        modal.appendChild(modalContent);
+        modal.className = 'modal-overlay';
+        document.body.appendChild(modal);
+
+        // Show modal with animation
+        setTimeout(() => {
+          modal.style.opacity = '1';
+          modalContent.style.transform = 'scale(1)';
+        }, 100);
+
+        // Close modal when clicking overlay
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+            modal.remove();
+          }
+        });
+      }
+
+      // Add smooth scrolling for internal links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

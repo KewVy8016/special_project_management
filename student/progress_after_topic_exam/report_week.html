@@ -437,6 +437,7 @@
         border-radius: 8px;
         padding: 1rem;
         border-left: 3px solid #2196f3;
+        margin-bottom: 0.75rem;
       }
 
       .comment-author {
@@ -527,6 +528,344 @@
         margin-top: 3rem;
       }
 
+      /* Modal Styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(8px);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        padding: 1rem;
+      }
+
+      .modal-overlay.active {
+        display: flex;
+      }
+
+      .report-form-modal {
+        background: white;
+        border-radius: 25px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        max-width: 800px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        animation: modalSlideIn 0.3s ease;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .modal-header {
+        background: linear-gradient(135deg, #2196f3, #1976d2);
+        color: white;
+        padding: 2rem;
+        border-radius: 25px 25px 0 0;
+        position: relative;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 18px;
+        transition: all 0.3s ease;
+      }
+
+      .modal-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.1);
+      }
+
+      .modal-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .modal-subtitle {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      .modal-body {
+        padding: 2rem;
+      }
+
+      .form-section {
+        margin-bottom: 2rem;
+      }
+
+      .section-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #1976d2;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+        font-size: 14px;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        font-family: inherit;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #2196f3;
+        box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+      }
+
+      .form-textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .file-upload-area {
+        border: 2px dashed #e9ecef;
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .file-upload-area:hover {
+        border-color: #2196f3;
+        background: #f8f9fa;
+      }
+
+      .file-upload-area.dragover {
+        border-color: #2196f3;
+        background: #e3f2fd;
+      }
+
+      .file-upload-icon {
+        font-size: 32px;
+        color: #2196f3;
+        margin-bottom: 1rem;
+      }
+
+      .file-upload-text {
+        color: #666;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .file-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .uploaded-files {
+        margin-top: 1rem;
+      }
+
+      .file-item {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .file-info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .file-icon {
+        color: #2196f3;
+      }
+
+      .file-name {
+        font-size: 14px;
+        color: #333;
+      }
+
+      .file-size {
+        font-size: 12px;
+        color: #666;
+      }
+
+      .file-remove {
+        background: #ff5252;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.3s ease;
+      }
+
+      .file-remove:hover {
+        background: #d32f2f;
+        transform: scale(1.1);
+      }
+
+      .progress-section {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .progress-input-group {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .progress-slider {
+        flex: 1;
+        -webkit-appearance: none;
+        height: 8px;
+        border-radius: 5px;
+        background: #e9ecef;
+        outline: none;
+      }
+
+      .progress-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #2196f3;
+        cursor: pointer;
+      }
+
+      .progress-slider::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #2196f3;
+        cursor: pointer;
+        border: none;
+      }
+
+      .progress-display {
+        font-size: 18px;
+        font-weight: 600;
+        color: #2196f3;
+        min-width: 60px;
+        text-align: center;
+      }
+
+      .comments-section {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 1.5rem;
+      }
+
+      .comment-item {
+        background: white;
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        border-left: 4px solid #2196f3;
+      }
+
+      .comment-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .comment-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+      }
+
+      .comment-author {
+        font-weight: 600;
+        color: #1976d2;
+      }
+
+      .comment-date {
+        font-size: 12px;
+        color: #666;
+      }
+
+      .comment-content {
+        color: #333;
+        line-height: 1.5;
+        font-size: 14px;
+      }
+
+      .modal-footer {
+        padding: 0 2rem 2rem;
+        display: flex;
+        gap: 1rem;
+      }
+
+      .btn-cancel {
+        background: #f8f9fa;
+        color: #666;
+        border: 1px solid #e9ecef;
+      }
+
+      .btn-save {
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        color: white;
+      }
+
+      .btn-save:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+      }
+
       /* Responsive */
       @media (max-width: 768px) {
         .container {
@@ -551,6 +890,25 @@
         }
 
         .week-actions {
+          flex-direction: column;
+        }
+
+        .report-form-modal {
+          margin: 0;
+          border-radius: 20px 20px 0 0;
+          max-height: 95vh;
+        }
+        
+        .modal-header {
+          border-radius: 20px 20px 0 0;
+        }
+        
+        .progress-input-group {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        
+        .modal-footer {
           flex-direction: column;
         }
       }
@@ -634,7 +992,7 @@
             <div class="stat-icon">
               <i class="fas fa-calendar-plus"></i>
             </div>
-            <div class="stat-value">6</div>
+            <div class="stat-value">4</div>
             <div class="stat-label">ยังไม่เริ่ม</div>
           </div>
           <div class="stat-box">
@@ -657,17 +1015,17 @@
             <div class="week-status-badge status-in-progress">กำลังทำ</div>
           </div>
           <div class="week-content">
-            <h3 class="week-title">การพัฒนาโมดูลการจัดการสต็อกและทดสอบ API</h3>
+            <h3 class="week-title">ยังไม่ระบุหัวข้อ</h3>
             <p class="week-description">
-              พัฒนาระบบจัดการสต็อกสินค้า เชื่อมต่อกับ IoT sensors และสร้าง API endpoints สำหรับการดึงข้อมูลแบบเรียลไทม์
+              กำลังดำเนินการกรอกข้อมูลรายละเอียดการทำงานในสัปดาห์นี้
             </p>
             <div class="week-progress">
               <div class="progress-header">
-                <span class="progress-label">ความคืบหน้า</span>
-                <span class="progress-value in-progress">75%</span>
+                <span class="progress-label">ความคืบหน้าโครงงาน</span>
+                <span class="progress-value in-progress">50%</span>
               </div>
               <div class="progress-bar">
-                <div class="progress-fill in-progress" style="width: 75%"></div>
+                <div class="progress-fill in-progress" style="width: 50%"></div>
               </div>
             </div>
             <div class="week-meta">
@@ -675,11 +1033,8 @@
               <span>เหลือ 2 วัน</span>
             </div>
             <div class="week-actions">
-              <button class="btn btn-primary">
+              <button class="btn btn-primary" onclick="openReportForm(6)">
                 <i class="fas fa-edit"></i> ทำรายงานต่อ
-              </button>
-              <button class="btn btn-secondary">
-                <i class="fas fa-eye"></i> ดูร่าง
               </button>
             </div>
           </div>
@@ -699,11 +1054,11 @@
             </p>
             <div class="week-progress">
               <div class="progress-header">
-                <span class="progress-label">ความคืบหน้า</span>
-                <span class="progress-value completed">100%</span>
+                <span class="progress-label">ความคืบหน้าโครงงาน</span>
+                <span class="progress-value completed">50%</span>
               </div>
               <div class="progress-bar">
-                <div class="progress-fill completed" style="width: 100%"></div>
+                <div class="progress-fill completed" style="width: 50%"></div>
               </div>
             </div>
             <div class="week-meta">
@@ -711,19 +1066,25 @@
               <span>ส่งตรงเวลา</span>
             </div>
             <div class="week-actions">
-              <button class="btn btn-secondary">
-                <i class="fas fa-eye"></i> ดูรายงาน
-              </button>
+              <a href="report specific.html" class="btn btn-secondary">
+              <i class="fas fa-eye"></i> ดูรายงาน
+              </a>
             </div>
             <div class="week-comments">
               <div class="comments-header">
                 <span class="comments-title">ความคิดเห็นจากอาจารย์</span>
-                <span class="comments-count">1</span>
+                <span class="comments-count">2</span>
               </div>
               <div class="comment-preview">
-                <div class="comment-author">รศ.ดร. เอกชัย วิบูลย์ธนากุล</div>
+                <div class="comment-author">รศ.ดร. เอกชัย วิบูลย์ธนากุล (อาจารย์ที่ปรึกษา)</div>
                 <p class="comment-text">
                   การพัฒนาส่วนติดต่อผู้ใช้มีความคืบหน้าดี UI/UX ออกแบบได้สวยงาม แต่ควรปรับปรุงการจัดการ state management...
+                </p>
+              </div>
+              <div class="comment-preview">
+                <div class="comment-author">ผศ.ดร. สมชาย พิทักษ์วงศ์ (อาจารย์ประจำวิชา)</div>
+                <p class="comment-text">
+                  Interface ออกแบบสวย responsive ดี แต่ควรเพิ่ม error handling และ loading states เพื่อประสบการณ์ผู้ใช้ที่ดีขึ้น...
                 </p>
               </div>
             </div>
@@ -744,11 +1105,11 @@
             </p>
             <div class="week-progress">
               <div class="progress-header">
-                <span class="progress-label">ความคืบหน้า</span>
-                <span class="progress-value completed">100%</span>
+                <span class="progress-label">ความคืบหน้าโครงงาน</span>
+                <span class="progress-value completed">40%</span>
               </div>
               <div class="progress-bar">
-                <div class="progress-fill completed" style="width: 100%"></div>
+                <div class="progress-fill completed" style="width: 40%"></div>
               </div>
             </div>
             <div class="week-meta">
@@ -763,12 +1124,18 @@
             <div class="week-comments">
               <div class="comments-header">
                 <span class="comments-title">ความคิดเห็นจากอาจารย์</span>
-                <span class="comments-count">1</span>
+                <span class="comments-count">2</span>
               </div>
               <div class="comment-preview">
-                <div class="comment-author">รศ.ดร. เอกชัย วิบูลย์ธนากุล</div>
+                <div class="comment-author">รศ.ดร. เอกชัย วิบูลย์ธนากุล (อาจารย์ที่ปรึกษา)</div>
                 <p class="comment-text">
                   งานสัปดาห์ที่ 4 ดีเยี่ยม! การพัฒนาโมดูลหลักและการทดสอบเบื้องต้นสมบูรณ์ การเขียน code มีคุณภาพ...
+                </p>
+              </div>
+              <div class="comment-preview">
+                <div class="comment-author">ผศ.ดร. สมชาย พิทักษ์วงศ์ (อาจารย์ประจำวิชา)</div>
+                <p class="comment-text">
+                  โมดูลหลักพัฒนาได้ดี แต่ควรเพิ่มการทดสอบ unit test และ integration test เพื่อความมั่นใจในคุณภาพโค้ด...
                 </p>
               </div>
             </div>
@@ -789,15 +1156,117 @@
             </p>
             <div class="week-progress">
               <div class="progress-header">
-                <span class="progress-label">ความคืบหน้า</span>
-                <span class="progress-value completed">100%</span>
+                <span class="progress-label">ความคืบหน้าโครงงาน</span>
+                <span class="progress-value completed">30%</span>
               </div>
               <div class="progress-bar">
-                <div class="progress-fill completed" style="width: 100%"></div>
+                <div class="progress-fill completed" style="width: 30%"></div>
               </div>
             </div>
             <div class="week-meta">
               <span class="submit-date">ส่งเมื่อ: 29 ส.ค. 2566</span>
+              <span>ส่งตรงเวลา</span>
+            </div>
+            <div class="week-actions">
+              <button class="btn btn-secondary">
+                <i class="fas fa-eye"></i> ดูรายงาน
+              </button>
+            </div>
+            <div class="week-comments">
+              <div class="comments-header">
+                <span class="comments-title">ความคิดเห็นจากอาจารย์</span>
+                <span class="comments-count">2</span>
+              </div>
+              <div class="comment-preview">
+                <div class="comment-author">รศ.ดร. เอกชัย วิบูลย์ธนากุล (อาจารย์ที่ปรึกษา)</div>
+                <p class="comment-text">
+                  การออกแบบระบบและกำหนดโครงสร้างข้อมูลมีความเหมาะสม ER Diagram ชัดเจน แต่ควรพิจารณาเรื่อง scalability...
+                </p>
+              </div>
+              <div class="comment-preview">
+                <div class="comment-author">ผศ.ดร. สมชาย พิทักษ์วงศ์ (อาจารย์ประจำวิชา)</div>
+                <p class="comment-text">
+                  System Architecture ออกแบบได้ดี แต่ควรเพิ่มการพิจารณาเรื่อง security และ data backup strategy...
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Week 2 - Submitted -->
+        <div class="week-report-card submitted">
+          <div class="week-header">
+            <div class="week-number">สัปดาห์ที่ 2</div>
+            <div class="week-period">15 - 22 สิงหาคม 2566</div>
+            <div class="week-status-badge status-submitted">ส่งแล้ว</div>
+          </div>
+          <div class="week-content">
+            <h3 class="week-title">การศึกษาเทคโนโลยีและเครื่องมือที่จำเป็น</h3>
+            <p class="week-description">
+              ศึกษาและวิเคราะห์เทคโนโลยี IoT, Node.js, React, MongoDB และเครื่องมือต่างๆ ที่จะใช้ในการพัฒนาระบบ
+            </p>
+            <div class="week-progress">
+              <div class="progress-header">
+                <span class="progress-label">ความคืบหน้าโครงงาน</span>
+                <span class="progress-value completed">20%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill completed" style="width: 20%"></div>
+              </div>
+            </div>
+            <div class="week-meta">
+              <span class="submit-date">ส่งเมื่อ: 22 ส.ค. 2566</span>
+              <span>ส่งตรงเวลา</span>
+            </div>
+            <div class="week-actions">
+              <button class="btn btn-secondary">
+                <i class="fas fa-eye"></i> ดูรายงาน
+              </button>
+            </div>
+            <div class="week-comments">
+              <div class="comments-header">
+                <span class="comments-title">ความคิดเห็นจากอาจารย์</span>
+                <span class="comments-count">2</span>
+              </div>
+              <div class="comment-preview">
+                <div class="comment-author">รศ.ดร. เอกชัย วิบูลย์ธนากุล (อาจารย์ที่ปรึกษา)</div>
+                <p class="comment-text">
+                  การศึกษาเทคโนโลยีและเครื่องมือมีความละเอียด เข้าใจในหลักการทำงานของแต่ละเทคโนโลยีดี แต่ควรเพิ่มการเปรียบเทียบทางเลือกอื่น...
+                </p>
+              </div>
+              <div class="comment-preview">
+                <div class="comment-author">ผศ.ดร. สมชาย พิทักษ์วงศ์ (อาจารย์ประจำวิชา)</div>
+                <p class="comment-text">
+                  การศึกษาเทคโนโลยีครอบคลุมดี แต่ควรเพิ่ม proof of concept เล็กๆ เพื่อทดสอบความเข้ากันได้ของเทคโนโลยี...
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Week 1 - Submitted -->
+        <div class="week-report-card submitted">
+          <div class="week-header">
+            <div class="week-number">สัปดาห์ที่ 1</div>
+            <div class="week-period">8 - 15 สิงหาคม 2566</div>
+            <div class="week-status-badge status-submitted">ส่งแล้ว</div>
+          </div>
+          <div class="week-content">
+            <h3 class="week-title">การกำหนดขอบเขตและวัตถุประสงค์โครงงาน</h3>
+            <p class="week-description">
+              กำหนดขอบเขต วัตถุประสงค์ของโครงงาน ศึกษาปัญหาและความต้องการของระบบจัดการคลังสินค้า และทบทวนงานวิจัยที่เกี่ยวข้อง
+            </p>
+            <div class="week-progress">
+              <div class="progress-header">
+                <span class="progress-label">ความคืบหน้าโครงงาน</span>
+                <span class="progress-value completed">10%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill completed" style="width: 10%"></div>
+              </div>
+            </div>
+            <div class="week-meta">
+              <span class="submit-date">ส่งเมื่อ: 15 ส.ค. 2566</span>
               <span>ส่งตรงเวลา</span>
             </div>
             <div class="week-actions">
@@ -813,11 +1282,348 @@
               <div class="comment-preview">
                 <div class="comment-author">รศ.ดร. เอกชัย วิบูลย์ธนากุล</div>
                 <p class="comment-text">
-                  การออกแบบระบบและกำหนดโครงสร้างข้อมูลมีความเหมาะสม ER Diagram ชัดเจน แต่ควรพิจารณาเรื่อง scalability...
+                  การกำหนดขอบเขตและวัตถุประสงค์ชัดเจนดี การทบทวนงานวิจัยครอบคลุม แต่ควรเพิ่มการวิเคราะห์ความเป็นไปได้ทางเทคนิคมากกว่านี้...
                 </p>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      
+    </main>
 
-        <!-- Week 2
+    <!-- Report Form Modal -->
+    <div class="modal-overlay" id="reportModal">
+      <div class="report-form-modal">
+        <div class="modal-header">
+          <button class="modal-close" onclick="closeReportForm()">
+            <i class="fas fa-times"></i>
+          </button>
+          <h2 class="modal-title">รายงานประจำสัปดาห์ที่ <span id="modalWeekNumber">6</span></h2>
+          <p class="modal-subtitle">กรอกข้อมูลการทำงานในสัปดาห์นี้</p>
+        </div>
+        
+        <div class="modal-body">
+          <form id="weeklyReportForm">
+            <!-- Week Topic Section -->
+            <div class="form-section">
+              <h3 class="section-title">
+                <i class="fas fa-lightbulb"></i>
+                หัวข้อการทำงานสัปดาห์นี้
+              </h3>
+              <div class="form-group">
+                <label class="form-label">หัวข้อหลักของงานที่ทำในสัปดาห์นี้</label>
+                <input 
+                  type="text" 
+                  class="form-input" 
+                  placeholder="เช่น การพัฒนาโมดูลการจัดการสต็อกและทดสอบ API"
+                  id="weekTopic"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">คำอธิบายโดยย่อ</label>
+                <textarea 
+                  class="form-input form-textarea" 
+                  placeholder="อธิบายเป้าหมายและสาระสำคัญของงานในสัปดาห์นี้..."
+                  rows="3"
+                  id="weekDescription"
+                ></textarea>
+              </div>
+            </div>
+            <!-- Work Details Section -->
+            <div class="form-section">
+              <h3 class="section-title">
+                <i class="fas fa-tasks"></i>
+                รายละเอียดการทำงานในสัปดาห์นี้
+              </h3>
+              <div class="form-group">
+                <label class="form-label">สิ่งที่ทำสำเร็จในสัปดาห์นี้</label>
+                <textarea 
+                  class="form-input form-textarea" 
+                  placeholder="อธิบายงานที่ทำสำเร็จ ความก้าวหน้า และผลลัพธ์ที่ได้..."
+                  rows="4"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">ปัญหาและอุปสรรคที่พบ</label>
+                <textarea 
+                  class="form-input form-textarea" 
+                  placeholder="ระบุปัญหาหรืออุปสรรคที่เกิดขึ้นและวิธีการแก้ไข..."
+                  rows="3"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">แผนงานสำหรับสัปดาห์หน้า</label>
+                <textarea 
+                  class="form-input form-textarea" 
+                  placeholder="งานที่วางแผนจะทำในสัปดาห์ถัดไป..."
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- File Upload Section -->
+            <div class="form-section">
+              <h3 class="section-title">
+                <i class="fas fa-upload"></i>
+                อัพโหลดเอกสารและภาพประกอบ
+              </h3>
+              <div class="form-group">
+                <label class="form-label">รูปเล่มหรือเอกสารประกอบ</label>
+                <div class="file-upload-area" id="fileUploadArea">
+                  <div class="file-upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                  </div>
+                  <div class="file-upload-text">
+                    <strong>คลิกเพื่อเลือกไฟล์</strong> หรือลากไฟล์มาวางที่นี่<br>
+                    รองรับ PDF, DOC, DOCX, JPG, PNG (ขนาดไม่เกิน 10MB)
+                  </div>
+                  <input type="file" class="file-input" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                </div>
+                <div class="uploaded-files" id="uploadedFiles"></div>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">ภาพการทำงานในสัปดาห์นี้</label>
+                <div class="file-upload-area" id="imageUploadArea">
+                  <div class="file-upload-icon">
+                    <i class="fas fa-images"></i>
+                  </div>
+                  <div class="file-upload-text">
+                    <strong>คลิกเพื่อเลือกภาพ</strong> หรือลากภาพมาวางที่นี่<br>
+                    รองรับ JPG, PNG, GIF (ขนาดไม่เกิน 5MB ต่อไฟล์)
+                  </div>
+                  <input type="file" class="file-input" id="imageInput" multiple accept=".jpg,.jpeg,.png,.gif">
+                </div>
+                <div class="uploaded-files" id="uploadedImages"></div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-cancel" onclick="closeReportForm()">
+            <i class="fas fa-times"></i> ยกเลิก
+          </button>
+          <button type="submit" class="btn btn-save" onclick="submitReport()">
+            <i class="fas fa-paper-plane"></i> ส่งรายงาน
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Filter functionality
+      const statusFilter = document.getElementById('statusFilter');
+      const sortFilter = document.getElementById('sortFilter');
+      const reportCards = document.querySelectorAll('.week-report-card');
+
+      statusFilter.addEventListener('change', filterReports);
+      sortFilter.addEventListener('change', sortReports);
+
+      function filterReports() {
+        const selectedStatus = statusFilter.value;
+        
+        reportCards.forEach(card => {
+          if (selectedStatus === 'all') {
+            card.style.display = 'block';
+          } else {
+            const hasStatus = card.classList.contains(selectedStatus);
+            card.style.display = hasStatus ? 'block' : 'none';
+          }
+        });
+      }
+
+      function sortReports() {
+        const selectedSort = sortFilter.value;
+        const reportsGrid = document.querySelector('.reports-grid');
+        const cards = Array.from(reportCards);
+        
+        cards.sort((a, b) => {
+          if (selectedSort === 'week-desc') {
+            const weekA = parseInt(a.querySelector('.week-number').textContent.match(/\d+/)[0]);
+            const weekB = parseInt(b.querySelector('.week-number').textContent.match(/\d+/)[0]);
+            return weekB - weekA;
+          } else if (selectedSort === 'week-asc') {
+            const weekA = parseInt(a.querySelector('.week-number').textContent.match(/\d+/)[0]);
+            const weekB = parseInt(b.querySelector('.week-number').textContent.match(/\d+/)[0]);
+            return weekA - weekB;
+          } else if (selectedSort === 'status') {
+            const statusOrder = { 'in-progress': 0, 'submitted': 1, 'not-started': 2 };
+            const statusA = a.classList.contains('in-progress') ? 'in-progress' : 
+                           a.classList.contains('submitted') ? 'submitted' : 'not-started';
+            const statusB = b.classList.contains('in-progress') ? 'in-progress' : 
+                           b.classList.contains('submitted') ? 'submitted' : 'not-started';
+            return statusOrder[statusA] - statusOrder[statusB];
+          }
+        });
+        
+        cards.forEach(card => reportsGrid.appendChild(card));
+      }
+
+      // Initialize with default sorting
+      sortReports();
+
+      // Modal functions
+      function openReportForm(weekNumber) {
+        const modal = document.getElementById('reportModal');
+        const modalWeekNumber = document.getElementById('modalWeekNumber');
+        modalWeekNumber.textContent = weekNumber;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeReportForm() {
+        const modal = document.getElementById('reportModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+
+      // Progress slider
+      function updateProgress(value) {
+        const display = document.getElementById('progressDisplay');
+        display.textContent = value + '%';
+      }
+
+      // File upload handling
+      const fileUploadArea = document.getElementById('fileUploadArea');
+      const fileInput = document.getElementById('fileInput');
+      const uploadedFiles = document.getElementById('uploadedFiles');
+      const imageUploadArea = document.getElementById('imageUploadArea');
+      const imageInput = document.getElementById('imageInput');
+      const uploadedImages = document.getElementById('uploadedImages');
+
+      // Handle file uploads
+      function setupFileUpload(area, input, container, fileTypes) {
+        area.addEventListener('click', () => input.click());
+        area.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          area.classList.add('dragover');
+        });
+        area.addEventListener('dragleave', () => {
+          area.classList.remove('dragover');
+        });
+        area.addEventListener('drop', (e) => {
+          e.preventDefault();
+          area.classList.remove('dragover');
+          handleFiles(e.dataTransfer.files, container, fileTypes);
+        });
+        input.addEventListener('change', (e) => {
+          handleFiles(e.target.files, container, fileTypes);
+        });
+      }
+
+      function handleFiles(files, container, fileTypes) {
+        Array.from(files).forEach(file => {
+          if (file.size > (fileTypes.includes('image') ? 5 : 10) * 1024 * 1024) {
+            alert(`ไฟล์ ${file.name} มีขนาดใหญ่เกินไป`);
+            return;
+          }
+          
+          const fileItem = createFileItem(file);
+          container.appendChild(fileItem);
+        });
+      }
+
+      function createFileItem(file) {
+        const item = document.createElement('div');
+        item.className = 'file-item';
+        
+        const isImage = file.type.startsWith('image/');
+        const icon = isImage ? 'fa-image' : 'fa-file-alt';
+        
+        item.innerHTML = `
+          <div class="file-info">
+            <i class="fas ${icon} file-icon"></i>
+            <div>
+              <div class="file-name">${file.name}</div>
+              <div class="file-size">${formatFileSize(file.size)}</div>
+            </div>
+          </div>
+          <button type="button" class="file-remove" onclick="removeFile(this)">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+        
+        return item;
+      }
+
+      function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+      }
+
+      function removeFile(button) {
+        button.parentElement.remove();
+      }
+
+      function submitReport() {
+        // Get form data
+        const weekTopic = document.getElementById('weekTopic').value;
+        const weekDescription = document.getElementById('weekDescription').value;
+        const progressValue = document.getElementById('progressSlider').value;
+        
+        // Basic validation
+        if (!weekTopic.trim()) {
+          alert('กรุณากรอกหัวข้อการทำงานสัปดาห์นี้');
+          return;
+        }
+        
+        if (!weekDescription.trim()) {
+          alert('กรุณากรอกคำอธิบายโดยย่อ');
+          return;
+        }
+        
+        // Here you would normally submit the form data to server
+        console.log('Submitting report:', {
+          topic: weekTopic,
+          description: weekDescription,
+          progress: progressValue
+        });
+        
+        alert('รายงานถูกส่งเรียบร้อยแล้ว!');
+        
+        // Update the card with new information
+        updateWeekCard(weekTopic, weekDescription, progressValue);
+        
+        closeReportForm();
+      }
+
+      function updateWeekCard(topic, description, progress) {
+        // Find the current week card (week 6 in this case)
+        const currentWeekCard = document.querySelector('.week-report-card.in-progress');
+        if (currentWeekCard) {
+          // Update title and description
+          const titleElement = currentWeekCard.querySelector('.week-title');
+          const descriptionElement = currentWeekCard.querySelector('.week-description');
+          const progressElement = currentWeekCard.querySelector('.progress-value');
+          const progressFill = currentWeekCard.querySelector('.progress-fill');
+          
+          if (titleElement) titleElement.textContent = topic;
+          if (descriptionElement) descriptionElement.textContent = description;
+          if (progressElement) progressElement.textContent = progress + '%';
+          if (progressFill) progressFill.style.width = progress + '%';
+        }
+      }
+
+      // Initialize file upload areas
+      setupFileUpload(fileUploadArea, fileInput, uploadedFiles, ['document']);
+      setupFileUpload(imageUploadArea, imageInput, uploadedImages, ['image']);
+
+      // Close modal when clicking outside
+      document.getElementById('reportModal').addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal-overlay')) {
+          closeReportForm();
+        }
+      });
+
+      // Prevent modal close when clicking inside the modal
+      document.querySelector('.report-form-modal').addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    </script>
+  </body>
+</html>
