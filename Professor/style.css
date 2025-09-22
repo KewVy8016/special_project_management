@@ -1,0 +1,1055 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  color: white;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-container img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-info {
+  text-align: right;
+}
+
+.user-info h4 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.user-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.user-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+/* Main Container */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+/* Navigation Tabs */
+.nav-tabs {
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.nav-tabs button {
+  background-color: transparent;
+  border: none;
+  padding: 12px 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #555;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-tabs button.active {
+  background: linear-gradient(45deg, #1976d2, #2196f3);
+  color: white;
+  box-shadow: 0 4px 10px rgba(33, 150, 243, 0.3);
+}
+
+.nav-tabs button:hover:not(.active) {
+  background-color: #e9ecef;
+}
+
+/* Content Sections */
+.tab-content {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Card Styles (Dashboard) */
+.card {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-icon {
+  font-size: 2rem;
+  color: #2196f3;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e3f2fd;
+  border-radius: 50%;
+}
+
+.card-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #34495e;
+}
+
+.card-info p {
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #218838;
+}
+
+/* Table Styles */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9em;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.styled-table thead tr {
+  background-color: #1976d2;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+  background-color: #f3f9ff;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #fcfcfc;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #1976d2;
+}
+
+/* Progress Bar */
+.progress-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress-bar {
+  height: 15px;
+  background: linear-gradient(90deg, #4caf50, #8bc34a);
+  transition: width 0.4s ease-in-out;
+}
+
+/* Project Detail Specific Styles */
+.project-info-card,
+.section-card {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.project-info-card h2 {
+  color: #1976d2;
+  margin-bottom: 1rem;
+}
+
+.info-group {
+  margin-bottom: 1rem;
+}
+
+.info-group p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0.5rem 0;
+  color: #555;
+}
+
+.progress-section {
+  margin-top: 1.5rem;
+}
+
+.progress-section h3 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+  height: 20px;
+  background: linear-gradient(90deg, #4caf50, #8bc34a);
+  text-align: center;
+  color: white;
+  transition: width 0.4s ease-in-out;
+}
+
+.sections-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.section-header {
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h3 {
+  color: #2196f3;
+  font-size: 1.5rem;
+}
+
+.week-reports-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.week-report-card {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 5px solid #ccc;
+  position: relative;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.week-report-card.completed {
+  border-left-color: #4caf50;
+}
+
+.week-report-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.status-indicator {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #4caf50;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.week-title {
+  font-size: 1.1rem;
+  color: #34495e;
+  margin-bottom: 0.5rem;
+}
+
+.week-description {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb-nav {
+  background-color: #f1f2f3;
+  padding: 0.75rem 2rem;
+  border-bottom: 1px solid #dee2e6;
+  position: sticky; /* ทำให้เมนูติดขอบบน */
+  top: 6rem; /* กำหนดให้เมนูอยู่ใต้ Header */
+  z-index: 99;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-item {
+  color: #495057;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease-in-out;
+}
+
+.breadcrumb-item:hover {
+  color: #007bff;
+}
+
+.breadcrumb-item.active {
+  color: #007bff;
+  font-weight: 600;
+  cursor: default;
+}
+
+.breadcrumb-separator {
+  margin: 0 0.5rem;
+  color: #adb5bd;
+}
+
+/* Modal and Report-specific styles */
+.modal-overlay {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 900px;
+  margin: 2rem;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-content .report-header,
+.modal-content .work-details-section,
+.modal-content .comments-section {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.report-header {
+  border-top: 5px solid #4caf50;
+  margin-bottom: 2rem;
+}
+
+.report-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1976d2;
+  margin-bottom: 1rem;
+}
+
+.report-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border-left: 4px solid #2196f3;
+}
+
+.meta-label {
+  font-weight: 600;
+  color: #666;
+  font-size: 14px;
+}
+
+.meta-value {
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.topic-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.topic-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.topic-content {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.topic-description {
+  color: #777;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Work Details Section */
+.work-details-section {
+  border-left: 5px solid #ff9800;
+  padding-left: 1rem;
+  margin-top: 2rem;
+}
+
+.work-details-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.work-detail-item {
+  margin-bottom: 2rem;
+}
+
+.work-detail-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.work-detail-content {
+  background: #f8f9fa;
+  padding: 1.25rem;
+  border-radius: 12px;
+  border-left: 4px solid #ff9800;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Comments Section */
+.comments-section {
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.comments-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.comment-item {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.comment-item.advisor {
+  border-left: 4px solid #4caf50;
+}
+
+.comment-item.instructor {
+  border-left: 4px solid #2196f3;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.comment-author-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.comment-avatar.advisor {
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+}
+
+.comment-avatar.instructor {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+}
+
+.author-details {
+  flex: 1;
+}
+
+.author-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.author-role {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+
+.comment-date {
+  font-size: 14px;
+  color: #666;
+}
+
+.comment-text {
+  color: #555;
+  line-height: 1.6;
+  font-size: 15px;
+  margin-bottom: 1rem;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  color: #dc3545;
+  transition: color 0.3s ease;
+}
+
+.modal-close-btn:hover {
+  color: #c82333;
+}
+
+/* Other CSS styles... */
+
+/* Modal and Report-specific styles */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 900px;
+  margin: 2rem;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* New Styles for Advisor Form */
+.evaluation-form-advisor {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.evaluation-form-advisor .form-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.evaluation-form-advisor .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.evaluation-form-advisor label {
+  display: block;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 0.75rem;
+}
+
+.evaluation-form-advisor textarea,
+.evaluation-form-advisor input[type="range"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+}
+
+.evaluation-form-advisor textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.evaluation-form-advisor input[type="range"] {
+  -webkit-appearance: none;
+  height: 8px;
+  background: #e9ecef;
+  outline: none;
+}
+
+.evaluation-form-advisor input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #2196f3;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.evaluation-form-advisor .progress-display {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1976d2;
+  margin-top: 0.5rem;
+}
+
+.evaluation-form-advisor .submit-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #28a745, #218838);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.evaluation-form-advisor .submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+/* Attachments Section */
+.attachments-section {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-top: 1.5rem;
+}
+
+.attachments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.attachment-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.25rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.attachment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.attachment-card .card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.attachment-card.document .card-icon {
+  color: #dc3545; /* สีแดงสำหรับเอกสาร */
+}
+
+.attachment-card.image .card-icon {
+  color: #17a2b8; /* สีฟ้าสำหรับรูปภาพ */
+}
+
+.attachment-card .file-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Styles for Sub-Tabs (Exam Types) */
+.tab-menu {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background-color: #f1f3f5;
+    border-radius: 12px;
+}
+
+.tab-button-sub {
+    flex: 0 1 auto;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #495057;
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tab-button-sub:hover {
+    background-color: #e9ecef;
+}
+
+.tab-button-sub.active {
+    background-color: #2196F3;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.2);
+}
+
+.sub-tab-content {
+    display: none;
+}
+
+.sub-tab-content.active {
+    display: block;
+}
+
+/* --- New CSS for Grading Popup --- */
+.modal-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    max-width: 90%;
+    width: 550px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    color: #aaa;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-close-btn:hover, .modal-close-btn:focus {
+    color: #333;
+}
+
+.modal-header {
+    text-align: center;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header .title {
+    font-size: 1.8rem;
+    color: #333;
+    font-weight: 700;
+}
+
+.project-details {
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.project-details .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem 0;
+    border-bottom: 1px dashed #e9ecef;
+}
+
+.project-details .label {
+    font-weight: 600;
+    color: #555;
+}
+
+.project-details .value {
+    color: #2196F3;
+    font-weight: 500;
+    text-align: right;
+}
+
+.grading-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.grading-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.grading-form .form-group label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.grading-form textarea, .grading-form select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.grading-form textarea:focus, .grading-form select:focus {
+    outline: none;
+    border-color: #2196F3;
+}
+
+.grading-form .submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #28a745; /* สีเขียวสำหรับปุ่มบันทึก */
+    color: #fff;
+    border: none;
+}
+
+.grading-form .submit-btn:hover {
+    background-color: #218838;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* --- New CSS for File Attachments --- */
+.attachments-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.attachments-section h3 {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.attachments-section h3 .fas {
+    color: #2196F3;
+}
+
+.files-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.file-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: #495057;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    flex-grow: 1;
+    min-width: 200px;
+    max-width: 45%;
+}
+
+.file-link:hover {
+    background-color: #e9ecef;
+    transform: translateY(-2px);
+}
+
+.file-icon {
+    font-size: 1.5rem;
+    color: #adb5bd;
+}
+
+.document-file .file-icon {
+    color: #dc3545; /* Red for documents */
+}
+
+.presentation-file .file-icon {
+    color: #fd7e14; /* Orange for presentations */
+}
+
+.file-link span {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
