@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายละเอียดโครงงาน - ระบบการจัดการข้อมูลโครงงาน</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 45px;
+            height: 45px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            font-size: 22px;
+        }
+
+        .system-title {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            font-size: 18px;
+        }
+
+        .user-info {
+            color: white;
+            text-align: right;
+        }
+
+        .user-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .user-role {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb-nav {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb-nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb-item {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .breadcrumb-item:hover {
+            color: #4CAF50;
+        }
+
+        .breadcrumb-item.active {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .breadcrumb-separator {
+            color: #999;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #388E3C;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 2rem;
+        }
+
+        /* Project Info Card */
+        .project-info-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-group {
+            margin-bottom: 1rem;
+        }
+
+        .info-group p {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 0.5rem;
+        }
+
+        .icon-label {
+            color: #4CAF50;
+        }
+
+        .progress-section {
+            margin: 1rem 0;
+        }
+
+        .progress-section h3 {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-container {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50 0%, #2e7d32 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .project-description {
+            margin: 1rem 0;
+            padding: 0.75rem;
+            background: #E8F5E9;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Sections Container */
+        .sections-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #388E3C;
+        }
+
+        .week-reports-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .week-report-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .week-report-card:hover {
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .week-report-card.completed .status-indicator {
+            width: 12px;
+            height: 12px;
+            background: #4CAF50;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .week-content {
+            flex: 1;
+        }
+
+        .week-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .week-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .week-progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .week-progress-bar {
+            flex: 1;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .week-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50 0%, #2e7d32 100%);
+            border-radius: 3px;
+        }
+
+        .week-progress-value {
+            font-weight: 600;
+            color: #2e7d32;
+            min-width: 35px;
+            text-align: right;
+        }
+
+        .week-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 0.5rem;
+            font-size: 13px;
+        }
+
+        .comment-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #E3F2FD;
+            color: #1976D2;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+        .comment-status.has-comments {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .comment-status.no-comments {
+            background: #FFF3E0;
+            color: #EF6C00;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .report-header {
+            margin-bottom: 2rem;
+        }
+
+        .report-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #388E3C;
+            margin-bottom: 1rem;
+        }
+
+        .report-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .meta-item {
+            flex: 1 1 200px;
+        }
+
+        .meta-label {
+            font-weight: 600;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .meta-value {
+            color: #333;
+            font-size: 14px;
+        }
+
+        .status-badge {
+            background: #E8F5E9;
+            color: #4CAF50;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .topic-section {
+            background: #E8F5E9;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .topic-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #388E3C;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .topic-content {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-description {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .work-details-section {
+            margin: 2rem 0;
+        }
+
+        .work-details-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #388E3C;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .work-detail-item {
+            margin-bottom: 1rem;
+        }
+
+        .work-detail-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .work-detail-content {
+            font-size: 14px;
+            color: #666;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .attachments-section {
+            margin: 2rem 0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #388E3C;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .attachments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .attachment-card {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .attachment-card:hover {
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .card-icon {
+            font-size: 24px;
+            color: #4CAF50;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-name {
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        .comments-section {
+            margin: 2rem 0;
+        }
+
+        .comments-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #388E3C;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .comment-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .comment-item.advisor .comment-avatar {
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+        }
+
+        .comment-item.instructor .comment-avatar {
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .comment-author-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .comment-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .author-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .author-role {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .comment-date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .comment-text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .evaluation-form-advisor {
+            margin: 2rem 0;
+        }
+
+        .form-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #388E3C;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        #progressValue {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .submit-btn-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .submit-btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+            color: white;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+
+            .report-meta {
+                flex-direction: column;
+            }
+
+            .attachments-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .week-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .week-progress-value {
+                align-self: flex-end;
+            }
+
+            .week-status {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">👨‍🏫</div>
+                <h1 class="system-title">ระบบการจัดการข้อมูลโครงงาน</h1>
+            </div>
+            <div class="user-section">
+                <div class="user-info">
+                    <div class="user-name">อ. สมชาย ใจดี</div>
+                    <div class="user-role">อาจารย์ประจำภาควิชา</div>
+                </div>
+                <div class="user-avatar">ส</div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav">
+        <div class="container">
+            <a href="teacher_dashboard.html" class="breadcrumb-item">Dashboard</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">รายละเอียดโครงงาน</span>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1 class="page-title">ระบบควบคุมบ้านอัจฉริยะ (IoT)</h1>
+        <p class="page-subtitle">รายละเอียดและความคืบหน้าของโครงงาน</p>
+
+        <!-- Project Info Card -->
+        <div class="project-info-card">
+            <h2 class="page-title">ระบบควบคุมบ้านอัจฉริยะ (IoT)</h2>
+            <div class="info-group">
+                <p>
+                    <i class="fas fa-users icon-label"></i>
+                    <strong>ทีม</strong>: สมศรี รักเรียน, มานะ ขยันทำ
+                </p>
+                <p>
+                    <i class="fas fa-microchip icon-label"></i>
+                    <strong>เทคโนโลยี</strong>: IoT, Web Application, Sensors
+                </p>
+            </div>
+            <div class="progress-section">
+                <h3>ความคืบหน้าโดยรวม: <span id="overallProgress">60</span>%</h3>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 60%"></div>
+                </div>
+            </div>
+            <p class="project-description">
+                โครงงานนี้มีจุดมุ่งหมายเพื่อพัฒนาระบบควบคุมอุปกรณ์ไฟฟ้าภายในบ้านผ่านอินเทอร์เน็ต เพื่อความสะดวกและประหยัดพลังงาน
+            </p>
+        </div>
+
+        <!-- Weekly Reports Section -->
+        <div class="sections-container">
+            <div class="section-header">
+                <h3><i class="fas fa-calendar-alt"></i> รายงานประจำสัปดาห์</h3>
+            </div>
+            <div class="week-reports-list">
+                <div class="week-report-card completed" onclick="showReportModal('สัปดาห์ที่ 5')">
+                    <div class="status-indicator"></div>
+                    <div class="week-content">
+                        <div class="week-title">
+                            <span>สัปดาห์ที่ 5: การพัฒนาส่วนติดต่อผู้ใช้</span>
+                            <span class="week-progress-value">85%</span>
+                        </div>
+                        <p class="week-description">
+                            พัฒนาและปรับปรุง User Interface สำหรับระบบแดชบอร์ดหลัก
+                        </p>
+                        <div class="week-progress">
+                            <div class="week-progress-bar">
+                                <div class="week-progress-fill" style="width: 85%"></div>
+                            </div>
+                            <span>ความคืบหน้า: 85%</span>
+                        </div>
+                        <div class="week-status">
+                            <div class="comment-status has-comments">
+                                <i class="fas fa-comment"></i>
+                                มีความคิดเห็น (2)
+                            </div>
+                            <div class="comment-status">
+                                <i class="fas fa-check-circle"></i>
+                                ส่งแล้ว
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="week-report-card completed" onclick="showReportModal('สัปดาห์ที่ 4')">
+                    <div class="status-indicator"></div>
+                    <div class="week-content">
+                        <div class="week-title">
+                            <span>สัปดาห์ที่ 4: พัฒนาส่วนควบคุม</span>
+                            <span class="week-progress-value">70%</span>
+                        </div>
+                        <p class="week-description">
+                            เริ่มเขียนโค้ดสำหรับส่วนควบคุมหลักและทดสอบเบื้องต้น
+                        </p>
+                        <div class="week-progress">
+                            <div class="week-progress-bar">
+                                <div class="week-progress-fill" style="width: 70%"></div>
+                            </div>
+                            <span>ความคืบหน้า: 70%</span>
+                        </div>
+                        <div class="week-status">
+                            <div class="comment-status no-comments">
+                                <i class="fas fa-comment"></i>
+                                ยังไม่มีความคิดเห็น
+                            </div>
+                            <div class="comment-status">
+                                <i class="fas fa-check-circle"></i>
+                                ส่งแล้ว
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="week-report-card completed" onclick="showReportModal('สัปดาห์ที่ 3')">
+                    <div class="status-indicator"></div>
+                    <div class="week-content">
+                        <div class="week-title">
+                            <span>สัปดาห์ที่ 3: ออกแบบระบบ</span>
+                            <span class="week-progress-value">90%</span>
+                        </div>
+                        <p class="week-description">
+                            ออกแบบสถาปัตยกรรมระบบ (System Architecture) และฐานข้อมูล
+                        </p>
+                        <div class="week-progress">
+                            <div class="week-progress-bar">
+                                <div class="week-progress-fill" style="width: 90%"></div>
+                            </div>
+                            <span>ความคืบหน้า: 90%</span>
+                        </div>
+                        <div class="week-status">
+                            <div class="comment-status no-comments">
+                                <i class="fas fa-comment"></i>
+                                ยังไม่มีความคิดเห็น
+                            </div>
+                            <div class="comment-status">
+                                <i class="fas fa-check-circle"></i>
+                                ส่งแล้ว
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Report Modal -->
+    <div id="reportModal" class="modal-overlay">
+        <div class="modal-content">
+            <!-- Modal content will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const mockReportData = {
+                'สัปดาห์ที่ 5': {
+                    title: 'รายงานสัปดาห์ที่ 5',
+                    progress: 85,
+                    meta: [
+                        { label: 'ระยะเวลา', value: '5 - 12 กันยายน 2566' },
+                        { label: 'วันที่ส่ง', value: '12 กันยายน 2566' },
+                        { label: 'สถานะ', value: '<span class="status-badge">ส่งแล้ว</span>' },
+                        { label: 'ความคืบหน้า', value: '<span class="status-badge">85%</span>' },
+                    ],
+                    topic: {
+                        title: 'หัวข้อการทำงานสัปดาห์นี้',
+                        content: 'การพัฒนาส่วนติดต่อผู้ใช้และทดสอบระบบแดชบอร์ด',
+                        description: 'พัฒนาและปรับปรุง User Interface สำหรับระบบแดชบอร์ดหลัก รวมถึงการทดสอบการทำงานของระบบและการปรับปรุงประสบการณ์ผู้ใช้ให้มีความสะดวกและใช้งานง่ายมากขึ้น'
+                    },
+                    details: [
+                        { label: 'สิ่งที่ทำสำเร็จในสัปดาห์นี้', content: 'ในสัปดาห์นี้ได้พัฒนาส่วนติดต่อผู้ใช้หลักของระบบแดชบอร์ดสำเร็จ โดยออกแบบ UI/UX ที่ทันสมัยและใช้งานง่าย ได้ทำการ implement responsive design ที่รองรับการใช้งานบนอุปกรณ์หลากหลายขนาด รวมถึงการทดสอบการทำงานของระบบ navigation และ data visualization components ต่างๆ ผลลัพธ์ที่ได้คือระบบที่มีประสิทธิภาพและสวยงาม' },
+                        { label: 'ปัญหาและอุปสรรคที่พบ', content: 'พบปัญหาในเรื่อง state management เมื่อมีการ update ข้อมูลแบบ real-time และปัญหา performance เมื่อมีข้อมูลจำนวนมาก นอกจากนี้ยังพบปัญหา compatibility issues กับ browser บางตัว ได้แก้ไขโดยการใช้ Redux สำหรับจัดการ state และ implement pagination พร้อม lazy loading เพื่อเพิ่มประสิทธิภาพ รวมถึงเพิ่ม polyfills สำหรับรองรับ browser เก่า' },
+                        { label: 'แผนงานสำหรับสัปดาห์หน้า', content: 'สัปดาห์หน้าจะเน้นไปที่การพัฒนาระบบ authentication และ user management รวมถึงการทำ unit testing และ integration testing ให้ครอบคลุม นอกจากนี้จะทำการปรับปรุง accessibility features และเพิ่มระบบ notification แบบ real-time เพื่อให้ระบบมีความสมบูรณ์มากขึ้น' }
+                    ],
+                    comments: [
+                        { author: 'รศ.ดร. เอกชัย วิบูลย์ธนากุล', role: 'อาจารย์ที่ปรึกษา', date: '12 กันยายน 2566', text: 'การพัฒนาส่วนติดต่อผู้ใช้มีความคืบหน้าดีมาก UI/UX ออกแบบได้สวยงามและใช้งานง่าย แต่ยังควรปรับปรุงการจัดการ state management และเพิ่มการตรวจสอบ input validation ให้มากขึ้น...' },
+                        { author: 'ผศ.ดร. สมชาย ใจดี', role: 'อาจารย์ประจำวิชา', date: '13 กันยายน 2566', text: 'เห็นด้วยกับความเห็นของอาจารย์ที่ปรึกษา การออกแบบ UI มีความสวยงามและทันสมัย อย่างไรก็ตาม ควรใส่ใจเรื่องการจัดการ error handling และ loading states ให้มากขึ้น...' }
+                    ],
+                    attachments: {
+                        documents: [
+                            { name: 'เอกสารการออกแบบระบบ.pdf', url: 'https://via.placeholder.com/300x200?text=เอกสารการออกแบบระบบ.pdf' },
+                            { name: 'แผนงานสัปดาห์ที่ 5.xlsx', url: 'https://via.placeholder.com/300x200?text=แผนงานสัปดาห์ที่ 5.xlsx' },
+                            { name: 'รายงานความคืบหน้า.pdf', url: 'https://via.placeholder.com/300x200?text=รายงานความคืบหน้า.pdf' }
+                        ],
+                        images: [
+                            { name: 'หน้าจอ UI.png', url: 'https://via.placeholder.com/300x200?text=หน้าจอ UI' },
+                            { name: 'แผนผังฐานข้อมูล.jpg', url: 'https://via.placeholder.com/300x200?text=แผนผังฐานข้อมูล' },
+                            { name: 'ภาพหน้าจอ Dashboard.jpg', url: 'https://via.placeholder.com/300x200?text=ภาพหน้าจอ Dashboard' },
+                            { name: 'ภาพการทดสอบระบบ.png', url: 'https://via.placeholder.com/300x200?text=ภาพการทดสอบระบบ' }
+                        ]
+                    }
+                },
+                'สัปดาห์ที่ 4': {
+                    title: 'รายงานสัปดาห์ที่ 4',
+                    progress: 70,
+                    meta: [
+                        { label: 'ระยะเวลา', value: '28 ส.ค. - 4 ก.ย. 2566' },
+                        { label: 'วันที่ส่ง', value: '4 กันยายน 2566' },
+                        { label: 'สถานะ', value: '<span class="status-badge">ส่งแล้ว</span>' },
+                        { label: 'ความคืบหน้า', value: '<span class="status-badge">70%</span>' },
+                    ],
+                    topic: {
+                        title: 'หัวข้อการทำงานสัปดาห์นี้',
+                        content: 'การพัฒนาส่วนควบคุม',
+                        description: 'เริ่มเขียนโค้ดสำหรับส่วนควบคุมหลักและทดสอบเบื้องต้น'
+                    },
+                    details: [
+                        { label: 'สิ่งที่ทำสำเร็จในสัปดาห์นี้', content: 'เริ่มต้นการพัฒนาโค้ดสำหรับส่วนควบคุมหลักของระบบ รวมถึงการทดสอบการเชื่อมต่อกับเซ็นเซอร์ต่างๆ ที่ใช้ในโครงงาน IoT' },
+                        { label: 'ปัญหาและอุปสรรคที่พบ', content: 'พบปัญหาในการเชื่อมต่อข้อมูลแบบไร้สายระหว่างอุปกรณ์และเซิร์ฟเวอร์เนื่องจากความล่าช้าในการส่งข้อมูล ได้แก้ไขโดยการเพิ่มโค้ดในการบีบอัดข้อมูลก่อนส่ง' },
+                        { label: 'แผนงานสำหรับสัปดาห์หน้า', content: 'สัปดาห์หน้าจะเน้นไปที่การพัฒนาระบบ authentication และ user management รวมถึงการทำ unit testing และ integration testing ให้ครอบคลุม' }
+                    ],
+                    comments: [],
+                    attachments: {
+                        documents: [],
+                        images: [
+                            { name: 'ภาพวงจร.png', url: 'https://via.placeholder.com/300x200?text=ภาพวงจร' }
+                        ]
+                    }
+                },
+                'สัปดาห์ที่ 3': {
+                    title: 'รายงานสัปดาห์ที่ 3',
+                    progress: 90,
+                    meta: [
+                        { label: 'ระยะเวลา', value: '21 - 28 ส.ค. 2566' },
+                        { label: 'วันที่ส่ง', value: '28 สิงหาคม 2566' },
+                        { label: 'สถานะ', value: '<span class="status-badge">ส่งแล้ว</span>' },
+                        { label: 'ความคืบหน้า', value: '<span class="status-badge">90%</span>' },
+                    ],
+                    topic: {
+                        title: 'หัวข้อการทำงานสัปดาห์นี้',
+                        content: 'ออกแบบระบบ',
+                        description: 'ออกแบบสถาปัตยกรรมระบบ (System Architecture) และฐานข้อมูล'
+                    },
+                    details: [
+                        { label: 'สิ่งที่ทำสำเร็จในสัปดาห์นี้', content: 'ได้ทำการออกแบบสถาปัตยกรรมระบบและฐานข้อมูลเบื้องต้น รวมถึงการสร้างแผนผังการไหลของข้อมูล (data flow diagram)' },
+                        { label: 'ปัญหาและอุปสรรคที่พบ', content: 'ไม่พบปัญหาใหญ่เกิดขึ้นในสัปดาห์นี้' },
+                        { label: 'แผนงานสำหรับสัปดาห์หน้า', content: 'สัปดาห์หน้าจะเริ่มลงมือเขียนโค้ดสำหรับส่วนควบคุม' }
+                    ],
+                    comments: [],
+                    attachments: {
+                        documents: [
+                            { name: 'เอกสารการออกแบบ.docx', url: 'https://via.placeholder.com/300x200?text=เอกสารการออกแบบ.docx' }
+                        ],
+                        images: []
+                    }
+                }
+            };
+
+            // อัปเดตสถานะความคิดเห็นในแต่ละสัปดาห์
+            function updateCommentStatus() {
+                const weekElements = document.querySelectorAll('.week-report-card');
+                
+                weekElements.forEach(element => {
+                    const titleElement = element.querySelector('.week-title span:first-child');
+                    if (titleElement) {
+                        const weekTitle = titleElement.textContent.trim();
+                        const weekData = mockReportData[weekTitle.split(':')[0].trim()];
+                        
+                        if (weekData) {
+                            const commentStatusElement = element.querySelector('.comment-status:first-child');
+                            if (commentStatusElement) {
+                                const commentCount = weekData.comments.length;
+                                
+                                if (commentCount > 0) {
+                                    commentStatusElement.innerHTML = `<i class="fas fa-comment"></i> มีความคิดเห็น (${commentCount})`;
+                                    commentStatusElement.className = 'comment-status has-comments';
+                                } else {
+                                    commentStatusElement.innerHTML = `<i class="fas fa-comment"></i> ยังไม่มีความคิดเห็น`;
+                                    commentStatusElement.className = 'comment-status no-comments';
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            window.showReportModal = function(weekTitle) {
+                const modal = document.getElementById('reportModal');
+                const modalContent = modal.querySelector('.modal-content');
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const userRole = urlParams.get('role') === 'instructor' ? 'instructor' : 'advisor';
+
+                const data = mockReportData[weekTitle];
+                if (!data) {
+                    modalContent.innerHTML = '<p>ไม่พบข้อมูลรายงานสำหรับสัปดาห์นี้</p>';
+                    modal.style.display = 'flex';
+                    return;
+                }
+
+                modalContent.innerHTML = `
+                    <button class="modal-close-btn">&times;</button>
+                    <div class="report-header">
+                        <h1 class="report-title">${data.title}</h1>
+                        <div class="report-meta">
+                            ${data.meta.map(item => `
+                                <div class="meta-item">
+                                    <span class="meta-label">${item.label}</span>
+                                    <span class="meta-value">${item.value}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="topic-section">
+                            <div class="topic-title">
+                                <i class="fas fa-lightbulb"></i>
+                                หัวข้อการทำงานสัปดาห์นี้
+                            </div>
+                            <div class="topic-content">
+                                ${data.topic.content}
+                            </div>
+                            <div class="topic-description">
+                                ${data.topic.description}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-details-section">
+                        <h2 class="work-details-title">
+                            <i class="fas fa-tasks"></i>
+                            รายละเอียดการทำงานในสัปดาห์นี้
+                        </h2>
+                        ${data.details.map(item => `
+                            <div class="work-detail-item">
+                                <div class="work-detail-label">
+                                    <i class="fas fa-check-circle"></i>
+                                    ${item.label}
+                                </div>
+                                <div class="work-detail-content">
+                                    ${item.content}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${data.attachments && (data.attachments.documents.length > 0 || data.attachments.images.length > 0) ? `
+                        <div class="attachments-section">
+                            <h2 class="section-title">
+                                <i class="fas fa-paperclip"></i>
+                                เอกสารและรูปภาพแนบ
+                            </h2>
+                            <div class="attachments-grid">
+                                ${data.attachments.documents.map(doc => `
+                                    <a href="${doc.url}" target="_blank" class="attachment-card document">
+                                        <i class="fas fa-file-alt card-icon"></i>
+                                        <span class="file-name">${doc.name}</span>
+                                    </a>
+                                `).join('')}
+                                ${data.attachments.images.map(img => `
+                                    <a href="${img.url}" target="_blank" class="attachment-card image">
+                                        <i class="fas fa-image card-icon"></i>
+                                        <span class="file-name">${img.name}</span>
+                                    </a>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                    ${data.comments && data.comments.length > 0 ? `
+                        <div class="comments-section">
+                            <h2 class="comments-title">
+                                <i class="fas fa-comments"></i>
+                                ความคิดเห็น (${data.comments.length})
+                            </h2>
+                            ${data.comments.map(comment => `
+                                <div class="comment-item ${comment.role.includes('ที่ปรึกษา') ? 'advisor' : 'instructor'}">
+                                    <div class="comment-header">
+                                        <div class="comment-author-info">
+                                            <div class="comment-avatar">${comment.author.charAt(0)}</div>
+                                            <div class="author-details">
+                                                <div class="author-name">${comment.author}</div>
+                                                <div class="author-role">${comment.role}</div>
+                                            </div>
+                                        </div>
+                                        <div class="comment-date">${comment.date}</div>
+                                    </div>
+                                    <div class="comment-text">${comment.text}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    ${userRole === 'advisor' || userRole === 'instructor' ? `
+                        <div class="evaluation-form-advisor">
+                            <h2 class="form-title">
+                                <i class="fas fa-edit"></i>
+                                การประเมินและให้ความคิดเห็น
+                            </h2>
+                            <form id="advisorForm">
+                                ${userRole === 'advisor' ? `
+                                    <div class="form-group">
+                                        <label for="progressInput">ความคืบหน้า (%):</label>
+                                        <input type="number" id="progressInput" name="progress" min="10" max="100" value="${data.progress}" required>
+                                    </div>
+                                ` : ''}
+                                <div class="form-group">
+                                    <label for="advisorComment">ความคิดเห็น:</label>
+                                    <textarea id="advisorComment" name="comment" placeholder="ใส่ความคิดเห็นของคุณที่นี่..."></textarea>
+                                </div>
+                                <div class="submit-btn-container">
+                                    <button type="submit" class="submit-btn">
+                                        <i class="fas fa-save"></i> บันทึก
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    ` : ''}
+                `;
+
+                modal.style.display = 'flex';
+
+                modal.querySelector('.modal-close-btn').onclick = function() {
+                    modal.style.display = 'none';
+                };
+
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                    }
+                };
+
+                if (userRole === 'advisor' || userRole === 'instructor') {
+                    const progressInput = document.getElementById('progressInput');
+                    const advisorComment = document.getElementById('advisorComment');
+                    const advisorForm = document.getElementById('advisorForm');
+
+                    if (userRole === 'advisor' && progressInput) {
+                        progressInput.addEventListener('input', function() {
+                            if (this.value < 10) {
+                                this.value = 10;
+                            }
+                        });
+                    }
+
+                    if (advisorForm) {
+                        advisorForm.addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            const newComment = advisorComment.value;
+                            let newProgress = null;
+
+                            if (newComment.trim() === '') {
+                                alert('กรุณาใส่ความคิดเห็นก่อนบันทึก');
+                                return;
+                            }
+
+                            if (userRole === 'advisor' && progressInput) {
+                                newProgress = progressInput.value;
+                            }
+
+                            updateProgressAndComment(weekTitle, newProgress, newComment, userRole);
+                            
+                            alert('บันทึกข้อมูลเรียบร้อยแล้ว!');
+                            modal.style.display = 'none';
+                        });
+                    }
+                }
+            };
+
+            function updateProgressAndComment(weekTitle, progress, comment, role) {
+                const data = mockReportData[weekTitle];
+                if (data) {
+                    const advisorName = role === 'advisor' ? 'รศ.ดร. เอกชัย วิบูลย์ธนากุล' : 'ผศ.ดร. สมชาย ใจดี';
+                    const userRoleText = role === 'advisor' ? 'อาจารย์ที่ปรึกษา' : 'อาจารย์ประจำวิชา';
+                    const currentDate = new Date().toLocaleDateString('th-TH', { day: 'numeric', month: 'long', year: 'numeric' });
+                    
+                    const newCommentObj = {
+                        author: advisorName,
+                        role: userRoleText,
+                        date: currentDate,
+                        text: comment
+                    };
+                    
+                    data.comments.push(newCommentObj);
+                    
+                    if (role === 'advisor' && progress) {
+                        // อัปเดตความคืบหน้าของสัปดาห์
+                        data.progress = parseInt(progress);
+                        
+                        // อัปเดตการแสดงผลในรายการสัปดาห์
+                        updateWeekProgressDisplay(weekTitle, progress);
+                        
+                        // อัปเดตความคืบหน้าโดยรวม
+                        updateOverallProgress();
+                    }
+                    
+                    // อัปเดตสถานะความคิดเห็น
+                    updateCommentStatus();
+                }
+            }
+
+            function updateWeekProgressDisplay(weekTitle, progress) {
+                const weekElements = document.querySelectorAll('.week-report-card');
+                weekElements.forEach(element => {
+                    const titleElement = element.querySelector('.week-title span:first-child');
+                    if (titleElement && titleElement.textContent.includes(weekTitle)) {
+                        const progressValueElement = element.querySelector('.week-progress-value');
+                        const progressFillElement = element.querySelector('.week-progress-fill');
+                        
+                        if (progressValueElement) {
+                            progressValueElement.textContent = progress + '%';
+                        }
+                        
+                        if (progressFillElement) {
+                            progressFillElement.style.width = progress + '%';
+                        }
+                    }
+                });
+            }
+
+            function updateOverallProgress() {
+                // คำนวณความคืบหน้าโดยรวมจากความคืบหน้าของแต่ละสัปดาห์
+                let totalProgress = 0;
+                let weekCount = 0;
+                
+                for (const week in mockReportData) {
+                    totalProgress += mockReportData[week].progress;
+                    weekCount++;
+                }
+                
+                const overallProgress = Math.round(totalProgress / weekCount);
+                
+                // อัปเดตการแสดงผล
+                const progressElement = document.querySelector('.project-info-card .progress-bar');
+                const progressText = document.getElementById('overallProgress');
+                
+                if (progressElement && progressText) {
+                    progressElement.style.width = overallProgress + '%';
+                    progressText.textContent = overallProgress;
+                }
+            }
+
+            // อัปเดตสถานะความคิดเห็นเมื่อโหลดหน้า
+            updateCommentStatus();
+        });
+    </script>
+</body>
+</html>

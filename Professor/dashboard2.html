@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard อาจารย์ - ระบบการจัดการข้อมูลโครงงาน</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 45px;
+            height: 45px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            font-size: 22px;
+        }
+
+        .system-title {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            font-size: 18px;
+        }
+
+        .user-info {
+            color: white;
+            text-align: right;
+        }
+
+        .user-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .user-role {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 2rem;
+        }
+
+        /* Role Tabs */
+        .role-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .role-tab {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            background: #f8f9fa;
+            color: #666;
+        }
+
+        .role-tab.active {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(33, 150, 243, 0.3);
+        }
+
+        .role-tab:hover:not(.active) {
+            background: #e9ecef;
+            transform: translateY(-1px);
+        }
+
+        /* Dashboard Overview */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .overview-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-top: 5px solid;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .overview-card.advisor { border-color: #4CAF50; }
+        .overview-card.instructor { border-color: #FF9800; }
+        .overview-card.committee { border-color: #9C27B0; }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 24px;
+        }
+
+        .advisor .card-icon {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            color: #4CAF50;
+        }
+
+        .instructor .card-icon {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            color: #FF9800;
+        }
+
+        .committee .card-icon {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            color: #9C27B0;
+        }
+
+        .card-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border-left: 5px solid #2196f3;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-team {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 1rem;
+        }
+
+        .progress-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .progress-value {
+            font-size: 14px;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50 0%, #2e7d32 100%);
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(33, 150, 243, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #e9ecef;
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            color: #333;
+            transform: translateY(-2px);
+        }
+
+        /* Exam Schedule */
+        .exam-table {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+        }
+
+        .table-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .exam-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .exam-tab {
+            flex: 1;
+            padding: 1rem 2rem;
+            border: none;
+            background: none;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .exam-tab.active {
+            background: white;
+            color: #1976d2;
+            border-bottom: 3px solid #2196f3;
+        }
+
+        .table-content {
+            padding: 2rem;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-scheduled {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .badge-completed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .badge-pending {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        /* Notifications */
+        .notifications-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1976d2;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .notification-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border-left: 4px solid;
+        }
+
+        .notification-item.urgent {
+            border-left-color: #f44336;
+        }
+
+        .notification-item.normal {
+            border-left-color: #ff9800;
+        }
+
+        .notification-item.info {
+            border-left-color: #2196f3;
+        }
+
+        .notification-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .notification-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .urgent .notification-icon {
+            background: #ffebee;
+            color: #f44336;
+        }
+
+        .normal .notification-icon {
+            background: #fff3e0;
+            color: #ff9800;
+        }
+
+        .info .notification-icon {
+            background: #e3f2fd;
+            color: #2196f3;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+            margin-bottom: 0.25rem;
+        }
+
+        .notification-desc {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .notification-time {
+            font-size: 12px;
+            color: #999;
+            font-weight: 500;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .role-tabs {
+                flex-direction: column;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-actions {
+                flex-direction: column;
+            }
+
+            .table-content {
+                overflow-x: auto;
+            }
+
+            .quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">👨‍🏫</div>
+                <h1 class="system-title">ระบบการจัดการข้อมูลโครงงาน</h1>
+            </div>
+            <div class="user-section">
+                <div class="user-info">
+                    <div class="user-name">รศ.ดร. เอกชัย วิบูลย์ธนากุล</div>
+                    <div class="user-role">อาจารย์ประจำภาควิชา</div>
+                </div>
+                <div class="user-avatar">อ</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">Dashboard อาจารย์</h1>
+        <p class="page-subtitle">จัดการและติดตามโครงงานในบทบาทต่างๆ</p>
+
+        <!-- Overview Cards -->
+        <div class="overview-grid">
+            <div class="overview-card advisor">
+                <div class="card-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="card-value">5</div>
+                <div class="card-label">โครงงานที่ปรึกษา</div>
+            </div>
+            
+            <div class="overview-card instructor">
+                <div class="card-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="card-value">12</div>
+                <div class="card-label">โครงงานที่สอน</div>
+            </div>
+            
+            <div class="overview-card committee">
+                <div class="card-icon">
+                    <i class="fas fa-gavel"></i>
+                </div>
+                <div class="card-value">8</div>
+                <div class="card-label">การสอบที่รับผิดชอบ</div>
+            </div>
+        </div>
+
+        <!-- Role Tabs -->
+        <div class="role-tabs">
+            <button class="role-tab active" onclick="switchRole('advisor')" data-role="advisor">
+                <i class="fas fa-user-graduate"></i>
+                อาจารย์ที่ปรึกษา
+            </button>
+            <button class="role-tab" onclick="switchRole('instructor')" data-role="instructor">
+                <i class="fas fa-chalkboard-teacher"></i>
+                อาจารย์ประจำวิชา
+            </button>
+            <button class="role-tab" onclick="switchRole('committee')" data-role="committee">
+                <i class="fas fa-gavel"></i>
+                กรรมการ
+            </button>
+        </div>
+
+        <!-- Advisor Tab Content -->
+        <div class="tab-content active" id="advisor-content">
+            <h2 class="section-title">
+                <i class="fas fa-user-graduate"></i>
+                โครงงานที่ดูแลในฐานะอาจารย์ที่ปรึกษา
+            </h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">ระบบจัดการคลังสินค้าอัจฉริยะด้วยเทคโนโลยี IoT</h3>
+                        <p class="project-team">👥 ทีม: Thanaboon Imcharoen, John Smith</p>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-header">
+                            <span class="progress-label">ความคืบหน้า</span>
+                            <span class="progress-value">65%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <a href="advisor_project_detail.html" class="btn btn-primary">
+                            <i class="fas fa-eye"></i> ดูรายละเอียด
+                        </a>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-edit"></i> ให้คำแนะนำ
+                        </button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">แพลตฟอร์มการเรียนรู้ออนไลน์แบบปรับตัว</h3>
+                        <p class="project-team">👥 ทีม: สมศรี ใจดี, วัชระ ทำดี</p>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-header">
+                            <span class="progress-label">ความคืบหน้า</span>
+                            <span class="progress-value">45%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%"></div>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <a href="advisor_project_detail.html" class="btn btn-primary">
+                            <i class="fas fa-eye"></i> ดูรายละเอียด
+                        </a>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-edit"></i> ให้คำแนะนำ
+                        </button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">ระบบตรวจสอบคุณภาพอากาศด้วย AI</h3>
+                        <p class="project-team">👥 ทีม: มานะ พยายาม, ปิติ รักงาน</p>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-header">
+                            <span class="progress-label">ความคืบหน้า</span>
+                            <span class="progress-value">80%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <a href="advisor_project_detail.html" class="btn btn-primary">
+                            <i class="fas fa-eye"></i> ดูรายละเอียด
+                        </a>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-edit"></i> ให้คำแนะนำ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructor Tab Content -->
+        <div class="tab-content" id="instructor-content">
+            <h2 class="section-title">
+                <i class="fas fa-chalkboard-teacher"></i>
+                โครงงานที่สอนในฐานะอาจารย์ประจำวิชา
+            </h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">ระบบบริหารจัดการร้านอาหารออนไลน์</h3>
+                        <p class="project-team">👥 ทีม: กมล สุขใส, นิติ เก่งดี</p>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-header">
+                            <span class="progress-label">ความคืบหน้า</span>
+                            <span class="progress-value">70%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <a href="instructor_project_detail.html" class="btn btn-primary">
+                            <i class="fas fa-eye"></i> ติดตามความคืบหน้า
+                        </a>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-comment"></i> แสดงความเห็น
+                        </button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">แอปพลิเคชันติดตามสุขภาพส่วนบุคคล</h3>
+                        <p class="project-team">👥 ทีม: สุดา ขยัน, อนุชา มานะ</p>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-header">
+                            <span class="progress-label">ความคืบหน้า</span>
+                            <span class="progress-value">55%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 55%"></div>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <a href="instructor_project_detail.html" class="btn btn-primary">
+                            <i class="fas fa-eye"></i> ติดตามความคืบหน้า
+                        </a>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-comment"></i> แสดงความเห็น
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Committee Tab Content -->
+        <div class="tab-content" id="committee-content">
+            <div class="exam-table">
+                <div class="table-header">
+                    <h2 class="table-title">
+                        <i class="fas fa-gavel"></i>
+                        ตารางการสอบในฐานะกรรมการ
+                    </h2>
+                </div>
+                
+                <div class="exam-tabs">
+                    <button class="exam-tab active" onclick="switchExamTab('proposal')">
+                        สอบเสนอหัวข้อโครงงาน
+                    </button>
+                    <button class="exam-tab" onclick="switchExamTab('final')">
+                        สอบจบโครงงาน
+                    </button>
+                </div>
+
+                <div class="table-content" id="proposal-exams">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>วันที่ - เวลา</th>
+                                <th>ชื่อโครงงาน</th>
+                                <th>นักศึกษา</th>
+                                <th>สถานที่</th>
+                                <th>สถานะ</th>
+                                <th>การจัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>25 ก.ย. 2568<br>09:00 - 10:00</td>
+                                <td>ระบบจัดการข้อมูลผู้ป่วย</td>
+                                <td>ทีม A</td>
+                                <td>ห้อง 501</td>
+                                <td><span class="status-badge badge-scheduled">กำหนดสอบ</span></td>
+                                <td><a href="committee_exam_detail.html" class="btn btn-primary">ประเมินผล</a></td>
+                            </tr>
+                            <tr>
+                                <td>26 ก.ย. 2568<br>10:00 - 11:00</td>
+                                <td>แอปพลิเคชันจองห้องประชุม</td>
+                                <td>ทีม B</td>
+                                <td>ห้อง 502</td>
+                                <td><span class="status-badge badge-completed">ประเมินแล้ว</span></td>
+                                <td><button class="btn btn-secondary" disabled>เสร็จสิ้น</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-content" id="final-exams" style="display: none;">
+                    <table class="table">
+                        <thead>

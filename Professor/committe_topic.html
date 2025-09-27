@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กรรมการสอบหัวข้อโครงงาน - ระบบการจัดการข้อมูลโครงงาน</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 45px;
+            height: 45px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            font-size: 22px;
+        }
+
+        .system-title {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #9C27B0 0%, #673AB7 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            font-size: 18px;
+        }
+
+        .user-info {
+            color: white;
+            text-align: right;
+        }
+
+        .user-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .user-role {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb-nav {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb-nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb-item {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .breadcrumb-item:hover {
+            color: #2196f3;
+        }
+
+        .breadcrumb-item.active {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .breadcrumb-separator {
+            color: #999;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 2rem;
+        }
+
+        /* Project Cards Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #9C27B0 0%, #673AB7 100%);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .exam-date-time {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .exam-date {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .exam-time {
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+        }
+
+        .exam-location {
+            font-size: 14px;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .project-team {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .project-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .project-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            margin-bottom: 0.75rem;
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #333;
+            width: 120px;
+            flex-shrink: 0;
+        }
+
+        .detail-value {
+            color: #666;
+            flex: 1;
+        }
+
+        .status-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .status-pending {
+            background: #fff3e0;
+            color: #FF9800;
+        }
+
+        .status-approved {
+            background: #e8f5e8;
+            color: #4caf50;
+        }
+
+        .status-revision {
+            background: #ffebee;
+            color: #f44336;
+        }
+
+        .status-waiting {
+            background: #e3f2fd;
+            color: #2196f3;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #9C27B0 0%, #673AB7 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(156, 39, 176, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #e9ecef;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn:disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .committee-modal {
+            padding: 2rem;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close-btn:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header .title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-details {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-row {
+            display: flex;
+            margin-bottom: 0.75rem;
+        }
+
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-row .label {
+            font-weight: 600;
+            color: #333;
+            width: 140px;
+            flex-shrink: 0;
+        }
+
+        .detail-row .value {
+            color: #666;
+            flex: 1;
+        }
+
+        .attachments-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .attachments-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1976d2;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .files-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .file-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .file-link:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .file-icon {
+            font-size: 20px;
+            width: 24px;
+            flex-shrink: 0;
+        }
+
+        .document-file .file-icon {
+            color: #f44336;
+        }
+
+        .presentation-file .file-icon {
+            color: #FF9800;
+        }
+
+        .grading-form {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #9C27B0 0%, #673AB7 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0 auto;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(156, 39, 176, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .files-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">⚖️</div>
+                <h1 class="system-title">ระบบการจัดการข้อมูลโครงงาน</h1>
+            </div>
+            <div class="user-section">
+                <div class="user-info">
+                    <div class="user-name">ผศ.ดร. วราภรณ์ พิจารณา</div>
+                    <div class="user-role">กรรมการสอบ</div>
+                </div>
+                <div class="user-avatar">ก</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumb-nav">
+        <div class="container">
+            <a href="teacher_dashboard.html" class="breadcrumb-item">Dashboard</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="committee_dashboard.html" class="breadcrumb-item">กรรมการ</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">สอบหัวข้อโครงงาน</span>
+        </div>
+    </div>
+
+    <main class="container">
+        <h1 class="page-title">กรรมการสอบหัวข้อโครงงาน</h1>
+        <p class="page-subtitle">ประเมินการสอบหัวข้อโครงงานนักศึกษา</p>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+            <!-- Project Card 1 -->
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="exam-date-time">
+                        <div class="exam-date">26 ก.ย. 2568</div>
+                        <div class="exam-time">13:00 - 14:00</div>
+                    </div>
+                    <div class="exam-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        ห้องประชุมเล็ก ชั้น 2 อาคาร 3
+                    </div>
+                    <h2 class="project-title">หุ่นยนต์ทำความสะอาดอัตโนมัติ</h2>
+                    <div class="project-team">ทีม E: อรรถพล ประดิษฐ์, สุกัญญา คิดค้น</div>
+                </div>
+                <div class="card-body">
+                    <p class="project-description">
+                        โครงงานพัฒนาหุ่นยนต์ทำความสะอาดอัตโนมัติที่สามารถทำงานในพื้นที่ต่างๆ 
+                        โดยใช้เซ็นเซอร์หลีกเลี่ยงสิ่งกีดขวางและทำความสะอาดพื้นผิวได้อย่างมีประสิทธิภาพ
+                    </p>
+                    
+                    <div class="project-details">
+                        <div class="detail-item">
+                            <div class="detail-label">เทคโนโลยี:</div>
+                            <div class="detail-value">IoT, Robotics, AI</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">ที่ปรึกษา:</div>
+                            <div class="detail-value">ผศ.ดร. สมชาย ใจดี</div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-section">
+                        <span class="status-badge status-pending">รอประเมิน</span>
+                        <button class="btn btn-primary" onclick="showGradingModal('project1')">
+                            <i class="fas fa-clipboard-check"></i> ประเมินผล
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="exam-date-time">
+                        <div class="exam-date">28 ก.ย. 2568</div>
+                        <div class="exam-time">09:00 - 10:00</div>
+                    </div>
+                    <div class="exam-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        ห้องสัมมนา ชั้น 4 อาคาร 1
+                    </div>
+                    <h2 class="project-title">แพลตฟอร์มการเรียนรู้ AI</h2>
+                    <div class="project-team">ทีม G: ธนพล เข้าใจ, มณีรัตน์ ฉลาด</div>
+                </div>
+                <div class="card-body">
+                    <p class="project-description">
+                        พัฒนาแพลตฟอร์มการเรียนรู้ปัญญาประดิษฐ์ที่ปรับเนื้อหาตามความสามารถของผู้เรียน 
+                        โดยใช้เทคนิค Machine Learning เพื่อวิเคราะห์รูปแบบการเรียนรู้
+                    </p>
+                    
+                    <div class="project-details">
+                        <div class="detail-item">
+                            <div class="detail-label">เทคโนโลยี:</div>
+                            <div class="detail-value">AI, Machine Learning, Web App</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">ที่ปรึกษา:</div>
+                            <div class="detail-value">อ. ดร. สุภาพร สอนเก่ง</div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-section">
+                        <span class="status-badge status-approved">ผ่าน</span>
+                        <button class="btn btn-secondary" onclick="showGradingModal('project2')">
+                            <i class="fas fa-eye"></i> ดูผลประเมิน
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 3 -->
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="exam-date-time">
+                        <div class="exam-date">30 ก.ย. 2568</div>
+                        <div class="exam-time">15:00 - 16:00</div>
+                    </div>
+                    <div class="exam-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        ห้องปฏิบัติการ IoT ชั้น 5 อาคาร 3
+                    </div>
+                    <h2 class="project-title">ระบบตรวจสอบคุณภาพอากาศ IoT</h2>
+                    <div class="project-team">ทีม H: วัชระ วิเคราะห์, ปริญญา สำรวจ</div>
+                </div>
+                <div class="card-body">
+                    <p class="project-description">
+                        ระบบตรวจสอบคุณภาพอากาศแบบเรียลไทม์ด้วยเซ็นเซอร์ IoT 
+                        ที่สามารถแจ้งเตือนเมื่อพบค่ามลพิษเกินมาตรฐานและแสดงผลผ่านแอปพลิเคชันมือถือ
+                    </p>
+                    
+                    <div class="project-details">
+                        <div class="detail-item">
+                            <div class="detail-label">เทคโนโลยี:</div>
+                            <div class="detail-value">IoT, Mobile App, Cloud</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">ที่ปรึกษา:</div>
+                            <div class="detail-value">รศ.ดร. วิทยา เทคโนโลยี</div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-section">
+                        <span class="status-badge status-revision">ผ่านแบบแก้ไข</span>
+                        <button class="btn btn-primary" onclick="showGradingModal('project3')">
+                            <i class="fas fa-edit"></i> ปรับประเมิน
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 4 -->
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="exam-date-time">
+                        <div class="exam-date">1 ต.ค. 2568</div>
+                        <div class="exam-time">10:00 - 11:00</div>
+                    </div>
+                    <div class="exam-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        ห้องประชุมใหญ่ ชั้น 5 อาคาร 1
+                    </div>
+                    <h2 class="project-title">แอปพลิเคชันจัดการฟาร์มเกษตรอัจฉริยะ</h2>
+                    <div class="project-team">ทีม I: กาญจน์ เกษตร, พงศ์พันธ์ พัฒนา</div>
+                </div>
+                <div class="card-body">
+                    <p class="project-description">
+                        แอปพลิเคชันสำหรับจัดการฟาร์มเกษตรอัจฉริยะที่ช่วยติดตามสภาพแวดล้อม 
+                        การเติบโตของพืช และให้คำแนะนำในการเพาะปลูกตามข้อมูลที่เก็บรวบรวม
+                    </p>
+                    
+                    <div class="project-details">
+                        <div class="detail-item">
+                            <div class="detail-label">เทคโนโลยี:</div>
+                            <div class="detail-value">Mobile App, IoT, Data Analytics</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">ที่ปรึกษา:</div>
+                            <div class="detail-value">อ. ดร. เกษตร เก่งรอบ</div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-section">
+                        <span class="status-badge status-waiting">รอการแก้ไข</span>
+                        <button class="btn btn-primary" onclick="showGradingModal('project4')">
+                            <i class="fas fa-clipboard-check"></i> ตรวจสอบใหม่
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Grading Modal -->
+    <div id="gradingModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn" onclick="closeGradingModal()">&times;</button>
+            <div class="committee-modal">
+                <div class="modal-header">
+                    <h2 class="title">ประเมินการสอบหัวข้อโครงงาน</h2>
+                    <p id="modalProjectInfo">หุ่นยนต์ทำความสะอาดอัตโนมัติ - ทีม E</p>
+                </div>
+                
+                <div class="project-details">
+                    <div class="detail-row">
+                        <div class="label">วันที่สอบ:</div>
+                        <div class="value">26 ก.ย. 2568</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="label">เวลาสอบ:</div>
+                        <div class="value">13:00 - 14:00</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="label">สถานที่สอบ:</div>
+                        <div class="value">ห้องประชุมเล็ก ชั้น 2 อาคาร 3</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="label">ที่ปรึกษา:</div>
+                        <div class="value">ผศ.ดร. สมชาย ใจดี</div>
+                    </div>
+                </div>
+                
+                <div class="attachments-section">
+                    <h3><i class="fas fa-paperclip"></i> เอกสารประกอบ</h3>
+                    <div class="files-container">
+                        <a href="#" class="file-link document-file">
+                            <i class="fas fa-file-pdf file-icon"></i>
+                            <span>เอกสารเสนอหัวข้อโครงงาน.pdf</span>
+                        </a>
+                        <a href="#" class="file-link presentation-file">
+                            <i class="fas fa-file-powerpoint file-icon"></i>
+                            <span>นำเสนอหัวข้อโครงงาน.pptx</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="grading-form">
+                    <h3><i class="fas fa-clipboard-check"></i> ผลการประเมิน</h3>
+                    
+                    <div class="form-group">
+                        <label for="evaluationResult">ผลการประเมิน</label>
+                        <select id="evaluationResult" onchange="toggleRevisionNotes()">
+                            <option value="">-- เลือกผลการประเมิน --</option>
+                            <option value="approved">ผ่าน</option>
+                            <option value="revision">ผ่านแบบแก้ไข</option>
+                            <option value="rejected">ไม่ผ่าน</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="revisionNotesGroup" style="display: none;">
+                        <label for="revisionNotes">หมายเหตุการแก้ไข</label>
+                        <textarea id="revisionNotes" placeholder="ระบุรายละเอียดส่วนที่ต้องแก้ไข..."></textarea>
+                    </div>
+                    
+                    <button class="submit-btn" onclick="submitEvaluation()">
+                        <i class="fas fa-check-circle"></i> บันทึกผลการประเมิน
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to show grading modal
+        function showGradingModal(projectId) {
+            // In a real application, you would fetch project data based on projectId
+            document.getElementById('gradingModal').style.display = 'flex';
+        }
+        
+        // Function to close grading modal
+        function closeGradingModal() {
+            document.getElementById('gradingModal').style.display = 'none';
+        }
+        
+        // Function to toggle revision notes visibility
+        function toggleRevisionNotes() {
+            const evaluationResult = document.getElementById('evaluationResult').value;
+            const revisionNotesGroup = document.getElementById('revisionNotesGroup');
+            
+            if (evaluationResult === 'revision') {
+                revisionNotesGroup.style.display = 'block';
+            } else {
+                revisionNotesGroup.style.display = 'none';
+            }
+        }
+        
+        // Function to submit evaluation
+        function submitEvaluation() {
+            const evaluationResult = document.getElementById('evaluationResult').value;
+            
+            if (!evaluationResult) {
+                alert('กรุณาเลือกผลการประเมิน');
+                return;
+            }
+            
+            if (evaluationResult === 'revision' && !document.getElementById('revisionNotes').value.trim()) {
+                alert('กรุณาระบุหมายเหตุการแก้ไข');
+                return;
+            }
+            
+            // In a real application, you would submit the evaluation to the server
+            alert('บันทึกผลการประเมินเรียบร้อยแล้ว');
+            closeGradingModal();
+            
+            // Reload or update the page to reflect the new status
+            // window.location.reload();
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('gradingModal');
+            if (event.target === modal) {
+                closeGradingModal();
+            }
+        }
+    </script>
+</body>
+</html>
