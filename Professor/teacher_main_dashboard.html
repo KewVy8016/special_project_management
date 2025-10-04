@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard อาจารย์ - ระบบจัดการโครงงาน</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        color: #333;
+      }
+
+      .main-container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo-section h1 {
+        color: #4a5568;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .logo-section p {
+        color: #718096;
+        font-size: 1.1rem;
+      }
+
+      .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        padding: 1rem 1.5rem;
+        border-radius: 15px;
+        color: white;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .user-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .user-info h3 {
+        margin-bottom: 0.25rem;
+        font-size: 1.1rem;
+      }
+
+      .user-info p {
+        opacity: 0.9;
+        font-size: 0.9rem;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .stat-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+      }
+
+      .stat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .stat-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #4a5568;
+      }
+
+      .stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+      }
+
+      .advisor-icon { background: linear-gradient(135deg, #48bb78, #38a169); }
+      .instructor-icon { background: linear-gradient(135deg, #4299e1, #3182ce); }
+      .committee-icon { background: linear-gradient(135deg, #ed8936, #dd6b20); }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-description {
+        color: #718096;
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+
+      .role-sections {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2rem;
+      }
+
+      .role-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .role-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .role-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #e2e8f0;
+      }
+
+      .role-header h2 {
+        color: #2d3748;
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
+
+      .quick-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .action-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem;
+        background: #f7fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        text-decoration: none;
+        color: #4a5568;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .action-btn:hover {
+        background: #edf2f7;
+        border-color: #cbd5e0;
+        transform: translateX(5px);
+      }
+
+      .action-btn i {
+        width: 20px;
+        text-align: center;
+        opacity: 0.7;
+      }
+
+      .notifications {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        margin-top: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .notifications h2 {
+        color: #2d3748;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .notification-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: #f7fafc;
+        border-left: 4px solid #fbd38d;
+        border-radius: 0 8px 8px 0;
+        margin-bottom: 0.75rem;
+      }
+
+      .notification-item.urgent {
+        border-left-color: #fc8181;
+        background: #fed7d7;
+      }
+
+      .notification-item.success {
+        border-left-color: #68d391;
+        background: #c6f6d5;
+      }
+
+      .notification-icon {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        color: #ed8936;
+        font-size: 0.9rem;
+      }
+
+      .urgent .notification-icon {
+        color: #e53e3e;
+      }
+
+      .success .notification-icon {
+        color: #38a169;
+      }
+
+      .notification-content h4 {
+        margin-bottom: 0.25rem;
+        color: #2d3748;
+        font-size: 0.95rem;
+      }
+
+      .notification-content p {
+        color: #4a5568;
+        font-size: 0.85rem;
+      }
+
+      .notification-time {
+        color: #718096;
+        font-size: 0.8rem;
+        margin-left: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- Header Section -->
+      <div class="header">
+        <div class="header-content">
+          <div class="logo-section">
+            <h1><i class="fas fa-graduation-cap"></i> ระบบจัดการโครงงาน</h1>
+            <p>Dashboard อาจารย์</p>
+          </div>
+          <div class="user-profile">
+            <div class="user-avatar">อ</div>
+            <div class="user-info">
+              <h3>รศ.ดร.อนิราช มิ่งขวัญ</h3>
+              <p>อาจารย์ประจำภาควิชา</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistics Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-title">อาจารย์ที่ปรึกษา</div>
+            <div class="stat-icon advisor-icon">
+              <i class="fas fa-user-tie"></i>
+            </div>
+          </div>
+          <div class="stat-number">12</div>
+          <div class="stat-description">กลุ่มโครงงานที่ดูแล<br>ความคืบหน้าเฉลี่ย 68%</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-title">อาจารย์ประจำวิชา</div>
+            <div class="stat-icon instructor-icon">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+          </div>
+          <div class="stat-number">45</div>
+          <div class="stat-description">กลุ่มโครงงานที่สอน<br>รอการตรวจสอบ 8 กลุ่ม</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-title">กรรมการสอบ</div>
+            <div class="stat-icon committee-icon">
+              <i class="fas fa-gavel"></i>
+            </div>
+          </div>
+          <div class="stat-number">7</div>
+          <div class="stat-description">การสอบที่รับผิดชอบ<br>สอบหัวข้อ 3 | สอบจบ 4</div>
+        </div>
+      </div>
+
+      <!-- Role-based Sections -->
+      <div class="role-sections">
+        <!-- Advisor Section -->
+        <div class="role-card">
+          <div class="role-header">
+            <div class="stat-icon advisor-icon">
+              <i class="fas fa-user-tie"></i>
+            </div>
+            <h2>อาจารย์ที่ปรึกษา</h2>
+          </div>
+          <div class="quick-actions">
+            <a href="advisor-projects.html" class="action-btn">
+              <i class="fas fa-project-diagram"></i>
+              <span>จัดการโครงงานที่ดูแล (12 กลุ่ม)</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Instructor Section -->
+        <div class="role-card">
+          <div class="role-header">
+            <div class="stat-icon instructor-icon">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <h2>อาจารย์ประจำวิชา</h2>
+          </div>
+          <div class="quick-actions">
+            <a href="teacher_subject.html" class="action-btn">
+              <i class="fas fa-list"></i>
+              <span>กลุ่มโครงงานในวิชาที่สอน (45 กลุ่ม)</span>
+            </a>
+            
+          </div>
+        </div>
+
+        <!-- Committee Section -->
+        <div class="role-card">
+          <div class="role-header">
+            <div class="stat-icon committee-icon">
+              <i class="fas fa-gavel"></i>
+            </div>
+            <h2>กรรมการสอบ</h2>
+          </div>
+          <div class="quick-actions">
+            
+            <a href="commitee-projects.html" class="action-btn">
+              <i class="fas fa-calendar-alt"></i>
+              <span>ตารางการสอบ</span>
+            </a>
+         
+          </div>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div class="notifications">
+        <h2><i class="fas fa-bell"></i> การแจ้งเตือนสำคัญ</h2>
+        
+        <div class="notification-item urgent">
+          <div class="notification-icon">
+            <i class="fas fa-exclamation"></i>
+          </div>
+          <div class="notification-content">
+            <h4>รายงานสัปดาห์ที่ล่าช้า</h4>
+            <p>กลุ่ม "ระบบ IoT" ยังไม่ส่งรายงานสัปดาห์ที่ 6</p>
+          </div>
+          <div class="notification-time">2 ชั่วโมงที่แล้ว</div>
+        </div>
+
+        <div class="notification-item">
+          <div class="notification-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="notification-content">
+            <h4>การสอบหัวข้อโครงงาน</h4>
+            <p>มีการสอบวันพรุ่งนี้ 9:00 น. ห้อง 301</p>
+          </div>
+          <div class="notification-time">1 วันที่แล้ว</div>
+        </div>
+
+        <div class="notification-item success">
+          <div class="notification-icon">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="notification-content">
+            <h4>โครงงานผ่านการประเมิน</h4>
+            <p>กลุ่ม "แอปจัดการสต๊อก" ผ่านการสอบจบเรียบร้อย</p>
+          </div>
+          <div class="notification-time">2 วันที่แล้ว</div>
+        </div>
+
+        <div class="notification-item">
+          <div class="notification-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="notification-content">
+            <h4>นักศึกษาขอนัดหมาย</h4>
+            <p>กลุ่ม "ระบบแนะนำหนังสือ" ขอนัดปรึกษา</p>
+          </div>
+          <div class="notification-time">3 วันที่แล้ว</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>อาจารย์ประจำวิชา - ติดตามโครงงาน</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      /* Header */
+      .header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .header-title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .header-title h1 {
+        color: #2d3748;
+        font-size: 2rem;
+        font-weight: 700;
+      }
+
+      .role-badge {
+        background: linear-gradient(135deg, #4299e1, #3182ce);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #718096;
+        font-size: 0.95rem;
+      }
+
+      .breadcrumb a {
+        color: #4299e1;
+        text-decoration: none;
+      }
+
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+
+      /* Summary Cards */
+      .summary-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .summary-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #4299e1;
+        transition: transform 0.3s ease;
+      }
+
+      .summary-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .summary-card h3 {
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      .summary-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #4299e1;
+        margin-bottom: 0.5rem;
+      }
+
+      .summary-description {
+        color: #718096;
+        font-size: 0.9rem;
+      }
+
+      /* Filters */
+      .filters {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .filter-row {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .search-box {
+        flex: 1;
+        min-width: 250px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+      }
+
+      .search-box input:focus {
+        outline: none;
+        border-color: #4299e1;
+      }
+
+      .filter-select select {
+        padding: 0.75rem 1rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        background: white;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      /* Projects Grid */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2rem;
+      }
+
+      .project-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        height: 380px; /* กำหนดความสูงคงที่ */
+      }
+
+      .project-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #4299e1, #3182ce);
+      }
+
+      .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      }
+
+      .project-header {
+        margin-bottom: 1.5rem;
+        position: relative;
+        flex: 1; /* ให้ส่วนหัวขยายเต็มพื้นที่ที่เหลือ */
+      }
+
+      .project-title {
+        color: #2d3748;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        line-height: 1.4;
+        padding-right: 10px;
+      }
+
+      .project-meta {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #718096;
+        font-size: 0.9rem;
+      }
+
+      .meta-item i {
+        color: #4299e1;
+      }
+
+      /* Progress Section */
+      .progress-section {
+        margin-bottom: 1.5rem;
+      }
+
+      .progress-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .progress-label {
+        color: #4a5568;
+        font-weight: 500;
+      }
+
+      .progress-percentage {
+        color: #4299e1;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #e2e8f0;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #4299e1, #3182ce);
+        border-radius: 4px;
+        transition: width 0.6s ease;
+      }
+
+      /* Status Section - จัดการ badge ทั้งสองให้อยู่ในแถวเดียวกัน */
+      .status-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        gap: 1rem;
+      }
+
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .status-active {
+        background: #bee3f8;
+        color: #2a4365;
+      }
+
+      .status-completed {
+        background: #c6f6d5;
+        color: #22543d;
+      }
+
+      /* Pending Comment Badge - วางชิดขวา */
+      .pending-badge {
+        background: linear-gradient(135deg, #f39c12, #e67e22);
+        color: white;
+        border-radius: 12px;
+        padding: 0.6rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
+        border: none;
+        flex-shrink: 0;
+      }
+
+      .pending-badge i {
+        color: white;
+        font-size: 1rem;
+      }
+
+      /* Action Buttons - จัดให้อยู่กลาง card และอยู่ด้านล่างสุด */
+      .card-actions {
+        display: flex;
+        justify-content: center;
+        margin-top: auto; /* ดันปุ่มไปด้านล่างสุด */
+        padding-top: 1rem;
+        border-top: 1px solid #e2e8f0; /* เพิ่มเส้นคั่น */
+      }
+
+      .btn {
+        padding: 0.6rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+        min-width: 180px;
+        justify-content: center;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #4299e1, #3182ce);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(66, 153, 225, 0.3);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: #4299e1;
+        border: 2px solid #4299e1;
+      }
+
+      .btn-outline:hover {
+        background: #4299e1;
+        color: white;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .header-content {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        
+        .filter-row {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        
+        .search-box {
+          min-width: auto;
+        }
+        
+        .btn {
+          min-width: 160px;
+          padding: 0.6rem 1.2rem;
+        }
+        
+        .status-section {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        
+        .pending-badge {
+          align-self: flex-end;
+        }
+        
+        .project-card {
+          height: auto; /* ใน mobile ให้ความสูงปรับตามเนื้อหา */
+          min-height: 380px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .project-meta {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        
+        .meta-item {
+          font-size: 0.85rem;
+        }
+        
+        .status-section {
+          align-items: stretch;
+        }
+        
+        .pending-badge {
+          align-self: stretch;
+          text-align: center;
+          justify-content: center;
+        }
+        
+        .project-card {
+          height: auto;
+          min-height: 380px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-content">
+          <div>
+            <div class="breadcrumb">
+              <a href="teacher_main_dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+              <i class="fas fa-chevron-right"></i>
+              <span>อาจารย์ประจำวิชา</span>
+            </div>
+            <div class="header-title">
+              <h1><i class="fas fa-chalkboard-teacher"></i> ติดตามโครงงานนักศึกษา</h1>
+              <div class="role-badge">อาจารย์ประจำวิชา</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="summary-cards">
+        <div class="summary-card">
+          <h3>โครงงานทั้งหมด</h3>
+          <div class="summary-number" id="totalProjects">6</div>
+          <div class="summary-description">กลุ่มที่รับผิดชอบ</div>
+        </div>
+        <div class="summary-card">
+          <h3>ความคืบหน้าเฉลี่ย</h3>
+          <div class="summary-number" id="avgProgress">68%</div>
+          <div class="summary-description">อยู่ในเกณฑ์ดี</div>
+        </div>
+        <div class="summary-card">
+          <h3>รอการให้ความเห็น</h3>
+          <div class="summary-number" id="pendingComment">4</div>
+          <div class="summary-description">รอการยืนยัน</div>
+        </div>
+        <div class="summary-card">
+          <h3>เสร็จสมบูรณ์</h3>
+          <div class="summary-number" id="completedProjects">1</div>
+          <div class="summary-description">พร้อมสอบจบ</div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters">
+        <div class="filter-row">
+          <div class="search-box">
+            <input type="text" placeholder="ค้นหาโครงงาน นักศึกษา หรือเทคโนโลยี..." id="searchInput">
+          </div>
+          <div class="filter-select">
+            <select id="statusFilter">
+              <option value="all">สถานะทั้งหมด</option>
+              <option value="active">กำลังดำเนินการ</option>
+              <option value="completed">เสร็จสมบูรณ์</option>
+            </select>
+          </div>
+          <div class="filter-select">
+            <select id="progressFilter">
+              <option value="all">ความคืบหน้าทั้งหมด</option>
+              <option value="pending">รอการให้ความเห็น</option>
+              <option value="low">0-30%</option>
+              <option value="medium">31-70%</option>
+              <option value="high">71-100%</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-grid" id="projectsGrid">
+        <!-- Project cards will be rendered by JavaScript -->
+      </div>
+    </div>
+
+    <script>
+      // Projects data - จำกัดไว้ 6 โครงงานตามข้อกำหนด
+      let projects = [
+        {
+          id: 1,
+          title: "ระบบควบคุมบ้านอัจฉริยะด้วย IoT",
+          startDate: "มิ.ย. 2568",
+          tech: "IoT, Web App",
+          progress: 45,
+          status: "active",
+          currentWeek: 5,
+          lastUpdatedWeek: 4,
+          advisorApproved: true,
+          instructorComment: false
+        },
+        {
+          id: 2,
+          title: "แอปพลิเคชันจัดการสต๊อกสินค้าอัตโนมัติ",
+          startDate: "ก.ค. 2568",
+          tech: "Mobile, Database",
+          progress: 35,
+          status: "active",
+          currentWeek: 3,
+          lastUpdatedWeek: 3,
+          advisorApproved: true,
+          instructorComment: false
+        },
+        {
+          id: 3,
+          title: "ระบบแนะนำหนังสือด้วย Machine Learning",
+          startDate: "พ.ค. 2568",
+          tech: "AI, Python",
+          progress: 85,
+          status: "active",
+          currentWeek: 8,
+          lastUpdatedWeek: 7,
+          advisorApproved: true,
+          instructorComment: true
+        },
+        {
+          id: 4,
+          title: "เว็บแอปพลิเคชันจัดการคลินิกสัตว์",
+          startDate: "เม.ย. 2568",
+          tech: "Web App, Database",
+          progress: 100,
+          status: "completed",
+          currentWeek: 12,
+          lastUpdatedWeek: 12,
+          advisorApproved: true,
+          instructorComment: true
+        },
+        {
+          id: 5,
+          title: "ระบบตรวจสอบคุณภาพอากาศด้วย Sensor",
+          startDate: "ส.ค. 2568",
+          tech: "Arduino, Sensor",
+          progress: 20,
+          status: "active",
+          currentWeek: 2,
+          lastUpdatedWeek: 1,
+          advisorApproved: false,
+          instructorComment: false
+        },
+        {
+          id: 6,
+          title: "แชทบอทตอบคำถามด้วย NLP",
+          startDate: "ส.ค. 2568",
+          tech: "NLP, Python",
+          progress: 25,
+          status: "active",
+          currentWeek: 4,
+          lastUpdatedWeek: 4,
+          advisorApproved: true,
+          instructorComment: false
+        }
+      ];
+
+      // Render projects
+      function renderProjects() {
+        const grid = document.getElementById('projectsGrid');
+        grid.innerHTML = '';
+
+        projects.forEach(project => {
+          const card = createProjectCard(project);
+          grid.appendChild(card);
+        });
+
+        updateSummaryCards();
+        animateProgressBars();
+      }
+
+      // Create project card
+      function createProjectCard(project) {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.dataset.status = project.status;
+        card.dataset.progress = project.progress;
+        card.dataset.projectId = project.id;
+
+        let statusBadge = '';
+        if (project.status === 'completed') {
+          statusBadge = `
+            <div class="status-badge status-completed">
+              <i class="fas fa-check-circle"></i>
+              เสร็จสมบูรณ์
+            </div>
+          `;
+        } else {
+          statusBadge = `
+            <div class="status-badge status-active">
+              <i class="fas fa-play-circle"></i>
+              กำลังดำเนินการ
+            </div>
+          `;
+        }
+
+        // ตรวจสอบว่าต้องการแสดงสถานะ "รอการให้ความเห็น" หรือไม่
+        const needsComment = project.status !== 'completed' && 
+                           project.advisorApproved && 
+                           !project.instructorComment;
+        
+        let pendingBadge = '';
+        if (needsComment) {
+          pendingBadge = `
+            <div class="pending-badge">
+              <i class="fas fa-comment-alt"></i>
+              <span>รอการให้ความเห็น</span>
+            </div>
+          `;
+        }
+
+        let progressSection = '';
+        let actionButtons = '';
+
+        // แสดงความคืบหน้าตามปกติเสมอ
+        progressSection = `
+          <div class="progress-section">
+            <div class="progress-header">
+              <span class="progress-label">ความคืบหน้าปัจจุบัน</span>
+              <span class="progress-percentage">${project.progress}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${project.progress}%"></div>
+            </div>
+          </div>
+        `;
+        
+        // ปุ่มการดำเนินการ - แก้ไขลิงก์ให้ชี้ไปยังไฟล์ weekly-progress ตาม ID
+        if (project.status === 'completed') {
+          actionButtons = `
+            <div class="card-actions">
+              <a href="project-detail-instructor.html?id=${project.id}" class="btn btn-primary">
+                <i class="fas fa-eye"></i>
+                ดูรายละเอียด
+              </a>
+            </div>
+          `;
+        } else {
+          // ใช้ลิงก์ไปยังไฟล์ weekly-progress ตาม ID ของโครงงาน
+          const weeklyProgressLink = `teacher_subject/weekly-progress${project.id}.html`;
+          actionButtons = `
+            <div class="card-actions">
+              <a href="${weeklyProgressLink}" class="btn ${needsComment ? 'btn-primary' : 'btn-outline'}">
+                <i class="fas fa-chart-line"></i>
+                ${needsComment ? 'ให้ความเห็น' : 'ติดตามความคืบหน้า'}
+              </a>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div class="status-section">
+            ${statusBadge}
+            ${pendingBadge}
+          </div>
+          
+          <div class="project-header">
+            <h3 class="project-title">${project.title}</h3>
+            <div class="project-meta">
+              <div class="meta-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>เริ่ม: ${project.startDate}</span>
+              </div>
+              <div class="meta-item">
+                <span>${project.tech}</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>สัปดาห์ที่: ${project.currentWeek}</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-user-tie"></i>
+                <span>อาจารย์ที่ปรึกษา: ${project.advisorApproved ? 'ยืนยันแล้ว' : 'รอยืนยัน'}</span>
+              </div>
+            </div>
+          </div>
+
+          ${progressSection}
+          ${actionButtons}
+        `;
+
+        return card;
+      }
+
+      // Update summary cards
+      function updateSummaryCards() {
+        const total = projects.length;
+        const completed = projects.filter(p => p.status === 'completed').length;
+        
+        // นับจำนวนโครงงานที่รอการให้ความเห็น
+        const pendingComment = projects.filter(p => 
+          p.status !== 'completed' && 
+          p.advisorApproved && 
+          !p.instructorComment
+        ).length;
+        
+        const avgProgress = Math.round(projects.reduce((sum, p) => sum + p.progress, 0) / projects.length);
+
+        document.getElementById('totalProjects').textContent = total;
+        document.getElementById('completedProjects').textContent = completed;
+        document.getElementById('pendingComment').textContent = pendingComment;
+        document.getElementById('avgProgress').textContent = avgProgress + '%';
+      }
+
+      // Filter projects
+      function filterProjects() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+        const statusValue = document.getElementById('statusFilter').value;
+        const progressValue = document.getElementById('progressFilter').value;
+
+        const cards = document.querySelectorAll('.project-card');
+
+        cards.forEach(card => {
+          const projectId = parseInt(card.dataset.projectId);
+          const project = projects.find(p => p.id === projectId);
+          
+          // Search filter
+          const title = project.title.toLowerCase();
+          const tech = project.tech.toLowerCase();
+          
+          const matchesSearch = searchTerm === '' || 
+            title.includes(searchTerm) || 
+            tech.includes(searchTerm);
+
+          // Status filter
+          const matchesStatus = statusValue === 'all' || project.status === statusValue;
+
+          // Progress filter
+          let matchesProgress = true;
+          if (progressValue === 'pending') {
+            matchesProgress = project.status !== 'completed' && 
+                            project.advisorApproved && 
+                            !project.instructorComment;
+          } else if (progressValue === 'low') {
+            matchesProgress = project.progress <= 30;
+          } else if (progressValue === 'medium') {
+            matchesProgress = project.progress > 30 && project.progress <= 70;
+          } else if (progressValue === 'high') {
+            matchesProgress = project.progress > 70;
+          }
+
+          // Show/hide card
+          if (matchesSearch && matchesStatus && matchesProgress) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      // Animate progress bars
+      function animateProgressBars() {
+        setTimeout(() => {
+          const progressBars = document.querySelectorAll('.progress-fill');
+          progressBars.forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0%';
+            setTimeout(() => {
+              bar.style.width = width;
+            }, 100);
+          });
+        }, 100);
+      }
+
+      // Event listeners
+      document.getElementById('searchInput').addEventListener('input', filterProjects);
+      document.getElementById('statusFilter').addEventListener('change', filterProjects);
+      document.getElementById('progressFilter').addEventListener('change', filterProjects);
+
+      // Initialize
+      document.addEventListener('DOMContentLoaded', function() {
+        renderProjects();
+      });
+    </script>
+  </body>
+</html>

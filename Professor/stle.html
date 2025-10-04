@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายละเอียดโครงงาน - อาจารย์ที่ปรึกษา</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #718096;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            color: #4299e1;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .project-title {
+            flex: 1;
+        }
+
+        .project-title h1 {
+            color: #2d3748;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #4a5568;
+        }
+
+        .meta-item i {
+            color: #48bb78;
+            width: 20px;
+        }
+
+        .project-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 1rem;
+        }
+
+        .status-badge {
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-active {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+        }
+
+        .overall-progress {
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .progress-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(#48bb78 0deg, #48bb78 216deg, #e2e8f0 216deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            position: relative;
+        }
+
+        .progress-circle::before {
+            content: '60%';
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #2d3748;
+        }
+
+        .progress-label {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .card h2 {
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+        }
+
+        .card h2 i {
+            color: #48bb78;
+        }
+
+        /* Team Members */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .member-card {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .member-card:hover {
+            border-color: #48bb78;
+            transform: translateY(-2px);
+        }
+
+        .member-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 auto 1rem;
+        }
+
+        .member-name {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-id {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        /* Weekly Progress Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e2e8f0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid #48bb78;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            background: #edf2f7;
+            transform: translateX(5px);
+        }
+
+        .timeline-item.delayed {
+            border-left-color: #f56565;
+            background: #fed7d7;
+        }
+
+        .timeline-item.completed {
+            border-left-color: #4299e1;
+            background: #ebf8ff;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.25rem;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            background: #48bb78;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .timeline-item.delayed .timeline-dot {
+            background: #f56565;
+        }
+
+        .timeline-item.completed .timeline-dot {
+            background: #4299e1;
+        }
+
+        .week-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .week-title {
+            font-weight: 600;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .week-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-submitted {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status-pending {
+            background: #fed7cc;
+            color: #9c4221;
+        }
+        
+        .status-waiting {
+            background: #fef5e7;
+            color: #744210;
+        }
+        
+        .status-completed {
+            background: #e6fffa;
+            color: #234e52;
+        }
+
+        .week-description {
+            color: #4a5568;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .week-progress {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #48bb78, #38a169);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-percent {
+            font-weight: 600;
+            color: #2d3748;
+            min-width: 40px;
+            text-align: right;
+        }
+
+        .week-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        .btn-primary {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #38a169;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #48bb78;
+            border: 1px solid #48bb78;
+        }
+
+        .btn-outline:hover {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #ed8936;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #dd6b20;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            margin-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1rem;
+        }
+
+        .comment {
+            background: #f7fafc;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .comment-date {
+            color: #718096;
+            font-size: 0.8rem;
+        }
+
+        .comment-text {
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 95%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #2d3748;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #718096;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #48bb78;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .progress-slider {
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        .progress-value {
+            text-align: center;
+            font-weight: 700;
+            color: #48bb78;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .file-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .file-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            background: #f7fafc;
+        }
+
+        .file-icon {
+            font-size: 2rem;
+            color: #4299e1;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-name {
+            font-size: 0.9rem;
+            color: #4a5568;
+            word-break: break-word;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Report Content in Modal */
+        .report-header {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-top: 5px solid #4caf50;
+        }
+
+        .report-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1976d2;
+            margin-bottom: 1rem;
+        }
+
+        .report-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .meta-label {
+            font-weight: 600;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .meta-value {
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .topic-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .topic-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .topic-content {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .topic-description {
+            color: #777;
+            font-size: 14px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        /* Work Details Section */
+        .work-details-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid #ff9800;
+        }
+
+        .work-details-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .work-detail-item {
+            margin-bottom: 2rem;
+        }
+
+        .work-detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .work-detail-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .work-detail-content {
+            background: #f8f9fa;
+            padding: 1.25rem;
+            border-radius: 12px;
+            border-left: 4px solid #ff9800;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Files Section */
+        .files-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid #9c27b0;
+        }
+
+        .files-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .file-category {
+            margin-bottom: 2rem;
+        }
+
+        .file-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .file-category-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .file-list {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .file-item-modal {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .file-item-modal:hover {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            transform: translateX(5px);
+        }
+
+        .file-icon-modal {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .file-size {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .file-action {
+            padding: 0.25rem 0.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .file-download {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .file-download:hover {
+            background: #1976d2;
+            color: white;
+        }
+
+        .file-view {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .file-view:hover {
+            background: #7b1fa2;
+            color: white;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .image-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .image-thumbnail {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(45deg, #e1bee7, #f3e5f5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7b1fa2;
+            font-size: 2rem;
+        }
+
+        .image-info {
+            padding: 1rem;
+        }
+
+        .image-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 14px;
+        }
+
+        .image-size {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Comments Section */
+        .comments-section-modal {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .comments-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .comment-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .comment-item.advisor {
+            border-left: 4px solid #4caf50;
+        }
+
+        .comment-item.instructor {
+            border-left: 4px solid #2196f3;
+        }
+
+        .comment-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .comment-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .comment-author-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .comment-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .comment-avatar.advisor {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+        }
+
+        .comment-avatar.instructor {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+        }
+
+        .author-details {
+            flex: 1;
+        }
+
+        .author-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-role {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .comment-date {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .comment-text {
+            color: #555;
+            line-height: 1.6;
+            font-size: 15px;
+            margin-bottom: 1rem;
+        }
+
+        /* Progress Form Section */
+        .progress-form-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-top: 2rem;
+            border-left: 5px solid #48bb78;
+        }
+
+        .progress-form-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .project-status {
+                align-items: flex-start;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .week-actions {
+                flex-direction: column;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+            
+            .report-meta {
+                grid-template-columns: 1fr;
+            }
+            
+            .image-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="breadcrumb">
+                <a href="teacher_main_dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="advisor-projects.html">อาจารย์ที่ปรึกษา</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>รายละเอียดโครงงาน</span>
+            </div>
+            
+            <div class="header-content">
+                <div class="project-title">
+                    <h1>ระบบควบคุมบ้านอัจฉริยะด้วย IoT</h1>
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-start"></i>
+                            <span>เริ่มโครงงาน: มิ.ย. 2566</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>กำหนดส่ง: ธ.ค. 2566</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-microchip"></i>
+                            <span>เทคโนโลยี: IoT, Web Application, Sensors</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-status">
+                    <div class="status-badge status-active">
+                        <i class="fas fa-play-circle"></i>
+                        กำลังดำเนินการ
+                    </div>
+                    <div class="overall-progress">
+                        <div class="progress-circle"></div>
+                        <div class="progress-label">ความคืบหน้าโดยรวม</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Members -->
+        <div class="card">
+            <h2><i class="fas fa-users"></i> สมาชิกทีม</h2>
+            <div class="team-grid">
+                <div class="member-card">
+                    <div class="member-avatar">ส</div>
+                    <div class="member-name">สมศรี รักเรียน</div>
+                    <div class="member-id">6501001</div>
+                </div>
+                <div class="member-card">
+                    <div class="member-avatar">ม</div>
+                    <div class="member-name">มานะ ขยันทำ</div>
+                    <div class="member-id">6501002</div>
+                </div>
+            </div>
+        </div>
+        <!-- Weekly Progress Timeline -->
+        <div class="card">
+            <h2><i class="fas fa-calendar-week"></i> ความคืบหน้ารายสัปดาห์</h2>
+            <div class="timeline">
+                <!-- Week 6 - Current/Pending -->
+                <div class="timeline-item delayed">
+                    <div class="timeline-dot"></div>
+                    <div class="week-header">
+                        <div class="week-title">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            สัปดาห์ที่ 6: การทดสอบระบบ
+                        </div>
+                        <div class="week-status status-waiting">รอกำหนดความคืบหน้า</div>
+                    </div>
+                    <div class="week-description">
+                        ทดสอบการเชื่อมต่อ IoT devices และ API integration
+                        <br><strong>กำหนดส่ง:</strong> 15 ตุลาคม 2566
+                    </div>
+                    <div class="week-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-percent">0%</div>
+                    </div>
+                    <div class="week-actions">
+                        <button class="btn btn-primary btn-sm" onclick="openProgressModal(6, false)">
+                            <i class="fas fa-check-circle"></i>
+                            ให้ความคืบหน้า
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Week 5 - Completed -->
+                <div class="timeline-item completed">
+                    <div class="timeline-dot"></div>
+                    <div class="week-header">
+                        <div class="week-title">
+                            <i class="fas fa-check-circle"></i>
+                            สัปดาห์ที่ 5: การพัฒนาส่วนติดต่อผู้ใช้
+                        </div>
+                        <div class="week-status status-completed">กำหนดความคืบหน้าสำเร็จ</div>
+                    </div>
+                    <div class="week-description">
+                        พัฒนาและปรับปรุง User Interface สำหรับระบบแดชบอร์ดหลัก
+                        <br><strong>ส่งเมื่อ:</strong> 8 ตุลาคม 2566
+                    </div>
+                    <div class="week-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                        <div class="progress-percent">75%</div>
+                    </div>
+                    <div class="week-actions">
+                        <button class="btn btn-outline btn-sm" onclick="openProgressModal(5, true)">
+                            <i class="fas fa-eye"></i>
+                            ดูรายงาน
+                        </button>
+                    </div>
+                    <!-- Comments Section for Week 5 -->
+                    <div class="comments-section">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="comment-author">อ. สมชาย ใจดี (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-date">10 ตุลาคม 2566</div>
+                            </div>
+                            <div class="comment-text">
+                                รายงานสัปดาห์ที่ 5 ดีมาก UI ออกแบบได้สวย แต่ควรเพิ่มการจัดการ error handling ให้ครบถ้วน
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="comment-author">อ. สุภาพร สอนดี (อาจารย์ประจำวิชา)</div>
+                                <div class="comment-date">12 ตุลาคม 2566</div>
+                            </div>
+                            <div class="comment-text">
+                                ยืนยันความคืบหน้าเรียบร้อยแล้ว งานมีความก้าวหน้าดีตามแผนที่วางไว้
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Week 4 - Completed -->
+                <div class="timeline-item completed">
+                    <div class="timeline-dot"></div>
+                    <div class="week-header">
+                        <div class="week-title">
+                            <i class="fas fa-check-circle"></i>
+                            สัปดาห์ที่ 4: พัฒนาส่วนควบคุม
+                        </div>
+                        <div class="week-status status-completed">กำหนดความคืบหน้าสำเร็จ</div>
+                    </div>
+                    <div class="week-description">
+                        เริ่มเขียนโค้ดสำหรับส่วนควบคุมหลักและทดสอบเบื้องต้น
+                    </div>
+                    <div class="week-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                        <div class="progress-percent">60%</div>
+                    </div>
+                    <div class="week-actions">
+                        <button class="btn btn-outline btn-sm" onclick="openProgressModal(4, true)">
+                            <i class="fas fa-eye"></i>
+                            ดูรายงาน
+                        </button>
+                    </div>
+                    <!-- Comments Section for Week 4 -->
+                    <div class="comments-section">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="comment-author">อ. สมชาย ใจดี (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-date">3 ตุลาคม 2566</div>
+                            </div>
+                            <div class="comment-text">
+                                การพัฒนาส่วนควบคุมเป็นไปตามแผน แต่ควรเพิ่มการทดสอบกับอุปกรณ์จริงให้มากขึ้น
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Week 3 - Completed -->
+                <div class="timeline-item completed">
+                    <div class="timeline-dot"></div>
+                    <div class="week-header">
+                        <div class="week-title">
+                            <i class="fas fa-check-circle"></i>
+                            สัปดาห์ที่ 3: ออกแบบระบบ
+                        </div>
+                        <div class="week-status status-completed">กำหนดความคืบหน้าสำเร็จ</div>
+                    </div>
+                    <div class="week-description">
+                        ออกแบบสถาปัตยกรรมระบบ (System Architecture) และฐานข้อมูล
+                    </div>
+                    <div class="week-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 40%"></div>
+                        </div>
+                        <div class="progress-percent">40%</div>
+                    </div>
+                    <div class="week-actions">
+                        <button class="btn btn-outline btn-sm" onclick="openProgressModal(3, true)">
+                            <i class="fas fa-eye"></i>
+                            ดูรายงาน
+                        </button>
+                    </div>
+                    <!-- Comments Section for Week 3 -->
+                    <div class="comments-section">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="comment-author">อ. สมชาย ใจดี (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-date">26 กันยายน 2566</div>
+                            </div>
+                            <div class="comment-text">
+                                การออกแบบระบบมีความสมบูรณ์ดี แต่ควรพิจารณาการจัดการข้อมูลแบบ real-time เพิ่มเติม
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Modal -->
+    <div class="modal" id="progressModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">ให้ความคืบหน้า - สัปดาห์ที่ <span id="weekNumber"></span></h3>
+                <button class="close-modal" onclick="closeProgressModal()">&times;</button>
+            </div>
+            
+            <!-- Report Content -->
+            <div id="reportContentSection">
+                <!-- Report Header -->
+                <div class="report-header">
+                    <h1 class="report-title">รายงานสัปดาห์ที่ <span id="reportWeekNumber">5</span></h1>
+                    <div class="report-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">ระยะเวลา</span>
+                            <span class="meta-value" id="reportPeriod">5 - 12 กันยายน 2566</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">วันที่ส่ง</span>
+                            <span class="meta-value" id="reportSubmitDate">12 กันยายน 2566</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">สถานะ</span>
+                            <span class="status-badge" id="reportStatus">ส่งแล้ว</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Topic Section -->
+                    <div class="topic-section">
+                        <div class="topic-title">
+                            <i class="fas fa-lightbulb"></i>
+                            หัวข้อการทำงานสัปดาห์นี้
+                        </div>
+                        <div class="topic-content" id="reportTopic">
+                            การพัฒนาส่วนติดต่อผู้ใช้และทดสอบระบบแดชบอร์ด
+                        </div>
+                        <div class="topic-description" id="reportTopicDescription">
+                            พัฒนาและปรับปรุง User Interface สำหรับระบบแดชบอร์ดหลัก รวมถึงการทดสอบการทำงานของระบบและการปรับปรุงประสบการณ์ผู้ใช้ให้มีความสะดวกและใช้งานง่ายมากขึ้น
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Details Section -->
+                <div class="work-details-section">
+                    <h2 class="work-details-title">
+                        <i class="fas fa-tasks"></i>
+                        รายละเอียดการทำงานในสัปดาห์นี้
+                    </h2>
+                    
+                    <div class="work-detail-item">
+                        <div class="work-detail-label">
+                            <i class="fas fa-check-circle"></i>
+                            สิ่งที่ทำสำเร็จในสัปดาห์นี้
+                        </div>
+                        <div class="work-detail-content" id="reportCompletedWork">
+                            ในสัปดาห์นี้ได้พัฒนาส่วนติดต่อผู้ใช้หลักของระบบแดชบอร์ดสำเร็จ โดยออกแบบ UI/UX ที่ทันสมัยและใช้งานง่าย ได้ทำการ implement responsive design ที่รองรับการใช้งานบนอุปกรณ์หลากหลายขนาด รวมถึงการทดสอบการทำงานของระบบ navigation และ data visualization components ต่างๆ ผลลัพธ์ที่ได้คือระบบที่มีประสิทธิภาพและสวยงาม
+                        </div>
+                    </div>
+
+                    <div class="work-detail-item">
+                        <div class="work-detail-label">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            ปัญหาและอุปสรรคที่พบ
+                        </div>
+                        <div class="work-detail-content" id="reportProblems">
+                            พบปัญหาในเรื่อง state management เมื่อมีการ update ข้อมูลแบบ real-time และปัญหา performance เมื่อมีข้อมูลจำนวนมาก นอกจากนี้ยังพบปัญหา compatibility issues กับ browser บางตัว ได้แก้ไขโดยการใช้ Redux สำหรับจัดการ state และ implement pagination พร้อม lazy loading เพื่อเพิ่มประสิทธิภาพ รวมถึงเพิ่ม polyfills สำหรับรองรับ browser เก่า
+                        </div>
+                    </div>
+
+                    <div class="work-detail-item">
+                        <div class="work-detail-label">
+                            <i class="fas fa-calendar-alt"></i>
+                            แผนงานสำหรับสัปดาห์หน้า
+                        </div>
+                        <div class="work-detail-content" id="reportNextPlan">
+                            สัปดาห์หน้าจะเน้นไปที่การพัฒนาระบบ authentication และ user management รวมถึงการทำ unit testing และ integration testing ให้ครอบคลุม นอกจากนี้จะทำการปรับปรุง accessibility features และเพิ่มระบบ notification แบบ real-time เพื่อให้ระบบมีความสมบูรณ์มากขึ้น
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Files Section -->
+                <div class="files-section">
+                    <h2 class="files-title">
+                        <i class="fas fa-folder-open"></i>
+                        เอกสารและภาพประกอบ
+                    </h2>
+
+                    <!-- Documents -->
+                    <div class="file-category">
+                        <div class="file-category-title">
+                            <i class="fas fa-file-alt"></i>
+                            รูปเล่มและเอกสารประกอบ
+                        </div>
+                        <div class="file-list">
+                            <div class="file-item-modal">
+                                <div class="file-icon-modal">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="file-info">
+                                    <div class="file-name">รายงานสัปดาห์ที่ 5 - UI Development.pdf</div>
+                                    <div class="file-size">2.3 MB</div>
+                                </div>
+                                <div class="file-actions">
+                                    <button class="file-action file-download">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="file-action file-view">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="file-item-modal">
+                                <div class="file-icon-modal">
+                                    <i class="fas fa-file-word"></i>
+                                </div>
+                                <div class="file-info">
+                                    <div class="file-name">Technical Documentation - Dashboard System.docx</div>
+                                    <div class="file-size">1.8 MB</div>
+                                </div>
+                                <div class="file-actions">
+                                    <button class="file-action file-download">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="file-action file-view">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Images -->
+                    <div class="file-category">
+                        <div class="file-category-title">
+                            <i class="fas fa-images"></i>
+                            ภาพการทำงานในสัปดาห์นี้
+                        </div>
+                        <div class="image-gallery">
+                            <div class="image-item">
+                                <div class="image-thumbnail">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <div class="image-info">
+                                    <div class="image-name">dashboard-mockup.png</div>
+                                    <div class="image-size">856 KB</div>
+                                </div>
+                            </div>
+                            
+                            <div class="image-item">
+                                <div class="image-thumbnail">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <div class="image-info">
+                                    <div class="image-name">responsive-design-test.jpg</div>
+                                    <div class="image-size">1.2 MB</div>
+                                </div>
+                            </div>
+                            
+                            <div class="image-item">
+                                <div class="image-thumbnail">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <div class="image-info">
+                                    <div class="image-name">user-interface-components.png</div>
+                                    <div class="image-size">734 KB</div>
+                                </div>
+                            </div>
+                            
+                            <div class="image-item">
+                                <div class="image-thumbnail">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <div class="image-info">
+                                    <div class="image-name">testing-results.jpg</div>
+                                    <div class="image-size">645 KB</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comments Section - เอาออกในโหมด "ให้ความคืบหน้า" -->
+                <div class="comments-section-modal" id="commentsSection">
+                    <h2 class="comments-title">
+                        <i class="fas fa-comments"></i>
+                        ความคิดเห็นจากอาจารย์
+                    </h2>
+
+                    <!-- Advisor Comment -->
+                    <div class="comment-item advisor">
+                        <div class="comment-header">
+                            <div class="comment-author-info">
+                                <div class="comment-avatar advisor">อ</div>
+                                <div class="author-details">
+                                    <div class="author-name">รศ.ดร. เอกชัย วิบูลย์ธนากุล</div>
+                                    <div class="author-role">อาจารย์ที่ปรึกษา</div>
+                                </div>
+                            </div>
+                            <div class="comment-date">12 กันยายน 2566 | 14:30</div>
+                        </div>
+                        <p class="comment-text">
+                            การพัฒนาส่วนติดต่อผู้ใช้มีความคืบหน้าดีมาก UI/UX ออกแบบได้สวยงามและใช้งานง่าย 
+                            แต่ยังควรปรับปรุงการจัดการ state management และเพิ่มการตรวจสอบ input validation 
+                            ให้มากขึ้น รวมถึงการทดสอบ responsive design บนอุปกรณ์ขนาดต่างๆ 
+                            โดยรวมแล้วงานมีคุณภาพและน่าพอใจ การแก้ไขปัญหาต่างๆ ที่เกิดขึ้นแสดงให้เห็นถึง
+                            ความสามารถในการแก้ปัญหาและการเรียนรู้ที่ดี
+                        </p>
+                    </div>
+
+                    <!-- Instructor Comment -->
+                    <div class="comment-item instructor">
+                        <div class="comment-header">
+                            <div class="comment-author-info">
+                                <div class="comment-avatar instructor">อ</div>
+                                <div class="author-details">
+                                    <div class="author-name">ผศ.ดร. สมชาย ใจดี</div>
+                                    <div class="author-role">อาจารย์ประจำวิชา</div>
+                                </div>
+                            </div>
+                            <div class="comment-date">13 กันยายน 2566 | 09:15</div>
+                        </div>
+                        <p class="comment-text">
+                            เห็นด้วยกับความเห็นของอาจารย์ที่ปรึกษา การออกแบบ UI มีความสวยงามและทันสมัย 
+                            อย่างไรก็ตาม ควรใส่ใจเรื่องการจัดการ error handling และ loading states 
+                            ให้มากขึ้น เพื่อประสบการณ์ผู้ใช้ที่ดีขึ้น นอกจากนี้ควรพิจารณาเพิ่ม 
+                            accessibility features สำหรับผู้ใช้พิการด้วย การวางแผนงานสำหรับสัปดาห์หน้า
+                            มีความชัดเจนและสอดคล้องกับเป้าหมายของโครงงาน
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Progress Form Section -->
+            <div class="progress-form-section" id="progressFormSection">
+                <h3 class="progress-form-title">
+                    <i class="fas fa-sliders-h"></i>
+                    กำหนดความคืบหน้าและความคิดเห็น
+                </h3>
+                
+                <form id="progressForm">
+                    <input type="hidden" id="selectedWeek" name="week">
+                    
+                    <div class="form-group">
+                        <label class="form-label">ความคืบหน้า (%)</label>
+                        <div class="progress-value" id="progressDisplay">50%</div>
+                        <input type="range" id="progressSlider" class="progress-slider" min="0" max="100" value="50" step="5">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">ความคิดเห็น</label>
+                        <textarea id="comment" class="form-control" placeholder="กรอกความคิดเห็นเกี่ยวกับความคืบหน้าในสัปดาห์นี้..."></textarea>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-outline" onclick="closeProgressModal()">ยกเลิก</button>
+                        <button type="submit" class="btn btn-primary">บันทึกความคืบหน้า</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Progress slider functionality
+        const progressSlider = document.getElementById('progressSlider');
+        const progressDisplay = document.getElementById('progressDisplay');
+        
+        if (progressSlider) {
+            progressSlider.addEventListener('input', function() {
+                progressDisplay.textContent = this.value + '%';
+            });
+        }
+
+        // Modal functionality
+        function openProgressModal(weekNumber, hasProgress) {
+            document.getElementById('weekNumber').textContent = weekNumber;
+            document.getElementById('reportWeekNumber').textContent = weekNumber;
+            document.getElementById('selectedWeek').value = weekNumber;
+            document.getElementById('progressModal').style.display = 'flex';
+            
+            // Set report data based on week
+            setReportData(weekNumber);
+            
+            // Reset form values
+            document.getElementById('progressSlider').value = 50;
+            document.getElementById('progressDisplay').textContent = '50%';
+            document.getElementById('comment').value = '';
+            
+            // Show/hide sections based on mode
+            const commentsSection = document.getElementById('commentsSection');
+            const progressFormSection = document.getElementById('progressFormSection');
+            
+            if (hasProgress) {
+                // Mode "ดูรายงาน" - แสดงความคิดเห็น, ซ่อนฟอร์ม
+                commentsSection.style.display = 'block';
+                progressFormSection.style.display = 'none';
+                document.getElementById('modalTitle').textContent = 'ดูรายงาน - สัปดาห์ที่ ' + weekNumber;
+            } else {
+                // Mode "ให้ความคืบหน้า" - ซ่อนความคิดเห็น, แสดงฟอร์ม
+                commentsSection.style.display = 'none';
+                progressFormSection.style.display = 'block';
+                document.getElementById('modalTitle').textContent = 'ให้ความคืบหน้า - สัปดาห์ที่ ' + weekNumber;
+            }
+            
+            // Add event listeners for file actions
+            addFileEventListeners();
+        }
+
+        function closeProgressModal() {
+            document.getElementById('progressModal').style.display = 'none';
+        }
+
+        // Set report data based on week number
+        function setReportData(weekNumber) {
+            // This would typically come from a database or API
+            // For demo purposes, we'll set it based on week number
+            const reportData = {
+                3: {
+                    period: "22 - 29 สิงหาคม 2566",
+                    submitDate: "29 สิงหาคม 2566",
+                    topic: "ออกแบบระบบ",
+                    topicDescription: "ออกแบบสถาปัตยกรรมระบบ (System Architecture) และฐานข้อมูล",
+                    completedWork: "ในสัปดาห์นี้ได้ออกแบบสถาปัตยกรรมระบบและฐานข้อมูลสำเร็จ โดยใช้ UML diagrams สำหรับแสดงโครงสร้างระบบและความสัมพันธ์ระหว่าง components ต่างๆ",
+                    problems: "พบปัญหาในการออกแบบ schema ฐานข้อมูลที่รองรับการขยายตัวในอนาคต ได้แก้ไขโดยการออกแบบ normalized database schema และเพิ่ม indexing สำหรับ query ที่สำคัญ",
+                    nextPlan: "สัปดาห์หน้าจะเริ่มพัฒนาส่วนควบคุมหลักของระบบและทดสอบเบื้องต้นกับฐานข้อมูล"
+                },
+                4: {
+                    period: "29 สิงหาคม - 5 กันยายน 2566",
+                    submitDate: "5 กันยายน 2566",
+                    topic: "พัฒนาส่วนควบคุม",
+                    topicDescription: "เริ่มเขียนโค้ดสำหรับส่วนควบคุมหลักและทดสอบเบื้องต้น",
+                    completedWork: "ในสัปดาห์นี้ได้พัฒนาส่วนควบคุมหลักของระบบสำเร็จ รวมถึงการเชื่อมต่อกับฐานข้อมูลและทดสอบการทำงานเบื้องต้น",
+                    problems: "พบปัญหาเรื่อง performance เมื่อมีข้อมูลจำนวนมาก และการจัดการ connection กับฐานข้อมูล ได้แก้ไขโดยการใช้ connection pooling และ query optimization",
+                    nextPlan: "สัปดาห์หน้าจะพัฒนาส่วนติดต่อผู้ใช้และทดสอบระบบแดชบอร์ด"
+                },
+                5: {
+                    period: "5 - 12 กันยายน 2566",
+                    submitDate: "12 กันยายน 2566",
+                    topic: "การพัฒนาส่วนติดต่อผู้ใช้และทดสอบระบบแดชบอร์ด",
+                    topicDescription: "พัฒนาและปรับปรุง User Interface สำหรับระบบแดชบอร์ดหลัก รวมถึงการทดสอบการทำงานของระบบและการปรับปรุงประสบการณ์ผู้ใช้ให้มีความสะดวกและใช้งานง่ายมากขึ้น",
+                    completedWork: "ในสัปดาห์นี้ได้พัฒนาส่วนติดต่อผู้ใช้หลักของระบบแดชบอร์ดสำเร็จ โดยออกแบบ UI/UX ที่ทันสมัยและใช้งานง่าย ได้ทำการ implement responsive design ที่รองรับการใช้งานบนอุปกรณ์หลากหลายขนาด รวมถึงการทดสอบการทำงานของระบบ navigation และ data visualization components ต่างๆ ผลลัพธ์ที่ได้คือระบบที่มีประสิทธิภาพและสวยงาม",
+                    problems: "พบปัญหาในเรื่อง state management เมื่อมีการ update ข้อมูลแบบ real-time และปัญหา performance เมื่อมีข้อมูลจำนวนมาก นอกจากนี้ยังพบปัญหา compatibility issues กับ browser บางตัว ได้แก้ไขโดยการใช้ Redux สำหรับจัดการ state และ implement pagination พร้อม lazy loading เพื่อเพิ่มประสิทธิภาพ รวมถึงเพิ่ม polyfills สำหรับรองรับ browser เก่า",
+                    nextPlan: "สัปดาห์หน้าจะเน้นไปที่การพัฒนาระบบ authentication และ user management รวมถึงการทำ unit testing และ integration testing ให้ครอบคลุม นอกจากนี้จะทำการปรับปรุง accessibility features และเพิ่มระบบ notification แบบ real-time เพื่อให้ระบบมีความสมบูรณ์มากขึ้น"
+                },
+                6: {
+                    period: "12 - 19 ตุลาคม 2566",
+                    submitDate: "15 ตุลาคม 2566",
+                    topic: "การทดสอบระบบ",
+                    topicDescription: "ทดสอบการเชื่อมต่อ IoT devices และ API integration",
+                    completedWork: "กำลังดำเนินการทดสอบระบบ...",
+                    problems: "ยังไม่พบปัญหา",
+                    nextPlan: "จะทำการทดสอบระบบให้เสร็จสมบูรณ์"
+                }
+            };
+            
+            const data = reportData[weekNumber] || reportData[5];
+            
+            document.getElementById('reportPeriod').textContent = data.period;
+            document.getElementById('reportSubmitDate').textContent = data.submitDate;
+            document.getElementById('reportTopic').textContent = data.topic;
+            document.getElementById('reportTopicDescription').textContent = data.topicDescription;
+            document.getElementById('reportCompletedWork').textContent = data.completedWork;
+            document.getElementById('reportProblems').textContent = data.problems;
+            document.getElementById('reportNextPlan').textContent = data.nextPlan;
+        }
+
+        // Add event listeners for file actions
+        function addFileEventListeners() {
+            document.querySelectorAll('.file-download').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const fileName = this.closest('.file-item-modal').querySelector('.file-name').textContent;
+                    showNotification(`กำลังดาวน์โหลด: ${fileName}`, 'info');
+                });
+            });
+
+            document.querySelectorAll('.file-view').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const fileName = this.closest('.file-item-modal').querySelector('.file-name').textContent;
+                    showNotification(`กำลังเปิดดู: ${fileName}`, 'info');
+                });
+            });
+
+            // Add click handlers for images
+            document.querySelectorAll('.image-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const imageName = this.querySelector('.image-name').textContent;
+                    showImageModal(imageName);
+                });
+            });
+        }
+
+        // Form submission for setting progress
+        document.getElementById('progressForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const weekNumber = document.getElementById('selectedWeek').value;
+            const progressValue = document.getElementById('progressSlider').value;
+            const comment = document.getElementById('comment').value;
+            
+            if (!comment.trim()) {
+                alert('กรุณากรอกความคิดเห็น');
+                return;
+            }
+            
+            // In a real application, you would send this data to the server
+            console.log(`บันทึกความคืบหน้าสำหรับสัปดาห์ที่ ${weekNumber}: ${progressValue}%`);
+            console.log(`ความคิดเห็น: ${comment}`);
+            
+            // Simulate successful submission
+            alert(`บันทึกความคืบหน้าสำหรับสัปดาห์ที่ ${weekNumber} เรียบร้อยแล้ว!`);
+            
+            // Close modal
+            closeProgressModal();
+            
+            // Update the timeline item
+            updateTimelineItem(weekNumber, progressValue, comment);
+        });
+
+        // Update timeline item after submission
+        function updateTimelineItem(weekNumber, progressValue, comment) {
+            // Find the timeline item for the specified week
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            let targetItem = null;
+            
+            for (let item of timelineItems) {
+                if (item.querySelector('.week-title').textContent.includes(`สัปดาห์ที่ ${weekNumber}`)) {
+                    targetItem = item;
+                    break;
+                }
+            }
+            
+            if (targetItem) {
+                // Update status
+                const statusElement = targetItem.querySelector('.week-status');
+                if (statusElement) {
+                    statusElement.textContent = 'กำหนดความคืบหน้าสำเร็จ';
+                    statusElement.className = 'week-status status-completed';
+                }
+                
+                // Update progress bar
+                const progressFill = targetItem.querySelector('.progress-fill');
+                const progressPercent = targetItem.querySelector('.progress-percent');
+                if (progressFill && progressPercent) {
+                    progressFill.style.width = `${progressValue}%`;
+                    progressPercent.textContent = `${progressValue}%`;
+                }
+                
+                // Update actions - เปลี่ยนเป็นปุ่ม "ดูรายงาน" เท่านั้น
+                const actionsContainer = targetItem.querySelector('.week-actions');
+                if (actionsContainer) {
+                    actionsContainer.innerHTML = `
+                        <button class="btn btn-outline btn-sm" onclick="openProgressModal(${weekNumber}, true)">
+                            <i class="fas fa-eye"></i>
+                            ดูรายงาน
+                        </button>
+                    `;
+                }
+                
+                // Add comment
+                let commentsSection = targetItem.querySelector('.comments-section');
+                if (!commentsSection) {
+                    commentsSection = document.createElement('div');
+                    commentsSection.className = 'comments-section';
+                    targetItem.appendChild(commentsSection);
+                }
+                
+                const newComment = document.createElement('div');
+                newComment.className = 'comment';
+                newComment.innerHTML = `
+                    <div class="comment-header">
+                        <div class="comment-author">อ. สมชาย ใจดี (อาจารย์ที่ปรึกษา)</div>
+                        <div class="comment-date">${new Date().toLocaleDateString('th-TH')}</div>
+                    </div>
+                    <div class="comment-text">
+                        ${comment}
+                    </div>
+                `;
+                
+                commentsSection.appendChild(newComment);
+                
+                // Update progress circle if this is the current week
+                if (weekNumber === 6) {
+                    updateProgressCircle(progressValue);
+                }
+            }
+        }
+
+        // Update progress circle
+        function updateProgressCircle(percentage) {
+            const circle = document.querySelector('.progress-circle');
+            const degrees = (percentage / 100) * 360;
+            circle.style.background = `conic-gradient(#48bb78 0deg, #48bb78 ${degrees}deg, #e2e8f0 ${degrees}deg)`;
+            
+            // Update the text content
+            circle.style.setProperty('--progress-text', `"${percentage}%"`);
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('progressModal');
+            if (e.target === modal) {
+                closeProgressModal();
+            }
+        });
+
+        // Initialize progress circle
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgressCircle(60);
+            
+            // Add CSS rule for progress circle text
+            const style = document.createElement('style');
+            style.textContent = `
+                .progress-circle::before {
+                    content: var(--progress-text, "60%");
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // Notification function
+        function showNotification(message, type = 'success') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4caf50' : '#2196f3'};
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                z-index: 1000;
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Image modal function
+        function showImageModal(imageName) {
+            // Create modal overlay
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            `;
+
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                padding: 2rem;
+                border-radius: 12px;
+                max-width: 80%;
+                max-height: 80%;
+                text-align: center;
+                transform: scale(0.7);
+                transition: transform 0.3s ease;
+            `;
+
+            modalContent.innerHTML = `
+                <div style="font-size: 4rem; color: #9c27b0; margin-bottom: 1rem;">
+                    <i class="fas fa-image"></i>
+                </div>
+                <h3 style="margin-bottom: 1rem; color: #333;">${imageName}</h3>
+                <p style="color: #666; margin-bottom: 2rem;">ตัวอย่างการแสดงภาพ</p>
+                <button onclick="this.closest('.modal-overlay').remove()" 
+                        style="background: #2196f3; color: white; border: none; padding: 0.75rem 1.5rem; 
+                               border-radius: 6px; cursor: pointer;">
+                    <i class="fas fa-times"></i> ปิด
+                </button>
+            `;
+
+            modal.appendChild(modalContent);
+            modal.className = 'modal-overlay';
+            document.body.appendChild(modal);
+
+            // Show modal with animation
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                modalContent.style.transform = 'scale(1)';
+            }, 100);
+
+            // Close modal when clicking overlay
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+    </script>
+</body>
+</html>

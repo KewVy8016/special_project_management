@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>รายละเอียดโครงงาน - อาจารย์ที่ปรึกษา</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* สไตล์ทั้งหมดเหมือนเดิม */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* Header */
+      .header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #718096;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+      }
+
+      .breadcrumb a {
+        color: #4299e1;
+        text-decoration: none;
+      }
+
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .project-title {
+        flex: 1;
+      }
+
+      .project-title h1 {
+        color: #2d3748;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+      }
+
+      .project-meta {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+      }
+
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #4a5568;
+      }
+
+      .meta-item i {
+        color: #48bb78;
+        width: 20px;
+      }
+
+      .project-status {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1rem;
+      }
+
+      .status-badge {
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .status-active {
+        background: linear-gradient(135deg, #48bb78, #38a169);
+        color: white;
+      }
+
+      .overall-progress {
+        text-align: center;
+        min-width: 120px;
+      }
+
+      .progress-circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: conic-gradient(
+          #48bb78 0deg,
+          #48bb78 180deg,
+          #e2e8f0 180deg
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 0.5rem;
+        position: relative;
+      }
+
+      .progress-circle::before {
+        content: "50%";
+        width: 60px;
+        height: 60px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #2d3748;
+      }
+
+      .progress-label {
+        color: #718096;
+        font-size: 0.9rem;
+      }
+
+      /* Cards */
+      .card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+      }
+
+      .card h2 {
+        color: #2d3748;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 1.4rem;
+      }
+
+      .card h2 i {
+        color: #48bb78;
+      }
+
+      /* Team Members */
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .member-card {
+        background: #f7fafc;
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        border: 2px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .member-card:hover {
+        border-color: #48bb78;
+        transform: translateY(-2px);
+      }
+
+      .member-avatar {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #48bb78, #38a169);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0 auto 1rem;
+      }
+
+      .member-name {
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+      }
+
+      .member-id {
+        color: #718096;
+        font-size: 0.9rem;
+      }
+
+      /* Weekly Progress Timeline */
+      .timeline {
+        position: relative;
+        padding-left: 2rem;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 15px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #e2e8f0;
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
+        background: #f7fafc;
+        border-radius: 12px;
+        padding: 1.5rem;
+        border-left: 4px solid #48bb78;
+        transition: all 0.3s ease;
+      }
+
+      .timeline-item:hover {
+        background: #edf2f7;
+        transform: translateX(5px);
+      }
+
+      .timeline-item.delayed {
+        border-left-color: #f56565;
+        background: #fed7d7;
+      }
+
+      .timeline-item.completed {
+        border-left-color: #4299e1;
+        background: #ebf8ff;
+      }
+
+      .timeline-dot {
+        position: absolute;
+        left: -2.25rem;
+        top: 1.5rem;
+        width: 12px;
+        height: 12px;
+        background: #48bb78;
+        border-radius: 50%;
+        border: 3px solid white;
+      }
+
+      .timeline-item.delayed .timeline-dot {
+        background: #f56565;
+      }
+
+      .timeline-item.completed .timeline-dot {
+        background: #4299e1;
+      }
+
+      .week-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .week-title {
+        font-weight: 600;
+        color: #2d3748;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .week-status {
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+
+      .status-submitted {
+        background: #c6f6d5;
+        color: #22543d;
+      }
+
+      .status-pending {
+        background: #fed7cc;
+        color: #9c4221;
+      }
+
+      .status-waiting {
+        background: #fef5e7;
+        color: #744210;
+      }
+
+      .status-completed {
+        background: #e6fffa;
+        color: #234e52;
+      }
+
+      .week-description {
+        color: #4a5568;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+      }
+
+      .week-progress {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .progress-bar {
+        flex: 1;
+        height: 8px;
+        background: #e2e8f0;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #48bb78, #38a169);
+        border-radius: 4px;
+        transition: width 0.5s ease;
+      }
+
+      .progress-percent {
+        font-weight: 600;
+        color: #2d3748;
+        min-width: 40px;
+        text-align: right;
+      }
+
+      .week-actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .btn-sm {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+      }
+
+      .btn-primary {
+        background: #48bb78;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #38a169;
+        transform: translateY(-1px);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: #48bb78;
+        border: 1px solid #48bb78;
+      }
+
+      .btn-outline:hover {
+        background: #48bb78;
+        color: white;
+      }
+
+      .btn-warning {
+        background: #ed8936;
+        color: white;
+      }
+
+      .btn-warning:hover {
+        background: #dd6b20;
+      }
+
+      /* Comments Section */
+      .comments-section {
+        margin-top: 1.5rem;
+        border-top: 1px solid #e2e8f0;
+        padding-top: 1rem;
+      }
+
+      .comment {
+        background: #f7fafc;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .comment-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+      }
+
+      .comment-author {
+        font-weight: 600;
+        color: #2d3748;
+      }
+
+      .comment-date {
+        color: #718096;
+        font-size: 0.8rem;
+      }
+
+      .comment-text {
+        color: #4a5568;
+        line-height: 1.5;
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 15px;
+        width: 95%;
+        max-width: 1000px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 2rem;
+        box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .modal-title {
+        font-size: 1.5rem;
+        color: #2d3748;
+      }
+
+      .close-modal {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #718096;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #4a5568;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 1rem;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: #48bb78;
+      }
+
+      textarea.form-control {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .progress-slider {
+        width: 100%;
+        margin: 1rem 0;
+      }
+
+      .progress-value {
+        text-align: center;
+        font-weight: 700;
+        color: #48bb78;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+
+      .file-preview {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .file-item {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 1rem;
+        text-align: center;
+        background: #f7fafc;
+      }
+
+      .file-icon {
+        font-size: 2rem;
+        color: #4299e1;
+        margin-bottom: 0.5rem;
+      }
+
+      .file-name {
+        font-size: 0.9rem;
+        color: #4a5568;
+        word-break: break-word;
+      }
+
+      .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      /* Report Content in Modal */
+      .report-header {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-top: 5px solid #4caf50;
+      }
+
+      .report-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1976d2;
+        margin-bottom: 1rem;
+      }
+
+      .report-meta {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .meta-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem;
+        background: #f8f9fa;
+        border-radius: 10px;
+        border-left: 4px solid #2196f3;
+      }
+
+      .meta-label {
+        font-weight: 600;
+        color: #666;
+        font-size: 14px;
+      }
+
+      .meta-value {
+        color: #333;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .status-badge {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+
+      .topic-section {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e9ecef;
+      }
+
+      .topic-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .topic-content {
+        color: #666;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+
+      .topic-description {
+        color: #777;
+        font-size: 14px;
+        font-style: italic;
+        line-height: 1.5;
+      }
+
+      /* Work Details Section */
+      .work-details-section {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-left: 5px solid #ff9800;
+      }
+
+      .work-details-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .work-detail-item {
+        margin-bottom: 2rem;
+      }
+
+      .work-detail-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .work-detail-label {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .work-detail-content {
+        background: #f8f9fa;
+        padding: 1.25rem;
+        border-radius: 12px;
+        border-left: 4px solid #ff9800;
+        color: #555;
+        line-height: 1.6;
+      }
+
+      /* Files Section */
+      .files-section {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-left: 5px solid #9c27b0;
+      }
+
+      .files-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .file-category {
+        margin-bottom: 2rem;
+      }
+
+      .file-category:last-child {
+        margin-bottom: 0;
+      }
+
+      .file-category-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .file-list {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .file-item-modal {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        transition: all 0.3s ease;
+      }
+
+      .file-item-modal:hover {
+        background: #e3f2fd;
+        border-color: #2196f3;
+        transform: translateX(5px);
+      }
+
+      .file-icon-modal {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 16px;
+      }
+
+      .file-info {
+        flex: 1;
+      }
+
+      .file-name {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.25rem;
+      }
+
+      .file-size {
+        font-size: 12px;
+        color: #666;
+      }
+
+      .file-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .file-action {
+        padding: 0.25rem 0.5rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.2s ease;
+      }
+
+      .file-download {
+        background: #e3f2fd;
+        color: #1976d2;
+      }
+
+      .file-download:hover {
+        background: #1976d2;
+        color: white;
+      }
+
+      .file-view {
+        background: #f3e5f5;
+        color: #7b1fa2;
+      }
+
+      .file-view:hover {
+        background: #7b1fa2;
+        color: white;
+      }
+
+      /* Image Gallery */
+      .image-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .image-item {
+        background: #f8f9fa;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .image-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .image-thumbnail {
+        width: 100%;
+        height: 150px;
+        background: linear-gradient(45deg, #e1bee7, #f3e5f5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #7b1fa2;
+        font-size: 2rem;
+      }
+
+      .image-info {
+        padding: 1rem;
+      }
+
+      .image-name {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+        font-size: 14px;
+      }
+
+      .image-size {
+        font-size: 12px;
+        color: #666;
+      }
+
+      /* Comments Section */
+      .comments-section-modal {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .comments-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .comment-item {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+
+      .comment-item.advisor {
+        border-left: 4px solid #4caf50;
+      }
+
+      .comment-item.instructor {
+        border-left: 4px solid #2196f3;
+      }
+
+      .comment-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .comment-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
+
+      .comment-author-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .comment-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      .comment-avatar.advisor {
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+      }
+
+      .comment-avatar.instructor {
+        background: linear-gradient(135deg, #2196f3, #1976d2);
+      }
+
+      .author-details {
+        flex: 1;
+      }
+
+      .author-name {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.25rem;
+      }
+
+      .author-role {
+        font-size: 12px;
+        color: #666;
+        font-weight: 500;
+      }
+
+      .comment-date {
+        font-size: 14px;
+        color: #666;
+      }
+
+      .comment-text {
+        color: #555;
+        line-height: 1.6;
+        font-size: 15px;
+        margin-bottom: 1rem;
+      }
+
+      /* Progress Form Section */
+      .progress-form-section {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-top: 2rem;
+        border-left: 5px solid #48bb78;
+      }
+
+      .progress-form-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .header-content {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .project-status {
+          align-items: flex-start;
+        }
+
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .week-actions {
+          flex-direction: column;
+        }
+
+        .modal-content {
+          width: 95%;
+          padding: 1.5rem;
+        }
+
+        .report-meta {
+          grid-template-columns: 1fr;
+        }
+
+        .image-gallery {
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <div class="breadcrumb">
+          <a href="../teacher_main_dashboard.html"
+            ><i class="fas fa-home"></i> Dashboard</a
+          >
+          <i class="fas fa-chevron-right"></i>
+          <a href="../advisor-projects.html">อาจารย์ที่ปรึกษา</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>รายละเอียดโครงงาน</span>
+        </div>
+
+        <div class="header-content">
+          <div class="project-title">
+            <h1>แชทบอทตอบคำถามด้วย NLP</h1>
+            <div class="project-meta">
+              <div class="meta-item">
+                <i class="fas fa-calendar-start"></i>
+                <span>เริ่มโครงงาน: ส.ค. 2568</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-code"></i>
+                <span>เทคโนโลยี: NLP, Python</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-status">
+            <div class="status-badge status-active">
+              <i class="fas fa-play-circle"></i>
+              กำลังดำเนินการ
+            </div>
+            <div class="overall-progress">
+              <div class="progress-circle"></div>
+              <div class="progress-label">ความคืบหน้าโดยรวม</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Members -->
+      <div class="card">
+        <h2><i class="fas fa-users"></i> สมาชิกทีม</h2>
+        <div class="team-grid">
+          <div class="member-card">
+            <div class="member-avatar">น</div>
+            <div class="member-name">นวพร สมบูรณ์</div>
+            <div class="member-id">6502001</div>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar">ธ</div>
+            <div class="member-name">ธนภัทร ใจดี</div>
+            <div class="member-id">6502002</div>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar">ศ</div>
+            <div class="member-name">ศิริลักษณ์ มั่นคง</div>
+            <div class="member-id">6502003</div>
+          </div>
+        </div>
+      </div>
+
+
+          <!-- Week 4 - Completed -->
+          <div class="timeline-item completed">
+            <div class="timeline-dot"></div>
+            <div class="week-header">
+              <div class="week-title">
+                <i class="fas fa-check-circle"></i>
+                สัปดาห์ที่ 4: พัฒนาโมเดลพื้นฐาน NLP
+              </div>
+              <div class="week-status status-completed">
+                กำหนดความคืบหน้าสำเร็จ
+              </div>
+            </div>
+            <div class="week-description">
+              พัฒนาโมเดล NLP พื้นฐานสำหรับการประมวลผลภาษาธรรมชาติและการตอบคำถาม
+              <br /><strong>ส่งเมื่อ:</strong> 29 สิงหาคม 2568
+            </div>
+            <div class="week-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 50%"></div>
+              </div>
+              <div class="progress-percent">50%</div>
+            </div>
+            <div class="week-actions">
+              <button
+                class="btn btn-outline btn-sm"
+                onclick="openReportModal(4)"
+              >
+                <i class="fas fa-eye"></i>
+                ดูรายงาน
+              </button>
+            </div>
+            <!-- Comments Section for Week 4 -->
+            <div class="comments-section">
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)
+                  </div>
+                  <div class="comment-date">31 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  การพัฒนาโมเดล NLP พื้นฐานเป็นไปด้วยดี
+                  ควรพิจารณาเพิ่มความสามารถในการเข้าใจบริบทและการจัดการกับคำถามที่ซับซ้อนมากขึ้น
+                </div>
+              </div>
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)
+                  </div>
+                  <div class="comment-date">1 กันยายน 2568</div>
+                </div>
+                <div class="comment-text">
+                  โมเดลพื้นฐานทำงานได้ดี
+                  ควรเพิ่มการทดสอบกับชุดข้อมูลที่หลากหลายและพิจารณาการใช้เทคนิค
+                  deep learning เพื่อเพิ่มความแม่นยำ
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Week 3 - Completed -->
+          <div class="timeline-item completed">
+            <div class="timeline-dot"></div>
+            <div class="week-header">
+              <div class="week-title">
+                <i class="fas fa-check-circle"></i>
+                สัปดาห์ที่ 3: ออกแบบสถาปัตยกรรมระบบ
+              </div>
+              <div class="week-status status-completed">
+                กำหนดความคืบหน้าสำเร็จ
+              </div>
+            </div>
+            <div class="week-description">
+              ออกแบบสถาปัตยกรรมระบบแชทบอทและโครงสร้างโมเดล NLP
+            </div>
+            <div class="week-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 40%"></div>
+              </div>
+              <div class="progress-percent">40%</div>
+            </div>
+            <div class="week-actions">
+              <button
+                class="btn btn-outline btn-sm"
+                onclick="openReportModal(3)"
+              >
+                <i class="fas fa-eye"></i>
+                ดูรายงาน
+              </button>
+            </div>
+            <!-- Comments Section for Week 3 -->
+            <div class="comments-section">
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)
+                  </div>
+                  <div class="comment-date">24 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  การออกแบบสถาปัตยกรรมมีความเหมาะสม ควรพิจารณาการจัดการ state
+                  ของการสนทนาและความสามารถในการเรียนรู้จากบทสนทนาก่อนหน้า
+                </div>
+              </div>
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)
+                  </div>
+                  <div class="comment-date">25 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  การออกแบบโมเดล NLP คำนึงถึงประสิทธิภาพได้ดี
+                  ควรเพิ่มแผนสำหรับการปรับปรุงโมเดลอย่างต่อเนื่องตามข้อมูลที่ได้รับ
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Week 2 - Completed -->
+          <div class="timeline-item completed">
+            <div class="timeline-dot"></div>
+            <div class="week-header">
+              <div class="week-title">
+                <i class="fas fa-check-circle"></i>
+                สัปดาห์ที่ 2: ศึกษาเทคโนโลยี NLP
+              </div>
+              <div class="week-status status-completed">
+                กำหนดความคืบหน้าสำเร็จ
+              </div>
+            </div>
+            <div class="week-description">
+              ศึกษาเทคโนโลยี NLP, Python libraries และเครื่องมือที่เกี่ยวข้อง
+            </div>
+            <div class="week-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 30%"></div>
+              </div>
+              <div class="progress-percent">30%</div>
+            </div>
+            <div class="week-actions">
+              <button
+                class="btn btn-outline btn-sm"
+                onclick="openReportModal(2)"
+              >
+                <i class="fas fa-eye"></i>
+                ดูรายงาน
+              </button>
+            </div>
+            <!-- Comments Section for Week 2 -->
+            <div class="comments-section">
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)
+                  </div>
+                  <div class="comment-date">17 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  การศึกษาเทคโนโลยี NLP เป็นไปด้วยดี
+                  ควรเน้นไปที่เทคนิคที่เหมาะสมกับภาษาไทยและพิจารณาการใช้
+                  pre-trained models
+                </div>
+              </div>
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)
+                  </div>
+                  <div class="comment-date">18 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  การเปรียบเทียบเครื่องมือต่างๆ เป็นสิ่งที่ดี
+                  ควรบันทึกข้อดีข้อเสียของแต่ละเครื่องมือเพื่อใช้ในการตัดสินใจเลือกใช้
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Week 1 - Completed -->
+          <div class="timeline-item completed">
+            <div class="timeline-dot"></div>
+            <div class="week-header">
+              <div class="week-title">
+                <i class="fas fa-check-circle"></i>
+                สัปดาห์ที่ 1: กำหนดขอบเขตและวางแผนโครงงาน
+              </div>
+              <div class="week-status status-completed">
+                กำหนดความคืบหน้าสำเร็จ
+              </div>
+            </div>
+            <div class="week-description">
+              กำหนดขอบเขตของแชทบอทตอบคำถามและวางแผนการทำงานทั้งหมด
+            </div>
+            <div class="week-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 20%"></div>
+              </div>
+              <div class="progress-percent">20%</div>
+            </div>
+            <div class="week-actions">
+              <button
+                class="btn btn-outline btn-sm"
+                onclick="openReportModal(1)"
+              >
+                <i class="fas fa-eye"></i>
+                ดูรายงาน
+              </button>
+            </div>
+            <!-- Comments Section for Week 1 -->
+            <div class="comments-section">
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)
+                  </div>
+                  <div class="comment-date">11 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  การวางแผนมีความชัดเจนดี
+                  ควรระบุประเภทของคำถามที่แชทบอทจะสามารถตอบได้และขอบเขตความรู้ของระบบให้ชัดเจน
+                </div>
+              </div>
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)
+                  </div>
+                  <div class="comment-date">12 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  ขอบเขตโครงการมีความเหมาะสม
+                  ควรเพิ่มการวิเคราะห์ผู้ใช้และสถานการณ์การใช้งานเพื่อให้ระบบตอบโจทย์ความต้องการของผู้ใช้มากขึ้น
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Modal -->
+    <div class="modal" id="progressModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">
+            ให้ความคืบหน้า - สัปดาห์ที่ <span id="weekNumber"></span>
+          </h3>
+          <button class="close-modal" onclick="closeProgressModal()">
+            &times;
+          </button>
+        </div>
+
+        <!-- Report Content -->
+        <div id="reportContentSection">
+          <!-- Report Header -->
+          <div class="report-header">
+            <h1 class="report-title">
+              รายงานสัปดาห์ที่ <span id="reportWeekNumber">5</span>
+            </h1>
+            <div class="report-meta">
+              <div class="meta-item">
+                <span class="meta-label">ระยะเวลา</span>
+                <span class="meta-value" id="reportPeriod"
+                  >29 สิงหาคม - 5 กันยายน 2568</span
+                >
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">วันที่ส่ง</span>
+                <span class="meta-value" id="reportSubmitDate"
+                  >5 กันยายน 2568</span
+                >
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">สถานะ</span>
+                <span class="status-badge" id="reportStatus">ส่งแล้ว</span>
+              </div>
+            </div>
+
+            <!-- Topic Section -->
+            <div class="topic-section">
+              <div class="topic-title">
+                <i class="fas fa-lightbulb"></i>
+                หัวข้อการทำงานสัปดาห์นี้
+              </div>
+              <div class="topic-content" id="reportTopic">
+                พัฒนาโมเดล NLP ขั้นสูง
+              </div>
+              <div class="topic-description" id="reportTopicDescription">
+                พัฒนาโมเดล NLP สำหรับการเข้าใจบริบทและการตอบคำถามที่ซับซ้อน
+              </div>
+            </div>
+          </div>
+
+          <!-- Work Details Section -->
+          <div class="work-details-section">
+            <h2 class="work-details-title">
+              <i class="fas fa-tasks"></i>
+              รายละเอียดการทำงานในสัปดาห์นี้
+            </h2>
+
+            <div class="work-detail-item">
+              <div class="work-detail-label">
+                <i class="fas fa-check-circle"></i>
+                สิ่งที่ทำสำเร็จในสัปดาห์นี้
+              </div>
+              <div class="work-detail-content" id="reportCompletedWork">
+                ในสัปดาห์นี้ได้เริ่มพัฒนาโมเดล NLP
+                ขั้นสูงสำหรับการเข้าใจบริบทและการตอบคำถามที่ซับซ้อน
+                โดยได้ทดลองใช้เทคนิค deep learning และ attention mechanisms
+                เพื่อเพิ่มความสามารถในการเข้าใจความหมายของประโยคในบริบทที่กว้างขึ้น
+              </div>
+            </div>
+
+            <div class="work-detail-item">
+              <div class="work-detail-label">
+                <i class="fas fa-exclamation-triangle"></i>
+                ปัญหาและอุปสรรคที่พบ
+              </div>
+              <div class="work-detail-content" id="reportProblems">
+                พบปัญหาเรื่องความซับซ้อนของโมเดลที่ส่งผลต่อเวลาในการฝึกฝน
+                และปัญหาด้านความแม่นยำเมื่อเผชิญกับประโยคที่มีโครงสร้างซับซ้อน
+                กำลังพิจารณาการใช้ transfer learning และการเพิ่มข้อมูลฝึกฝน
+              </div>
+            </div>
+
+            <div class="work-detail-item">
+              <div class="work-detail-label">
+                <i class="fas fa-calendar-alt"></i>
+                แผนงานสำหรับสัปดาห์หน้า
+              </div>
+              <div class="work-detail-content" id="reportNextPlan">
+                สัปดาห์หน้าจะทำการทดสอบโมเดลกับชุดข้อมูลทดสอบและปรับปรุงประสิทธิภาพ
+                รวมถึงเริ่มพัฒนาส่วนติดต่อผู้ใช้สำหรับแชทบอท
+              </div>
+            </div>
+          </div>
+
+          <!-- Files Section -->
+          <div class="files-section">
+            <h2 class="files-title">
+              <i class="fas fa-folder-open"></i>
+              เอกสารและภาพประกอบ
+            </h2>
+
+            <!-- Documents -->
+            <div class="file-category">
+              <div class="file-category-title">
+                <i class="fas fa-file-alt"></i>
+                รูปเล่มและเอกสารประกอบ
+              </div>
+              <div class="file-list">
+                <div class="file-item-modal">
+                  <div class="file-icon-modal">
+                    <i class="fas fa-file-pdf"></i>
+                  </div>
+                  <div class="file-info">
+                    <div class="file-name">
+                      รายงานสัปดาห์ที่ 5 - Advanced NLP Model.pdf
+                    </div>
+                    <div class="file-size">1.8 MB</div>
+                  </div>
+                  <div class="file-actions">
+                    <button class="file-action file-download">
+                      <i class="fas fa-download"></i>
+                    </button>
+                    <button class="file-action file-view">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="file-item-modal">
+                  <div class="file-icon-modal">
+                    <i class="fas fa-file-code"></i>
+                  </div>
+                  <div class="file-info">
+                    <div class="file-name">NLP Model Implementation.py</div>
+                    <div class="file-size">68 KB</div>
+                  </div>
+                  <div class="file-actions">
+                    <button class="file-action file-download">
+                      <i class="fas fa-download"></i>
+                    </button>
+                    <button class="file-action file-view">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Images -->
+            <div class="file-category">
+              <div class="file-category-title">
+                <i class="fas fa-images"></i>
+                ภาพการทำงานในสัปดาห์นี้
+              </div>
+              <div class="image-gallery">
+                <div class="image-item">
+                  <div class="image-thumbnail">
+                    <i class="fas fa-image"></i>
+                  </div>
+                  <div class="image-info">
+                    <div class="image-name">model-architecture.png</div>
+                    <div class="image-size">912 KB</div>
+                  </div>
+                </div>
+
+                <div class="image-item">
+                  <div class="image-thumbnail">
+                    <i class="fas fa-image"></i>
+                  </div>
+                  <div class="image-info">
+                    <div class="image-name">training-results.jpg</div>
+                    <div class="image-size">1.2 MB</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress Form Section -->
+        <div class="progress-form-section">
+          <h3 class="progress-form-title">
+            <i class="fas fa-sliders-h"></i>
+            กำหนดความคืบหน้าและความคิดเห็น
+          </h3>
+
+          <form id="progressForm">
+            <input type="hidden" id="selectedWeek" name="week" />
+
+            <div class="form-group">
+              <label class="form-label">ความคืบหน้า (%)</label>
+              <div class="progress-value" id="progressDisplay">60%</div>
+              <input
+                type="range"
+                id="progressSlider"
+                class="progress-slider"
+                min="0"
+                max="100"
+                value="60"
+                step="5"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">ความคิดเห็น</label>
+              <textarea
+                id="comment"
+                class="form-control"
+                placeholder="กรอกความคิดเห็นเกี่ยวกับความคืบหน้าในสัปดาห์นี้..."
+              ></textarea>
+            </div>
+
+            <div class="modal-actions">
+              <button
+                type="button"
+                class="btn btn-outline"
+                onclick="closeProgressModal()"
+              >
+                ยกเลิก
+              </button>
+              <button type="submit" class="btn btn-primary">
+                บันทึกความคืบหน้า
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Report Modal -->
+    <div class="modal" id="reportModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">
+            ดูรายงาน - สัปดาห์ที่ <span id="reportModalWeekNumber">4</span>
+          </h3>
+          <button class="close-modal" onclick="closeReportModal()">
+            &times;
+          </button>
+        </div>
+
+        <!-- Report Content -->
+        <div id="reportModalContentSection">
+          <!-- Report Header -->
+          <div class="report-header">
+            <h1 class="report-title">
+              รายงานสัปดาห์ที่ <span id="reportModalWeekNumberTitle">4</span>
+            </h1>
+            <div class="report-meta">
+              <div class="meta-item">
+                <span class="meta-label">ระยะเวลา</span>
+                <span class="meta-value" id="reportModalPeriod"
+                  >22 - 29 สิงหาคม 2568</span
+                >
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">วันที่ส่ง</span>
+                <span class="meta-value" id="reportModalSubmitDate"
+                  >29 สิงหาคม 2568</span
+                >
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">สถานะ</span>
+                <span class="status-badge" id="reportModalStatus">ส่งแล้ว</span>
+              </div>
+            </div>
+
+            <!-- Topic Section -->
+            <div class="topic-section">
+              <div class="topic-title">
+                <i class="fas fa-lightbulb"></i>
+                หัวข้อการทำงานสัปดาห์นี้
+              </div>
+              <div class="topic-content" id="reportModalTopic">
+                พัฒนาโมเดลพื้นฐาน NLP
+              </div>
+              <div class="topic-description" id="reportModalTopicDescription">
+                พัฒนาโมเดล NLP
+                พื้นฐานสำหรับการประมวลผลภาษาธรรมชาติและการตอบคำถาม
+              </div>
+            </div>
+          </div>
+
+          <!-- Work Details Section -->
+          <div class="work-details-section">
+            <h2 class="work-details-title">
+              <i class="fas fa-tasks"></i>
+              รายละเอียดการทำงานในสัปดาห์นี้
+            </h2>
+
+            <div class="work-detail-item">
+              <div class="work-detail-label">
+                <i class="fas fa-check-circle"></i>
+                สิ่งที่ทำสำเร็จในสัปดาห์นี้
+              </div>
+              <div class="work-detail-content" id="reportModalCompletedWork">
+                ในสัปดาห์นี้ได้พัฒนาโมเดล NLP
+                พื้นฐานสำหรับการประมวลผลภาษาธรรมชาติสำเร็จ โดยใช้เทคนิค word
+                embedding และ sequence modeling
+                สำหรับการเข้าใจความหมายของประโยคและการตอบคำถามพื้นฐาน
+                โมเดลสามารถประมวลผลประโยคภาษาไทยและให้คำตอบที่เหมาะสมได้ในระดับที่น่าพอใจ
+              </div>
+            </div>
+
+            <div class="work-detail-item">
+              <div class="work-detail-label">
+                <i class="fas fa-exclamation-triangle"></i>
+                ปัญหาและอุปสรรคที่พบ
+              </div>
+              <div class="work-detail-content" id="reportModalProblems">
+                พบปัญหาเรื่องความแม่นยำเมื่อเผชิญกับประโยคที่มีความกำกวมหรือโครงสร้างไวยากรณ์ที่ซับซ้อน
+                และปัญหาด้านประสิทธิภาพเมื่อต้องประมวลผลประโยคยาวๆ
+                นอกจากนี้ยังพบว่าข้อมูลฝึกฝนภาษาไทยที่มีคุณภาพยังมีจำนวนจำกัด
+              </div>
+            </div>
+
+            <div class="work-detail-item">
+              <div class="work-detail-label">
+                <i class="fas fa-calendar-alt"></i>
+                แผนงานสำหรับสัปดาห์หน้า
+              </div>
+              <div class="work-detail-content" id="reportModalNextPlan">
+                สัปดาห์หน้าจะพัฒนาต่อยอดโมเดลให้มีความสามารถในการเข้าใจบริบทและการตอบคำถามที่ซับซ้อนมากขึ้น
+                โดยจะทดลองใช้เทคนิค deep learning
+                และเพิ่มข้อมูลฝึกฝนที่มีความหลากหลายมากขึ้น
+              </div>
+            </div>
+          </div>
+
+          <!-- Files Section -->
+          <div class="files-section">
+            <h2 class="files-title">
+              <i class="fas fa-folder-open"></i>
+              เอกสารและภาพประกอบ
+            </h2>
+
+            <!-- Documents -->
+            <div class="file-category">
+              <div class="file-category-title">
+                <i class="fas fa-file-alt"></i>
+                รูปเล่มและเอกสารประกอบ
+              </div>
+              <div class="file-list">
+                <div class="file-item-modal">
+                  <div class="file-icon-modal">
+                    <i class="fas fa-file-pdf"></i>
+                  </div>
+                  <div class="file-info">
+                    <div class="file-name">
+                      รายงานสัปดาห์ที่ 4 - NLP Model Development.pdf
+                    </div>
+                    <div class="file-size">2.1 MB</div>
+                  </div>
+                  <div class="file-actions">
+                    <button class="file-action file-download">
+                      <i class="fas fa-download"></i>
+                    </button>
+                    <button class="file-action file-view">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="file-item-modal">
+                  <div class="file-icon-modal">
+                    <i class="fas fa-file-word"></i>
+                  </div>
+                  <div class="file-info">
+                    <div class="file-name">Model Documentation.docx</div>
+                    <div class="file-size">1.5 MB</div>
+                  </div>
+                  <div class="file-actions">
+                    <button class="file-action file-download">
+                      <i class="fas fa-download"></i>
+                    </button>
+                    <button class="file-action file-view">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Images -->
+            <div class="file-category">
+              <div class="file-category-title">
+                <i class="fas fa-images"></i>
+                ภาพการทำงานในสัปดาห์นี้
+              </div>
+              <div class="image-gallery">
+                <div class="image-item">
+                  <div class="image-thumbnail">
+                    <i class="fas fa-image"></i>
+                  </div>
+                  <div class="image-info">
+                    <div class="image-name">model-performance.png</div>
+                    <div class="image-size">856 KB</div>
+                  </div>
+                </div>
+
+                <div class="image-item">
+                  <div class="image-thumbnail">
+                    <i class="fas fa-image"></i>
+                  </div>
+                  <div class="image-info">
+                    <div class="image-name">training-process.jpg</div>
+                    <div class="image-size">1.1 MB</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="comments-section-modal">
+            <h2 class="comments-title">
+              <i class="fas fa-comments"></i>
+              ความคิดเห็นจากอาจารย์
+            </h2>
+
+            <!-- Advisor Comment -->
+            <div class="comment-item advisor">
+              <div class="comment-header">
+                <div class="comment-author-info">
+                  <div class="comment-avatar advisor">อ</div>
+                  <div class="author-details">
+                    <div class="author-name">รศ.ดร.อนิราช มิ่งขวัญ</div>
+                    <div class="author-role">อาจารย์ที่ปรึกษา</div>
+                  </div>
+                </div>
+                <div class="comment-date">31 สิงหาคม 2568 | 14:30</div>
+              </div>
+              <p class="comment-text">
+                การพัฒนาโมเดล NLP พื้นฐานเป็นไปด้วยดี
+                ควรพิจารณาเพิ่มความสามารถในการเข้าใจบริบทและการจัดการกับคำถามที่ซับซ้อนมากขึ้น
+                การใช้ word embedding สำหรับภาษาไทยเป็นแนวทางที่ดี
+                แต่ควรทดสอบกับหลายๆ วิธีเพื่อหาวิธีที่เหมาะสมที่สุด
+              </p>
+            </div>
+
+            <!-- Instructor Comment -->
+            <div class="comment-item instructor">
+              <div class="comment-header">
+                <div class="comment-author-info">
+                  <div class="comment-avatar instructor">อ</div>
+                  <div class="author-details">
+                    <div class="author-name">ผศ.อรบุษป์ วุฒิกมลชัย</div>
+                    <div class="author-role">อาจารย์ประจำวิชา</div>
+                  </div>
+                </div>
+                <div class="comment-date">1 กันยายน 2568 | 09:15</div>
+              </div>
+              <p class="comment-text">
+                โมเดลพื้นฐานทำงานได้ดี
+                ควรเพิ่มการทดสอบกับชุดข้อมูลที่หลากหลายและพิจารณาการใช้เทคนิค
+                deep learning เพื่อเพิ่มความแม่นยำ
+                การจัดการกับข้อมูลภาษาไทยต้องคำนึงถึงความซับซ้อนของไวยากรณ์และบริบททางวัฒนธรรม
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Progress slider functionality
+      const progressSlider = document.getElementById("progressSlider");
+      const progressDisplay = document.getElementById("progressDisplay");
+
+      if (progressSlider) {
+        progressSlider.addEventListener("input", function () {
+          progressDisplay.textContent = this.value + "%";
+        });
+      }
+
+      // Modal functionality
+      function openProgressModal(weekNumber) {
+        document.getElementById("weekNumber").textContent = weekNumber;
+        document.getElementById("reportWeekNumber").textContent = weekNumber;
+        document.getElementById("selectedWeek").value = weekNumber;
+        document.getElementById("progressModal").style.display = "flex";
+
+        // Set report data based on week
+        setProgressReportData(weekNumber);
+
+        // Reset form values
+        document.getElementById("progressSlider").value = 60;
+        document.getElementById("progressDisplay").textContent = "60%";
+        document.getElementById("comment").value = "";
+
+        // Add event listeners for file actions
+        addFileEventListeners();
+      }
+
+      function closeProgressModal() {
+        document.getElementById("progressModal").style.display = "none";
+      }
+
+      function openReportModal(weekNumber) {
+        document.getElementById("reportModalWeekNumber").textContent =
+          weekNumber;
+        document.getElementById("reportModalWeekNumberTitle").textContent =
+          weekNumber;
+        document.getElementById("reportModal").style.display = "flex";
+
+        // Set report data based on week
+        setReportModalData(weekNumber);
+
+        // Add event listeners for file actions
+        addFileEventListeners();
+      }
+
+      function closeReportModal() {
+        document.getElementById("reportModal").style.display = "none";
+      }
+
+      // Set report data for progress modal
+      function setProgressReportData(weekNumber) {
+        const reportData = {
+          5: {
+            period: "29 สิงหาคม - 5 กันยายน 2568",
+            submitDate: "5 กันยายน 2568",
+            topic: "พัฒนาโมเดล NLP ขั้นสูง",
+            topicDescription:
+              "พัฒนาโมเดล NLP สำหรับการเข้าใจบริบทและการตอบคำถามที่ซับซ้อน",
+            completedWork:
+              "ในสัปดาห์นี้ได้เริ่มพัฒนาโมเดล NLP ขั้นสูงสำหรับการเข้าใจบริบทและการตอบคำถามที่ซับซ้อน โดยได้ทดลองใช้เทคนิค deep learning และ attention mechanisms เพื่อเพิ่มความสามารถในการเข้าใจความหมายของประโยคในบริบทที่กว้างขึ้น",
+            problems:
+              "พบปัญหาเรื่องความซับซ้อนของโมเดลที่ส่งผลต่อเวลาในการฝึกฝน และปัญหาด้านความแม่นยำเมื่อเผชิญกับประโยคที่มีโครงสร้างซับซ้อน กำลังพิจารณาการใช้ transfer learning และการเพิ่มข้อมูลฝึกฝน",
+            nextPlan:
+              "สัปดาห์หน้าจะทำการทดสอบโมเดลกับชุดข้อมูลทดสอบและปรับปรุงประสิทธิภาพ รวมถึงเริ่มพัฒนาส่วนติดต่อผู้ใช้สำหรับแชทบอท",
+          },
+        };
+
+        const data = reportData[weekNumber] || reportData[5];
+
+        document.getElementById("reportPeriod").textContent = data.period;
+        document.getElementById("reportSubmitDate").textContent =
+          data.submitDate;
+        document.getElementById("reportTopic").textContent = data.topic;
+        document.getElementById("reportTopicDescription").textContent =
+          data.topicDescription;
+        document.getElementById("reportCompletedWork").textContent =
+          data.completedWork;
+        document.getElementById("reportProblems").textContent = data.problems;
+        document.getElementById("reportNextPlan").textContent = data.nextPlan;
+      }
+
+      // Set report data for report modal
+      function setReportModalData(weekNumber) {
+        const reportData = {
+          1: {
+            period: "1 - 8 สิงหาคม 2568",
+            submitDate: "8 สิงหาคม 2568",
+            topic: "กำหนดขอบเขตและวางแผนโครงงาน",
+            topicDescription:
+              "กำหนดขอบเขตของแชทบอทตอบคำถามและวางแผนการทำงานทั้งหมด",
+            completedWork:
+              "ในสัปดาห์นี้ได้กำหนดขอบเขตของแชทบอทตอบคำถามและวางแผนการทำงานทั้งหมดอย่างละเอียด รวมถึงการกำหนดประเภทของคำถามที่แชทบอทจะสามารถตอบได้และขอบเขตความรู้ของระบบ",
+            problems: "ยังไม่พบปัญหาที่สำคัญในขั้นตอนการวางแผน",
+            nextPlan:
+              "สัปดาห์หน้าจะเริ่มศึกษาข้อมูลเทคโนโลยีที่เกี่ยวข้องกับโครงงาน",
+          },
+          2: {
+            period: "8 - 15 สิงหาคม 2568",
+            submitDate: "15 สิงหาคม 2568",
+            topic: "ศึกษาเทคโนโลยี NLP",
+            topicDescription:
+              "ศึกษาเทคโนโลยี NLP, Python libraries และเครื่องมือที่เกี่ยวข้อง",
+            completedWork:
+              "ในสัปดาห์นี้ได้ศึกษาเทคโนโลยี NLP อย่างละเอียด รวมถึง Python libraries ต่างๆ ที่เกี่ยวข้องกับการประมวลผลภาษาธรรมชาติ เช่น NLTK, spaCy, Transformers และการเปรียบเทียบข้อดีข้อเสียของแต่ละเครื่องมือ",
+            problems:
+              "พบว่ามีเครื่องมือและเทคนิคให้เลือกมากมาย ทำให้ต้องใช้เวลาในการศึกษาและเปรียบเทียบอย่างละเอียดเพื่อเลือกใช้เทคโนโลยีที่เหมาะสมที่สุด",
+            nextPlan:
+              "สัปดาห์หน้าจะเริ่มออกแบบสถาปัตยกรรมระบบและโครงสร้างโมเดล NLP",
+          },
+          3: {
+            period: "15 - 22 สิงหาคม 2568",
+            submitDate: "22 สิงหาคม 2568",
+            topic: "ออกแบบสถาปัตยกรรมระบบ",
+            topicDescription:
+              "ออกแบบสถาปัตยกรรมระบบแชทบอทและโครงสร้างโมเดล NLP",
+            completedWork:
+              "ในสัปดาห์นี้ได้ออกแบบสถาปัตยกรรมระบบแชทบอทและโครงสร้างโมเดล NLP สำเร็จ โดยออกแบบ pipeline การประมวลผลตั้งแต่การรับข้อความ การประมวลผลภาษา การค้นหาคำตอบ และการสร้างคำตอบกลับให้ผู้ใช้",
+            problems:
+              "พบปัญหาในการออกแบบระบบที่รองรับการจัดการ state ของการสนทนาและการเข้าใจบริบทจากบทสนทนาก่อนหน้า ได้แก้ไขโดยการออกแบบ memory mechanism สำหรับเก็บประวัติการสนทนา",
+            nextPlan:
+              "สัปดาห์หน้าจะเริ่มพัฒนาโมเดล NLP พื้นฐานสำหรับการประมวลผลภาษาธรรมชาติ",
+          },
+          4: {
+            period: "22 - 29 สิงหาคม 2568",
+            submitDate: "29 สิงหาคม 2568",
+            topic: "พัฒนาโมเดลพื้นฐาน NLP",
+            topicDescription:
+              "พัฒนาโมเดล NLP พื้นฐานสำหรับการประมวลผลภาษาธรรมชาติและการตอบคำถาม",
+            completedWork:
+              "ในสัปดาห์นี้ได้พัฒนาโมเดล NLP พื้นฐานสำหรับการประมวลผลภาษาธรรมชาติสำเร็จ โดยใช้เทคนิค word embedding และ sequence modeling สำหรับการเข้าใจความหมายของประโยคและการตอบคำถามพื้นฐาน โมเดลสามารถประมวลผลประโยคภาษาไทยและให้คำตอบที่เหมาะสมได้ในระดับที่น่าพอใจ",
+            problems:
+              "พบปัญหาเรื่องความแม่นยำเมื่อเผชิญกับประโยคที่มีความกำกวมหรือโครงสร้างไวยากรณ์ที่ซับซ้อน และปัญหาด้านประสิทธิภาพเมื่อต้องประมวลผลประโยคยาวๆ นอกจากนี้ยังพบว่าข้อมูลฝึกฝนภาษาไทยที่มีคุณภาพยังมีจำนวนจำกัด",
+            nextPlan:
+              "สัปดาห์หน้าจะพัฒนาต่อยอดโมเดลให้มีความสามารถในการเข้าใจบริบทและการตอบคำถามที่ซับซ้อนมากขึ้น โดยจะทดลองใช้เทคนิค deep learning และเพิ่มข้อมูลฝึกฝนที่มีความหลากหลายมากขึ้น",
+          },
+        };
+
+        const data = reportData[weekNumber] || reportData[4];
+
+        document.getElementById("reportModalPeriod").textContent = data.period;
+        document.getElementById("reportModalSubmitDate").textContent =
+          data.submitDate;
+        document.getElementById("reportModalTopic").textContent = data.topic;
+        document.getElementById("reportModalTopicDescription").textContent =
+          data.topicDescription;
+        document.getElementById("reportModalCompletedWork").textContent =
+          data.completedWork;
+        document.getElementById("reportModalProblems").textContent =
+          data.problems;
+        document.getElementById("reportModalNextPlan").textContent =
+          data.nextPlan;
+      }
+
+      // Add event listeners for file actions
+      function addFileEventListeners() {
+        document.querySelectorAll(".file-download").forEach((btn) => {
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            const fileName =
+              this.closest(".file-item-modal").querySelector(
+                ".file-name"
+              ).textContent;
+            showNotification(`กำลังดาวน์โหลด: ${fileName}`, "info");
+          });
+        });
+
+        document.querySelectorAll(".file-view").forEach((btn) => {
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            const fileName =
+              this.closest(".file-item-modal").querySelector(
+                ".file-name"
+              ).textContent;
+            showNotification(`กำลังเปิดดู: ${fileName}`, "info");
+          });
+        });
+
+        // Add click handlers for images
+        document.querySelectorAll(".image-item").forEach((item) => {
+          item.addEventListener("click", function () {
+            const imageName = this.querySelector(".image-name").textContent;
+            showImageModal(imageName);
+          });
+        });
+      }
+
+      // Form submission for setting progress
+      document
+        .getElementById("progressForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const weekNumber = document.getElementById("selectedWeek").value;
+          const progressValue = document.getElementById("progressSlider").value;
+          const comment = document.getElementById("comment").value;
+
+          if (!comment.trim()) {
+            alert("กรุณากรอกความคิดเห็น");
+            return;
+          }
+
+          // In a real application, you would send this data to the server
+          console.log(
+            `บันทึกความคืบหน้าสำหรับสัปดาห์ที่ ${weekNumber}: ${progressValue}%`
+          );
+          console.log(`ความคิดเห็น: ${comment}`);
+
+          // Simulate successful submission
+          alert(
+            `บันทึกความคืบหน้าสำหรับสัปดาห์ที่ ${weekNumber} เรียบร้อยแล้ว!`
+          );
+
+          // Close modal
+          closeProgressModal();
+
+          // Update the timeline item
+          updateTimelineItem(weekNumber, progressValue, comment);
+        });
+
+      // Update timeline item after submission
+      function updateTimelineItem(weekNumber, progressValue, comment) {
+        // Find the timeline item for the specified week
+        const timelineItems = document.querySelectorAll(".timeline-item");
+        let targetItem = null;
+
+        for (let item of timelineItems) {
+          if (
+            item
+              .querySelector(".week-title")
+              .textContent.includes(`สัปดาห์ที่ ${weekNumber}`)
+          ) {
+            targetItem = item;
+            break;
+          }
+        }
+
+        if (targetItem) {
+          // Remove delayed class and add completed class
+          targetItem.classList.remove("delayed");
+          targetItem.classList.add("completed");
+
+          // Update status
+          const statusElement = targetItem.querySelector(".week-status");
+          if (statusElement) {
+            statusElement.textContent = "กำหนดความคืบหน้าสำเร็จ";
+            statusElement.className = "week-status status-completed";
+          }
+
+          // Update progress bar
+          const progressFill = targetItem.querySelector(".progress-fill");
+          const progressPercent = targetItem.querySelector(".progress-percent");
+          if (progressFill && progressPercent) {
+            progressFill.style.width = `${progressValue}%`;
+            progressPercent.textContent = `${progressValue}%`;
+          }
+
+          // Update actions - เปลี่ยนเป็นปุ่ม "ดูรายงาน" เท่านั้น
+          const actionsContainer = targetItem.querySelector(".week-actions");
+          if (actionsContainer) {
+            actionsContainer.innerHTML = `
+                    <button class="btn btn-outline btn-sm" onclick="openReportModal(${weekNumber})">
+                        <i class="fas fa-eye"></i>
+                        ดูรายงาน
+                    </button>
+                `;
+          }
+
+          // Update timeline dot
+          const timelineDot = targetItem.querySelector(".timeline-dot");
+          if (timelineDot) {
+            timelineDot.style.background = "#4299e1";
+          }
+
+          // Add comment
+          let commentsSection = targetItem.querySelector(".comments-section");
+          if (!commentsSection) {
+            commentsSection = document.createElement("div");
+            commentsSection.className = "comments-section";
+            targetItem.appendChild(commentsSection);
+          }
+
+          const newComment = document.createElement("div");
+          newComment.className = "comment";
+          newComment.innerHTML = `
+                <div class="comment-header">
+                    <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
+                    <div class="comment-date">${new Date().toLocaleDateString(
+                      "th-TH"
+                    )}</div>
+                </div>
+                <div class="comment-text">
+                    ${comment}
+                </div>
+            `;
+
+          commentsSection.appendChild(newComment);
+
+          // Update progress circle with the latest progress value
+          updateProgressCircle(progressValue);
+        }
+      }
+
+      // Update progress circle with the latest progress value
+      function updateProgressCircle(percentage) {
+        const circle = document.querySelector(".progress-circle");
+        const degrees = (percentage / 100) * 360;
+        circle.style.background = `conic-gradient(#48bb78 0deg, #48bb78 ${degrees}deg, #e2e8f0 ${degrees}deg)`;
+
+        // Update the text content
+        circle.style.setProperty("--progress-text", `"${percentage}%"`);
+      }
+
+      // Close modal when clicking outside
+      window.addEventListener("click", function (e) {
+        const progressModal = document.getElementById("progressModal");
+        const reportModal = document.getElementById("reportModal");
+
+        if (e.target === progressModal) {
+          closeProgressModal();
+        }
+        if (e.target === reportModal) {
+          closeReportModal();
+        }
+      });
+
+      // Initialize progress circle with the latest progress (50% for week 4)
+      document.addEventListener("DOMContentLoaded", function () {
+        updateProgressCircle(50);
+
+        // Add CSS rule for progress circle text
+        const style = document.createElement("style");
+        style.textContent = `
+            .progress-circle::before {
+                content: var(--progress-text, "50%");
+            }
+        `;
+        document.head.appendChild(style);
+      });
+
+      // Notification function
+      function showNotification(message, type = "success") {
+        // Create notification element
+        const notification = document.createElement("div");
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${type === "success" ? "#4caf50" : "#2196f3"};
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        `;
+        notification.textContent = message;
+
+        document.body.appendChild(notification);
+
+        // Show notification
+        setTimeout(() => {
+          notification.style.transform = "translateX(0)";
+        }, 100);
+
+        // Hide notification after 3 seconds
+        setTimeout(() => {
+          notification.style.transform = "translateX(400px)";
+          setTimeout(() => {
+            document.body.removeChild(notification);
+          }, 300);
+        }, 3000);
+      }
+
+      // Image modal function
+      function showImageModal(imageName) {
+        // Create modal overlay
+        const modal = document.createElement("div");
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        `;
+
+        const modalContent = document.createElement("div");
+        modalContent.style.cssText = `
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 80%;
+            max-height: 80%;
+            text-align: center;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+        `;
+
+        modalContent.innerHTML = `
+            <div style="font-size: 4rem; color: #9c27b0; margin-bottom: 1rem;">
+                <i class="fas fa-image"></i>
+            </div>
+            <h3 style="margin-bottom: 1rem; color: #333;">${imageName}</h3>
+            <p style="color: #666; margin-bottom: 2rem;">ตัวอย่างการแสดงภาพ</p>
+            <button onclick="this.closest('.modal-overlay').remove()" 
+                    style="background: #2196f3; color: white; border: none; padding: 0.75rem 1.5rem; 
+                           border-radius: 6px; cursor: pointer;">
+                <i class="fas fa-times"></i> ปิด
+            </button>
+        `;
+
+        modal.appendChild(modalContent);
+        modal.className = "modal-overlay";
+        document.body.appendChild(modal);
+
+        // Show modal with animation
+        setTimeout(() => {
+          modal.style.opacity = "1";
+          modalContent.style.transform = "scale(1)";
+        }, 100);
+
+        // Close modal when clicking overlay
+        modal.addEventListener("click", function (e) {
+          if (e.target === modal) {
+            modal.remove();
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
