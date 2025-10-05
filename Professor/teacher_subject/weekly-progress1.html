@@ -132,7 +132,7 @@
         }
 
         .progress-circle::before {
-            content: '50%';
+            content: '60%';
             width: 60px;
             height: 60px;
             background: white;
@@ -1100,9 +1100,9 @@
                     </div>
                     <div class="week-progress">
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
+                            <div class="progress-fill" style="width: 60%"></div>
                         </div>
-                        <div class="progress-percent">0%</div>
+                        <div class="progress-percent">60%</div>
                     </div>
                     <div class="week-actions">
                         <button class="btn btn-primary btn-sm" onclick="openProgressModal(6)">
@@ -2098,7 +2098,7 @@
             const style = document.createElement('style');
             style.textContent = `
                 .progress-circle::before {
-                    content: var(--progress-text, "50%");
+                    content: var(--progress-text, "60%");
                 }
             `;
             document.head.appendChild(style);
