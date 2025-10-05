@@ -665,7 +665,7 @@
               gap: 12px;
             "
           >
-            <span class="user-name">Thanaboon Imcharoen</span>
+            <span class="user-name">ธนบูลย์ อิ่มเจริญ</span>
             <div class="user-avatar">T</div>
           </a>
         </div>
@@ -678,18 +678,13 @@
           <div class="status-icon">🎓</div>
           <h2 class="status-title">การสอบสิ้นสุดผ่านวิชาโครงงาน</h2>
           <p class="status-subtitle">
-            ขอแสดงความยินดี! คุณได้สำเร็จการศึกษาวิชาโครงงานเรียบร้อยแล้ว
+            ขอแสดงความยินดี คุณผ่านวิชาโครงงานเรียบร้อยแล้ว
           </p>
-          
-          <div class="status-badge completed" id="currentStatus">
-            สำเร็จการศึกษาเรียบร้อย
-          </div>
 
           <div class="completion-section">
-            <h3 class="completion-title">ยินดีด้วยกับการสำเร็จการศึกษา!</h3>
+            <h3 class="completion-title">ยินดีด้วยกับการสำเร็จการวิชาโครงงานพิเศษ</h3>
             <p class="completion-content">
               คุณได้ผ่านการประเมินโครงงานและกรรมการได้ลงนามครบถ้วนแล้ว
-              นี่เป็นความสำเร็จที่ยอดเยี่ยมและเป็นจุดเริ่มต้นของเส้นทางอาชีพของคุณ
             </p>
           </div>
 
@@ -746,6 +741,13 @@
                 </div>
                 <div class="signature-status-badge status-signed">ลงนามแล้ว</div>
               </div>
+              <div class="committee-member">
+                <div class="member-info">
+                  <div class="member-name">ดร. สุภาพ เทคโนโลยี</div>
+                  <div class="member-role">กรรมการ</div>
+                </div>
+                <div class="signature-status-badge status-signed">ลงนามแล้ว</div>
+              </div>
             </div>
           </div>
 
@@ -759,12 +761,12 @@
 
             <div class="info-row">
               <div class="info-label">วันที่สอบ:</div>
-              <div class="info-value">15 มีนาคม 2567</div>
+              <div class="info-value">15 มีนาคม 2568</div>
             </div>
 
             <div class="info-row">
               <div class="info-label">วันที่ลงนามเสร็จสิ้น:</div>
-              <div class="info-value">20 มีนาคม 2567</div>
+              <div class="info-value">20 มีนาคม 2568</div>
             </div>
 
             <div class="info-row">
@@ -800,32 +802,7 @@
 
      
 
-      // เอฟเฟกต์ confetti สำหรับการเฉลิมฉลอง
-      function createConfetti() {
-        const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50'];
-        
-        for (let i = 0; i < 50; i++) {
-          const confetti = document.createElement('div');
-          confetti.className = 'confetti';
-          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-          confetti.style.left = Math.random() * 100 + 'vw';
-          confetti.style.animation = `confetti ${Math.random() * 3 + 2}s linear forwards`;
-          confetti.style.width = Math.random() * 10 + 5 + 'px';
-          confetti.style.height = Math.random() * 10 + 5 + 'px';
-          document.body.appendChild(confetti);
-          
-          setTimeout(() => {
-            confetti.remove();
-          }, 5000);
-        }
-      }
-
-      // เรียก confetti เมื่อโหลดหน้าเว็บ
-      window.onload = function() {
-        createConfetti();
-        // เรียก confetti ซ้ำทุก 3 วินาที
-        setInterval(createConfetti, 3000);
-      };
+     
     </script>
   </body>
 </html>

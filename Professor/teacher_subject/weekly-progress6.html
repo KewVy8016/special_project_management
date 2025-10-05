@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>รายละเอียดโครงงาน - อาจารย์ที่ปรึกษา</title>
+    <title>รายละเอียดโครงงาน - อาจารย์ประจำวิชา</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -1039,7 +1039,7 @@
             ><i class="fas fa-home"></i> Dashboard</a
           >
           <i class="fas fa-chevron-right"></i>
-          <a href="../advisor-projects.html">อาจารย์ที่ปรึกษา</a>
+          <a href="../teacher_subject.html">อาจารย์ประจำวิชา</a>
           <i class="fas fa-chevron-right"></i>
           <span>รายละเอียดโครงงาน</span>
         </div>
@@ -1128,8 +1128,15 @@
                 <i class="fas fa-eye"></i>
                 ดูรายงาน
               </button>
+              <button
+                class="btn btn-primary btn-sm"
+                onclick="openCommentModal(5)"
+              >
+                <i class="fas fa-comment"></i>
+                ให้ความเห็น
+              </button>
             </div>
-            <!-- Comments Section for Week 5 -->
+            <!-- Comments Section for Week 5 - อาจารย์ที่ปรึกษาแสดงความเห็นก่อน -->
             <div class="comments-section">
               <div class="comment">
                 <div class="comment-header">
@@ -1144,6 +1151,7 @@
                   ควรทดสอบโมเดลกับชุดข้อมูลที่หลากหลายมากขึ้น
                 </div>
               </div>
+              <!-- ความเห็นจากอาจารย์ประจำวิชาจะแสดงที่นี่หลังจากให้ความเห็น -->
             </div>
           </div>
 
@@ -1178,8 +1186,20 @@
                 ดูรายงาน
               </button>
             </div>
-            <!-- Comments Section for Week 4 -->
+            <!-- Comments Section for Week 4 - อาจารย์ที่ปรึกษาแสดงความเห็นก่อน -->
             <div class="comments-section">
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)
+                  </div>
+                  <div class="comment-date">31 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  การพัฒนาโมเดล NLP พื้นฐานเป็นไปด้วยดี
+                  ควรพิจารณาเพิ่มความสามารถในการเข้าใจบริบทและการจัดการกับคำถามที่ซับซ้อนมากขึ้น
+                </div>
+              </div>
               <div class="comment">
                 <div class="comment-header">
                   <div class="comment-author">
@@ -1191,18 +1211,6 @@
                   โมเดลพื้นฐานทำงานได้ดี
                   ควรเพิ่มการทดสอบกับชุดข้อมูลที่หลากหลายและพิจารณาการใช้เทคนิค
                   deep learning เพื่อเพิ่มความแม่นยำ
-                </div>
-              </div>
-              <div class="comment">
-                <div class="comment-header">
-                  <div class="comment-author">
-                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)
-                  </div>
-                  <div class="comment-date">31 สิงหาคม 2568</div>
-                </div>
-                <div class="comment-text">
-                  การพัฒนาโมเดล NLP พื้นฐานเป็นไปด้วยดี
-                  ควรพิจารณาเพิ่มความสามารถในการเข้าใจบริบทและการจัดการกับคำถามที่ซับซ้อนมากขึ้น
                 </div>
               </div>
             </div>
@@ -1238,20 +1246,8 @@
                 ดูรายงาน
               </button>
             </div>
-            <!-- Comments Section for Week 3 -->
+            <!-- Comments Section for Week 3 - อาจารย์ที่ปรึกษาแสดงความเห็นก่อน -->
             <div class="comments-section">
-              <div class="comment">
-                <div class="comment-header">
-                  <div class="comment-author">
-                    อ.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)
-                  </div>
-                  <div class="comment-date">25 สิงหาคม 2568</div>
-                </div>
-                <div class="comment-text">
-                  การออกแบบโมเดล NLP คำนึงถึงประสิทธิภาพได้ดี
-                  ควรเพิ่มแผนสำหรับการปรับปรุงโมเดลอย่างต่อเนื่องตามข้อมูลที่ได้รับ
-                </div>
-              </div>
               <div class="comment">
                 <div class="comment-header">
                   <div class="comment-author">
@@ -1262,6 +1258,18 @@
                 <div class="comment-text">
                   การออกแบบสถาปัตยกรรมมีความเหมาะสม ควรพิจารณาการจัดการ state
                   ของการสนทนาและความสามารถในการเรียนรู้จากบทสนทนาก่อนหน้า
+                </div>
+              </div>
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    อ.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)
+                  </div>
+                  <div class="comment-date">25 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  การออกแบบโมเดล NLP คำนึงถึงประสิทธิภาพได้ดี
+                  ควรเพิ่มแผนสำหรับการปรับปรุงโมเดลอย่างต่อเนื่องตามข้อมูลที่ได้รับ
                 </div>
               </div>
             </div>
@@ -1297,20 +1305,8 @@
                 ดูรายงาน
               </button>
             </div>
-            <!-- Comments Section for Week 2 -->
+            <!-- Comments Section for Week 2 - อาจารย์ที่ปรึกษาแสดงความเห็นก่อน -->
             <div class="comments-section">
-              <div class="comment">
-                <div class="comment-header">
-                  <div class="comment-author">
-                    อ.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)
-                  </div>
-                  <div class="comment-date">18 สิงหาคม 2568</div>
-                </div>
-                <div class="comment-text">
-                  การเปรียบเทียบเครื่องมือต่างๆ เป็นสิ่งที่ดี
-                  ควรบันทึกข้อดีข้อเสียของแต่ละเครื่องมือเพื่อใช้ในการตัดสินใจเลือกใช้
-                </div>
-              </div>
               <div class="comment">
                 <div class="comment-header">
                   <div class="comment-author">
@@ -1322,6 +1318,18 @@
                   การศึกษาเทคโนโลยี NLP เป็นไปด้วยดี
                   ควรเน้นไปที่เทคนิคที่เหมาะสมกับภาษาไทยและพิจารณาการใช้
                   pre-trained models
+                </div>
+              </div>
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    อ.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)
+                  </div>
+                  <div class="comment-date">18 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  การเปรียบเทียบเครื่องมือต่างๆ เป็นสิ่งที่ดี
+                  ควรบันทึกข้อดีข้อเสียของแต่ละเครื่องมือเพื่อใช้ในการตัดสินใจเลือกใช้
                 </div>
               </div>
             </div>
@@ -1357,20 +1365,8 @@
                 ดูรายงาน
               </button>
             </div>
-            <!-- Comments Section for Week 1 -->
+            <!-- Comments Section for Week 1 - อาจารย์ที่ปรึกษาแสดงความเห็นก่อน -->
             <div class="comments-section">
-              <div class="comment">
-                <div class="comment-header">
-                  <div class="comment-author">
-                    อ.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)
-                  </div>
-                  <div class="comment-date">12 สิงหาคม 2568</div>
-                </div>
-                <div class="comment-text">
-                  ขอบเขตโครงการมีความเหมาะสม
-                  ควรเพิ่มการวิเคราะห์ผู้ใช้และสถานการณ์การใช้งานเพื่อให้ระบบตอบโจทย์ความต้องการของผู้ใช้มากขึ้น
-                </div>
-              </div>
               <div class="comment">
                 <div class="comment-header">
                   <div class="comment-author">
@@ -1381,6 +1377,18 @@
                 <div class="comment-text">
                   การวางแผนมีความชัดเจนดี
                   ควรระบุประเภทของคำถามที่แชทบอทจะสามารถตอบได้และขอบเขตความรู้ของระบบให้ชัดเจน
+                </div>
+              </div>
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    อ.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)
+                  </div>
+                  <div class="comment-date">12 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  ขอบเขตโครงการมีความเหมาะสม
+                  ควรเพิ่มการวิเคราะห์ผู้ใช้และสถานการณ์การใช้งานเพื่อให้ระบบตอบโจทย์ความต้องการของผู้ใช้มากขึ้น
                 </div>
               </div>
             </div>
@@ -1569,13 +1577,42 @@
               </div>
             </div>
           </div>
+
+          <!-- Comments Section in Modal - แสดงความเห็นจากอาจารย์ที่ปรึกษาก่อน -->
+          <div class="comments-section-modal">
+            <h2 class="comments-title">
+              <i class="fas fa-comments"></i>
+              ความคิดเห็นจากอาจารย์
+            </h2>
+
+            <!-- Advisor Comment -->
+            <div class="comment-item advisor">
+              <div class="comment-header">
+                <div class="comment-author-info">
+                  <div class="comment-avatar advisor">อ</div>
+                  <div class="author-details">
+                    <div class="author-name">ผศ.อรบุษป์ วุฒิกมลชัย</div>
+                    <div class="author-role">อาจารย์ที่ปรึกษา</div>
+                  </div>
+                </div>
+                <div class="comment-date">6 กันยายน 2568 | 10:30</div>
+              </div>
+              <p class="comment-text">
+                การพัฒนาโมเดล NLP ขั้นสูงเป็นไปด้วยดี
+                การใช้ attention mechanisms ช่วยเพิ่มความสามารถในการเข้าใจบริบทได้ดี
+                ควรทดสอบโมเดลกับชุดข้อมูลที่หลากหลายมากขึ้น
+              </p>
+            </div>
+
+            <!-- Instructor Comment จะแสดงที่นี่หลังจากให้ความเห็น -->
+          </div>
         </div>
 
         <!-- Comment Form Section -->
         <div class="progress-form-section">
           <h3 class="progress-form-title">
             <i class="fas fa-comment"></i>
-            ให้ความเห็น
+            ให้ความเห็น (อาจารย์ประจำวิชา)
           </h3>
 
           <form id="commentForm">
@@ -1791,32 +1828,12 @@
             </div>
           </div>
 
-          <!-- Comments Section -->
+          <!-- Comments Section in Report Modal - อาจารย์ที่ปรึกษาแสดงความเห็นก่อน -->
           <div class="comments-section-modal">
             <h2 class="comments-title">
               <i class="fas fa-comments"></i>
               ความคิดเห็นจากอาจารย์
             </h2>
-
-            <!-- Instructor Comment -->
-            <div class="comment-item instructor">
-              <div class="comment-header">
-                <div class="comment-author-info">
-                  <div class="comment-avatar instructor">อ</div>
-                  <div class="author-details">
-                    <div class="author-name">อ.อนิราช มิ่งขวัญ</div>
-                    <div class="author-role">อาจารย์ประจำวิชา</div>
-                  </div>
-                </div>
-                <div class="comment-date">1 กันยายน 2568 | 09:15</div>
-              </div>
-              <p class="comment-text">
-                โมเดลพื้นฐานทำงานได้ดี
-                ควรเพิ่มการทดสอบกับชุดข้อมูลที่หลากหลายและพิจารณาการใช้เทคนิค
-                deep learning เพื่อเพิ่มความแม่นยำ
-                การจัดการกับข้อมูลภาษาไทยต้องคำนึงถึงความซับซ้อนของไวยากรณ์และบริบททางวัฒนธรรม
-              </p>
-            </div>
 
             <!-- Advisor Comment -->
             <div class="comment-item advisor">
@@ -1835,6 +1852,26 @@
                 ควรพิจารณาเพิ่มความสามารถในการเข้าใจบริบทและการจัดการกับคำถามที่ซับซ้อนมากขึ้น
                 การใช้ word embedding สำหรับภาษาไทยเป็นแนวทางที่ดี
                 แต่ควรทดสอบกับหลายๆ วิธีเพื่อหาวิธีที่เหมาะสมที่สุด
+              </p>
+            </div>
+
+            <!-- Instructor Comment -->
+            <div class="comment-item instructor">
+              <div class="comment-header">
+                <div class="comment-author-info">
+                  <div class="comment-avatar instructor">อ</div>
+                  <div class="author-details">
+                    <div class="author-name">อ.อนิราช มิ่งขวัญ</div>
+                    <div class="author-role">อาจารย์ประจำวิชา</div>
+                  </div>
+                </div>
+                <div class="comment-date">1 กันยายน 2568 | 09:15</div>
+              </div>
+              <p class="comment-text">
+                โมเดลพื้นฐานทำงานได้ดี
+                ควรเพิ่มการทดสอบกับชุดข้อมูลที่หลากหลายและพิจารณาการใช้เทคนิค
+                deep learning เพื่อเพิ่มความแม่นยำ
+                การจัดการกับข้อมูลภาษาไทยต้องคำนึงถึงความซับซ้อนของไวยากรณ์และบริบททางวัฒนธรรม
               </p>
             </div>
           </div>
@@ -2095,7 +2132,7 @@
             timelineDot.style.background = "#4299e1";
           }
 
-          // Add comment
+          // Add comment (อาจารย์ประจำวิชาแสดงความเห็นหลังจากอาจารย์ที่ปรึกษา)
           let commentsSection = targetItem.querySelector(".comments-section");
           if (!commentsSection) {
             commentsSection = document.createElement("div");
@@ -2107,7 +2144,7 @@
           newComment.className = "comment";
           newComment.innerHTML = `
                 <div class="comment-header">
-                    <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
+                    <div class="comment-author">อ.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
                     <div class="comment-date">${new Date().toLocaleDateString(
                       "th-TH"
                     )}</div>

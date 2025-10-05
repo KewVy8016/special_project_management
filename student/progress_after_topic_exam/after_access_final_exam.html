@@ -411,7 +411,7 @@
               gap: 12px;
             "
           >
-            <span class="user-name">Thanaboon Imcharoen</span>
+            <span class="user-name">ธนบูลย์ อิ่มเจริญ</span>
             <div class="user-avatar">T</div>
           </a>
         </div>
@@ -444,7 +444,7 @@
 
             <div class="info-row">
               <div class="info-label">วันที่สอบ:</div>
-              <div class="info-value">15 มีนาคม 2567</div>
+              <div class="info-value">15 มีนาคม 2568</div>
             </div>
 
             <div class="info-row">
@@ -454,13 +454,13 @@
 
             <div class="info-row">
               <div class="info-label">สถานที่สอบ:</div>
-              <div class="info-value">ห้อง IT-301 อาคารเทคโนโลยีสารสนเทศ</div>
+              <div class="info-value">ห้อง IT-301 </div>
             </div>
 
             <div class="info-row">
               <div class="info-label">รูปแบบการสอบ:</div>
               <div class="info-value">
-                นำเสนอโครงงาน 45 นาที, ซักถาม 30 นาที, การสาธิต 15 นาที
+                นำเสนอโครงงาน 45 นาที
               </div>
             </div>
 
@@ -509,10 +509,6 @@
               <ul class="preparation-list">
                 <li>รายงานโครงงานฉบับสมบูรณ์ จำนวน 5 เล่ม</li>
                 <li>ไฟล์นำเสนอ (PowerPoint) และอุปกรณ์สำหรับการสาธิต</li>
-                <li>ซอร์สโค้ดและเอกสารประกอบการพัฒนา</li>
-                <li>โปสเตอร์สำหรับการนำเสนอ</li>
-                <li>บทคัดย่อภาษาไทยและภาษาอังกฤษ</li>
-                <li>เอกสารการทดสอบและประเมินผลระบบ</li>
               </ul>
             </div>
           </div>
@@ -537,7 +533,7 @@
         failButton.className = "btn btn-outline";
         failButton.textContent = "✗ ไม่ผ่าน";
         failButton.onclick = function () {
-          window.location.href = "not_pass_defense_exam.html";
+          window.location.href = "not_pass_final_exam.html";
         };
 
         const passEditButton = document.createElement("button");
@@ -556,7 +552,7 @@
 
       // ฟังก์ชันนับถอยหลัง
       function updateCountdown() {
-        const examDate = new Date('2567-03-15T09:00:00');
+      
         const now = new Date();
         const timeDiff = examDate - now;
 
