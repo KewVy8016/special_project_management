@@ -18,7 +18,6 @@
             min-height: 100vh;
         }
 
-        /* Navigation Bar */
         .navbar {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 1rem 2rem;
@@ -69,7 +68,6 @@
             text-shadow: 0 0 5px rgba(255,255,255,0.8);
         }
 
-        /* Main Content */
         .container {
             max-width: 1400px;
             margin: 2rem auto;
@@ -97,7 +95,6 @@
             font-size: 1.1rem;
         }
 
-        /* Filter Section */
         .filter-section {
             background: white;
             border-radius: 15px;
@@ -138,7 +135,6 @@
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
-        /* Stats Summary */
         .stats-summary {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -167,7 +163,6 @@
             font-size: 0.9rem;
         }
 
-        /* Project Cards */
         .projects-grid {
             display: grid;
             gap: 1.5rem;
@@ -296,7 +291,6 @@
             margin-top: 0.5rem;
         }
 
-        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -556,7 +550,6 @@
             transform: translateY(-1px);
         }
 
-        /* Footer */
         .footer {
             background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
             color: white;
@@ -565,7 +558,6 @@
             margin-top: 3rem;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .container {
                 padding: 0 1rem;
@@ -602,7 +594,6 @@
             }
         }
 
-        /* Animation */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -617,10 +608,31 @@
         .project-card {
             animation: fadeInUp 0.6s ease-out;
         }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-content">
             <div class="logo">🎓 ระบบจัดการโครงงาน - IT Department</div>
@@ -630,25 +642,22 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="container">
-        <!-- Page Header -->
         <div class="page-header">
             <h1 class="page-title">คำขออนุมัติสอบหัวข้อโครงงาน</h1>
             <p class="page-subtitle">จัดการและอนุมัติคำขอสอบหัวข้อโครงงานทั้งหมดของนักศึกษา</p>
         </div>
 
-        <!-- Filter Section -->
         <div class="filter-section">
             <div class="filter-group">
                 <label class="filter-label">สาขาวิชา</label>
                 <select class="filter-select" id="branchFilter" onchange="filterProjects()">
                     <option value="all">ทั้งหมด</option>
                     <option value="IT">IT - เทคโนโลยีสารสนเทศ</option>
-                    <option value="ITI">ITI - เทคโนโลยีสารสนเทศเพื่ออุตสาหกรรม</option>
-                    <option value="INE">INE - วิศวกรรมเครือข่าย</option>
-                    <option value="INET">INET - เทคโนโลยีอินเทอร์เน็ต</option>
-                    <option value="ITT">ITT - เทคโนโลยีสารสนเทศและการสื่อสาร</option>
+                    <option value="ITI">ITI - เทคโนโลยีสารสนเทศ</option>
+                    <option value="INE">INE - วิศวกรรมสารสนเทศและเครือข่าย</option>
+                    <option value="INET">INET - วิศวกรรมสารสนเทศและเครือข่าย</option>
+                    <option value="ITT">ITT - เทคโนโลยีสารสนเทศและธุรกิจ</option>
                 </select>
             </div>
             <div class="filter-group">
@@ -662,7 +671,6 @@
             </div>
         </div>
 
-        <!-- Stats Summary -->
         <div class="stats-summary">
             <div class="stat-item">
                 <div class="stat-number" id="totalCount">12</div>
@@ -682,13 +690,9 @@
             </div>
         </div>
 
-        <!-- Projects Grid -->
-        <div class="projects-grid" id="projectsGrid">
-            <!-- Project cards will be generated by JavaScript -->
-        </div>
+        <div class="projects-grid" id="projectsGrid"></div>
     </div>
 
-    <!-- Project Detail Modal -->
     <div id="projectModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -697,7 +701,6 @@
                 <span class="close" onclick="closeModal()">&times;</span>
             </div>
             <div class="modal-body">
-                <!-- Project Details Section -->
                 <div class="form-section">
                     <h3 class="section-title">ข้อมูลโครงงาน</h3>
                     <div class="project-details">
@@ -720,9 +723,8 @@
                     </div>
                 </div>
 
-                <!-- Documents Section -->
                 <div class="form-section">
-                    <h3 class="section-title">เอกสารประกอบจากนักเรียน</h3>
+                    <h3 class="section-title">เอกสารประกอบ</h3>
                     <div class="documents-section">
                         <div class="document-item">
                             <span class="document-name">เอกสารข้อเสนอโครงงาน (Project Proposal)</span>
@@ -736,22 +738,9 @@
                                 <button class="btn-download" onclick="downloadDocument('request_form')">ดาวน์โหลด</button>
                             </div>
                         </div>
-                        <div class="document-item">
-                            <span class="document-name">ใบรับรองผลการศึกษา (Transcript)</span>
-                            <div class="document-actions">
-                                <button class="btn-download" onclick="downloadDocument('transcript')">ดาวน์โหลด</button>
-                            </div>
-                        </div>
-                        <div class="document-item">
-                            <span class="document-name">เอกสารอื่นๆ ที่เกี่ยวข้อง</span>
-                            <div class="document-actions">
-                                <button class="btn-download" onclick="downloadDocument('other')">ดาวน์โหลด</button>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Exam Schedule Section -->
                 <div class="form-section">
                     <h3 class="section-title">กำหนดการสอบ</h3>
                     <div class="form-group">
@@ -778,7 +767,6 @@
                     </div>
                 </div>
 
-                <!-- Committee Section -->
                 <div class="form-section">
                     <h3 class="section-title">กรรมการสอบ (4 คน)</h3>
                     <div class="committee-section">
@@ -786,41 +774,35 @@
                             <span class="member-role">ประธานกรรมการ:</span>
                             <select class="form-select" id="chairman">
                                 <option value="">เลือกอาจารย์</option>
-                                <!-- Options will be populated by JavaScript -->
                             </select>
                         </div>
                         <div class="committee-member">
                             <span class="member-role">กรรมการคนที่ 1:</span>
                             <select class="form-select" id="committee1">
                                 <option value="">เลือกอาจารย์</option>
-                                <!-- Options will be populated by JavaScript -->
                             </select>
                         </div>
                         <div class="committee-member">
                             <span class="member-role">กรรมการคนที่ 2:</span>
                             <select class="form-select" id="committee2">
                                 <option value="">เลือกอาจารย์</option>
-                                <!-- Options will be populated by JavaScript -->
                             </select>
                         </div>
                         <div class="committee-member">
                             <span class="member-role">กรรมการคนที่ 3:</span>
                             <select class="form-select" id="committee3">
                                 <option value="">เลือกอาจารย์</option>
-                                <!-- Options will be populated by JavaScript -->
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <!-- Approval Section -->
                 <div class="approve-section">
                     <p style="margin-bottom: 1rem; color: #2d3748; font-weight: 600;">กรุณาตรวจสอบข้อมูลให้ครบถ้วนก่อนการอนุมัติ</p>
                     <button class="btn btn-success" onclick="approveProject()" id="approveBtn">✓ อนุมัติการสอบ</button>
                     <button class="btn btn-secondary" onclick="closeModal()">ยกเลิก</button>
                 </div>
 
-                <!-- Rejection Section -->
                 <div class="reject-section">
                     <p style="margin-bottom: 1rem; color: #742a2a; font-weight: 600;">หากโครงงานไม่ผ่านเกณฑ์การอนุมัติ</p>
                     <button class="btn btn-danger" onclick="rejectProject()">✗ ไม่อนุมัติการสอบ</button>
@@ -829,678 +811,731 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2025 ภาควิชาเทคโนโลยีสารสนเทศ | ระบบจัดการข้อมูลโครงงานพิเศษและโครงงานสหกิจศึกษา</p>
+            <p>&copy; 2568 ภาควิชาเทคโนโลยีสารสนเทศ | ระบบจัดการข้อมูลโครงงานพิเศษและโครงงานสหกิจศึกษา</p>
         </div>
     </footer>
 
+
     <script>
-        // List of professors
-        const professors = [
-            "รศ.ดร.อนิราช มิ่งขวัญ",
-            "ผศ.อรบุษป์ วุฒิกมลชัย",
-            "ผศ.ดร.บีสุดา ดาวเรือง",
-            "ผศ.ดร.ขนิษฐา นามี",
-            "อ.ดร.กาญจน ณ ศรีธะ",
-            "ผศ.นพดล บูรณ์กุศล",
-            "ผศ.จสต.นพเก้า ทองใบ",
-            "ผศ.ดร.นิติการ นาคเจือทอง",
-            "ผศ.ดร.นัฎฐพันธ์ นาคพงษ์",
-            "ผศ.นิมิต ศรีคำทา",
-            "อ.ดร.พิทย์พิมล ชูรอด",
-            "ผศ.ดร.พาฝัน ดวงไพศาล",
-            "อ.ดร.ประดิษฐ์ พิทักษ์เสถียรกุล",
-            "ผศ.พีระศักดิ์ เสรีกุล",
-            "ผศ.สมชัย เชียงพงศ์พันธุ์",
-            "ผศ.ดร.สุปีติ กุลจันทร์",
-            "ผศ.สิวาลัย จินเจือ",
-            "ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ",
-            "ผศ.ดร.ศรายุทธ ธเนศสกุลวัฒนา",
-            "อ.ดร.ศิรินทรา แว่วศรี",
-            "อ.ดร.วัชรชัย คงศิริวัฒนา",
-            "ผศ.ดร.วันทนี ประจวบศุภกิจ",
-            "รศ.ดร.ยุพิน สรรพคุณ"
-        ];
+        // รายชื่ออาจารย์
+const professors = [
+    "รศ.ดร.อนิราช มิ่งขวัญ",
+    "ผศ.อรบุษป์ วุฒิกมลชัย",
+    "ผศ.ดร.บีสุดา ดาวเรือง",
+    "ผศ.ดร.ขนิษฐา นามี",
+    "อ.ดร.กาญจน ณ ศรีธะ",
+    "ผศ.นพดล บูรณ์กุศล",
+    "ผศ.จสต.นพเก้า ทองใบ",
+    "ผศ.ดร.นิติการ นาคเจือทอง",
+    "ผศ.ดร.นัฎฐพันธ์ นาคพงษ์",
+    "ผศ.นิมิต ศรีคำทา",
+    "อ.ดร.พิทย์พิมล ชูรอด",
+    "ผศ.ดร.พาฝัน ดวงไพศาล",
+    "อ.ดร.ประดิษฐ์ พิทักษ์เสถียรกุล",
+    "ผศ.พีระศักดิ์ เสรีกุล",
+    "ผศ.สมชัย เชียงพงศ์พันธุ์",
+    "ผศ.ดร.สุปีติ กุลจันทร์",
+    "ผศ.สิวาลัย จินเจือ",
+    "ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ",
+    "ผศ.ดร.ศรายุทธ ธเนศสกุลวัฒนา",
+    "อ.ดร.ศิรินทรา แว่วศรี",
+    "อ.ดร.วัชรชัย คงศิริวัฒนา",
+    "ผศ.ดร.วันทนี ประจวบศุภกิจ",
+    "รศ.ดร.ยุพิน สรรพคุณ"
+];
 
-        // Sample project data
-        const projects = [
-            {
-                id: 1,
-                title: "ระบบจัดการร้านค้าออนไลน์ด้วย React และ Node.js",
-                advisor: "อ.ดร.สมชาย ใจดี",
-                students: "นายสมศักดิ์ เก่งมาก, นางสาวมาลี สุขใส",
-                branch: "IT",
-                status: "pending",
-                submitDate: "2024-03-15",
-                type: "โครงงานพิเศษ",
-                description: "พัฒนาระบบจัดการร้านค้าออนไลน์ที่ครบครันด้วยเทคโนโลยี React สำหรับ Frontend และ Node.js สำหรับ Backend พร้อมระบบจัดการสินค้า การชำระเงิน และรายงานยอดขาย",
-                documents: [
-                    { name: "เอกสารข้อเสนอโครงงาน", type: "proposal" },
-                    { name: "แบบฟอร์มคำขอสอบหัวข้อโครงงาน", type: "request_form" },
-                    { name: "ใบรับรองผลการศึกษา", type: "transcript" }
-                ]
-            },
-            {
-                id: 2,
-                title: "แอปพลิเคชันติดตามสุขภาพด้วย AI",
-                advisor: "อ.ดร.วิไล สุขสันต์",
-                students: "นายดำรง เก่งดี, นายประเสริฐ มั่นใจ",
-                branch: "ITI",
-                status: "pending",
-                submitDate: "2024-03-14",
-                type: "โครงงานสหกิจ",
-                description: "พัฒนาแอปพลิเคชันบนมือถือสำหรับติดตามสุขภาพด้วยการวิเคราะห์ข้อมูลด้วย AI รวมทั้งการแจ้งเตือนและให้คำแนะนำด้านสุขภาพ",
-                documents: [
-                    { name: "เอกสารข้อเสนอโครงงาน", type: "proposal" },
-                    { name: "แบบฟอร์มคำขอสอบหัวข้อโครงงาน", type: "request_form" }
-                ]
-            },
-            {
-                id: 3,
-                title: "ระบบรักษาความปลอดภัยเครือข่ายด้วย Machine Learning",
-                advisor: "อ.ดร.ประเสริฐ มั่นคง",
-                students: "นายวิทยา เฉลียวฉลาด",
-                branch: "INE",
-                status: "approved",
-                submitDate: "2024-03-10",
-                type: "โครงงานพิเศษ",
-                description: "พัฒนาระบบตรวจจับและป้องกันการโจมตีทางไซเบอร์ด้วยเทคนิค Machine Learning เพื่อรักษาความปลอดภัยของเครือข่ายคอมพิวเตอร์",
-                examDate: "2024-04-15",
-                examTime: "09:00",
-                examRoom: "IT-301",
-                chairman: "ผศ.ดร.บีสุดา ดาวเรือง",
-                committee1: "ผศ.ดร.ขนิษฐา นามี",
-                committee2: "อ.ดร.กาญจน ณ ศรีธะ",
-                committee3: "ผศ.นพดล บูรณ์กุศล",
-                documents: [
-                    { name: "เอกสารข้อเสนอโครงงาน", type: "proposal" },
-                    { name: "แบบฟอร์มคำขอสอบหัวข้อโครงงาน", type: "request_form" },
-                    { name: "ใบรับรองผลการศึกษา", type: "transcript" },
-                    { name: "เอกสารอื่นๆ ที่เกี่ยวข้อง", type: "other" }
-                ]
-            },
-            // ... other projects remain the same
-        ];
+// ข้อมูลโครงงานตัวอย่าง
+const projects = [
+    {
+        id: 1,
+        title: "ระบบจัดการร้านค้าออนไลน์ด้วย React และ Node.js",
+        advisor: "รศ.ดร.อนิราช มิ่งขวัญ",
+        students: "นายสมศักดิ์ เก่งมาก, นางสาวมาลี สุขใส",
+        branch: "IT",
+        status: "pending",
+        submitDate: "2568-03-15",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาระบบจัดการร้านค้าออนไลน์ที่ครบครันด้วยเทคโนโลยี React สำหรับ Frontend และ Node.js สำหรับ Backend พร้อมระบบจัดการสินค้า การชำระเงิน และรายงานยอดขาย"
+    },
+    {
+        id: 2,
+        title: "แอปพลิเคชันติดตามสุขภาพด้วย AI",
+        advisor: "ผศ.ดร.บีสุดา ดาวเรือง",
+        students: "นายดำรง เก่งดี, นายประเสริฐ มั่นใจ",
+        branch: "ITI",
+        status: "pending",
+        submitDate: "2568-03-14",
+        type: "โครงงานสหกิจ",
+        description: "พัฒนาแอปพลิเคชันบนมือถือสำหรับติดตามสุขภาพด้วยการวิเคราะห์ข้อมูลด้วย AI รวมทั้งการแจ้งเตือนและให้คำแนะนำด้านสุขภาพ"
+    },
+    {
+        id: 3,
+        title: "ระบบรักษาความปลอดภัยเครือข่ายด้วย Machine Learning",
+        advisor: "ผศ.ดร.ขนิษฐา นามี",
+        students: "นายวิทยา เฉลียวฉลาด",
+        branch: "INE",
+        status: "approved",
+        submitDate: "2568-03-10",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาระบบตรวจจับและป้องกันการโจมตีทางไซเบอร์ด้วยเทคนิค Machine Learning เพื่อรักษาความปลอดภัยของเครือข่ายคอมพิวเตอร์",
+        examDate: "2568-04-15",
+        examTime: "09:00",
+        examRoom: "IT-301",
+        chairman: "ผศ.ดร.บีสุดา ดาวเรือง",
+        committee1: "ผศ.ดร.ขนิษฐา นามี",
+        committee2: "อ.ดร.กาญจน ณ ศรีธะ",
+        committee3: "ผศ.นพดล บูรณ์กุศล"
+    },
+    {
+        id: 4,
+        title: "ระบบจัดการคลังสินค้าอัจฉริยะด้วย IoT",
+        advisor: "อ.ดร.กาญจน ณ ศรีธะ",
+        students: "นางสาวสุดา ยิ้มแย้ม, นายชาญ ฉลาดเฉลียว",
+        branch: "INET",
+        status: "pending",
+        submitDate: "2568-03-18",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาระบบจัดการคลังสินค้าที่เชื่อมต่อกับอุปกรณ์ IoT เพื่อติดตามสินค้า ตรวจสอบอุณหภูมิ และจัดการสต็อกอัตโนมัติ"
+    },
+    {
+        id: 5,
+        title: "แพลตฟอร์มการเรียนรู้ออนไลน์แบบ Adaptive Learning",
+        advisor: "ผศ.ดร.วันทนี ประจวบศุภกิจ",
+        students: "นายธนา เรียนดี, นางสาวปรียา มีความรู้",
+        branch: "IT",
+        status: "pending",
+        submitDate: "2568-03-20",
+        type: "โครงงานสหกิจ",
+        description: "สร้างแพลตฟอร์มการเรียนรู้ที่ปรับเนื้อหาตามความสามารถของผู้เรียนด้วยเทคโนโลยี AI และ Machine Learning"
+    },
+    {
+        id: 6,
+        title: "ระบบวิเคราะห์ความรู้สึกจากโซเชียลมีเดีย",
+        advisor: "ผศ.ดร.สุปีติ กุลจันทร์",
+        students: "นายอนันต์ วิเคราะห์ดี",
+        branch: "ITT",
+        status: "approved",
+        submitDate: "2568-03-05",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาระบบวิเคราะห์ความรู้สึกและทัศนคติของผู้ใช้งานจากข้อความในโซเชียลมีเดียด้วย Natural Language Processing",
+        examDate: "2568-04-10",
+        examTime: "13:00",
+        examRoom: "IT-201",
+        chairman: "รศ.ดร.ยุพิน สรรพคุณ",
+        committee1: "ผศ.ดร.สุปีติ กุลจันทร์",
+        committee2: "ผศ.ดร.ศรายุทธ ธเนศสกุลวัฒนา",
+        committee3: "อ.ดร.ศิรินทรา แว่วศรี"
+    },
+    {
+        id: 7,
+        title: "แอปพลิเคชันจัดการการเงินส่วนบุคคล",
+        advisor: "ผศ.นิมิต ศรีคำทา",
+        students: "นางสาวสมหมาย รวยเงิน, นายเศรษฐี มั่งคั่ง",
+        branch: "ITI",
+        status: "pending",
+        submitDate: "2568-03-22",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาแอปพลิเคชันสำหรับบันทึกรายรับรายจ่าย วางแผนการเงิน และให้คำแนะนำการออม"
+    },
+    {
+        id: 8,
+        title: "ระบบตรวจจับวัตถุด้วย Deep Learning สำหรับรถยนต์ไร้คนขับ",
+        advisor: "อ.ดร.พิทย์พิมล ชูรอด",
+        students: "นายชัยชนะ ขับเก่ง",
+        branch: "IT",
+        status: "rejected",
+        submitDate: "2568-03-01",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาระบบตรวจจับวัตถุและอุปสรรคบนท้องถนนด้วย Deep Learning เพื่อนำไปประยุกต์ใช้กับรถยนต์ไร้คนขับ",
+        rejectReason: "ขอบเขตโครงงานกว้างเกินไป ควรปรับให้เฉพาะเจาะจงมากขึ้น และต้องมีการจัดหาอุปกรณ์ทดสอบที่เหมาะสม"
+    },
+    {
+        id: 9,
+        title: "ระบบแนะนำสินค้าด้วย Collaborative Filtering",
+        advisor: "ผศ.ดร.พาฝัน ดวงไพศาล",
+        students: "นางสาวนิภา ช้อปชอบ, นายสมชาย ซื้อเก่ง",
+        branch: "INET",
+        status: "pending",
+        submitDate: "2568-03-23",
+        type: "โครงงานสหกิจ",
+        description: "สร้างระบบแนะนำสินค้าที่เหมาะสมกับผู้ใช้แต่ละคนด้วยเทคนิค Collaborative Filtering และ Content-based Filtering"
+    },
+    {
+        id: 10,
+        title: "แพลตฟอร์มจับคู่ผู้เชี่ยวชาญกับผู้ต้องการคำปรึกษา",
+        advisor: "ผศ.สมชัย เชียงพงศ์พันธุ์",
+        students: "นายปรีชา ช่วยเหลือดี",
+        branch: "ITT",
+        status: "approved",
+        submitDate: "2568-03-08",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาแพลตฟอร์มที่เชื่อมต่อผู้เชี่ยวชาญในด้านต่างๆ กับผู้ที่ต้องการคำปรึกษา พร้อมระบบการจองนัดหมายและการชำระเงิน",
+        examDate: "2568-04-18",
+        examTime: "10:00",
+        examRoom: "IT-102",
+        chairman: "ผศ.อรบุษป์ วุฒิกมลชัย",
+        committee1: "ผศ.สมชัย เชียงพงศ์พันธุ์",
+        committee2: "ผศ.สิวาลัย จินเจือ",
+        committee3: "อ.ดร.วัชรชัย คงศิริวัฒนา"
+    },
+    {
+        id: 11,
+        title: "ระบบจัดการโครงการด้วย Agile Methodology",
+        advisor: "ผศ.ดร.นิติการ นาคเจือทอง",
+        students: "นายวิชัย จัดการเก่ง, นางสาวสุภา วางแผนดี",
+        branch: "IT",
+        status: "pending",
+        submitDate: "2568-03-25",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาระบบจัดการโครงการที่รองรับ Agile Methodology พร้อม Kanban Board, Sprint Planning และ Burndown Chart"
+    },
+    {
+        id: 12,
+        title: "แอปพลิเคชันแปลภาษามือเป็นข้อความด้วย AI",
+        advisor: "อ.ดร.ศิรินทรา แว่วศรี",
+        students: "นางสาวกมลวรรณ ใจดี, นายสุรชัย ช่วยเหลือดี",
+        branch: "INE",
+        status: "pending",
+        submitDate: "2568-03-26",
+        type: "โครงงานสหกิจ",
+        description: "สร้างแอปพลิเคชันที่ใช้ Computer Vision และ Machine Learning ในการแปลภาษามือให้เป็นข้อความเพื่อช่วยเหลือผู้พิการทางการได้ยิน"
+    }
+];
 
-        let filteredProjects = [...projects];
-        let currentProject = null;
+let filteredProjects = [...projects];
+let currentProject = null;
 
-        // Initialize the page
-        function init() {
-            populateProfessorOptions();
-            renderProjects();
-            updateStats();
-            setupEventListeners();
-        }
+// เริ่มต้นระบบ
+function init() {
+    populateProfessorOptions();
+    renderProjects();
+    updateStats();
+    setupEventListeners();
+}
 
-        // Populate professor options in committee dropdowns
-        function populateProfessorOptions() {
-            const committeeSelects = ['chairman', 'committee1', 'committee2', 'committee3'];
-            
-            committeeSelects.forEach(selectId => {
-                const selectElement = document.getElementById(selectId);
-                professors.forEach(professor => {
-                    const option = document.createElement('option');
-                    option.value = professor;
-                    option.textContent = professor;
-                    selectElement.appendChild(option);
-                });
-            });
-        }
+// เติมรายชื่ออาจารย์ในช่องเลือกกรรมการ
+function populateProfessorOptions() {
+    const committeeSelects = ['chairman', 'committee1', 'committee2', 'committee3'];
+    
+    committeeSelects.forEach(selectId => {
+        const selectElement = document.getElementById(selectId);
+        professors.forEach(professor => {
+            const option = document.createElement('option');
+            option.value = professor;
+            option.textContent = professor;
+            selectElement.appendChild(option);
+        });
+    });
+}
 
-        // Setup event listeners
-        function setupEventListeners() {
-            // Filter change events
-            document.getElementById('branchFilter').addEventListener('change', filterProjects);
-            document.getElementById('statusFilter').addEventListener('change', filterProjects);
+// ตั้งค่า Event Listeners
+function setupEventListeners() {
+    document.getElementById('branchFilter').addEventListener('change', filterProjects);
+    document.getElementById('statusFilter').addEventListener('change', filterProjects);
 
-            // Modal close events
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') {
-                    closeModal();
-                }
-            });
-        }
-
-        // Render project cards
-        function renderProjects() {
-            const grid = document.getElementById('projectsGrid');
-            grid.innerHTML = '';
-
-            if (filteredProjects.length === 0) {
-                grid.innerHTML = `
-                    <div style="text-align: center; padding: 3rem; color: #718096;">
-                        <h3>ไม่พบข้อมูลโครงงาน</h3>
-                        <p>กรุณาลองเปลี่ยนเงื่อนไขการกรอง</p>
-                    </div>
-                `;
-                return;
-            }
-
-            filteredProjects.forEach((project, index) => {
-                const statusClass = `status-${project.status}`;
-                const statusText = getStatusText(project.status);
-                
-                const card = document.createElement('div');
-                card.className = 'project-card';
-                card.style.animationDelay = `${index * 0.1}s`;
-                card.onclick = () => openModal(project);
-                
-                // Add priority indicator for urgent requests (submitted within last 3 days)
-                const isUrgent = isRecentSubmission(project.submitDate);
-                const urgentIndicator = isUrgent ? '<div style="position: absolute; top: 10px; left: 10px; background: #ff4757; color: white; padding: 4px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold;">ด่วน</div>' : '';
-                
-                card.innerHTML = `
-                    ${urgentIndicator}
-                    <div class="project-header">
-                        <div class="project-info">
-                            <h3 class="project-title">${project.title}</h3>
-                            <div class="project-meta">
-                                <div class="meta-item">
-                                    <span class="meta-label">อาจารย์ที่ปรึกษา</span>
-                                    <span class="meta-value">${project.advisor}</span>
-                                </div>
-                                <div class="meta-item">
-                                    <span class="meta-label">นักศึกษา</span>
-                                    <span class="meta-value">${truncateText(project.students, 50)}</span>
-                                </div>
-                                <div class="meta-item">
-                                    <span class="meta-label">วันที่ส่งคำขอ</span>
-                                    <span class="meta-value">${formatDate(project.submitDate)}</span>
-                                </div>
-                                <div class="meta-item">
-                                    <span class="meta-label">ประเภท</span>
-                                    <span class="meta-value">${project.type}</span>
-                                </div>
-                            </div>
-                            <div class="branch-tag">${project.branch} - ${getBranchName(project.branch)}</div>
-                        </div>
-                        <div class="project-status ${statusClass}">
-                            ${statusText}
-                        </div>
-                    </div>
-                `;
-                
-                grid.appendChild(card);
-            });
-        }
-
-        // Filter projects
-        function filterProjects() {
-            const branchFilter = document.getElementById('branchFilter').value;
-            const statusFilter = document.getElementById('statusFilter').value;
-            
-            filteredProjects = projects.filter(project => {
-                const branchMatch = branchFilter === 'all' || project.branch === branchFilter;
-                const statusMatch = statusFilter === 'all' || project.status === statusFilter;
-                return branchMatch && statusMatch;
-            });
-            
-            renderProjects();
-            updateStats();
-        }
-
-        // Update statistics with animation
-        function updateStats() {
-            const total = filteredProjects.length;
-            const pending = filteredProjects.filter(p => p.status === 'pending').length;
-            const approved = filteredProjects.filter(p => p.status === 'approved').length;
-            const rejected = filteredProjects.filter(p => p.status === 'rejected').length;
-            
-            animateCounter('totalCount', total);
-            animateCounter('pendingCount', pending);
-            animateCounter('approvedCount', approved);
-            animateCounter('rejectedCount', rejected);
-        }
-
-        // Animate counter
-        function animateCounter(elementId, targetValue) {
-            const element = document.getElementById(elementId);
-            const currentValue = parseInt(element.textContent) || 0;
-            const increment = targetValue > currentValue ? 1 : -1;
-            let current = currentValue;
-            
-            const timer = setInterval(() => {
-                current += increment;
-                element.textContent = current;
-                
-                if ((increment === 1 && current >= targetValue) || 
-                    (increment === -1 && current <= targetValue)) {
-                    element.textContent = targetValue;
-                    clearInterval(timer);
-                }
-            }, 50);
-        }
-
-        // Helper functions
-        function getStatusText(status) {
-            const statusMap = {
-                'pending': 'รออนุมัติ',
-                'approved': 'อนุมัติแล้ว',
-                'rejected': 'ไม่อนุมัติ'
-            };
-            return statusMap[status] || 'ไม่ทราบ';
-        }
-
-        function getBranchName(branch) {
-            const branchMap = {
-                'IT': 'เทคโนโลยีสารสนเทศ',
-                'ITI': 'เทคโนโลยีสารสนเทศเพื่ออุตสาหกรรม',
-                'INE': 'วิศวกรรมเครือข่าย',
-                'INET': 'เทคโนโลยีอินเทอร์เน็ต',
-                'ITT': 'เทคโนโลยีสารสนเทศและการสื่อสาร'
-            };
-            return branchMap[branch] || branch;
-        }
-
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const options = { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                weekday: 'long'
-            };
-            return date.toLocaleDateString('th-TH', options);
-        }
-
-        function formatDateTime(date, time) {
-            const dateObj = new Date(date + 'T' + time);
-            const dateOptions = { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                weekday: 'long'
-            };
-            const timeOptions = {
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false
-            };
-            
-            const dateStr = dateObj.toLocaleDateString('th-TH', dateOptions);
-            const timeStr = dateObj.toLocaleTimeString('th-TH', timeOptions);
-            
-            return `${dateStr} เวลา ${timeStr} น.`;
-        }
-
-        function truncateText(text, maxLength) {
-            return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
-        }
-
-        function isRecentSubmission(dateString) {
-            const submitDate = new Date(dateString);
-            const today = new Date();
-            const diffTime = Math.abs(today - submitDate);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            return diffDays <= 3;
-        }
-
-        // Document download function
-        function downloadDocument(type) {
-            const documentNames = {
-                'proposal': 'เอกสารข้อเสนอโครงงาน.pdf',
-                'request_form': 'แบบฟอร์มคำขอสอบหัวข้อโครงงาน.pdf',
-                'transcript': 'ใบรับรองผลการศึกษา.pdf',
-                'other': 'เอกสารอื่นๆ.zip'
-            };
-            
-            const fileName = documentNames[type] || 'document.pdf';
-            showNotification(`ดาวน์โหลด ${fileName} เรียบร้อยแล้ว (จำลอง)`, 'success');
-            
-            // In a real application, this would initiate an actual file download
-            // For demo purposes, we'll just show a notification
-        }
-
-        // Modal functions
-        function openModal(project) {
-            currentProject = project;
-            
-            // Set basic project information
-            document.getElementById('modalProjectTitle').textContent = project.title;
-            document.getElementById('modalProjectSubtitle').textContent = `${project.type} - ${project.branch}`;
-            document.getElementById('modalProjectName').textContent = project.title;
-            document.getElementById('modalAdvisor').textContent = project.advisor;
-            document.getElementById('modalStudents').textContent = project.students;
-            document.getElementById('modalBranch').textContent = `${project.branch} - ${getBranchName(project.branch)}`;
-            
-            // Add project description if exists
-            const modalBody = document.querySelector('.modal-body');
-            let descriptionSection = modalBody.querySelector('.description-section');
-            
-            if (project.description) {
-                if (!descriptionSection) {
-                    descriptionSection = document.createElement('div');
-                    descriptionSection.className = 'form-section description-section';
-                    descriptionSection.innerHTML = `
-                        <h3 class="section-title">รายละเอียดโครงงาน</h3>
-                        <div class="project-details">
-                            <p style="line-height: 1.6; color: #4a5568;">${project.description}</p>
-                        </div>
-                    `;
-                    modalBody.insertBefore(descriptionSection, modalBody.children[1]);
-                } else {
-                    descriptionSection.querySelector('p').textContent = project.description;
-                }
-            }
-            
-            // Handle different status states
-            const examSection = modalBody.querySelector('.form-section:nth-child(4)');
-            const committeeSection = modalBody.querySelector('.form-section:nth-child(5)');
-            const approveSection = modalBody.querySelector('.approve-section');
-            const rejectSection = modalBody.querySelector('.reject-section');
-            
-            if (project.status === 'approved') {
-                // Show exam details for approved projects
-                document.getElementById('examDate').value = project.examDate || '';
-                document.getElementById('examTime').value = project.examTime || '';
-                document.getElementById('examRoom').value = project.examRoom || '';
-                document.getElementById('chairman').value = project.chairman || '';
-                document.getElementById('committee1').value = project.committee1 || '';
-                document.getElementById('committee2').value = project.committee2 || '';
-                document.getElementById('committee3').value = project.committee3 || '';
-                
-                // Disable form fields
-                const formInputs = modalBody.querySelectorAll('.form-input, .form-select');
-                formInputs.forEach(input => input.disabled = true);
-                
-                approveSection.innerHTML = `
-                    <div style="background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%); border-radius: 10px; padding: 2rem; text-align: center;">
-                        <div style="color: #276749; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">
-                            ✅ โครงงานนี้ได้รับการอนุมัติแล้ว
-                        </div>
-                        <div style="color: #2d5016; margin-bottom: 1rem;">
-                            <strong>กำหนดการสอบ:</strong> ${formatDateTime(project.examDate, project.examTime)}
-                        </div>
-                        <div style="color: #2d5016; margin-bottom: 1rem;">
-                            <strong>ห้องสอบ:</strong> ${project.examRoom}
-                        </div>
-                        <div style="color: #2d5016;">
-                            <strong>กรรมการ:</strong> ${project.chairman}, ${project.committee1}, ${project.committee2}, ${project.committee3}
-                        </div>
-                        <button class="btn btn-secondary" onclick="closeModal()" style="margin-top: 1rem;">ปิด</button>
-                    </div>
-                `;
-                
-                rejectSection.style.display = 'none';
-            } else if (project.status === 'rejected') {
-                // Hide form sections and show rejection reason
-                examSection.style.display = 'none';
-                committeeSection.style.display = 'none';
-                approveSection.style.display = 'none';
-                
-                rejectSection.innerHTML = `
-                    <div style="background: linear-gradient(135deg, #fff5f5 0%, #feb2b2 100%); border-radius: 10px; padding: 2rem; text-align: center;">
-                        <div style="color: #c53030; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">
-                            ❌ โครงงานนี้ไม่ได้รับการอนุมัติ
-                        </div>
-                        <div style="color: #742a2a; margin-bottom: 1rem;">
-                            <strong>เหตุผล:</strong> ${project.rejectReason || 'ไม่ได้ระบุเหตุผล'}
-                        </div>
-                        <button class="btn btn-secondary" onclick="closeModal()">ปิด</button>
-                    </div>
-                `;
-            } else {
-                // Reset form for pending projects
-                examSection.style.display = 'block';
-                committeeSection.style.display = 'block';
-                approveSection.style.display = 'block';
-                rejectSection.style.display = 'block';
-                
-                const formInputs = modalBody.querySelectorAll('.form-input, .form-select');
-                formInputs.forEach(input => {
-                    input.disabled = false;
-                    if (input.type !== 'date' && input.type !== 'time') {
-                        input.value = '';
-                    }
-                });
-                
-                // Set minimum date to today
-                const today = new Date().toISOString().split('T')[0];
-                document.getElementById('examDate').min = today;
-                
-                approveSection.innerHTML = `
-                    <div style="background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%); border-radius: 10px; padding: 2rem; text-align: center;">
-                        <p style="margin-bottom: 1rem; color: #2d3748; font-weight: 600;">กรุณาตรวจสอบข้อมูลให้ครบถ้วนก่อนการอนุมัติ</p>
-                        <button class="btn btn-success" onclick="approveProject()" id="approveBtn">✓ อนุมัติการสอบ</button>
-                        <button class="btn btn-secondary" onclick="closeModal()">ยกเลิก</button>
-                    </div>
-                `;
-                
-                rejectSection.innerHTML = `
-                    <div style="background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%); border-radius: 10px; padding: 2rem; text-align: center;">
-                        <p style="margin-bottom: 1rem; color: #742a2a; font-weight: 600;">หากโครงงานไม่ผ่านเกณฑ์การอนุมัติ</p>
-                        <button class="btn btn-danger" onclick="rejectProject()">✗ ไม่อนุมัติการสอบ</button>
-                    </div>
-                `;
-            }
-            
-            document.getElementById('projectModal').style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
-
-        function closeModal() {
-            document.getElementById('projectModal').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restore scrolling
-            currentProject = null;
-            
-            // Reset form
-            const modalBody = document.querySelector('.modal-body');
-            const formInputs = modalBody.querySelectorAll('.form-input, .form-select');
-            formInputs.forEach(input => {
-                input.value = '';
-                input.disabled = false;
-            });
-            
-            // Remove description section if it exists
-            const descriptionSection = modalBody.querySelector('.description-section');
-            if (descriptionSection) {
-                descriptionSection.remove();
-            }
-        }
-
-        function approveProject() {
-            if (!currentProject) return;
-            
-            const examDate = document.getElementById('examDate').value;
-            const examTime = document.getElementById('examTime').value;
-            const examRoom = document.getElementById('examRoom').value;
-            const chairman = document.getElementById('chairman').value;
-            const committee1 = document.getElementById('committee1').value;
-            const committee2 = document.getElementById('committee2').value;
-            const committee3 = document.getElementById('committee3').value;
-            
-            // Update project data
-            const projectIndex = projects.findIndex(p => p.id === currentProject.id);
-            if (projectIndex !== -1) {
-                projects[projectIndex].status = 'approved';
-                projects[projectIndex].examDate = examDate || '2024-04-20';
-                projects[projectIndex].examTime = examTime || '10:00';
-                projects[projectIndex].examRoom = examRoom || 'IT-101';
-                projects[projectIndex].chairman = chairman || professors[0];
-                projects[projectIndex].committee1 = committee1 || professors[1];
-                projects[projectIndex].committee2 = committee2 || professors[2];
-                projects[projectIndex].committee3 = committee3 || professors[3];
-                projects[projectIndex].approvedDate = new Date().toISOString().split('T')[0];
-            }
-            
-            // Show success notification
-            showNotification('อนุมัติการสอบเรียบร้อยแล้ว!', 'success');
-            
-            // Send notification email (simulation)
-            setTimeout(() => {
-                showNotification('ส่งอีเมลแจ้งการอนุมัติให้นักศึกษาและอาจารย์แล้ว', 'info');
-            }, 1500);
-            
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
             closeModal();
-            filterProjects(); // Refresh the display
         }
+    });
+}
 
-        function rejectProject() {
-            if (!currentProject) return;
-            
-            const reason = prompt('กรุณาระบุเหตุผลในการไม่อนุมัติ:');
-            if (!reason || reason.trim() === '') {
-                showNotification('กรุณาระบุเหตุผลในการไม่อนุมัติ', 'error');
-                return;
-            }
-            
-            // Update project data
-            const projectIndex = projects.findIndex(p => p.id === currentProject.id);
-            if (projectIndex !== -1) {
-                projects[projectIndex].status = 'rejected';
-                projects[projectIndex].rejectReason = reason.trim();
-                projects[projectIndex].rejectedDate = new Date().toISOString().split('T')[0];
-            }
-            
-            showNotification('ไม่อนุมัติโครงงานแล้ว', 'warning');
-            
-            closeModal();
-            filterProjects(); // Refresh the display
-        }
+// แสดงการ์ดโครงงาน
+function renderProjects() {
+    const grid = document.getElementById('projectsGrid');
+    grid.innerHTML = '';
 
-        // Notification system
-        function showNotification(message, type = 'info') {
-            // Remove existing notifications
-            const existingNotifications = document.querySelectorAll('.notification');
-            existingNotifications.forEach(n => n.remove());
-            
-            const notification = document.createElement('div');
-            notification.className = `notification notification-${type}`;
-            
-            const colors = {
-                'success': 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
-                'error': 'linear-gradient(135deg, #f56565 0%, #e53e3e 100%)',
-                'warning': 'linear-gradient(135deg, #ed8936 0%, #dd6b20 100%)',
-                'info': 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)'
-            };
-            
-            const icons = {
-                'success': '✅',
-                'error': '❌',
-                'warning': '⚠️',
-                'info': 'ℹ️'
-            };
-            
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: ${colors[type]};
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 10px;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-                z-index: 10000;
-                font-weight: 600;
-                max-width: 400px;
-                animation: slideInRight 0.3s ease-out;
-            `;
-            
-            notification.innerHTML = `${icons[type]} ${message}`;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'slideOutRight 0.3s ease-in';
-                setTimeout(() => notification.remove(), 300);
-            }, 4000);
-        }
-
-        // Add notification animations to CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideInRight {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-            
-            @keyframes slideOutRight {
-                from {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-            }
+    if (filteredProjects.length === 0) {
+        grid.innerHTML = `
+            <div style="text-align: center; padding: 3rem; color: #718096;">
+                <h3>ไม่พบข้อมูลโครงงาน</h3>
+                <p>กรุณาลองเปลี่ยนเงื่อนไขการกรอง</p>
+            </div>
         `;
-        document.head.appendChild(style);
+        return;
+    }
 
-        // Search functionality
-        function setupSearch() {
-            const searchInput = document.createElement('input');
-            searchInput.type = 'text';
-            searchInput.placeholder = 'ค้นหาโครงงาน...';
-            searchInput.className = 'form-input';
-            searchInput.style.cssText = 'max-width: 300px; margin-left: auto;';
-            
-            const filterSection = document.querySelector('.filter-section');
-            filterSection.appendChild(searchInput);
-            
-            searchInput.addEventListener('input', function(e) {
-                const searchTerm = e.target.value.toLowerCase();
-                
-                if (searchTerm === '') {
-                    filterProjects();
-                    return;
-                }
-                
-                const branchFilter = document.getElementById('branchFilter').value;
-                const statusFilter = document.getElementById('statusFilter').value;
-                
-                filteredProjects = projects.filter(project => {
-                    const branchMatch = branchFilter === 'all' || project.branch === branchFilter;
-                    const statusMatch = statusFilter === 'all' || project.status === statusFilter;
-                    const searchMatch = 
-                        project.title.toLowerCase().includes(searchTerm) ||
-                        project.advisor.toLowerCase().includes(searchTerm) ||
-                        project.students.toLowerCase().includes(searchTerm);
-                    
-                    return branchMatch && statusMatch && searchMatch;
-                });
-                
-                renderProjects();
-                updateStats();
-            });
+    filteredProjects.forEach((project, index) => {
+        const statusClass = `status-${project.status}`;
+        const statusText = getStatusText(project.status);
+        
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.onclick = () => openModal(project);
+        
+        const isUrgent = isRecentSubmission(project.submitDate);
+        const urgentIndicator = isUrgent ? '<div style="position: absolute; top: 10px; left: 10px; background: #ff4757; color: white; padding: 4px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold;">ด่วน</div>' : '';
+        
+        card.innerHTML = `
+            ${urgentIndicator}
+            <div class="project-header">
+                <div class="project-info">
+                    <h3 class="project-title">${project.title}</h3>
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">อาจารย์ที่ปรึกษา</span>
+                            <span class="meta-value">${project.advisor}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">นักศึกษา</span>
+                            <span class="meta-value">${truncateText(project.students, 50)}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">วันที่ส่งคำขอ</span>
+                            <span class="meta-value">${formatDate(project.submitDate)}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">ประเภท</span>
+                            <span class="meta-value">${project.type}</span>
+                        </div>
+                    </div>
+                    <div class="branch-tag">${project.branch} - ${getBranchName(project.branch)}</div>
+                </div>
+                <div class="project-status ${statusClass}">
+                    ${statusText}
+                </div>
+            </div>
+        `;
+        
+        grid.appendChild(card);
+    });
+}
+
+// กรองโครงงาน
+function filterProjects() {
+    const branchFilter = document.getElementById('branchFilter').value;
+    const statusFilter = document.getElementById('statusFilter').value;
+    
+    filteredProjects = projects.filter(project => {
+        const branchMatch = branchFilter === 'all' || project.branch === branchFilter;
+        const statusMatch = statusFilter === 'all' || project.status === statusFilter;
+        return branchMatch && statusMatch;
+    });
+    
+    renderProjects();
+    updateStats();
+}
+
+// อัปเดตสถิติ
+function updateStats() {
+    const total = filteredProjects.length;
+    const pending = filteredProjects.filter(p => p.status === 'pending').length;
+    const approved = filteredProjects.filter(p => p.status === 'approved').length;
+    const rejected = filteredProjects.filter(p => p.status === 'rejected').length;
+    
+    animateCounter('totalCount', total);
+    animateCounter('pendingCount', pending);
+    animateCounter('approvedCount', approved);
+    animateCounter('rejectedCount', rejected);
+}
+
+// แอนิเมชันตัวเลข
+function animateCounter(elementId, targetValue) {
+    const element = document.getElementById(elementId);
+    const currentValue = parseInt(element.textContent) || 0;
+    const increment = targetValue > currentValue ? 1 : -1;
+    let current = currentValue;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        element.textContent = current;
+        
+        if ((increment === 1 && current >= targetValue) || 
+            (increment === -1 && current <= targetValue)) {
+            element.textContent = targetValue;
+            clearInterval(timer);
         }
+    }, 50);
+}
 
-        // Go back to dashboard
-        function goBack() {
-            if (confirm('คุณต้องการกลับไปหน้า Dashboard หรือไม่?')) {
-                window.history.back();
-            }
+// ฟังก์ชันช่วยเหลือ
+function getStatusText(status) {
+    const statusMap = {
+        'pending': 'รออนุมัติ',
+        'approved': 'อนุมัติแล้ว',
+        'rejected': 'ไม่อนุมัติ'
+    };
+    return statusMap[status] || 'ไม่ทราบ';
+}
+
+function getBranchName(branch) {
+    const branchMap = {
+        'IT': 'เทคโนโลยีสารสนเทศ',
+        'ITI': 'เทคโนโลยีสารสนเทศ',
+        'INE': 'วิศวกรรมสารสนเทศและเครือข่าย',
+        'INET': 'วิศวกรรมสารสนเทศและเครือข่าย',
+        'ITT': 'เทคโนโลยีสารสนเทศและธุรกิจ'
+    };
+    return branchMap[branch] || branch;
+}
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        weekday: 'long'
+    };
+    return date.toLocaleDateString('th-TH', options);
+}
+
+function formatDateTime(date, time) {
+    const dateObj = new Date(date + 'T' + time);
+    const dateOptions = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        weekday: 'long'
+    };
+    const timeOptions = {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    };
+    
+    const dateStr = dateObj.toLocaleDateString('th-TH', dateOptions);
+    const timeStr = dateObj.toLocaleTimeString('th-TH', timeOptions);
+    
+    return `${dateStr} เวลา ${timeStr} น.`;
+}
+
+function truncateText(text, maxLength) {
+    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+}
+
+function isRecentSubmission(dateString) {
+    const submitDate = new Date(dateString);
+    const today = new Date();
+    const diffTime = Math.abs(today - submitDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays <= 3;
+}
+
+// ดาวน์โหลดเอกสาร
+function downloadDocument(type) {
+    const documentNames = {
+        'proposal': 'เอกสารข้อเสนอโครงงาน.pdf',
+        'request_form': 'แบบฟอร์มคำขอสอบหัวข้อโครงงาน.pdf'
+    };
+    
+    const fileName = documentNames[type] || 'document.pdf';
+    showNotification(`ดาวน์โหลด ${fileName} เรียบร้อยแล้ว (จำลอง)`, 'success');
+}
+
+// ฟังก์ชัน Modal
+function openModal(project) {
+    currentProject = project;
+    
+    document.getElementById('modalProjectTitle').textContent = project.title;
+    document.getElementById('modalProjectSubtitle').textContent = `${project.type} - ${project.branch}`;
+    document.getElementById('modalProjectName').textContent = project.title;
+    document.getElementById('modalAdvisor').textContent = project.advisor;
+    document.getElementById('modalStudents').textContent = project.students;
+    document.getElementById('modalBranch').textContent = `${project.branch} - ${getBranchName(project.branch)}`;
+    
+    const modalBody = document.querySelector('.modal-body');
+    let descriptionSection = modalBody.querySelector('.description-section');
+    
+    if (project.description) {
+        if (!descriptionSection) {
+            descriptionSection = document.createElement('div');
+            descriptionSection.className = 'form-section description-section';
+            descriptionSection.innerHTML = `
+                <h3 class="section-title">รายละเอียดโครงงาน</h3>
+                <div class="project-details">
+                    <p style="line-height: 1.6; color: #4a5568;">${project.description}</p>
+                </div>
+            `;
+            modalBody.insertBefore(descriptionSection, modalBody.children[1]);
+        } else {
+            descriptionSection.querySelector('p').textContent = project.description;
         }
-
-        // Handle browser back/forward
-        window.addEventListener('popstate', function(event) {
-            if (document.getElementById('projectModal').style.display === 'block') {
-                closeModal();
-                event.preventDefault();
+    }
+    
+    const examSection = modalBody.querySelector('.form-section:nth-child(4)');
+    const committeeSection = modalBody.querySelector('.form-section:nth-child(5)');
+    const approveSection = modalBody.querySelector('.approve-section');
+    const rejectSection = modalBody.querySelector('.reject-section');
+    
+    if (project.status === 'approved') {
+        document.getElementById('examDate').value = project.examDate || '';
+        document.getElementById('examTime').value = project.examTime || '';
+        document.getElementById('examRoom').value = project.examRoom || '';
+        document.getElementById('chairman').value = project.chairman || '';
+        document.getElementById('committee1').value = project.committee1 || '';
+        document.getElementById('committee2').value = project.committee2 || '';
+        document.getElementById('committee3').value = project.committee3 || '';
+        
+        const formInputs = modalBody.querySelectorAll('.form-input, .form-select');
+        formInputs.forEach(input => input.disabled = true);
+        
+        approveSection.innerHTML = `
+            <div style="background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%); border-radius: 10px; padding: 2rem; text-align: center;">
+                <div style="color: #276749; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">
+                    ✅ โครงงานนี้ได้รับการอนุมัติแล้ว
+                </div>
+                <div style="color: #2d5016; margin-bottom: 1rem;">
+                    <strong>กำหนดการสอบ:</strong> ${formatDateTime(project.examDate, project.examTime)}
+                </div>
+                <div style="color: #2d5016; margin-bottom: 1rem;">
+                    <strong>ห้องสอบ:</strong> ${project.examRoom}
+                </div>
+                <div style="color: #2d5016;">
+                    <strong>กรรมการ:</strong> ${project.chairman}, ${project.committee1}, ${project.committee2}, ${project.committee3}
+                </div>
+                <button class="btn btn-secondary" onclick="closeModal()" style="margin-top: 1rem;">ปิด</button>
+            </div>
+        `;
+        
+        rejectSection.style.display = 'none';
+    } else if (project.status === 'rejected') {
+        examSection.style.display = 'none';
+        committeeSection.style.display = 'none';
+        approveSection.style.display = 'none';
+        
+        rejectSection.innerHTML = `
+            <div style="background: linear-gradient(135deg, #fff5f5 0%, #feb2b2 100%); border-radius: 10px; padding: 2rem; text-align: center;">
+                <div style="color: #c53030; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">
+                    ❌ โครงงานนี้ไม่ได้รับการอนุมัติ
+                </div>
+                <div style="color: #742a2a; margin-bottom: 1rem;">
+                    <strong>เหตุผล:</strong> ${project.rejectReason || 'ไม่ได้ระบุเหตุผล'}
+                </div>
+                <button class="btn btn-secondary" onclick="closeModal()">ปิด</button>
+            </div>
+        `;
+    } else {
+        examSection.style.display = 'block';
+        committeeSection.style.display = 'block';
+        approveSection.style.display = 'block';
+        rejectSection.style.display = 'block';
+        
+        const formInputs = modalBody.querySelectorAll('.form-input, .form-select');
+        formInputs.forEach(input => {
+            input.disabled = false;
+            if (input.type !== 'date' && input.type !== 'time') {
+                input.value = '';
             }
         });
+        
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('examDate').min = today;
+        
+        approveSection.innerHTML = `
+            <div style="background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%); border-radius: 10px; padding: 2rem; text-align: center;">
+                <p style="margin-bottom: 1rem; color: #2d3748; font-weight: 600;">กรุณาตรวจสอบข้อมูลให้ครบถ้วนก่อนการอนุมัติ</p>
+                <button class="btn btn-success" onclick="approveProject()" id="approveBtn">✓ อนุมัติการสอบ</button>
+                <button class="btn btn-secondary" onclick="closeModal()">ยกเลิก</button>
+            </div>
+        `;
+        
+        rejectSection.innerHTML = `
+            <div style="background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%); border-radius: 10px; padding: 2rem; text-align: center;">
+                <p style="margin-bottom: 1rem; color: #742a2a; font-weight: 600;">หากโครงงานไม่ผ่านเกณฑ์การอนุมัติ</p>
+                <button class="btn btn-danger" onclick="rejectProject()">✗ ไม่อนุมัติการสอบ</button>
+            </div>
+        `;
+    }
+    
+    document.getElementById('projectModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
 
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('projectModal');
-            if (event.target === modal) {
-                closeModal();
-            }
+function closeModal() {
+    document.getElementById('projectModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+    currentProject = null;
+    
+    const modalBody = document.querySelector('.modal-body');
+    const formInputs = modalBody.querySelectorAll('.form-input, .form-select');
+    formInputs.forEach(input => {
+        input.value = '';
+        input.disabled = false;
+    });
+    
+    const descriptionSection = modalBody.querySelector('.description-section');
+    if (descriptionSection) {
+        descriptionSection.remove();
+    }
+}
+
+function approveProject() {
+    if (!currentProject) return;
+    
+    const examDate = document.getElementById('examDate').value;
+    const examTime = document.getElementById('examTime').value;
+    const examRoom = document.getElementById('examRoom').value;
+    const chairman = document.getElementById('chairman').value;
+    const committee1 = document.getElementById('committee1').value;
+    const committee2 = document.getElementById('committee2').value;
+    const committee3 = document.getElementById('committee3').value;
+    
+    if (!examDate || !examTime || !examRoom || !chairman || !committee1 || !committee2 || !committee3) {
+        showNotification('กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
+        return;
+    }
+    
+    const projectIndex = projects.findIndex(p => p.id === currentProject.id);
+    if (projectIndex !== -1) {
+        projects[projectIndex].status = 'approved';
+        projects[projectIndex].examDate = examDate;
+        projects[projectIndex].examTime = examTime;
+        projects[projectIndex].examRoom = examRoom;
+        projects[projectIndex].chairman = chairman;
+        projects[projectIndex].committee1 = committee1;
+        projects[projectIndex].committee2 = committee2;
+        projects[projectIndex].committee3 = committee3;
+        projects[projectIndex].approvedDate = new Date().toISOString().split('T')[0];
+    }
+    
+    showNotification('อนุมัติการสอบเรียบร้อยแล้ว!', 'success');
+    
+    setTimeout(() => {
+        showNotification('ส่งอีเมลแจ้งการอนุมัติให้นักศึกษาและอาจารย์แล้ว', 'info');
+    }, 1500);
+    
+    closeModal();
+    filterProjects();
+}
+
+function rejectProject() {
+    if (!currentProject) return;
+    
+    const reason = prompt('กรุณาระบุเหตุผลในการไม่อนุมัติ:');
+    if (!reason || reason.trim() === '') {
+        showNotification('กรุณาระบุเหตุผลในการไม่อนุมัติ', 'error');
+        return;
+    }
+    
+    const projectIndex = projects.findIndex(p => p.id === currentProject.id);
+    if (projectIndex !== -1) {
+        projects[projectIndex].status = 'rejected';
+        projects[projectIndex].rejectReason = reason.trim();
+        projects[projectIndex].rejectedDate = new Date().toISOString().split('T')[0];
+    }
+    
+    showNotification('ไม่อนุมัติโครงงานแล้ว', 'warning');
+    
+    closeModal();
+    filterProjects();
+}
+
+// ระบบแจ้งเตือน
+function showNotification(message, type = 'info') {
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(n => n.remove());
+    
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    
+    const colors = {
+        'success': 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
+        'error': 'linear-gradient(135deg, #f56565 0%, #e53e3e 100%)',
+        'warning': 'linear-gradient(135deg, #ed8936 0%, #dd6b20 100%)',
+        'info': 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)'
+    };
+    
+    const icons = {
+        'success': '✅',
+        'error': '❌',
+        'warning': '⚠️',
+        'info': 'ℹ️'
+    };
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${colors[type]};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        z-index: 10000;
+        font-weight: 600;
+        max-width: 400px;
+        animation: slideInRight 0.3s ease-out;
+    `;
+    
+    notification.innerHTML = `${icons[type]} ${message}`;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-in';
+        setTimeout(() => notification.remove(), 300);
+    }, 4000);
+}
+
+// ฟังก์ชันค้นหา
+function setupSearch() {
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.placeholder = 'ค้นหาโครงงาน...';
+    searchInput.className = 'form-input';
+    searchInput.style.cssText = 'max-width: 300px; margin-left: auto;';
+    
+    const filterSection = document.querySelector('.filter-section');
+    filterSection.appendChild(searchInput);
+    
+    searchInput.addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        
+        if (searchTerm === '') {
+            filterProjects();
+            return;
         }
-
-        // Initialize page when loaded
-        window.addEventListener('load', function() {
-            init();
-            setupSearch();
+        
+        const branchFilter = document.getElementById('branchFilter').value;
+        const statusFilter = document.getElementById('statusFilter').value;
+        
+        filteredProjects = projects.filter(project => {
+            const branchMatch = branchFilter === 'all' || project.branch === branchFilter;
+            const statusMatch = statusFilter === 'all' || project.status === statusFilter;
+            const searchMatch = 
+                project.title.toLowerCase().includes(searchTerm) ||
+                project.advisor.toLowerCase().includes(searchTerm) ||
+                project.students.toLowerCase().includes(searchTerm);
+            
+            return branchMatch && statusMatch && searchMatch;
         });
+        
+        renderProjects();
+        updateStats();
+    });
+}
+
+// กลับไปหน้า Dashboard
+function goBack() {
+    if (confirm('คุณต้องการกลับไปหน้า Dashboard หรือไม่?')) {
+        window.history.back();
+    }
+}
+
+// จัดการ browser back/forward
+window.addEventListener('popstate', function(event) {
+    if (document.getElementById('projectModal').style.display === 'block') {
+        closeModal();
+        event.preventDefault();
+    }
+});
+
+// ปิด modal เมื่อคลิกข้างนอก
+window.onclick = function(event) {
+    const modal = document.getElementById('projectModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+
+// เริ่มต้นเมื่อโหลดหน้าเว็บ
+window.addEventListener('load', function() {
+    init();
+    setupSearch();
+});
     </script>
 </body>
 </html>

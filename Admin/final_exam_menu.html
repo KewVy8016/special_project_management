@@ -543,6 +543,17 @@
             transform: translateY(-1px);
         }
 
+        .btn-danger {
+            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 101, 101, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 101, 101, 0.4);
+        }
+
         /* Footer */
         .footer {
             background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
@@ -632,6 +643,28 @@
             max-width: 300px;
             margin-left: auto;
         }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -660,10 +693,10 @@
                 <select class="filter-select" id="branchFilter" onchange="filterProjects()">
                     <option value="all">ทั้งหมด</option>
                     <option value="IT">IT - เทคโนโลยีสารสนเทศ</option>
-                    <option value="ITI">ITI - เทคโนโลยีสารสนเทศเพื่ออุตสาหกรรม</option>
-                    <option value="INE">INE - วิศวกรรมเครือข่าย</option>
-                    <option value="INET">INET - เทคโนโลยีอินเทอร์เน็ต</option>
-                    <option value="ITT">ITT - เทคโนโลยีสารสนเทศและการสื่อสาร</option>
+                    <option value="ITI">ITI - เทคโนโลยีสารสนเทศ</option>
+                    <option value="INE">INE - วิศวกรรมสารสนเทศและเครือข่าย</option>
+                    <option value="INET">INET - วิศวกรรมสารสนเทศและเครือข่าย</option>
+                    <option value="ITT">ITT - เทคโนโลยีสารสนเทศและธุรกิจ</option>
                 </select>
             </div>
             <div class="filter-group">
@@ -758,27 +791,15 @@
                     <h3 class="section-title">เอกสารประกอบการสอบจบ</h3>
                     <div class="documents-section">
                         <div class="document-item">
-                            <span class="document-name">เล่มโครงงานฉบับสมบูรณ์</span>
+                            <span class="document-name">เล่มโครงงาน (PDF)</span>
                             <div class="document-actions">
                                 <button class="btn-download" onclick="downloadDocument('final_report')">ดาวน์โหลด</button>
                             </div>
                         </div>
                         <div class="document-item">
-                            <span class="document-name">ไฟล์การนำเสนอ (Presentation)</span>
+                            <span class="document-name">ไฟล์นำเสนอ (PDF)</span>
                             <div class="document-actions">
                                 <button class="btn-download" onclick="downloadDocument('presentation')">ดาวน์โหลด</button>
-                            </div>
-                        </div>
-                        <div class="document-item">
-                            <span class="document-name">แบบฟอร์มคำขอสอบจบโครงงาน</span>
-                            <div class="document-actions">
-                                <button class="btn-download" onclick="downloadDocument('final_request_form')">ดาวน์โหลด</button>
-                            </div>
-                        </div>
-                        <div class="document-item">
-                            <span class="document-name">บันทึกการแก้ไขจากการสอบหัวข้อ</span>
-                            <div class="document-actions">
-                                <button class="btn-download" onclick="downloadDocument('revision_notes')">ดาวน์โหลด</button>
                             </div>
                         </div>
                     </div>
@@ -824,947 +845,896 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2025 ภาควิชาเทคโนโลยีสารสนเทศ | ระบบจัดการข้อมูลโครงงานพิเศษและโครงงานสหกิจศึกษา</p>
+            <p>&copy; 2568 ภาควิชาเทคโนโลยีสารสนเทศ | ระบบจัดการข้อมูลโครงงานพิเศษและโครงงานสหกิจศึกษา</p>
         </div>
     </footer>
+
+    
 
     <script>
         // Sample final defense project data (projects that passed topic defense)
         const finalDefenseProjects = [
-            {
-                id: 1,
-                title: "ระบบจัดการร้านค้าออนไลน์ด้วย React และ Node.js",
-                advisor: "อ.ดร.สมชาย ใจดี",
-                students: "นายสมศักดิ์ เก่งมาก, นางสาวมาลี สุขใส",
-                branch: "IT",
-                status: "pending",
-                submitDate: "2024-05-25",
-                topicExamDate: "2024-04-15",
-                type: "โครงงานพิเศษ",
-                description: "พัฒนาระบบจัดการร้านค้าออนไลน์ที่ครบครันด้วยเทคโนโลยี React สำหรับ Frontend และ Node.js สำหรับ Backend พร้อมระบบจัดการสินค้า การชำระเงิน และรายงานยอดขาย",
-                chairman: "ผศ.ดร.บีสุดา ดาวเรือง",
-                committee1: "ผศ.ดร.ขนิษฐา นามี",
-                committee2: "อ.ดร.กาญจน ณ ศรีธะ",
-                committee3: "ผศ.นพดล บูรณ์กุศล",
-                documents: [
-                    { name: "เล่มโครงงานฉบับสมบูรณ์", type: "final_report" },
-                    { name: "ไฟล์การนำเสนอ (Presentation)", type: "presentation" },
-                    { name: "แบบฟอร์มคำขอสอบจบโครงงาน", type: "final_request_form" },
-                    { name: "บันทึกการแก้ไขจากการสอบหัวข้อ", type: "revision_notes" }
-                ]
-            },
-            {
-                id: 2,
-                title: "ระบบรักษาความปลอดภัยเครือข่ายด้วย Machine Learning",
-                advisor: "อ.ดร.ประเสริฐ มั่นคง",
-                students: "นายวิทยา เฉลียวฉลาด",
-                branch: "INE",
-                status: "scheduled",
-                submitDate: "2024-05-10",
-                topicExamDate: "2024-04-15",
-                type: "โครงงานพิเศษ",
-                description: "พัฒนาระบบตรวจจับและป้องกันการโจมตีทางไซเบอร์ด้วยเทคนิค Machine Learning เพื่อรักษาความปลอดภัยของเครือข่ายคอมพิวเตอร์",
-                chairman: "ผศ.ดร.บีสุดา ดาวเรือง",
-                committee1: "ผศ.ดร.ขนิษฐา นามี",
-                committee2: "อ.ดร.กาญจน ณ ศรีธะ",
-                committee3: "ผศ.นพดล บูรณ์กุศล",
-                finalExamDate: "2024-06-15",
-                finalExamTime: "09:00",
-                finalExamRoom: "IT-301",
-                documents: [
-                    { name: "เล่มโครงงานฉบับสมบูรณ์", type: "final_report" },
-                    { name: "ไฟล์การนำเสนอ (Presentation)", type: "presentation" },
-                    { name: "แบบฟอร์มคำขอสอบจบโครงงาน", type: "final_request_form" },
-                    { name: "บันทึกการแก้ไขจากการสอบหัวข้อ", type: "revision_notes" }
-                ]
-            },
-            {
-                id: 3,
-                title: "แอปพลิเคชันติดตามสุขภาพด้วย AI",
-                advisor: "อ.ดร.วิไล สุขสันต์",
-                students: "นายดำรง เก่งดี, นายประเสริฐ มั่นใจ",
-                branch: "ITI",
-                status: "pending",
-                submitDate: "2024-05-28",
-                topicExamDate: "2024-04-20",
-                type: "โครงงานสหกิจ",
-                description: "พัฒนาแอปพลิเคชันบนมือถือสำหรับติดตามสุขภาพด้วยการวิเคราะห์ข้อมูลด้วย AI รวมทั้งการแจ้งเตือนและให้คำแนะนำด้านสุขภาพ",
-                chairman: "ผศ.จสต.นพเก้า ทองใบ",
-                committee1: "ผศ.ดร.นิติการ นาคเจือทอง",
-                committee2: "ผศ.ดร.นัฎฐพันธ์ นาคพงษ์",
-                committee3: "ผศ.นิมิต ศรีคำทา",
-                documents: [
-                    { name: "เล่มโครงงานฉบับสมบูรณ์", type: "final_report" },
-                    { name: "ไฟล์การนำเสนอ (Presentation)", type: "presentation" },
-                    { name: "แบบฟอร์มคำขอสอบจบโครงงาน", type: "final_request_form" },
-                    { name: "บันทึกการแก้ไขจากการสอบหัวข้อ", type: "revision_notes" }
-                ]
-            },
-            {
-                id: 4,
-                title: "ระบบจองห้องประชุมออนไลน์",
-                advisor: "อ.ดร.พิทย์พิมล ชูรอด",
-                students: "นางสาวจิราพร สวยงาม, นายอนันต์ เก่งจริง",
-                branch: "IT",
-                status: "completed",
-                submitDate: "2024-04-20",
-                topicExamDate: "2024-03-25",
-                type: "โครงงานพิเศษ",
-                description: "พัฒนาระบบจองห้องประชุมออนไลน์ที่มีความสะดวกและมีประสิทธิภาพ พร้อมระบบแจ้งเตือนและรายงาน",
-                chairman: "ผศ.ดร.พาฝัน ดวงไพศาล",
-                committee1: "อ.ดร.ประดิษฐ์ พิทักษ์เสถียรกุล",
-                committee2: "ผศ.พีระศักดิ์ เสรีกุล",
-                committee3: "ผศ.สมชัย เชียงพงศ์พันธุ์",
-                finalExamDate: "2024-05-30",
-                finalExamTime: "14:00",
-                finalExamRoom: "IT-201",
-                finalExamCompleted: true,
-                finalResult: "ผ่าน",
-                documents: [
-                    { name: "เล่มโครงงานฉบับสมบูรณ์", type: "final_report" },
-                    { name: "ไฟล์การนำเสนอ (Presentation)", type: "presentation" },
-                    { name: "แบบฟอร์มคำขอสอบจบโครงงาน", type: "final_request_form" },
-                    { name: "บันทึกการแก้ไขจากการสอบหัวข้อ", type: "revision_notes" }
-                ]
-            },
-            {
-                id: 5,
-                title: "ระบบตรวจสอบการคัดลอกงานเขียน",
-                advisor: "ผศ.ดร.สุปีติ กุลจันทร์",
-                students: "นายสุรชัย มั่นคง",
-                branch: "INET",
-                status: "ready",
-                submitDate: "2024-05-18",
-                topicExamDate: "2024-04-25",
-                type: "โครงงานพิเศษ",
-                description: "พัฒนาระบบตรวจสอบการคัดลอกงานเขียนด้วยเทคนิค Natural Language Processing เพื่อช่วยในการตรวจสอบความถูกต้องของงานเขียน",
-                chairman: "ผศ.สิวาลัย จินเจือ",
-                committee1: "ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ",
-                committee2: "ผศ.ดร.ศรายุทธ ธเนศสกุลวัฒนา",
-                committee3: "อ.ดร.ศิรินทรา แว่วศรี",
-                documents: [
-                    { name: "เล่มโครงงานฉบับสมบูรณ์", type: "final_report" },
-                    { name: "ไฟล์การนำเสนอ (Presentation)", type: "presentation" },
-                    { name: "แบบฟอร์มคำขอสอบจบโครงงาน", type: "final_request_form" },
-                    { name: "บันทึกการแก้ไขจากการสอบหัวข้อ", type: "revision_notes" }
-                ]
-            },
-            {
-                id: 6,
-                title: "ระบบแนะนำหนังสือด้วย Collaborative Filtering",
-                advisor: "อ.ดร.วัชรชัย คงศิริวัฒนา",
-                students: "นางสาวพิมพ์ชนก อ่อนหวาน, นายณัฐวุฒิ เรียนดี",
-                branch: "ITT",
-                status: "scheduled",
-                submitDate: "2024-05-05",
-                topicExamDate: "2024-04-10",
-                type: "โครงงานสหกิจ",
-                description: "พัฒนาระบบแนะนำหนังสือโดยใช้เทคนิค Collaborative Filtering เพื่อช่วยผู้ใช้ค้นหาหนังสือที่เหมาะสมตามความสนใจ",
-                chairman: "ผศ.ดร.วันทนี ประจวบศุภกิจ",
-                committee1: "รศ.ดร.ยุพิน สรรพคุณ",
-                committee2: "รศ.ดร.อนิราช มิ่งขวัญ",
-                committee3: "ผศ.อรบุษป์ วุฒิกมลชัย",
-                finalExamDate: "2024-06-20",
-                finalExamTime: "10:30",
-                finalExamRoom: "IT-102",
-                documents: [
-                    { name: "เล่มโครงงานฉบับสมบูรณ์", type: "final_report" },
-                    { name: "ไฟล์การนำเสนอ (Presentation)", type: "presentation" },
-                    { name: "แบบฟอร์มคำขอสอบจบโครงงาน", type: "final_request_form" },
-                    { name: "บันทึกการแก้ไขจากการสอบหัวข้อ", type: "revision_notes" }
-                ]
-            },
-            {
-                id: 7,
-                title: "แอปพลิเคชันเรียนรู้ภาษาอังกฤษด้วย Gamification",
-                advisor: "ผศ.ดร.ขนิษฐา นามี",
-                students: "นายธนากร สนุกสนาน, นางสาวสุดา เก่งเก่า",
-                branch: "IT",
-                status: "ready",
-                submitDate: "2024-05-20",
-                topicExamDate: "2024-04-30",
-                type: "โครงงานพิเศษ",
-                description: "พัฒนาแอปพลิเคชันการเรียนรู้ภาษาอังกฤษที่ใช้หลักการ Gamification เพื่อเพิ่มแรงจูงใจและความสนุกในการเรียนรู้",
-                chairman: "อ.ดร.กาญจน ณ ศรีธะ",
-                committee1: "ผศ.นพดล บูรณ์กุศล",
-                committee2: "ผศ.จสต.นพเก้า ทองใบ",
-                committee3: "ผศ.ดร.นิติการ นาคเจือทอง",
-                documents: [
-                    { name: "เล่มโครงงานฉบับสมบูรณ์", type: "final_report" },
-                    { name: "ไฟล์การนำเสนอ (Presentation)", type: "presentation" },
-                    { name: "แบบฟอร์มคำขอสอบจบโครงงาน", type: "final_request_form" },
-                    { name: "บันทึกการแก้ไขจากการสอบหัวข้อ", type: "revision_notes" }
-                ]
-            },
-            {
-                id: 8,
-                title: "ระบบจัดการคลังสินค้าด้วย IoT",
-                advisor: "ผศ.ดร.นัฎฐพันธ์ นาคพงษ์",
-                students: "นายประยุทธ นักสู้",
-                branch: "INE",
-                status: "ready",
-                submitDate: "2024-05-22",
-                topicExamDate: "2024-05-02",
-                type: "โครงงานสหกิจ",
-                description: "พัฒนาระบบจัดการคลังสินค้าด้วยเทคโนโลยี Internet of Things เพื่อเพิ่มประสิทธิภาพในการจัดการสินค้า",
-                chairman: "ผศ.นิมิต ศรีคำทา",
-                committee1: "อ.ดร.พิทย์พิมล ชูรอด",
-                committee2: "ผศ.ดร.พาฝัน ดวงไพศาล",
-                committee3: "อ.ดร.ประดิษฐ์ พิทักษ์เสถียรกุล",
-                documents: [
-                    { name: "เล่มโครงงานฉบับสมบูรณ์", type: "final_report" },
-                    { name: "ไฟล์การนำเสนอ (Presentation)", type: "presentation" },
-                    { name: "แบบฟอร์มคำขอสอบจบโครงงาน", type: "final_request_form" },
-                    { name: "บันทึกการแก้ไขจากการสอบหัวข้อ", type: "revision_notes" }
-                ]
-            },
-            {
-                id: 9,
-                title: "ระบบพยากรณ์อากาศด้วย Deep Learning",
-                advisor: "รศ.ดร.อนิราช มิ่งขวัญ",
-                students: "นายวีรชัย ชาญวิทย์, นางสาวนิภา เก่งกล้า",
-                branch: "ITI",
-                status: "pending",
-                submitDate: "2024-05-30",
-                topicExamDate: "2024-05-05",
-                type: "โครงงานพิเศษ",
-                description: "พัฒนาระบบพยากรณ์อากาศด้วยเทคนิค Deep Learning เพื่อเพิ่มความแม่นยำในการทำนายสภาพอากาศ",
-                chairman: "ผศ.อรบุษป์ วุฒิกมลชัย",
-                committee1: "ผศ.ดร.บีสุดา ดาวเรือง",
-                committee2: "ผศ.ดร.ขนิษฐา นามี",
-                committee3: "อ.ดร.กาญจน ณ ศรีธะ",
-                documents: [
-                    { name: "เล่มโครงงานฉบับสมบูรณ์", type: "final_report" },
-                    { name: "ไฟล์การนำเสนอ (Presentation)", type: "presentation" },
-                    { name: "แบบฟอร์มคำขอสอบจบโครงงาน", type: "final_request_form" },
-                    { name: "บันทึกการแก้ไขจากการสอบหัวข้อ", type: "revision_notes" }
-                ]
-            },
-            {
-                id: 10,
-                title: "ระบบบริหารจัดการห้องเรียนอัจฉริยะ",
-                advisor: "ผศ.ดร.ศรายุทธ ธเนศสกุลวัฒนา",
-                students: "นายทศพล ฉลาดมาก",
-                branch: "INET",
-                status: "ready",
-                submitDate: "2024-05-08",
-                topicExamDate: "2024-04-18",
-                type: "โครงงานพิเศษ",
-                description: "พัฒนาระบบบริหารจัดการห้องเรียนอัจฉริยะที่สามารถควบคุมอุปกรณ์ต่างๆ ในห้องเรียนได้อย่างอัตโนมัติ",
-                chairman: "อ.ดร.ศิรินทรา แว่วศรี",
-                committee1: "อ.ดร.วัชรชัย คงศิริวัฒนา",
-                committee2: "ผศ.ดร.วันทนี ประจวบศุภกิจ",
-                committee3: "รศ.ดร.ยุพิน สรรพคุณ",
-                documents: [
-                    { name: "เล่มโครงงานฉบับสมบูรณ์", type: "final_report" },
-                    { name: "ไฟล์การนำเสนอ (Presentation)", type: "presentation" },
-                    { name: "แบบฟอร์มคำขอสอบจบโครงงาน", type: "final_request_form" },
-                    { name: "บันทึกการแก้ไขจากการสอบหัวข้อ", type: "revision_notes" }
-                ]
-            },
-            {
-                id: 11,
-                title: "ระบบการจัดการขยะอัจฉริยะ",
-                advisor: "ผศ.พีระศักดิ์ เสรีกุล",
-                students: "นางสาวอรอนงค์ สิงหะ, นายมานพ เก่งการ",
-                branch: "INE",
-                status: "ready",
-                submitDate: "2024-05-15",
-                topicExamDate: "2024-04-22",
-                type: "โครงงานสหกิจ",
-                description: "พัฒนาระบบจัดการขยะอัจฉริยะที่ใช้ IoT และ AI เพื่อการแยกและจัดการขยะอย่างมีประสิทธิภาพ",
-                chairman: "ผศ.สมชัย เชียงพงศ์พันธุ์",
-                committee1: "ผศ.ดร.สุปีติ กุลจันทร์",
-                committee2: "ผศ.สิวาลัย จินเจือ",
-                committee3: "ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ",
-                documents: [
-                    { name: "เล่มโครงงานฉบับสมบูรณ์", type: "final_report" },
-                    { name: "ไฟล์การนำเสนอ (Presentation)", type: "presentation" },
-                    { name: "แบบฟอร์มคำขอสอบจบโครงงาน", type: "final_request_form" },
-                    { name: "บันทึกการแก้ไขจากการสอบหัวข้อ", type: "revision_notes" }
-                ]
-            },
-            {
-                id: 12,
-                title: "แพลตฟอร์มการเรียนออนไลน์แบบโต้ตอบ",
-                advisor: "อ.ดร.ศิรินทรา แว่วศรี",
-                students: "นายกิตติพงษ์ ดีมาก",
-                branch: "ITT",
-                status: "pending",
-                submitDate: "2024-06-01",
-                topicExamDate: "2024-05-08",
-                type: "โครงงานพิเศษ",
-                description: "พัฒนาแพลตฟอร์มการเรียนออนไลน์ที่มีระบบโต้ตอบแบบเรียลไทม์และสามารถปรับเนื้อหาตามผู้เรียนได้",
-                chairman: "อ.ดร.วัชรชัย คงศิริวัฒนา",
-                committee1: "ผศ.ดร.วันทนี ประจวบศุภกิจ",
-                committee2: "รศ.ดร.ยุพิน สรรพคุณ",
-                committee3: "รศ.ดร.อนิราช มิ่งขวัญ",
-                documents: [
-                    { name: "เล่มโครงงานฉบับสมบูรณ์", type: "final_report" },
-                    { name: "ไฟล์การนำเสนอ (Presentation)", type: "presentation" },
-                    { name: "แบบฟอร์มคำขอสอบจบโครงงาน", type: "final_request_form" },
-                    { name: "บันทึกการแก้ไขจากการสอบหัวข้อ", type: "revision_notes" }
-                ]
-            }
-        ];
+    {
+        id: 1,
+        title: "ระบบจัดการร้านค้าออนไลน์ด้วย React และ Node.js",
+        advisor: "รศ.ดร.อนิราช มิ่งขวัญ",
+        students: "นายสมศักดิ์ เก่งมาก, นางสาวมาลี สุขใส",
+        branch: "IT",
+        status: "pending",
+        submitDate: "2568-05-25",
+        topicExamDate: "2568-04-15",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาระบบจัดการร้านค้าออนไลน์ที่ครบครันด้วยเทคโนโลยี React สำหรับ Frontend และ Node.js สำหรับ Backend พร้อมระบบจัดการสินค้า การชำระเงิน และรายงานยอดขาย",
+        chairman: "ผศ.อรบุษป์ วุฒิกมลชัย",
+        committee1: "ผศ.ดร.บีสุดา ดาวเรือง",
+        committee2: "ผศ.ดร.ขนิษฐา นามี",
+        committee3: "อ.ดร.กาญจน ณ ศรีธะ",
+        documents: [
+            { name: "เล่มโครงงาน (PDF)", type: "final_report" },
+            { name: "ไฟล์นำเสนอ (PDF)", type: "presentation" }
+        ]
+    },
+    {
+        id: 2,
+        title: "ระบบรักษาความปลอดภัยเครือข่ายด้วย Machine Learning",
+        advisor: "ผศ.นพดล บูรณ์กุศล",
+        students: "นายวิทยา เฉลียวฉลาด",
+        branch: "INE",
+        status: "scheduled",
+        submitDate: "2568-05-10",
+        topicExamDate: "2568-04-15",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาระบบตรวจจับและป้องกันการโจมตีทางไซเบอร์ด้วยเทคนิค Machine Learning เพื่อรักษาความปลอดภัยของเครือข่ายคอมพิวเตอร์",
+        chairman: "ผศ.จสต.นพเก้า ทองใบ",
+        committee1: "ผศ.ดร.นิติการ นาคเจือทอง",
+        committee2: "ผศ.ดร.นัฎฐพันธ์ นาคพงษ์",
+        committee3: "ผศ.นิมิต ศรีคำทา",
+        finalExamDate: "2568-06-15",
+        finalExamTime: "09:00",
+        finalExamRoom: "IT-301",
+        documents: [
+            { name: "เล่มโครงงาน (PDF)", type: "final_report" },
+            { name: "ไฟล์นำเสนอ (PDF)", type: "presentation" }
+        ]
+    },
+    {
+        id: 3,
+        title: "แอปพลิเคชันติดตามสุขภาพด้วย AI",
+        advisor: "อ.ดร.พิทย์พิมล ชูรอด",
+        students: "นายดำรง เก่งดี, นายประเสริฐ มั่นใจ",
+        branch: "ITI",
+        status: "pending",
+        submitDate: "2568-05-28",
+        topicExamDate: "2568-04-20",
+        type: "โครงงานสหกิจ",
+        description: "พัฒนาแอปพลิเคชันบนมือถือสำหรับติดตามสุขภาพด้วยการวิเคราะห์ข้อมูลด้วย AI รวมทั้งการแจ้งเตือนและให้คำแนะนำด้านสุขภาพ",
+        chairman: "ผศ.ดร.พาฝัน ดวงไพศาล",
+        committee1: "อ.ดร.ประดิษฐ์ พิทักษ์เสถียรกุล",
+        committee2: "ผศ.พีระศักดิ์ เสรีกุล",
+        committee3: "ผศ.สมชัย เชียงพงศ์พันธุ์",
+        documents: [
+            { name: "เล่มโครงงาน (PDF)", type: "final_report" },
+            { name: "ไฟล์นำเสนอ (PDF)", type: "presentation" }
+        ]
+    },
+    {
+        id: 4,
+        title: "ระบบจองห้องประชุมออนไลน์",
+        advisor: "ผศ.ดร.สุปีติ กุลจันทร์",
+        students: "นางสาวจิราพร สวยงาม, นายอนันต์ เก่งจริง",
+        branch: "IT",
+        status: "completed",
+        submitDate: "2568-04-20",
+        topicExamDate: "2568-03-25",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาระบบจองห้องประชุมออนไลน์ที่มีความสะดวกและมีประสิทธิภาพ พร้อมระบบแจ้งเตือนและรายงาน",
+        chairman: "ผศ.สิวาลัย จินเจือ",
+        committee1: "ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ",
+        committee2: "ผศ.ดร.ศรายุทธ ธเนศสกุลวัฒนา",
+        committee3: "อ.ดร.ศิรินทรา แว่วศรี",
+        finalExamDate: "2568-05-30",
+        finalExamTime: "14:00",
+        finalExamRoom: "IT-201",
+        finalExamCompleted: true,
+        finalResult: "ผ่าน",
+        documents: [
+            { name: "เล่มโครงงาน (PDF)", type: "final_report" },
+            { name: "ไฟล์นำเสนอ (PDF)", type: "presentation" }
+        ]
+    },
+    {
+        id: 5,
+        title: "ระบบตรวจสอบการคัดลอกงานเขียน",
+        advisor: "อ.ดร.วัชรชัย คงศิริวัฒนา",
+        students: "นายสุรชัย มั่นคง",
+        branch: "INET",
+        status: "ready",
+        submitDate: "2568-05-18",
+        topicExamDate: "2568-04-25",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาระบบตรวจสอบการคัดลอกงานเขียนด้วยเทคนิค Natural Language Processing เพื่อช่วยในการตรวจสอบความถูกต้องของงานเขียน",
+        chairman: "ผศ.ดร.วันทนี ประจวบศุภกิจ",
+        committee1: "รศ.ดร.ยุพิน สรรพคุณ",
+        committee2: "รศ.ดร.อนิราช มิ่งขวัญ",
+        committee3: "ผศ.อรบุษป์ วุฒิกมลชัย",
+        documents: [
+            { name: "เล่มโครงงาน (PDF)", type: "final_report" },
+            { name: "ไฟล์นำเสนอ (PDF)", type: "presentation" }
+        ]
+    },
+    {
+        id: 6,
+        title: "ระบบแนะนำหนังสือด้วย Collaborative Filtering",
+        advisor: "ผศ.ดร.บีสุดา ดาวเรือง",
+        students: "นางสาวพิมพ์ชนก อ่อนหวาน, นายณัฐวุฒิ เรียนดี",
+        branch: "ITT",
+        status: "scheduled",
+        submitDate: "2568-05-05",
+        topicExamDate: "2568-04-10",
+        type: "โครงงานสหกิจ",
+        description: "พัฒนาระบบแนะนำหนังสือโดยใช้เทคนิค Collaborative Filtering เพื่อช่วยผู้ใช้ค้นหาหนังสือที่เหมาะสมตามความสนใจ",
+        chairman: "ผศ.ดร.ขนิษฐา นามี",
+        committee1: "อ.ดร.กาญจน ณ ศรีธะ",
+        committee2: "ผศ.นพดล บูรณ์กุศล",
+        committee3: "ผศ.จสต.นพเก้า ทองใบ",
+        finalExamDate: "2568-06-20",
+        finalExamTime: "10:30",
+        finalExamRoom: "IT-102",
+        documents: [
+            { name: "เล่มโครงงาน (PDF)", type: "final_report" },
+            { name: "ไฟล์นำเสนอ (PDF)", type: "presentation" }
+        ]
+    },
+    {
+        id: 7,
+        title: "แอปพลิเคชันเรียนรู้ภาษาอังกฤษด้วย Gamification",
+        advisor: "ผศ.ดร.นิติการ นาคเจือทอง",
+        students: "นายธนากร สนุกสนาน, นางสาวสุดา เก่งเก่า",
+        branch: "IT",
+        status: "ready",
+        submitDate: "2568-05-20",
+        topicExamDate: "2568-04-30",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาแอปพลิเคชันการเรียนรู้ภาษาอังกฤษที่ใช้หลักการ Gamification เพื่อเพิ่มแรงจูงใจและความสนุกในการเรียนรู้",
+        chairman: "ผศ.ดร.นัฎฐพันธ์ นาคพงษ์",
+        committee1: "ผศ.นิมิต ศรีคำทา",
+        committee2: "อ.ดร.พิทย์พิมล ชูรอด",
+        committee3: "ผศ.ดร.พาฝัน ดวงไพศาล",
+        documents: [
+            { name: "เล่มโครงงาน (PDF)", type: "final_report" },
+            { name: "ไฟล์นำเสนอ (PDF)", type: "presentation" }
+        ]
+    },
+    {
+        id: 8,
+        title: "ระบบจัดการคลังสินค้าด้วย IoT",
+        advisor: "อ.ดร.ประดิษฐ์ พิทักษ์เสถียรกุล",
+        students: "นายประยุทธ นักสู้",
+        branch: "INE",
+        status: "ready",
+        submitDate: "2568-05-22",
+        topicExamDate: "2568-05-02",
+        type: "โครงงานสหกิจ",
+        description: "พัฒนาระบบจัดการคลังสินค้าด้วยเทคโนโลยี Internet of Things เพื่อเพิ่มประสิทธิภาพในการจัดการสินค้า",
+        chairman: "ผศ.พีระศักดิ์ เสรีกุล",
+        committee1: "ผศ.สมชัย เชียงพงศ์พันธุ์",
+        committee2: "ผศ.ดร.สุปีติ กุลจันทร์",
+        committee3: "ผศ.สิวาลัย จินเจือ",
+        documents: [
+            { name: "เล่มโครงงาน (PDF)", type: "final_report" },
+            { name: "ไฟล์นำเสนอ (PDF)", type: "presentation" }
+        ]
+    },
+    {
+        id: 9,
+        title: "ระบบพยากรณ์อากาศด้วย Deep Learning",
+        advisor: "ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ",
+        students: "นายวีรชัย ชาญวิทย์, นางสาวนิภา เก่งกล้า",
+        branch: "ITI",
+        status: "pending",
+        submitDate: "2568-05-30",
+        topicExamDate: "2568-05-05",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาระบบพยากรณ์อากาศด้วยเทคนิค Deep Learning เพื่อเพิ่มความแม่นยำในการทำนายสภาพอากาศ",
+        chairman: "ผศ.ดร.ศรายุทธ ธเนศสกุลวัฒนา",
+        committee1: "อ.ดร.ศิรินทรา แว่วศรี",
+        committee2: "อ.ดร.วัชรชัย คงศิริวัฒนา",
+        committee3: "ผศ.ดร.วันทนี ประจวบศุภกิจ",
+        documents: [
+            { name: "เล่มโครงงาน (PDF)", type: "final_report" },
+            { name: "ไฟล์นำเสนอ (PDF)", type: "presentation" }
+        ]
+    },
+    {
+        id: 10,
+        title: "ระบบบริหารจัดการห้องเรียนอัจฉริยะ",
+        advisor: "รศ.ดร.ยุพิน สรรพคุณ",
+        students: "นายทศพล ฉลาดมาก",
+        branch: "INET",
+        status: "ready",
+        submitDate: "2568-05-08",
+        topicExamDate: "2568-04-18",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาระบบบริหารจัดการห้องเรียนอัจฉริยะที่สามารถควบคุมอุปกรณ์ต่างๆ ในห้องเรียนได้อย่างอัตโนมัติ",
+        chairman: "รศ.ดร.อนิราช มิ่งขวัญ",
+        committee1: "ผศ.อรบุษป์ วุฒิกมลชัย",
+        committee2: "ผศ.ดร.บีสุดา ดาวเรือง",
+        committee3: "ผศ.ดร.ขนิษฐา นามี",
+        documents: [
+            { name: "เล่มโครงงาน (PDF)", type: "final_report" },
+            { name: "ไฟล์นำเสนอ (PDF)", type: "presentation" }
+        ]
+    },
+    {
+        id: 11,
+        title: "ระบบการจัดการขยะอัจฉริยะ",
+        advisor: "ผศ.จสต.นพเก้า ทองใบ",
+        students: "นางสาวอรอนงค์ สิงหะ, นายมานพ เก่งการ",
+        branch: "INE",
+        status: "ready",
+        submitDate: "2568-05-15",
+        topicExamDate: "2568-04-22",
+        type: "โครงงานสหกิจ",
+        description: "พัฒนาระบบจัดการขยะอัจฉริยะที่ใช้ IoT และ AI เพื่อการแยกและจัดการขยะอย่างมีประสิทธิภาพ",
+        chairman: "อ.ดร.กาญจน ณ ศรีธะ",
+        committee1: "ผศ.นพดล บูรณ์กุศล",
+        committee2: "ผศ.จสต.นพเก้า ทองใบ",
+        committee3: "ผศ.ดร.นิติการ นาคเจือทอง",
+        documents: [
+            { name: "เล่มโครงงาน (PDF)", type: "final_report" },
+            { name: "ไฟล์นำเสนอ (PDF)", type: "presentation" }
+        ]
+    },
+    {
+        id: 12,
+        title: "แพลตฟอร์มการเรียนออนไลน์แบบโต้ตอบ",
+        advisor: "ผศ.สมชัย เชียงพงศ์พันธุ์",
+        students: "นายกิตติพงษ์ ดีมาก",
+        branch: "ITT",
+        status: "pending",
+        submitDate: "2568-06-01",
+        topicExamDate: "2568-05-08",
+        type: "โครงงานพิเศษ",
+        description: "พัฒนาแพลตฟอร์มการเรียนออนไลน์ที่มีระบบโต้ตอบแบบเรียลไทม์และสามารถปรับเนื้อหาตามผู้เรียนได้",
+        chairman: "ผศ.ดร.นัฎฐพันธ์ นาคพงษ์",
+        committee1: "ผศ.นิมิต ศรีคำทา",
+        committee2: "อ.ดร.พิทย์พิมล ชูรอด",
+        committee3: "ผศ.ดร.พาฝัน ดวงไพศาล",
+        documents: [
+            { name: "เล่มโครงงาน (PDF)", type: "final_report" },
+            { name: "ไฟล์นำเสนอ (PDF)", type: "presentation" }
+        ]
+    }
+];
 
-        let filteredProjects = [...finalDefenseProjects];
-        let currentProject = null;
+let filteredProjects = [...finalDefenseProjects];
+let currentProject = null;
 
-        // Initialize the page
-        function init() {
-            renderProjects();
-            updateStats();
-            setupEventListeners();
-        }
+// Initialize the page
+function init() {
+    renderProjects();
+    updateStats();
+    setupEventListeners();
+}
 
-        // Setup event listeners
-        function setupEventListeners() {
-            // Filter change events
-            document.getElementById('branchFilter').addEventListener('change', filterProjects);
-            document.getElementById('statusFilter').addEventListener('change', filterProjects);
-            document.getElementById('searchInput').addEventListener('input', handleSearch);
+// Setup event listeners
+function setupEventListeners() {
+    // Filter change events
+    document.getElementById('branchFilter').addEventListener('change', filterProjects);
+    document.getElementById('statusFilter').addEventListener('change', filterProjects);
+    document.getElementById('searchInput').addEventListener('input', handleSearch);
 
-            // Modal close events
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') {
-                    closeModal();
-                }
-            });
-        }
-
-        // Handle search
-        function handleSearch() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            
-            if (searchTerm === '') {
-                filterProjects();
-                return;
-            }
-            
-            const branchFilter = document.getElementById('branchFilter').value;
-            const statusFilter = document.getElementById('statusFilter').value;
-            
-            filteredProjects = finalDefenseProjects.filter(project => {
-                const branchMatch = branchFilter === 'all' || project.branch === branchFilter;
-                const statusMatch = statusFilter === 'all' || project.status === statusFilter;
-                const searchMatch = 
-                    project.title.toLowerCase().includes(searchTerm) ||
-                    project.advisor.toLowerCase().includes(searchTerm) ||
-                    project.students.toLowerCase().includes(searchTerm);
-                
-                return branchMatch && statusMatch && searchMatch;
-            });
-            
-            renderProjects();
-            updateStats();
-        }
-
-        // Render project cards
-        function renderProjects() {
-            const grid = document.getElementById('projectsGrid');
-            grid.innerHTML = '';
-
-            if (filteredProjects.length === 0) {
-                grid.innerHTML = `
-                    <div style="text-align: center; padding: 3rem; color: #718096;">
-                        <h3>ไม่พบข้อมูลโครงงาน</h3>
-                        <p>กรุณาลองเปลี่ยนเงื่อนไขการกรอง</p>
-                    </div>
-                `;
-                return;
-            }
-
-            filteredProjects.forEach((project, index) => {
-                const statusClass = `status-${project.status}`;
-                const statusText = getStatusText(project.status);
-                
-                const card = document.createElement('div');
-                card.className = 'project-card';
-                card.style.animationDelay = `${index * 0.1}s`;
-                card.onclick = () => openModal(project);
-                
-                // Add priority indicator for urgent requests (submitted within last 7 days)
-                const isUrgent = isRecentSubmission(project.submitDate, 7);
-                const urgentIndicator = isUrgent && project.status === 'ready' ? 
-                    '<div style="position: absolute; top: 10px; left: 10px; background: #ff4757; color: white; padding: 4px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold;">ด่วน</div>' : '';
-                
-                // Add exam info for scheduled projects
-                const examInfo = project.status === 'scheduled' || project.status === 'completed' ? 
-                    `<div class="meta-item">
-                        <span class="meta-label">วันที่สอบจบ</span>
-                        <span class="meta-value">${formatDate(project.finalExamDate)} ${project.finalExamTime} น.</span>
-                    </div>` : '';
-                
-                card.innerHTML = `
-                    ${urgentIndicator}
-                    <div class="project-header">
-                        <div class="project-info">
-                            <h3 class="project-title">${project.title}</h3>
-                            <div class="project-meta">
-                                <div class="meta-item">
-                                    <span class="meta-label">อาจารย์ที่ปรึกษา</span>
-                                    <span class="meta-value">${project.advisor}</span>
-                                </div>
-                                <div class="meta-item">
-                                    <span class="meta-label">นักศึกษา</span>
-                                    <span class="meta-value">${truncateText(project.students, 50)}</span>
-                                </div>
-                                <div class="meta-item">
-                                    <span class="meta-label">วันที่ส่งคำขอ</span>
-                                    <span class="meta-value">${formatDate(project.submitDate)}</span>
-                                </div>
-                                <div class="meta-item">
-                                    <span class="meta-label">ประเภท</span>
-                                    <span class="meta-value">${project.type}</span>
-                                </div>
-                                ${examInfo}
-                            </div>
-                            <div class="branch-tag">${project.branch} - ${getBranchName(project.branch)}</div>
-                        </div>
-                        <div class="project-status ${statusClass}">
-                            ${statusText}
-                        </div>
-                    </div>
-                `;
-                
-                grid.appendChild(card);
-            });
-        }
-
-        // Filter projects
-        function filterProjects() {
-            const branchFilter = document.getElementById('branchFilter').value;
-            const statusFilter = document.getElementById('statusFilter').value;
-            
-            filteredProjects = finalDefenseProjects.filter(project => {
-                const branchMatch = branchFilter === 'all' || project.branch === branchFilter;
-                const statusMatch = statusFilter === 'all' || project.status === statusFilter;
-                return branchMatch && statusMatch;
-            });
-            
-            renderProjects();
-            updateStats();
-        }
-
-        // Update statistics with animation
-        function updateStats() {
-            const total = filteredProjects.length;
-            const pending = filteredProjects.filter(p => p.status === 'pending').length;
-            const ready = filteredProjects.filter(p => p.status === 'ready').length;
-            const scheduled = filteredProjects.filter(p => p.status === 'scheduled').length;
-            const completed = filteredProjects.filter(p => p.status === 'completed').length;
-            
-            animateCounter('totalCount', total);
-            animateCounter('pendingCount', pending);
-            animateCounter('readyCount', ready);
-            animateCounter('scheduledCount', scheduled);
-            animateCounter('completedCount', completed);
-        }
-
-        // Animate counter
-        function animateCounter(elementId, targetValue) {
-            const element = document.getElementById(elementId);
-            const currentValue = parseInt(element.textContent) || 0;
-            const increment = targetValue > currentValue ? 1 : -1;
-            let current = currentValue;
-            
-            const timer = setInterval(() => {
-                current += increment;
-                element.textContent = current;
-                
-                if ((increment === 1 && current >= targetValue) || 
-                    (increment === -1 && current <= targetValue)) {
-                    element.textContent = targetValue;
-                    clearInterval(timer);
-                }
-            }, 50);
-        }
-
-        // Helper functions
-        function getStatusText(status) {
-            const statusMap = {
-                'pending': 'รอการอนุมัติ',
-                'ready': 'พร้อมสอบจบ',
-                'scheduled': 'กำหนดการแล้ว',
-                'completed': 'สอบจบแล้ว'
-            };
-            return statusMap[status] || 'ไม่ทราบ';
-        }
-
-        function getBranchName(branch) {
-            const branchMap = {
-                'IT': 'เทคโนโลยีสารสนเทศ',
-                'ITI': 'เทคโนโลยีสารสนเทศเพื่ออุตสาหกรรม',
-                'INE': 'วิศวกรรมเครือข่าย',
-                'INET': 'เทคโนโลยีอินเทอร์เน็ต',
-                'ITT': 'เทคโนโลยีสารสนเทศและการสื่อสาร'
-            };
-            return branchMap[branch] || branch;
-        }
-
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const options = { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                weekday: 'long'
-            };
-            return date.toLocaleDateString('th-TH', options);
-        }
-
-        function formatDateTime(date, time) {
-            const dateObj = new Date(date + 'T' + time);
-            const dateOptions = { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                weekday: 'long'
-            };
-            const timeOptions = {
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false
-            };
-            
-            const dateStr = dateObj.toLocaleDateString('th-TH', dateOptions);
-            const timeStr = dateObj.toLocaleTimeString('th-TH', timeOptions);
-            
-            return `${dateStr} เวลา ${timeStr} น.`;
-        }
-
-        function truncateText(text, maxLength) {
-            return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
-        }
-
-        function isRecentSubmission(dateString, days = 3) {
-            const submitDate = new Date(dateString);
-            const today = new Date();
-            const diffTime = Math.abs(today - submitDate);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            return diffDays <= days;
-        }
-
-        // Document download function
-        function downloadDocument(type) {
-            const documentNames = {
-                'final_report': 'เล่มโครงงานฉบับสมบูรณ์.pdf',
-                'presentation': 'ไฟล์การนำเสนอ.pptx',
-                'final_request_form': 'แบบฟอร์มคำขอสอบจบโครงงาน.pdf',
-                'revision_notes': 'บันทึกการแก้ไขจากการสอบหัวข้อ.pdf'
-            };
-            
-            const fileName = documentNames[type] || 'document.pdf';
-            showNotification(`ดาวน์โหลด ${fileName} เรียบร้อยแล้ว (จำลอง)`, 'success');
-            
-            // In a real application, this would initiate an actual file download
-            // For demo purposes, we'll just show a notification
-        }
-
-        // Modal functions
-        function openModal(project) {
-            currentProject = project;
-            
-            // Set basic project information
-            document.getElementById('modalProjectTitle').textContent = project.title;
-            document.getElementById('modalProjectSubtitle').textContent = `${project.type} - ${project.branch}`;
-            document.getElementById('modalProjectName').textContent = project.title;
-            document.getElementById('modalAdvisor').textContent = project.advisor;
-            document.getElementById('modalStudents').textContent = project.students;
-            document.getElementById('modalBranch').textContent = `${project.branch} - ${getBranchName(project.branch)}`;
-            document.getElementById('modalTopicExamDate').textContent = formatDate(project.topicExamDate);
-            
-            // Display committee members (read-only from topic defense)
-            const committeeDisplay = document.getElementById('committeeDisplay');
-            committeeDisplay.innerHTML = `
-                <div class="committee-member">
-                    <span class="member-role">ประธานกรรมการ:</span>
-                    <span class="meta-value">${project.chairman}</span>
-                </div>
-                <div class="committee-member">
-                    <span class="member-role">กรรมการคนที่ 1:</span>
-                    <span class="meta-value">${project.committee1}</span>
-                </div>
-                <div class="committee-member">
-                    <span class="member-role">กรรมการคนที่ 2:</span>
-                    <span class="meta-value">${project.committee2}</span>
-                </div>
-                <div class="committee-member">
-                    <span class="member-role">กรรมการคนที่ 3:</span>
-                    <span class="meta-value">${project.committee3}</span>
-                </div>
-            `;
-            
-            // Add project description if exists
-            const modalBody = document.querySelector('.modal-body');
-            let descriptionSection = modalBody.querySelector('.description-section');
-            
-            if (project.description) {
-                if (!descriptionSection) {
-                    descriptionSection = document.createElement('div');
-                    descriptionSection.className = 'form-section description-section';
-                    descriptionSection.innerHTML = `
-                        <h3 class="section-title">รายละเอียดโครงงาน</h3>
-                        <div class="project-details">
-                            <p style="line-height: 1.6; color: #4a5568;">${project.description}</p>
-                        </div>
-                    `;
-                    modalBody.insertBefore(descriptionSection, modalBody.children[1]);
-                } else {
-                    descriptionSection.querySelector('p').textContent = project.description;
-                }
-            }
-            
-            // Handle different status states
-            const examScheduleSection = document.getElementById('examScheduleSection');
-            const approveSection = document.getElementById('approveSection');
-            
-            if (project.status === 'completed') {
-                // Show completed exam details
-                examScheduleSection.innerHTML = `
-                    <h3 class="section-title">ข้อมูลการสอบจบ</h3>
-                    <div class="project-details">
-                        <div class="detail-row">
-                            <span class="detail-label">วันที่สอบ:</span>
-                            <span class="detail-value">${formatDateTime(project.finalExamDate, project.finalExamTime)}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">ห้องสอบ:</span>
-                            <span class="detail-value">${project.finalExamRoom}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">ผลการสอบ:</span>
-                            <span class="detail-value" style="color: #276749; font-weight: 600;">${project.finalResult}</span>
-                        </div>
-                    </div>
-                `;
-                
-                approveSection.innerHTML = `
-                    <div style="background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%); border-radius: 10px; padding: 2rem; text-align: center;">
-                        <div style="color: #276749; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">
-                            ✅ การสอบจบโครงงานเสร็จสิ้นแล้ว
-                        </div>
-                        <div style="color: #2d5016; margin-bottom: 1rem;">
-                            <strong>ผลการสอบ:</strong> ${project.finalResult}
-                        </div>
-                        <div style="color: #2d5016;">
-                            <strong>วันที่สอบ:</strong> ${formatDateTime(project.finalExamDate, project.finalExamTime)}
-                        </div>
-                        <button class="btn btn-secondary" onclick="closeModal()" style="margin-top: 1rem;">ปิด</button>
-                    </div>
-                `;
-            } else if (project.status === 'scheduled') {
-                // Show scheduled exam details (read-only)
-                document.getElementById('finalExamDate').value = project.finalExamDate || '';
-                document.getElementById('finalExamTime').value = project.finalExamTime || '';
-                document.getElementById('finalExamRoom').value = project.finalExamRoom || '';
-                
-                // Disable form fields
-                const formInputs = examScheduleSection.querySelectorAll('.form-input, .form-select');
-                formInputs.forEach(input => input.disabled = true);
-                
-                approveSection.innerHTML = `
-                    <div style="background: linear-gradient(135deg, #fef5e7 0%, #fed7aa 100%); border-radius: 10px; padding: 2rem; text-align: center;">
-                        <div style="color: #c05621; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">
-                            📅 การสอบจบได้รับการอนุมัติแล้ว
-                        </div>
-                        <div style="color: #9c4221; margin-bottom: 1rem;">
-                            <strong>กำหนดการสอบ:</strong> ${formatDateTime(project.finalExamDate, project.finalExamTime)}
-                        </div>
-                        <div style="color: #9c4221;">
-                            <strong>ห้องสอบ:</strong> ${project.finalExamRoom}
-                        </div>
-                        <button class="btn btn-secondary" onclick="closeModal()" style="margin-top: 1rem;">ปิด</button>
-                    </div>
-                `;
-            } else if (project.status === 'pending') {
-                // Show pending approval status - no exam scheduling yet
-                examScheduleSection.innerHTML = `
-                    <h3 class="section-title">การอนุมัติเอกสาร</h3>
-                    <div class="project-details">
-                        <div class="detail-row">
-                            <span class="detail-label">สถานะ:</span>
-                            <span class="detail-value" style="color: #c53030; font-weight: 600;">รอการตรวจสอบและอนุมัติเอกสาร</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">วันที่ส่งคำขอ:</span>
-                            <span class="detail-value">${formatDate(project.submitDate)}</span>
-                        </div>
-                    </div>
-                `;
-                
-                approveSection.innerHTML = `
-                    <div style="background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%); border-radius: 10px; padding: 2rem; text-align: center; margin-bottom: 1rem;">
-                        <div style="color: #c53030; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">
-                            ⏳ รอการตรวจสอบเอกสาร
-                        </div>
-                        <div style="color: #742a2a; margin-bottom: 1rem;">
-                            กรุณาตรวจสอบเอกสารประกอบการสอบจบให้ครบถ้วนก่อนการอนุมัติ
-                        </div>
-                        <button class="btn btn-success" onclick="approveToReady()" style="margin-right: 0.5rem;">✓ อนุมัติเอกสาร</button>
-                        <button class="btn btn-danger" onclick="rejectFinalDefense()">✗ ไม่อนุมัติ</button>
-                    </div>
-                    <div style="background: #f7fafc; border-radius: 10px; padding: 1.5rem; text-align: center;">
-                        <button class="btn btn-secondary" onclick="closeModal()">ปิด</button>
-                    </div>
-                `;
-            } else {
-                // Reset form for ready projects
-                examScheduleSection.innerHTML = `
-                    <h3 class="section-title">กำหนดการสอบจบ</h3>
-                    <div class="form-group">
-                        <label class="form-label">วันที่สอบจบ</label>
-                        <input type="date" class="form-input" id="finalExamDate">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">เวลาสอบ</label>
-                        <input type="time" class="form-input" id="finalExamTime">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">ห้องสอบ</label>
-                        <select class="form-select" id="finalExamRoom">
-                            <option value="">เลือกห้องสอบ</option>
-                            <option value="IT-101">IT-101</option>
-                            <option value="IT-102">IT-102</option>
-                            <option value="IT-103">IT-103</option>
-                            <option value="IT-201">IT-201</option>
-                            <option value="IT-202">IT-202</option>
-                            <option value="IT-301">IT-301</option>
-                            <option value="IT-302">IT-302</option>
-                            <option value="IT-401">IT-401</option>
-                        </select>
-                    </div>
-                `;
-                
-                // Set minimum date to today
-                const today = new Date().toISOString().split('T')[0];
-                document.getElementById('finalExamDate').min = today;
-                
-                approveSection.innerHTML = `
-                    <div style="background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%); border-radius: 10px; padding: 2rem; text-align: center;">
-                        <p style="margin-bottom: 1rem; color: #2d3748; font-weight: 600;">กรุณาตรวจสอบข้อมูลให้ครบถ้วนก่อนการอนุมัติ</p>
-                        <button class="btn btn-success" onclick="approveFinalDefense()" id="approveBtn">✓ อนุมัติการสอบจบ</button>
-                        <button class="btn btn-secondary" onclick="closeModal()">ยกเลิก</button>
-                    </div>
-                `;
-            }
-            
-            document.getElementById('projectModal').style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
-
-        function closeModal() {
-            document.getElementById('projectModal').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restore scrolling
-            currentProject = null;
-            
-            // Remove description section if it exists
-            const modalBody = document.querySelector('.modal-body');
-            const descriptionSection = modalBody.querySelector('.description-section');
-            if (descriptionSection) {
-                descriptionSection.remove();
-            }
-        }
-
-        function approveFinalDefense() {
-            if (!currentProject) return;
-            
-            const finalExamDate = document.getElementById('finalExamDate').value;
-            const finalExamTime = document.getElementById('finalExamTime').value;
-            const finalExamRoom = document.getElementById('finalExamRoom').value;
-            
-            // Validation
-            if (!finalExamDate || !finalExamTime || !finalExamRoom) {
-                showNotification('กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
-                return;
-            }
-            
-            // Check if exam date is not in the past
-            const examDate = new Date(finalExamDate);
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            
-            if (examDate < today) {
-                showNotification('ไม่สามารถกำหนดวันสอบในอดีตได้', 'error');
-                return;
-            }
-            
-            // Update project data
-            const projectIndex = finalDefenseProjects.findIndex(p => p.id === currentProject.id);
-            if (projectIndex !== -1) {
-                finalDefenseProjects[projectIndex].status = 'scheduled';
-                finalDefenseProjects[projectIndex].finalExamDate = finalExamDate;
-                finalDefenseProjects[projectIndex].finalExamTime = finalExamTime;
-                finalDefenseProjects[projectIndex].finalExamRoom = finalExamRoom;
-                finalDefenseProjects[projectIndex].approvedDate = new Date().toISOString().split('T')[0];
-            }
-            
-            // Show success notification
-            showNotification('อนุมัติการสอบจบเรียบร้อยแล้ว!', 'success');
-            
-            // Send notification email (simulation)
-            setTimeout(() => {
-                showNotification('ส่งอีเมลแจ้งการอนุมัติให้นักศึกษา อาจารย์ที่ปรึกษา และกรรมการสอบแล้ว', 'info');
-            }, 1500);
-            
+    // Modal close events
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
             closeModal();
-            filterProjects(); // Refresh the display
         }
+    });
+}
 
-        // Approve pending project to ready status
-        function approveToReady() {
-            if (!currentProject) return;
-            
-            // Update project data
-            const projectIndex = finalDefenseProjects.findIndex(p => p.id === currentProject.id);
-            if (projectIndex !== -1) {
-                finalDefenseProjects[projectIndex].status = 'ready';
-                finalDefenseProjects[projectIndex].documentApprovedDate = new Date().toISOString().split('T')[0];
-            }
-            
-            // Show success notification
-            showNotification('อนุมัติเอกสารเรียบร้อยแล้ว! โครงงานพร้อมสำหรับการกำหนดการสอบ', 'success');
-            
-            // Send notification email (simulation)
-            setTimeout(() => {
-                showNotification('ส่งอีเมลแจ้งการอนุมัติเอกสารให้นักศึกษาและอาจารย์ที่ปรึกษาแล้ว', 'info');
-            }, 1500);
-            
-            closeModal();
-            filterProjects(); // Refresh the display
-        }
+// Handle search
+function handleSearch() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    
+    if (searchTerm === '') {
+        filterProjects();
+        return;
+    }
+    
+    const branchFilter = document.getElementById('branchFilter').value;
+    const statusFilter = document.getElementById('statusFilter').value;
+    
+    filteredProjects = finalDefenseProjects.filter(project => {
+        const branchMatch = branchFilter === 'all' || project.branch === branchFilter;
+        const statusMatch = statusFilter === 'all' || project.status === statusFilter;
+        const searchMatch = 
+            project.title.toLowerCase().includes(searchTerm) ||
+            project.advisor.toLowerCase().includes(searchTerm) ||
+            project.students.toLowerCase().includes(searchTerm);
+        
+        return branchMatch && statusMatch && searchMatch;
+    });
+    
+    renderProjects();
+    updateStats();
+}
 
-        // Reject final defense
-        function rejectFinalDefense() {
-            if (!currentProject) return;
-            
-            const reason = prompt('กรุณาระบุเหตุผลในการไม่อนุมัติ:');
-            if (!reason || reason.trim() === '') {
-                showNotification('กรุณาระบุเหตุผลในการไม่อนุมัติ', 'error');
-                return;
-            }
-            
-            // Update project data
-            const projectIndex = finalDefenseProjects.findIndex(p => p.id === currentProject.id);
-            if (projectIndex !== -1) {
-                finalDefenseProjects[projectIndex].status = 'rejected';
-                finalDefenseProjects[projectIndex].rejectReason = reason.trim();
-                finalDefenseProjects[projectIndex].rejectedDate = new Date().toISOString().split('T')[0];
-            }
-            
-            showNotification('ไม่อนุมัติการสอบจบแล้ว', 'warning');
-            
-            // Send notification email (simulation)
-            setTimeout(() => {
-                showNotification('ส่งอีเมลแจ้งการไม่อนุมัติพร้อมเหตุผลให้นักศึกษาแล้ว', 'info');
-            }, 1500);
-            
-            closeModal();
-            filterProjects(); // Refresh the display
-        }
+// Render project cards
+function renderProjects() {
+    const grid = document.getElementById('projectsGrid');
+    grid.innerHTML = '';
 
-        // Notification system
-        function showNotification(message, type = 'info') {
-            // Remove existing notifications
-            const existingNotifications = document.querySelectorAll('.notification');
-            existingNotifications.forEach(n => n.remove());
-            
-            const notification = document.createElement('div');
-            notification.className = `notification notification-${type}`;
-            
-            const colors = {
-                'success': 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
-                'error': 'linear-gradient(135deg, #f56565 0%, #e53e3e 100%)',
-                'warning': 'linear-gradient(135deg, #ed8936 0%, #dd6b20 100%)',
-                'info': 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)'
-            };
-            
-            const icons = {
-                'success': '✅',
-                'error': '❌',
-                'warning': '⚠️',
-                'info': 'ℹ️'
-            };
-            
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: ${colors[type]};
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 10px;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-                z-index: 10000;
-                font-weight: 600;
-                max-width: 400px;
-                animation: slideInRight 0.3s ease-out;
-            `;
-            
-            notification.innerHTML = `${icons[type]} ${message}`;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'slideOutRight 0.3s ease-in';
-                setTimeout(() => notification.remove(), 300);
-            }, 4000);
-        }
-
-        // Add notification animations to CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideInRight {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-            
-            @keyframes slideOutRight {
-                from {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-            }
+    if (filteredProjects.length === 0) {
+        grid.innerHTML = `
+            <div style="text-align: center; padding: 3rem; color: #718096;">
+                <h3>ไม่พบข้อมูลโครงงาน</h3>
+                <p>กรุณาลองเปลี่ยนเงื่อนไขการกรอง</p>
+            </div>
         `;
-        document.head.appendChild(style);
+        return;
+    }
 
-        // Go back to dashboard
-        function goBack() {
-            if (confirm('คุณต้องการกลับไปหน้า Dashboard หรือไม่?')) {
-                window.history.back();
-            }
+    filteredProjects.forEach((project, index) => {
+        const statusClass = `status-${project.status}`;
+        const statusText = getStatusText(project.status);
+        
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.onclick = () => openModal(project);
+        
+        // Add priority indicator for urgent requests (submitted within last 7 days)
+        const isUrgent = isRecentSubmission(project.submitDate, 7);
+        const urgentIndicator = isUrgent && project.status === 'ready' ? 
+            '<div style="position: absolute; top: 10px; left: 10px; background: #ff4757; color: white; padding: 4px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold;">ด่วน</div>' : '';
+        
+        // Add exam info for scheduled projects
+        const examInfo = project.status === 'scheduled' || project.status === 'completed' ? 
+            `<div class="meta-item">
+                <span class="meta-label">วันที่สอบจบ</span>
+                <span class="meta-value">${formatDate(project.finalExamDate)} ${project.finalExamTime} น.</span>
+            </div>` : '';
+        
+        card.innerHTML = `
+            ${urgentIndicator}
+            <div class="project-header">
+                <div class="project-info">
+                    <h3 class="project-title">${project.title}</h3>
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">อาจารย์ที่ปรึกษา</span>
+                            <span class="meta-value">${project.advisor}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">นักศึกษา</span>
+                            <span class="meta-value">${truncateText(project.students, 50)}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">วันที่ส่งคำขอ</span>
+                            <span class="meta-value">${formatDate(project.submitDate)}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">ประเภท</span>
+                            <span class="meta-value">${project.type}</span>
+                        </div>
+                        ${examInfo}
+                    </div>
+                    <div class="branch-tag">${project.branch} - ${getBranchName(project.branch)}</div>
+                </div>
+                <div class="project-status ${statusClass}">
+                    ${statusText}
+                </div>
+            </div>
+        `;
+        
+        grid.appendChild(card);
+    });
+}
+
+// Filter projects
+function filterProjects() {
+    const branchFilter = document.getElementById('branchFilter').value;
+    const statusFilter = document.getElementById('statusFilter').value;
+    
+    filteredProjects = finalDefenseProjects.filter(project => {
+        const branchMatch = branchFilter === 'all' || project.branch === branchFilter;
+        const statusMatch = statusFilter === 'all' || project.status === statusFilter;
+        return branchMatch && statusMatch;
+    });
+    
+    renderProjects();
+    updateStats();
+}
+
+// Update statistics with animation
+function updateStats() {
+    const total = filteredProjects.length;
+    const pending = filteredProjects.filter(p => p.status === 'pending').length;
+    const ready = filteredProjects.filter(p => p.status === 'ready').length;
+    const scheduled = filteredProjects.filter(p => p.status === 'scheduled').length;
+    const completed = filteredProjects.filter(p => p.status === 'completed').length;
+    
+    animateCounter('totalCount', total);
+    animateCounter('pendingCount', pending);
+    animateCounter('readyCount', ready);
+    animateCounter('scheduledCount', scheduled);
+    animateCounter('completedCount', completed);
+}
+
+// Animate counter
+function animateCounter(elementId, targetValue) {
+    const element = document.getElementById(elementId);
+    const currentValue = parseInt(element.textContent) || 0;
+    const increment = targetValue > currentValue ? 1 : -1;
+    let current = currentValue;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        element.textContent = current;
+        
+        if ((increment === 1 && current >= targetValue) || 
+            (increment === -1 && current <= targetValue)) {
+            element.textContent = targetValue;
+            clearInterval(timer);
         }
+    }, 50);
+}
 
-        // Handle browser back/forward
-        window.addEventListener('popstate', function(event) {
-            if (document.getElementById('projectModal').style.display === 'block') {
-                closeModal();
-                event.preventDefault();
-            }
-        });
+// Helper functions
+function getStatusText(status) {
+    const statusMap = {
+        'pending': 'รอการอนุมัติ',
+        'ready': 'พร้อมสอบจบ',
+        'scheduled': 'กำหนดการแล้ว',
+        'completed': 'สอบจบแล้ว'
+    };
+    return statusMap[status] || 'ไม่ทราบ';
+}
 
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('projectModal');
-            if (event.target === modal) {
-                closeModal();
-            }
+function getBranchName(branch) {
+    const branchMap = {
+        'IT': 'เทคโนโลยีสารสนเทศ',
+        'ITI': 'เทคโนโลยีสารสนเทศ',
+        'INE': 'วิศวกรรมสารสนเทศและเครือข่าย',
+        'INET': 'วิศวกรรมสารสนเทศและเครือข่าย',
+        'ITT': 'เทคโนโลยีสารสนเทศและธุรกิจ'
+    };
+    return branchMap[branch] || branch;
+}
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        weekday: 'long'
+    };
+    return date.toLocaleDateString('th-TH', options);
+}
+
+function formatDateTime(date, time) {
+    const dateObj = new Date(date + 'T' + time);
+    const dateOptions = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        weekday: 'long'
+    };
+    const timeOptions = {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    };
+    
+    const dateStr = dateObj.toLocaleDateString('th-TH', dateOptions);
+    const timeStr = dateObj.toLocaleTimeString('th-TH', timeOptions);
+    
+    return `${dateStr} เวลา ${timeStr} น.`;
+}
+
+function truncateText(text, maxLength) {
+    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+}
+
+function isRecentSubmission(dateString, days = 3) {
+    const submitDate = new Date(dateString);
+    const today = new Date();
+    const diffTime = Math.abs(today - submitDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays <= days;
+}
+
+// Document download function
+function downloadDocument(type) {
+    const documentNames = {
+        'final_report': 'เล่มโครงงาน.pdf',
+        'presentation': 'ไฟล์นำเสนอ.pdf'
+    };
+    
+    const fileName = documentNames[type] || 'document.pdf';
+    showNotification(`ดาวน์โหลด ${fileName} เรียบร้อยแล้ว (จำลอง)`, 'success');
+    
+    // In a real application, this would initiate an actual file download
+    // For demo purposes, we'll just show a notification
+}
+
+// Modal functions
+function openModal(project) {
+    currentProject = project;
+    
+    // Set basic project information
+    document.getElementById('modalProjectTitle').textContent = project.title;
+    document.getElementById('modalProjectSubtitle').textContent = `${project.type} - ${project.branch}`;
+    document.getElementById('modalProjectName').textContent = project.title;
+    document.getElementById('modalAdvisor').textContent = project.advisor;
+    document.getElementById('modalStudents').textContent = project.students;
+    document.getElementById('modalBranch').textContent = `${project.branch} - ${getBranchName(project.branch)}`;
+    document.getElementById('modalTopicExamDate').textContent = formatDate(project.topicExamDate);
+    
+    // Display committee members (read-only from topic defense)
+    const committeeDisplay = document.getElementById('committeeDisplay');
+    committeeDisplay.innerHTML = `
+        <div class="committee-member">
+            <span class="member-role">ประธานกรรมการ:</span>
+            <span class="meta-value">${project.chairman}</span>
+        </div>
+        <div class="committee-member">
+            <span class="member-role">กรรมการคนที่ 1:</span>
+            <span class="meta-value">${project.committee1}</span>
+        </div>
+        <div class="committee-member">
+            <span class="member-role">กรรมการคนที่ 2:</span>
+            <span class="meta-value">${project.committee2}</span>
+        </div>
+        <div class="committee-member">
+            <span class="member-role">กรรมการคนที่ 3:</span>
+            <span class="meta-value">${project.committee3}</span>
+        </div>
+    `;
+    
+    // Add project description if exists
+    const modalBody = document.querySelector('.modal-body');
+    let descriptionSection = modalBody.querySelector('.description-section');
+    
+    if (project.description) {
+        if (!descriptionSection) {
+            descriptionSection = document.createElement('div');
+            descriptionSection.className = 'form-section description-section';
+            descriptionSection.innerHTML = `
+                <h3 class="section-title">รายละเอียดโครงงาน</h3>
+                <div class="project-details">
+                    <p style="line-height: 1.6; color: #4a5568;">${project.description}</p>
+                </div>
+            `;
+            modalBody.insertBefore(descriptionSection, modalBody.children[1]);
+        } else {
+            descriptionSection.querySelector('p').textContent = project.description;
         }
+    }
+    
+    // Handle different status states
+    const examScheduleSection = document.getElementById('examScheduleSection');
+    const approveSection = document.getElementById('approveSection');
+    
+    if (project.status === 'completed') {
+        // Show completed exam details
+        examScheduleSection.innerHTML = `
+            <h3 class="section-title">ข้อมูลการสอบจบ</h3>
+            <div class="project-details">
+                <div class="detail-row">
+                    <span class="detail-label">วันที่สอบ:</span>
+                    <span class="detail-value">${formatDateTime(project.finalExamDate, project.finalExamTime)}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">ห้องสอบ:</span>
+                    <span class="detail-value">${project.finalExamRoom}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">ผลการสอบ:</span>
+                    <span class="detail-value" style="color: #276749; font-weight: 600;">${project.finalResult}</span>
+                </div>
+            </div>
+        `;
+        
+        approveSection.innerHTML = `
+            <div style="background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%); border-radius: 10px; padding: 2rem; text-align: center;">
+                <div style="color: #276749; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">
+                    ✅ การสอบจบโครงงานเสร็จสิ้นแล้ว
+                </div>
+                <div style="color: #2d5016; margin-bottom: 1rem;">
+                    <strong>ผลการสอบ:</strong> ${project.finalResult}
+                </div>
+                <div style="color: #2d5016;">
+                    <strong>วันที่สอบ:</strong> ${formatDateTime(project.finalExamDate, project.finalExamTime)}
+                </div>
+                <button class="btn btn-secondary" onclick="closeModal()" style="margin-top: 1rem;">ปิด</button>
+            </div>
+        `;
+    } else if (project.status === 'scheduled') {
+        // Show scheduled exam details (read-only)
+        document.getElementById('finalExamDate').value = project.finalExamDate || '';
+        document.getElementById('finalExamTime').value = project.finalExamTime || '';
+        document.getElementById('finalExamRoom').value = project.finalExamRoom || '';
+        
+        // Disable form fields
+        const formInputs = examScheduleSection.querySelectorAll('.form-input, .form-select');
+        formInputs.forEach(input => input.disabled = true);
+        
+        approveSection.innerHTML = `
+            <div style="background: linear-gradient(135deg, #fef5e7 0%, #fed7aa 100%); border-radius: 10px; padding: 2rem; text-align: center;">
+                <div style="color: #c05621; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">
+                    📅 การสอบจบได้รับการอนุมัติแล้ว
+                </div>
+                <div style="color: #9c4221; margin-bottom: 1rem;">
+                    <strong>กำหนดการสอบ:</strong> ${formatDateTime(project.finalExamDate, project.finalExamTime)}
+                </div>
+                <div style="color: #9c4221;">
+                    <strong>ห้องสอบ:</strong> ${project.finalExamRoom}
+                </div>
+                <button class="btn btn-secondary" onclick="closeModal()" style="margin-top: 1rem;">ปิด</button>
+            </div>
+        `;
+    } else if (project.status === 'pending') {
+        // Show pending approval status - no exam scheduling yet
+        examScheduleSection.innerHTML = `
+            <h3 class="section-title">การอนุมัติเอกสาร</h3>
+            <div class="project-details">
+                <div class="detail-row">
+                    <span class="detail-label">สถานะ:</span>
+                    <span class="detail-value" style="color: #c53030; font-weight: 600;">รอการตรวจสอบและอนุมัติเอกสาร</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">วันที่ส่งคำขอ:</span>
+                    <span class="detail-value">${formatDate(project.submitDate)}</span>
+                </div>
+            </div>
+        `;
+        
+        approveSection.innerHTML = `
+            <div style="background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%); border-radius: 10px; padding: 2rem; text-align: center; margin-bottom: 1rem;">
+                <div style="color: #c53030; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">
+                    ⏳ รอการตรวจสอบเอกสาร
+                </div>
+                <div style="color: #742a2a; margin-bottom: 1rem;">
+                    กรุณาตรวจสอบเอกสารประกอบการสอบจบให้ครบถ้วนก่อนการอนุมัติ
+                </div>
+                <button class="btn btn-success" onclick="approveToReady()" style="margin-right: 0.5rem;">✓ อนุมัติเอกสาร</button>
+                <button class="btn btn-danger" onclick="rejectFinalDefense()">✗ ไม่อนุมัติ</button>
+            </div>
+            <div style="background: #f7fafc; border-radius: 10px; padding: 1.5rem; text-align: center;">
+                <button class="btn btn-secondary" onclick="closeModal()">ปิด</button>
+            </div>
+        `;
+    } else {
+        // Reset form for ready projects
+        examScheduleSection.innerHTML = `
+            <h3 class="section-title">กำหนดการสอบจบ</h3>
+            <div class="form-group">
+                <label class="form-label">วันที่สอบจบ</label>
+                <input type="date" class="form-input" id="finalExamDate">
+            </div>
+            <div class="form-group">
+                <label class="form-label">เวลาสอบ</label>
+                <input type="time" class="form-input" id="finalExamTime">
+            </div>
+            <div class="form-group">
+                <label class="form-label">ห้องสอบ</label>
+                <select class="form-select" id="finalExamRoom">
+                    <option value="">เลือกห้องสอบ</option>
+                    <option value="IT-101">IT-101</option>
+                    <option value="IT-102">IT-102</option>
+                    <option value="IT-103">IT-103</option>
+                    <option value="IT-201">IT-201</option>
+                    <option value="IT-202">IT-202</option>
+                    <option value="IT-301">IT-301</option>
+                    <option value="IT-302">IT-302</option>
+                    <option value="IT-401">IT-401</option>
+                </select>
+            </div>
+        `;
+        
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('finalExamDate').min = today;
+        
+        approveSection.innerHTML = `
+            <div style="background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%); border-radius: 10px; padding: 2rem; text-align: center;">
+                <p style="margin-bottom: 1rem; color: #2d3748; font-weight: 600;">กรุณาตรวจสอบข้อมูลให้ครบถ้วนก่อนการอนุมัติ</p>
+                <button class="btn btn-success" onclick="approveFinalDefense()" id="approveBtn">✓ อนุมัติการสอบจบ</button>
+                <button class="btn btn-secondary" onclick="closeModal()">ยกเลิก</button>
+            </div>
+        `;
+    }
+    
+    document.getElementById('projectModal').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
 
-        // Initialize page when loaded
-        window.addEventListener('load', function() {
-            init();
-        });
+function closeModal() {
+    document.getElementById('projectModal').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Restore scrolling
+    currentProject = null;
+    
+    // Remove description section if it exists
+    const modalBody = document.querySelector('.modal-body');
+    const descriptionSection = modalBody.querySelector('.description-section');
+    if (descriptionSection) {
+        descriptionSection.remove();
+    }
+}
+
+function approveFinalDefense() {
+    if (!currentProject) return;
+    
+    const finalExamDate = document.getElementById('finalExamDate').value;
+    const finalExamTime = document.getElementById('finalExamTime').value;
+    const finalExamRoom = document.getElementById('finalExamRoom').value;
+    
+    // Validation
+    if (!finalExamDate || !finalExamTime || !finalExamRoom) {
+        showNotification('กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
+        return;
+    }
+    
+    // Check if exam date is not in the past
+    const examDate = new Date(finalExamDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    if (examDate < today) {
+        showNotification('ไม่สามารถกำหนดวันสอบในอดีตได้', 'error');
+        return;
+    }
+    
+    // Update project data
+    const projectIndex = finalDefenseProjects.findIndex(p => p.id === currentProject.id);
+    if (projectIndex !== -1) {
+        finalDefenseProjects[projectIndex].status = 'scheduled';
+        finalDefenseProjects[projectIndex].finalExamDate = finalExamDate;
+        finalDefenseProjects[projectIndex].finalExamTime = finalExamTime;
+        finalDefenseProjects[projectIndex].finalExamRoom = finalExamRoom;
+        finalDefenseProjects[projectIndex].approvedDate = new Date().toISOString().split('T')[0];
+    }
+    
+    // Show success notification
+    showNotification('อนุมัติการสอบจบเรียบร้อยแล้ว!', 'success');
+    
+    // Send notification email (simulation)
+    setTimeout(() => {
+        showNotification('ส่งอีเมลแจ้งการอนุมัติให้นักศึกษา อาจารย์ที่ปรึกษา และกรรมการสอบแล้ว', 'info');
+    }, 1500);
+    
+    closeModal();
+    filterProjects(); // Refresh the display
+}
+
+// Approve pending project to ready status
+function approveToReady() {
+    if (!currentProject) return;
+    
+    // Update project data
+    const projectIndex = finalDefenseProjects.findIndex(p => p.id === currentProject.id);
+    if (projectIndex !== -1) {
+        finalDefenseProjects[projectIndex].status = 'ready';
+        finalDefenseProjects[projectIndex].documentApprovedDate = new Date().toISOString().split('T')[0];
+    }
+    
+    // Show success notification
+    showNotification('อนุมัติเอกสารเรียบร้อยแล้ว! โครงงานพร้อมสำหรับการกำหนดการสอบ', 'success');
+    
+    // Send notification email (simulation)
+    setTimeout(() => {
+        showNotification('ส่งอีเมลแจ้งการอนุมัติเอกสารให้นักศึกษาและอาจารย์ที่ปรึกษาแล้ว', 'info');
+    }, 1500);
+    
+    closeModal();
+    filterProjects(); // Refresh the display
+}
+
+// Reject final defense
+function rejectFinalDefense() {
+    if (!currentProject) return;
+    
+    const reason = prompt('กรุณาระบุเหตุผลในการไม่อนุมัติ:');
+    if (!reason || reason.trim() === '') {
+        showNotification('กรุณาระบุเหตุผลในการไม่อนุมัติ', 'error');
+        return;
+    }
+    
+    // Update project data
+    const projectIndex = finalDefenseProjects.findIndex(p => p.id === currentProject.id);
+    if (projectIndex !== -1) {
+        finalDefenseProjects[projectIndex].status = 'rejected';
+        finalDefenseProjects[projectIndex].rejectReason = reason.trim();
+        finalDefenseProjects[projectIndex].rejectedDate = new Date().toISOString().split('T')[0];
+    }
+    
+    showNotification('ไม่อนุมัติการสอบจบแล้ว', 'warning');
+    
+    // Send notification email (simulation)
+    setTimeout(() => {
+        showNotification('ส่งอีเมลแจ้งการไม่อนุมัติพร้อมเหตุผลให้นักศึกษาแล้ว', 'info');
+    }, 1500);
+    
+    closeModal();
+    filterProjects(); // Refresh the display
+}
+
+// Notification system
+function showNotification(message, type = 'info') {
+    // Remove existing notifications
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(n => n.remove());
+    
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    
+    const colors = {
+        'success': 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
+        'error': 'linear-gradient(135deg, #f56565 0%, #e53e3e 100%)',
+        'warning': 'linear-gradient(135deg, #ed8936 0%, #dd6b20 100%)',
+        'info': 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)'
+    };
+    
+    const icons = {
+        'success': '✅',
+        'error': '❌',
+        'warning': '⚠️',
+        'info': 'ℹ️'
+    };
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${colors[type]};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        z-index: 10000;
+        font-weight: 600;
+        max-width: 400px;
+        animation: slideInRight 0.3s ease-out;
+    `;
+    
+    notification.innerHTML = `${icons[type]} ${message}`;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-in';
+        setTimeout(() => notification.remove(), 300);
+    }, 4000);
+}
+
+// Go back to dashboard
+function goBack() {
+    if (confirm('คุณต้องการกลับไปหน้า Dashboard หรือไม่?')) {
+        window.location.href = 'admin_dashboard.html'; // Adjust URL as needed
+    }
+}
+
+// Handle browser back/forward
+window.addEventListener('popstate', function(event) {
+    if (document.getElementById('projectModal').style.display === 'block') {
+        closeModal();
+        event.preventDefault();
+    }
+});
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('projectModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+
+// Initialize page when loaded
+window.addEventListener('load', function() {
+    init();
+});
     </script>
 </body>
 </html>
