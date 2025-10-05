@@ -1089,31 +1089,52 @@
         <div class="card">
             <h2><i class="fas fa-calendar-week"></i> ความคืบหน้ารายสัปดาห์</h2>
             <div class="timeline">
-                <!-- Week 2 - Waiting for progress -->
-                <div class="timeline-item delayed">
+                <!-- Week 2 - Completed (สัปดาห์ล่าสุดถูกให้ความเห็นจากอาจารย์ประจำวิชาไปแล้ว) -->
+                <div class="timeline-item completed">
                     <div class="timeline-dot"></div>
                     <div class="week-header">
                         <div class="week-title">
-                            <i class="fas fa-exclamation-triangle"></i>
+                            <i class="fas fa-check-circle"></i>
                             สัปดาห์ที่ 2: ปรับปรุงและเพิ่มความเสถียรของโค้ด
                         </div>
-                        <div class="week-status status-waiting">รอกำหนดความคืบหน้า</div>
+                        <div class="week-status status-completed">ให้ความเห็นสำเร็จ</div>
                     </div>
                     <div class="week-description">
                         ปรับปรุงโค้ดการอ่านค่าจากเซ็นเซอร์ เพิ่มฟังก์ชันการบันทึกข้อมูล และทดสอบกับสภาพแวดล้อมต่างๆ
-                        <br><strong>กำหนดส่ง:</strong> 15 สิงหาคม 2568
+                        <br><strong>ส่งเมื่อ:</strong> 15 สิงหาคม 2568
                     </div>
                     <div class="week-progress">
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
+                            <div class="progress-fill" style="width: 40%"></div>
                         </div>
-                        <div class="progress-percent">0%</div>
+                        <div class="progress-percent">40%</div>
                     </div>
                     <div class="week-actions">
-                        <button class="btn btn-primary btn-sm" onclick="openProgressModal(2)">
-                            <i class="fas fa-check-circle"></i>
-                            ให้ความคืบหน้า
+                        <button class="btn btn-outline btn-sm" onclick="openReportModal(2)">
+                            <i class="fas fa-eye"></i>
+                            ดูรายงาน
                         </button>
+                    </div>
+                    <!-- Comments Section for Week 2 - อาจารย์ที่ปรึกษาแสดงความเห็นก่อน -->
+                    <div class="comments-section">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-date">16 สิงหาคม 2568</div>
+                            </div>
+                            <div class="comment-text">
+                                การปรับปรุงโค้ดเป็นไปด้วยดี การเพิ่มฟังก์ชันบันทึกข้อมูลลง SD Card เป็นแนวทางที่เหมาะสม ควรทดสอบระบบกับสภาพแวดล้อมที่หลากหลายมากขึ้น
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="comment-author">อ.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
+                                <div class="comment-date">17 สิงหาคม 2568</div>
+                            </div>
+                            <div class="comment-text">
+                                การพัฒนาระบบเป็นไปด้วยดีตามแผน ควรเพิ่มการทดสอบกับข้อมูลจริงในสภาพแวดล้อมต่างๆ เพื่อให้มั่นใจในความแม่นยำของระบบ
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -1125,7 +1146,7 @@
                             <i class="fas fa-check-circle"></i>
                             สัปดาห์ที่ 1: ติดตั้งและตั้งค่าเซ็นเซอร์
                         </div>
-                        <div class="week-status status-completed">กำหนดความคืบหน้าสำเร็จ</div>
+                        <div class="week-status status-completed">ให้ความเห็นสำเร็จ</div>
                     </div>
                     <div class="week-description">
                         ติดตั้งและตั้งค่าเซ็นเซอร์วัดคุณภาพอากาศ พัฒนาโค้ดพื้นฐานสำหรับอ่านค่าจากเซ็นเซอร์ และทดสอบเบื้องต้นกับ Arduino
@@ -1143,11 +1164,11 @@
                             ดูรายงาน
                         </button>
                     </div>
-                    <!-- Comments Section for Week 1 -->
+                    <!-- Comments Section for Week 1 - อาจารย์ที่ปรึกษาแสดงความเห็นก่อน -->
                     <div class="comments-section">
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
                                 <div class="comment-date">10 สิงหาคม 2568</div>
                             </div>
                             <div class="comment-text">
@@ -1156,7 +1177,7 @@
                         </div>
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)</div>
+                                <div class="comment-author">อ.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
                                 <div class="comment-date">11 สิงหาคม 2568</div>
                             </div>
                             <div class="comment-text">
@@ -1169,31 +1190,31 @@
         </div>
     </div>
 
-    <!-- Progress Modal -->
-    <div class="modal" id="progressModal">
+    <!-- Report Modal -->
+    <div class="modal" id="reportModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">ให้ความคืบหน้า - สัปดาห์ที่ <span id="weekNumber"></span></h3>
-                <button class="close-modal" onclick="closeProgressModal()">&times;</button>
+                <h3 class="modal-title">ดูรายงาน - สัปดาห์ที่ <span id="reportModalWeekNumber">2</span></h3>
+                <button class="close-modal" onclick="closeReportModal()">&times;</button>
             </div>
             
             <!-- Report Content -->
-            <div id="reportContentSection">
+            <div id="reportModalContentSection">
                 <!-- Report Header -->
                 <div class="report-header">
-                    <h1 class="report-title">รายงานสัปดาห์ที่ <span id="reportWeekNumber">2</span></h1>
+                    <h1 class="report-title">รายงานสัปดาห์ที่ <span id="reportModalWeekNumberTitle">2</span></h1>
                     <div class="report-meta">
                         <div class="meta-item">
                             <span class="meta-label">ระยะเวลา</span>
-                            <span class="meta-value" id="reportPeriod">8 - 15 สิงหาคม 2568</span>
+                            <span class="meta-value" id="reportModalPeriod">8 - 15 สิงหาคม 2568</span>
                         </div>
                         <div class="meta-item">
                             <span class="meta-label">วันที่ส่ง</span>
-                            <span class="meta-value" id="reportSubmitDate">15 สิงหาคม 2568</span>
+                            <span class="meta-value" id="reportModalSubmitDate">15 สิงหาคม 2568</span>
                         </div>
                         <div class="meta-item">
                             <span class="meta-label">สถานะ</span>
-                            <span class="status-badge" id="reportStatus">ส่งแล้ว</span>
+                            <span class="status-badge" id="reportModalStatus">ส่งแล้ว</span>
                         </div>
                     </div>
                     
@@ -1203,10 +1224,10 @@
                             <i class="fas fa-lightbulb"></i>
                             หัวข้อการทำงานสัปดาห์นี้
                         </div>
-                        <div class="topic-content" id="reportTopic">
+                        <div class="topic-content" id="reportModalTopic">
                             ปรับปรุงและเพิ่มความเสถียรของโค้ด
                         </div>
-                        <div class="topic-description" id="reportTopicDescription">
+                        <div class="topic-description" id="reportModalTopicDescription">
                             ปรับปรุงโค้ดการอ่านค่าจากเซ็นเซอร์ เพิ่มฟังก์ชันการบันทึกข้อมูล และทดสอบกับสภาพแวดล้อมต่างๆ
                         </div>
                     </div>
@@ -1224,7 +1245,7 @@
                             <i class="fas fa-check-circle"></i>
                             สิ่งที่ทำสำเร็จในสัปดาห์นี้
                         </div>
-                        <div class="work-detail-content" id="reportCompletedWork">
+                        <div class="work-detail-content" id="reportModalCompletedWork">
                             ในสัปดาห์นี้ได้ปรับปรุงโค้ดการอ่านค่าจากเซ็นเซอร์ให้มีความเสถียรมากขึ้น เพิ่มฟังก์ชันการบันทึกข้อมูลลงใน SD Card และทดสอบระบบกับสภาพแวดล้อมที่แตกต่างกัน รวมถึงพัฒนาโค้ดสำหรับการประมวลผลข้อมูลเบื้องต้น
                         </div>
                     </div>
@@ -1234,7 +1255,7 @@
                             <i class="fas fa-exclamation-triangle"></i>
                             ปัญหาและอุปสรรคที่พบ
                         </div>
-                        <div class="work-detail-content" id="reportProblems">
+                        <div class="work-detail-content" id="reportModalProblems">
                             พบปัญหาเรื่องความไม่เสถียรของค่าที่อ่านได้จากเซ็นเซอร์ในบางสภาพแวดล้อม และปัญหาเกี่ยวกับการบันทึกข้อมูลลง SD Card ที่บางครั้งข้อมูลขาดหาย กำลังแก้ไขโดยเพิ่มการตรวจสอบ error และการเขียนข้อมูลแบบ buffer
                         </div>
                     </div>
@@ -1244,7 +1265,7 @@
                             <i class="fas fa-calendar-alt"></i>
                             แผนงานสำหรับสัปดาห์หน้า
                         </div>
-                        <div class="work-detail-content" id="reportNextPlan">
+                        <div class="work-detail-content" id="reportModalNextPlan">
                             สัปดาห์หน้าจะพัฒนาส่วนติดต่อผู้ใช้เบื้องต้นสำหรับแสดงผลข้อมูล และเริ่มพัฒนาระบบแจ้งเตือนเมื่อคุณภาพอากาศอยู่ในระดับที่เป็นอันตราย
                         </div>
                     </div>
@@ -1331,202 +1352,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Progress Form Section -->
-            <div class="progress-form-section">
-                <h3 class="progress-form-title">
-                    <i class="fas fa-sliders-h"></i>
-                    กำหนดความคืบหน้าและความคิดเห็น
-                </h3>
-                
-                <form id="progressForm">
-                    <input type="hidden" id="selectedWeek" name="week">
-                    
-                    <div class="form-group">
-                        <label class="form-label">ความคืบหน้า (%)</label>
-                        <div class="progress-value" id="progressDisplay">20%</div>
-                        <input type="range" id="progressSlider" class="progress-slider" min="0" max="100" value="20" step="5">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">ความคิดเห็น</label>
-                        <textarea id="comment" class="form-control" placeholder="กรอกความคิดเห็นเกี่ยวกับความคืบหน้าในสัปดาห์นี้..."></textarea>
-                    </div>
-                    
-                    <div class="modal-actions">
-                        <button type="button" class="btn btn-outline" onclick="closeProgressModal()">ยกเลิก</button>
-                        <button type="submit" class="btn btn-primary">บันทึกความคืบหน้า</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
-    <!-- Report Modal -->
-    <div class="modal" id="reportModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">ดูรายงาน - สัปดาห์ที่ <span id="reportModalWeekNumber">1</span></h3>
-                <button class="close-modal" onclick="closeReportModal()">&times;</button>
-            </div>
-            
-            <!-- Report Content -->
-            <div id="reportModalContentSection">
-                <!-- Report Header -->
-                <div class="report-header">
-                    <h1 class="report-title">รายงานสัปดาห์ที่ <span id="reportModalWeekNumberTitle">1</span></h1>
-                    <div class="report-meta">
-                        <div class="meta-item">
-                            <span class="meta-label">ระยะเวลา</span>
-                            <span class="meta-value" id="reportModalPeriod">1 - 8 สิงหาคม 2568</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">วันที่ส่ง</span>
-                            <span class="meta-value" id="reportModalSubmitDate">8 สิงหาคม 2568</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">สถานะ</span>
-                            <span class="status-badge" id="reportModalStatus">ส่งแล้ว</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Topic Section -->
-                    <div class="topic-section">
-                        <div class="topic-title">
-                            <i class="fas fa-lightbulb"></i>
-                            หัวข้อการทำงานสัปดาห์นี้
-                        </div>
-                        <div class="topic-content" id="reportModalTopic">
-                            ติดตั้งและตั้งค่าเซ็นเซอร์
-                        </div>
-                        <div class="topic-description" id="reportModalTopicDescription">
-                            ติดตั้งและตั้งค่าเซ็นเซอร์วัดคุณภาพอากาศ พัฒนาโค้ดพื้นฐานสำหรับอ่านค่าจากเซ็นเซอร์ และทดสอบเบื้องต้นกับ Arduino
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Work Details Section -->
-                <div class="work-details-section">
-                    <h2 class="work-details-title">
-                        <i class="fas fa-tasks"></i>
-                        รายละเอียดการทำงานในสัปดาห์นี้
-                    </h2>
-                    
-                    <div class="work-detail-item">
-                        <div class="work-detail-label">
-                            <i class="fas fa-check-circle"></i>
-                            สิ่งที่ทำสำเร็จในสัปดาห์นี้
-                        </div>
-                        <div class="work-detail-content" id="reportModalCompletedWork">
-                            ในสัปดาห์นี้ได้ติดตั้งเซ็นเซอร์วัดคุณภาพอากาศและพัฒนาโค้ดพื้นฐานสำหรับอ่านค่าจากเซ็นเซอร์ รวมถึงทดสอบเบื้องต้นกับ Arduino เพื่อตรวจสอบการทำงานของระบบ
-                        </div>
-                    </div>
-
-                    <div class="work-detail-item">
-                        <div class="work-detail-label">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            ปัญหาและอุปสรรคที่พบ
-                        </div>
-                        <div class="work-detail-content" id="reportModalProblems">
-                            ยังไม่พบปัญหาที่สำคัญในขั้นตอนการติดตั้งและตั้งค่าเบื้องต้น
-                        </div>
-                    </div>
-
-                    <div class="work-detail-item">
-                        <div class="work-detail-label">
-                            <i class="fas fa-calendar-alt"></i>
-                            แผนงานสำหรับสัปดาห์หน้า
-                        </div>
-                        <div class="work-detail-content" id="reportModalNextPlan">
-                            สัปดาห์หน้าจะปรับปรุงโค้ดการอ่านค่าจากเซ็นเซอร์ให้มีความเสถียรมากขึ้น และเพิ่มฟังก์ชันการบันทึกข้อมูล
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Files Section -->
-                <div class="files-section">
-                    <h2 class="files-title">
-                        <i class="fas fa-folder-open"></i>
-                        เอกสารและภาพประกอบ
-                    </h2>
-
-                    <!-- Documents -->
-                    <div class="file-category">
-                        <div class="file-category-title">
-                            <i class="fas fa-file-alt"></i>
-                            รูปเล่มและเอกสารประกอบ
-                        </div>
-                        <div class="file-list">
-                            <div class="file-item-modal">
-                                <div class="file-icon-modal">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-info">
-                                    <div class="file-name">รายงานสัปดาห์ที่ 1 - Sensor Setup.pdf</div>
-                                    <div class="file-size">980 KB</div>
-                                </div>
-                                <div class="file-actions">
-                                    <button class="file-action file-download">
-                                        <i class="fas fa-download"></i>
-                                    </button>
-                                    <button class="file-action file-view">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <div class="file-item-modal">
-                                <div class="file-icon-modal">
-                                    <i class="fas fa-file-code"></i>
-                                </div>
-                                <div class="file-info">
-                                    <div class="file-name">Source Code Basic.ino</div>
-                                    <div class="file-size">32 KB</div>
-                                </div>
-                                <div class="file-actions">
-                                    <button class="file-action file-download">
-                                        <i class="fas fa-download"></i>
-                                    </button>
-                                    <button class="file-action file-view">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Images -->
-                    <div class="file-category">
-                        <div class="file-category-title">
-                            <i class="fas fa-images"></i>
-                            ภาพการทำงานในสัปดาห์นี้
-                        </div>
-                        <div class="image-gallery">
-                            <div class="image-item">
-                                <div class="image-thumbnail">
-                                    <i class="fas fa-image"></i>
-                                </div>
-                                <div class="image-info">
-                                    <div class="image-name">sensor-installation.jpg</div>
-                                    <div class="image-size">756 KB</div>
-                                </div>
-                            </div>
-                            
-                            <div class="image-item">
-                                <div class="image-thumbnail">
-                                    <i class="fas fa-image"></i>
-                                </div>
-                                <div class="image-info">
-                                    <div class="image-name">arduino-setup.png</div>
-                                    <div class="image-size">1.1 MB</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Comments Section -->
+                <!-- Comments Section in Report Modal - อาจารย์ที่ปรึกษาแสดงความเห็นก่อน -->
                 <div class="comments-section-modal">
                     <h2 class="comments-title">
                         <i class="fas fa-comments"></i>
@@ -1539,14 +1366,14 @@
                             <div class="comment-author-info">
                                 <div class="comment-avatar advisor">อ</div>
                                 <div class="author-details">
-                                    <div class="author-name">รศ.ดร.อนิราช มิ่งขวัญ</div>
+                                    <div class="author-name">ผศ.อรบุษป์ วุฒิกมลชัย</div>
                                     <div class="author-role">อาจารย์ที่ปรึกษา</div>
                                 </div>
                             </div>
-                            <div class="comment-date">10 สิงหาคม 2568 | 14:30</div>
+                            <div class="comment-date">16 สิงหาคม 2568 | 14:30</div>
                         </div>
                         <p class="comment-text">
-                            การติดตั้งเซ็นเซอร์และพัฒนาโค้ดเบื้องต้นเป็นไปด้วยดี ควรทดสอบเซ็นเซอร์กับสภาพแวดล้อมที่หลากหลายเพื่อตรวจสอบความแม่นยำ
+                            การปรับปรุงโค้ดเป็นไปด้วยดี การเพิ่มฟังก์ชันบันทึกข้อมูลลง SD Card เป็นแนวทางที่เหมาะสม ควรทดสอบระบบกับสภาพแวดล้อมที่หลากหลายมากขึ้นเพื่อให้มั่นใจในความเสถียรของระบบ
                         </p>
                     </div>
 
@@ -1556,14 +1383,14 @@
                             <div class="comment-author-info">
                                 <div class="comment-avatar instructor">อ</div>
                                 <div class="author-details">
-                                    <div class="author-name">ผศ.อรบุษป์ วุฒิกมลชัย</div>
+                                    <div class="author-name">อ.อนิราช มิ่งขวัญ</div>
                                     <div class="author-role">อาจารย์ประจำวิชา</div>
                                 </div>
                             </div>
-                            <div class="comment-date">11 สิงหาคม 2568 | 09:15</div>
+                            <div class="comment-date">17 สิงหาคม 2568 | 09:15</div>
                         </div>
                         <p class="comment-text">
-                            การเริ่มต้นโครงการเป็นไปด้วยดี ควรวางแผนการเก็บข้อมูลและวิเคราะห์ผลลัพธ์ให้ชัดเจนในขั้นตอนต่อไป
+                            การพัฒนาระบบเป็นไปด้วยดีตามแผน ควรเพิ่มการทดสอบกับข้อมูลจริงในสภาพแวดล้อมต่างๆ เพื่อให้มั่นใจในความแม่นยำของระบบ และพิจารณาการแสดงผลข้อมูลในรูปแบบที่เข้าใจง่ายสำหรับผู้ใช้
                         </p>
                     </div>
                 </div>
@@ -1572,39 +1399,7 @@
     </div>
 
     <script>
-        // Progress slider functionality
-        const progressSlider = document.getElementById('progressSlider');
-        const progressDisplay = document.getElementById('progressDisplay');
-        
-        if (progressSlider) {
-            progressSlider.addEventListener('input', function() {
-                progressDisplay.textContent = this.value + '%';
-            });
-        }
-
         // Modal functionality
-        function openProgressModal(weekNumber) {
-            document.getElementById('weekNumber').textContent = weekNumber;
-            document.getElementById('reportWeekNumber').textContent = weekNumber;
-            document.getElementById('selectedWeek').value = weekNumber;
-            document.getElementById('progressModal').style.display = 'flex';
-            
-            // Set report data based on week
-            setProgressReportData(weekNumber);
-            
-            // Reset form values
-            document.getElementById('progressSlider').value = 20;
-            document.getElementById('progressDisplay').textContent = '20%';
-            document.getElementById('comment').value = '';
-            
-            // Add event listeners for file actions
-            addFileEventListeners();
-        }
-
-        function closeProgressModal() {
-            document.getElementById('progressModal').style.display = 'none';
-        }
-
         function openReportModal(weekNumber) {
             document.getElementById('reportModalWeekNumber').textContent = weekNumber;
             document.getElementById('reportModalWeekNumberTitle').textContent = weekNumber;
@@ -1621,9 +1416,18 @@
             document.getElementById('reportModal').style.display = 'none';
         }
 
-        // Set report data for progress modal
-        function setProgressReportData(weekNumber) {
+        // Set report data for report modal
+        function setReportModalData(weekNumber) {
             const reportData = {
+                1: {
+                    period: "1 - 8 สิงหาคม 2568",
+                    submitDate: "8 สิงหาคม 2568",
+                    topic: "ติดตั้งและตั้งค่าเซ็นเซอร์",
+                    topicDescription: "ติดตั้งและตั้งค่าเซ็นเซอร์วัดคุณภาพอากาศ พัฒนาโค้ดพื้นฐานสำหรับอ่านค่าจากเซ็นเซอร์ และทดสอบเบื้องต้นกับ Arduino",
+                    completedWork: "ในสัปดาห์นี้ได้ติดตั้งเซ็นเซอร์วัดคุณภาพอากาศและพัฒนาโค้ดพื้นฐานสำหรับอ่านค่าจากเซ็นเซอร์ รวมถึงทดสอบเบื้องต้นกับ Arduino เพื่อตรวจสอบการทำงานของระบบ",
+                    problems: "ยังไม่พบปัญหาที่สำคัญในขั้นตอนการติดตั้งและตั้งค่าเบื้องต้น",
+                    nextPlan: "สัปดาห์หน้าจะปรับปรุงโค้ดการอ่านค่าจากเซ็นเซอร์ให้มีความเสถียรมากขึ้น และเพิ่มฟังก์ชันการบันทึกข้อมูล"
+                },
                 2: {
                     period: "8 - 15 สิงหาคม 2568",
                     submitDate: "15 สิงหาคม 2568",
@@ -1636,31 +1440,6 @@
             };
             
             const data = reportData[weekNumber] || reportData[2];
-            
-            document.getElementById('reportPeriod').textContent = data.period;
-            document.getElementById('reportSubmitDate').textContent = data.submitDate;
-            document.getElementById('reportTopic').textContent = data.topic;
-            document.getElementById('reportTopicDescription').textContent = data.topicDescription;
-            document.getElementById('reportCompletedWork').textContent = data.completedWork;
-            document.getElementById('reportProblems').textContent = data.problems;
-            document.getElementById('reportNextPlan').textContent = data.nextPlan;
-        }
-
-        // Set report data for report modal
-        function setReportModalData(weekNumber) {
-            const reportData = {
-                1: {
-                    period: "1 - 8 สิงหาคม 2568",
-                    submitDate: "8 สิงหาคม 2568",
-                    topic: "ติดตั้งและตั้งค่าเซ็นเซอร์",
-                    topicDescription: "ติดตั้งและตั้งค่าเซ็นเซอร์วัดคุณภาพอากาศ พัฒนาโค้ดพื้นฐานสำหรับอ่านค่าจากเซ็นเซอร์ และทดสอบเบื้องต้นกับ Arduino",
-                    completedWork: "ในสัปดาห์นี้ได้ติดตั้งเซ็นเซอร์วัดคุณภาพอากาศและพัฒนาโค้ดพื้นฐานสำหรับอ่านค่าจากเซ็นเซอร์ รวมถึงทดสอบเบื้องต้นกับ Arduino เพื่อตรวจสอบการทำงานของระบบ",
-                    problems: "ยังไม่พบปัญหาที่สำคัญในขั้นตอนการติดตั้งและตั้งค่าเบื้องต้น",
-                    nextPlan: "สัปดาห์หน้าจะปรับปรุงโค้ดการอ่านค่าจากเซ็นเซอร์ให้มีความเสถียรมากขึ้น และเพิ่มฟังก์ชันการบันทึกข้อมูล"
-                }
-            };
-            
-            const data = reportData[weekNumber] || reportData[1];
             
             document.getElementById('reportModalPeriod').textContent = data.period;
             document.getElementById('reportModalSubmitDate').textContent = data.submitDate;
@@ -1698,109 +1477,28 @@
             });
         }
 
-        // Form submission for setting progress
-        document.getElementById('progressForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const reportModal = document.getElementById('reportModal');
             
-            const weekNumber = document.getElementById('selectedWeek').value;
-            const progressValue = document.getElementById('progressSlider').value;
-            const comment = document.getElementById('comment').value;
-            
-            if (!comment.trim()) {
-                alert('กรุณากรอกความคิดเห็น');
-                return;
+            if (e.target === reportModal) {
+                closeReportModal();
             }
-            
-            // In a real application, you would send this data to the server
-            console.log(`บันทึกความคืบหน้าสำหรับสัปดาห์ที่ ${weekNumber}: ${progressValue}%`);
-            console.log(`ความคิดเห็น: ${comment}`);
-            
-            // Simulate successful submission
-            alert(`บันทึกความคืบหน้าสำหรับสัปดาห์ที่ ${weekNumber} เรียบร้อยแล้ว!`);
-            
-            // Close modal
-            closeProgressModal();
-            
-            // Update the timeline item
-            updateTimelineItem(weekNumber, progressValue, comment);
         });
 
-        // Update timeline item after submission
-        function updateTimelineItem(weekNumber, progressValue, comment) {
-            // Find the timeline item for the specified week
-            const timelineItems = document.querySelectorAll('.timeline-item');
-            let targetItem = null;
+        // Initialize progress circle with the latest progress (40%)
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgressCircle(40);
             
-            for (let item of timelineItems) {
-                if (item.querySelector('.week-title').textContent.includes(`สัปดาห์ที่ ${weekNumber}`)) {
-                    targetItem = item;
-                    break;
+            // Add CSS rule for progress circle text
+            const style = document.createElement('style');
+            style.textContent = `
+                .progress-circle::before {
+                    content: var(--progress-text, "40%");
                 }
-            }
-            
-            if (targetItem) {
-                // Remove delayed class and add completed class
-                targetItem.classList.remove('delayed');
-                targetItem.classList.add('completed');
-                
-                // Update status
-                const statusElement = targetItem.querySelector('.week-status');
-                if (statusElement) {
-                    statusElement.textContent = 'กำหนดความคืบหน้าสำเร็จ';
-                    statusElement.className = 'week-status status-completed';
-                }
-                
-                // Update progress bar
-                const progressFill = targetItem.querySelector('.progress-fill');
-                const progressPercent = targetItem.querySelector('.progress-percent');
-                if (progressFill && progressPercent) {
-                    progressFill.style.width = `${progressValue}%`;
-                    progressPercent.textContent = `${progressValue}%`;
-                }
-                
-                // Update actions - เปลี่ยนเป็นปุ่ม "ดูรายงาน" เท่านั้น
-                const actionsContainer = targetItem.querySelector('.week-actions');
-                if (actionsContainer) {
-                    actionsContainer.innerHTML = `
-                        <button class="btn btn-outline btn-sm" onclick="openReportModal(${weekNumber})">
-                            <i class="fas fa-eye"></i>
-                            ดูรายงาน
-                        </button>
-                    `;
-                }
-                
-                // Update timeline dot
-                const timelineDot = targetItem.querySelector('.timeline-dot');
-                if (timelineDot) {
-                    timelineDot.style.background = '#4299e1';
-                }
-                
-                // Add comment
-                let commentsSection = targetItem.querySelector('.comments-section');
-                if (!commentsSection) {
-                    commentsSection = document.createElement('div');
-                    commentsSection.className = 'comments-section';
-                    targetItem.appendChild(commentsSection);
-                }
-                
-                const newComment = document.createElement('div');
-                newComment.className = 'comment';
-                newComment.innerHTML = `
-                    <div class="comment-header">
-                        <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
-                        <div class="comment-date">${new Date().toLocaleDateString('th-TH')}</div>
-                    </div>
-                    <div class="comment-text">
-                        ${comment}
-                    </div>
-                `;
-                
-                commentsSection.appendChild(newComment);
-                
-                // Update progress circle with the latest progress value
-                updateProgressCircle(progressValue);
-            }
-        }
+            `;
+            document.head.appendChild(style);
+        });
 
         // Update progress circle with the latest progress value
         function updateProgressCircle(percentage) {
@@ -1811,33 +1509,6 @@
             // Update the text content
             circle.style.setProperty('--progress-text', `"${percentage}%"`);
         }
-
-        // Close modal when clicking outside
-        window.addEventListener('click', function(e) {
-            const progressModal = document.getElementById('progressModal');
-            const reportModal = document.getElementById('reportModal');
-            
-            if (e.target === progressModal) {
-                closeProgressModal();
-            }
-            if (e.target === reportModal) {
-                closeReportModal();
-            }
-        });
-
-        // Initialize progress circle with the latest progress (20%)
-        document.addEventListener('DOMContentLoaded', function() {
-            updateProgressCircle(20);
-            
-            // Add CSS rule for progress circle text
-            const style = document.createElement('style');
-            style.textContent = `
-                .progress-circle::before {
-                    content: var(--progress-text, "20%");
-                }
-            `;
-            document.head.appendChild(style);
-        });
 
         // Notification function
         function showNotification(message, type = 'success') {

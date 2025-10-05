@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบการจัดการข้อมูลโครงงาน - ผลการสอบโครงงาน</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0fff0 0%, #e6ffe6 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo::before {
+            content: "📋";
+            font-size: 20px;
+        }
+
+        .system-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border: 2px solid white;
+        }
+
+        .user-name {
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .content-area {
+            background: white;
+            border-radius: 20px;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.1);
+        }
+
+        .status-section {
+            text-align: center;
+            padding: 3rem;
+            width: 100%;
+        }
+
+        .status-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            background: rgba(76, 175, 80, 0.1);
+            border: 5px solid #4CAF50;
+            color: #4CAF50;
+            font-size: 50px;
+        }
+
+        .status-title {
+            color: #2E7D32;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status-subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .exam-info {
+            background: #F8F9FA;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 700px;
+            text-align: left;
+            border: 1px solid #E9ECEF;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #E9ECEF;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .info-label {
+            flex: 0 0 200px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .info-value {
+            flex: 1;
+            color: #212529;
+        }
+
+        .comments-section {
+            margin-top: 2rem;
+            background: #e8f5e9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .comments-title {
+            color: #2E7D32;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .comment-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .comment-date {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .comment-content {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .upload-section {
+            margin-top: 2rem;
+            background: #E3F2FD;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 2px dashed #2196F3;
+        }
+
+        .upload-title {
+            color: #1976D2;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .upload-instructions {
+            color: #666;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .upload-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .file-input-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 12px 24px;
+            background: #2196F3;
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-input-label:hover {
+            background: #1976D2;
+        }
+
+        .file-name {
+            margin-top: 0.5rem;
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #2196F3;
+            color: #2196F3;
+        }
+
+        .btn-outline:hover {
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .info-row {
+                flex-direction: column;
+            }
+            
+            .info-label {
+                flex: none;
+                margin-bottom: 0.5rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .status-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 40px;
+            }
+            
+            .status-title {
+                font-size: 24px;
+            }
+            
+            .status-subtitle {
+                font-size: 16px;
+            }
+            
+            .comment-header {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+        }
+
+        /* Animation for status icon */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .status-icon {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo"></div>
+                <h1 class="system-title">ระบบการจัดการข้อมูลโครงงาน</h1>
+            </div>
+            <div class="user-section">
+                <a href="profile.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                    <span class="user-name">ธนบูลย์ อิ่มเจริญ</span>
+                    <div class="user-avatar">T</div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="content-area">
+            <div class="status-section">
+                <div class="status-icon">✅</div>
+                <h2 class="status-title">ผลการสอบ: ผ่าน (ต้องแก้ไข)</h2>
+                <p class="status-subtitle">การสอบโครงงานของคุณผ่านเกณฑ์การประเมิน แต่มีบางส่วนที่ต้องแก้ไขตามคำแนะนำของคณะกรรมการ กรุณาอัพโหลดไฟล์ที่แก้ไขแล้วภายใน 7 วัน</p>
+                
+                <div class="exam-info">
+                    <h3 style="text-align: center; margin-bottom: 1.5rem; color: #2196F3;">รายละเอียดการสอบ</h3>
+                    
+                    <div class="info-row">
+                        <div class="info-label">วันที่สอบ:</div>
+                        <div class="info-value">25 พฤศจิกายน 2568</div>
+                    </div>
+                    
+                    <div class="info-row">
+                        <div class="info-label">หัวข้อโครงงาน:</div>
+                        <div class="info-value">ระบบจัดการคลังสินค้าอัจฉริยะด้วยเทคโนโลยี IoT</div>
+                    </div>
+                    
+                    <div class="info-row">
+                        <div class="info-label">สถานะ:</div>
+                        <div class="info-value" style="color: #4CAF50; font-weight: 600;">ผ่าน (ต้องแก้ไข)</div>
+                    </div>
+                    
+                    <div class="comments-section">
+                        <div class="comments-title">ความคิดเห็นและข้อเสนอแนะจากคณะกรรมการ</div>
+                        <div class="comments-list">
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <span class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ</span>
+                                    <span class="comment-date">25 พ.ย. 2568</span>
+                                </div>
+                                <div class="comment-content">
+                                    โครงงานมีแนวคิดดี แต่ควรเพิ่มการอ้างอิงงานวิจัยล่าสุดในส่วนของ IoT Applications in Warehouse Management ที่ตีพิมพ์ในช่วง 2 ปีที่ผ่านมา
+                                </div>
+                            </div>
+                            
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <span class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย</span>
+                                    <span class="comment-date">25 พ.ย. 2568</span>
+                                </div>
+                                <div class="comment-content">
+                                    กรุณาแก้ไขบทที่ 3 ในส่วนวิธีการวิจัยให้ระบุรายละเอียดเครื่องมือที่ใช้และวิธีการวิเคราะห์ข้อมูลให้ชัดเจนยิ่งขึ้น
+                                </div>
+                            </div>
+                            
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <span class="comment-author">ผศ.ดร.บีสุดา ดาวเรือง</span>
+                                    <span class="comment-date">25 พ.ย. 2568</span>
+                                </div>
+                                <div class="comment-content">
+                                    ควรปรับปรุงรูปแบบการนำเสนอในบทที่ 4 และเพิ่มการวิเคราะห์ผลการทดลองโดยเปรียบเทียบกับงานวิจัยอื่นๆ
+                                </div>
+                            </div>
+
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <span class="comment-author">ผศ.ดร.ขนิษฐา นามี</span>
+                                    <span class="comment-date">25 พ.ย. 2568</span>
+                                </div>
+                                <div class="comment-content">
+                                    ควรปรับปรุงรูปแบบการนำเสนอในบทที่ 3 และเพิ่มการวิเคราะห์ผลการทดลองโดยเปรียบเทียบกับงานวิจัยอื่นๆ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="upload-section">
+                        <div class="upload-title">อัพโหลดไฟล์ที่แก้ไขแล้ว</div>
+                        <div class="upload-instructions">
+                            กรุณาอัพโหลดไฟล์เอกสารโครงงานที่แก้ไขตามคำแนะนำของคณะกรรมการแล้วในรูปแบบ PDF (ขนาดไฟล์ไม่เกิน 10MB)
+                        </div>
+                        <div class="upload-area">
+                            <div class="file-input-container">
+                                <input type="file" id="fileUpload" class="file-input" accept=".pdf">
+                                <label for="fileUpload" class="file-input-label">เลือกไฟล์ PDF</label>
+                            </div>
+                            <div id="fileName" class="file-name">ยังไม่ได้เลือกไฟล์</div>
+                            <button class="btn btn-success" onclick="uploadFile()">อัพโหลดไฟล์</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function uploadFile() {
+            const fileInput = document.getElementById('fileUpload');
+            if (fileInput.files.length === 0) {
+                alert('กรุณาเลือกไฟล์ PDF ก่อนอัพโหลด');
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            if (file.type !== 'application/pdf') {
+                alert('กรุณาอัพโหลดไฟล์ PDF เท่านั้น');
+                return;
+            }
+            
+            if (file.size > 10 * 1024 * 1024) {
+                alert('ขนาดไฟล์ต้องไม่เกิน 10MB');
+                return;
+            }
+            
+            // จำลองการอัพโหลดไฟล์
+            alert('กำลังอัพโหลดไฟล์: ' + file.name);
+            // ในทางปฏิบัติควรมีโค้ดสำหรับอัพโหลดไฟล์ไปยังเซิร์ฟเวอร์ที่นี่
+            window.location.href = 'await_comittee.html'; // เปลี่ยนเส้นทางหลังอัพโหลดสำเร็จ
+        }
+
+        // แสดงชื่อไฟล์ที่เลือก
+        document.getElementById('fileUpload').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'ยังไม่ได้เลือกไฟล์';
+            document.getElementById('fileName').textContent = fileName;
+        });
+    </script>
+</body>
+</html>

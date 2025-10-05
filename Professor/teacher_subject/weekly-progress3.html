@@ -123,7 +123,7 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: conic-gradient(#48bb78 0deg, #48bb78 216deg, #e2e8f0 216deg);
+            background: conic-gradient(#48bb78 0deg, #48bb78 270deg, #e2e8f0 270deg);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -132,7 +132,7 @@
         }
 
         .progress-circle::before {
-            content: '70%';
+            content: '75%';
             width: 60px;
             height: 60px;
             background: white;
@@ -1084,15 +1084,15 @@
         <div class="card">
             <h2><i class="fas fa-calendar-week"></i> ความคืบหน้ารายสัปดาห์</h2>
             <div class="timeline">
-                <!-- Week 8 - Current/Pending -->
-                <div class="timeline-item delayed">
+                <!-- Week 8 - Current/Completed -->
+                <div class="timeline-item completed">
                     <div class="timeline-dot"></div>
                     <div class="week-header">
                         <div class="week-title">
-                            <i class="fas fa-exclamation-triangle"></i>
+                            <i class="fas fa-check-circle"></i>
                             สัปดาห์ที่ 8: ปรับปรุงประสิทธิภาพโมเดล
                         </div>
-                        <div class="week-status status-waiting">รอกำหนดความคืบหน้า</div>
+                        <div class="week-status status-completed">กำหนดความคืบหน้าสำเร็จ</div>
                     </div>
                     <div class="week-description">
                         ปรับปรุงโมเดล Machine Learning เพื่อเพิ่มความแม่นยำและประสิทธิภาพ
@@ -1100,15 +1100,38 @@
                     </div>
                     <div class="week-progress">
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
+                            <div class="progress-fill" style="width: 75%"></div>
                         </div>
-                        <div class="progress-percent">0%</div>
+                        <div class="progress-percent">75%</div>
                     </div>
                     <div class="week-actions">
-                        <button class="btn btn-primary btn-sm" onclick="openProgressModal(8)">
-                            <i class="fas fa-check-circle"></i>
-                            ให้ความคืบหน้า
+                        <button class="btn btn-outline btn-sm" onclick="openReportModal(8)">
+                            <i class="fas fa-eye"></i>
+                            ดูรายงาน
                         </button>
+                    </div>
+                    <!-- Comments Section for Week 8 -->
+                    <div class="comments-section">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-date">28 ตุลาคม 2568</div>
+                            </div>
+                            <div class="comment-text">
+                                การปรับปรุงโมเดลมีความคืบหน้าดีมาก การเพิ่ม regularization และปรับปรุงกระบวนการ preprocessing 
+                                เป็นแนวทางที่ถูกต้อง ควรทดสอบโมเดลกับชุดข้อมูลที่หลากหลายมากขึ้นเพื่อความมั่นใจในประสิทธิภาพ
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
+                                <div class="comment-date">30 ตุลาคม 2568</div>
+                            </div>
+                            <div class="comment-text">
+                                การปรับปรุงโมเดลมีความคืบหน้าดีมาก การเพิ่ม regularization และปรับปรุงกระบวนการ preprocessing 
+                                เป็นแนวทางที่ถูกต้อง ควรทดสอบโมเดลกับชุดข้อมูลที่หลากหลายมากขึ้นเพื่อความมั่นใจในประสิทธิภาพ
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -1142,8 +1165,8 @@
                     <div class="comments-section">
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
-                                <div class="comment-date">24 ตุลาคม 2568</div>
+                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-date">23 ตุลาคม 2568</div>
                             </div>
                             <div class="comment-text">
                                 การทดสอบระบบมีผลลัพธ์ที่ดี การเพิ่มฟีเจอร์แนะนำหนังสือตามบริบทเป็นแนวทางที่น่าสนใจ 
@@ -1153,13 +1176,13 @@
                         </div>
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)</div>
-                                <div class="comment-date">25 ตุลาคม 2568</div>
+                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
+                                <div class="comment-date">24 ตุลาคม 2568</div>
                             </div>
                             <div class="comment-text">
-                                ระบบมีประสิทธิภาพดี แต่ควรเพิ่มการประมวลผลข้อมูลแบบ real-time 
-                                และปรับปรุงอัลกอริทึมให้ทำงานได้เร็วขึ้น การรวบรวมข้อมูล feedback 
-                                จากผู้ใช้เป็นสิ่งสำคัญสำหรับการพัฒนาระบบต่อไป
+                                การทดสอบระบบมีผลลัพธ์ที่ดี การเพิ่มฟีเจอร์แนะนำหนังสือตามบริบทเป็นแนวทางที่น่าสนใจ 
+                                ควรพัฒนาโมเดลให้มีความแม่นยำมากขึ้นและพิจารณาการประมวลผลแบบ real-time 
+                                เพื่อประสบการณ์ผู้ใช้ที่ดีขึ้น
                             </div>
                         </div>
                     </div>
@@ -1194,8 +1217,8 @@
                     <div class="comments-section">
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
-                                <div class="comment-date">17 ตุลาคม 2568</div>
+                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-date">16 ตุลาคม 2568</div>
                             </div>
                             <div class="comment-text">
                                 การทดสอบโมเดลมีความคืบหน้าดีมาก ผลลัพธ์ที่ได้น่าพอใจ 
@@ -1205,12 +1228,13 @@
                         </div>
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)</div>
-                                <div class="comment-date">18 ตุลาคม 2568</div>
+                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
+                                <div class="comment-date">17 ตุลาคม 2568</div>
                             </div>
                             <div class="comment-text">
-                                การปรับปรุงโมเดลเป็นไปตามแผนที่ดี ควรบันทึกผลการทดสอบและวิธีการปรับปรุง 
-                                ไว้ในเอกสารประกอบอย่างละเอียด เพื่อใช้เป็นข้อมูลอ้างอิงในอนาคต
+                                การทดสอบโมเดลมีความคืบหน้าดีมาก ผลลัพธ์ที่ได้น่าพอใจ 
+                                แต่ควรพิจารณาเพิ่มการทดสอบกับชุดข้อมูลที่หลากหลายมากขึ้น 
+                                เพื่อความมั่นใจในประสิทธิภาพของโมเดล
                             </div>
                         </div>
                     </div>
@@ -1245,8 +1269,8 @@
                     <div class="comments-section">
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
-                                <div class="comment-date">10 ตุลาคม 2568</div>
+                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-date">9 ตุลาคม 2568</div>
                             </div>
                             <div class="comment-text">
                                 การพัฒนาส่วนติดต่อผู้ใช้มีความก้าวหน้าดีมาก UI/UX ออกแบบได้สวยงามและใช้งานง่าย 
@@ -1255,12 +1279,12 @@
                         </div>
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)</div>
-                                <div class="comment-date">11 ตุลาคม 2568</div>
+                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
+                                <div class="comment-date">10 ตุลาคม 2568</div>
                             </div>
                             <div class="comment-text">
-                                เห็นด้วยกับความเห็นของอาจารย์อนิราช การออกแบบ UI มีความทันสมัยและใช้งานได้ดี 
-                                แต่ควรพิจารณาเพิ่ม accessibility features สำหรับผู้ใช้พิการด้วย
+                                การพัฒนาส่วนติดต่อผู้ใช้มีความก้าวหน้าดีมาก UI/UX ออกแบบได้สวยงามและใช้งานง่าย 
+                                แต่ควรเพิ่มการจัดการ error handling และ loading states ให้ครบถ้วนมากขึ้น
                             </div>
                         </div>
                     </div>
@@ -1295,8 +1319,8 @@
                     <div class="comments-section">
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
-                                <div class="comment-date">3 ตุลาคม 2568</div>
+                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-date">2 ตุลาคม 2568</div>
                             </div>
                             <div class="comment-text">
                                 การพัฒนาส่วนควบคุมเป็นไปตามแผนที่ดี แต่ควรเพิ่มการทดสอบกับข้อมูลจริงให้มากขึ้น 
@@ -1305,12 +1329,12 @@
                         </div>
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)</div>
-                                <div class="comment-date">4 ตุลาคม 2568</div>
+                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
+                                <div class="comment-date">3 ตุลาคม 2568</div>
                             </div>
                             <div class="comment-text">
-                                การจัดการ connection pooling และ query optimization เป็นการแก้ปัญหาที่ดี 
-                                ควรบันทึกวิธีการแก้ปัญหาเหล่านี้ไว้ในเอกสารประกอบ
+                                การพัฒนาส่วนควบคุมเป็นไปตามแผนที่ดี แต่ควรเพิ่มการทดสอบกับข้อมูลจริงให้มากขึ้น 
+                                เพื่อความมั่นใจในความเสถียรของระบบ
                             </div>
                         </div>
                     </div>
@@ -1345,8 +1369,8 @@
                     <div class="comments-section">
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
-                                <div class="comment-date">26 กันยายน 2568</div>
+                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-date">25 กันยายน 2568</div>
                             </div>
                             <div class="comment-text">
                                 การออกแบบระบบมีความสมบูรณ์ดี แต่ควรพิจารณาการจัดการข้อมูลแบบ real-time เพิ่มเติม 
@@ -1355,12 +1379,12 @@
                         </div>
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)</div>
-                                <div class="comment-date">27 กันยายน 2568</div>
+                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
+                                <div class="comment-date">26 กันยายน 2568</div>
                             </div>
                             <div class="comment-text">
-                                การออกแบบ normalized database schema และการเพิ่ม indexing เป็นแนวทางที่ดี 
-                                ควรพิจารณาเรื่อง scalability ของระบบด้วย
+                                การออกแบบระบบมีความสมบูรณ์ดี แต่ควรพิจารณาการจัดการข้อมูลแบบ real-time เพิ่มเติม 
+                                เพื่อรองรับการใช้งานในสถานการณ์จริง
                             </div>
                         </div>
                     </div>
@@ -1395,8 +1419,8 @@
                     <div class="comments-section">
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
-                                <div class="comment-date">19 กันยายน 2568</div>
+                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-date">18 กันยายน 2568</div>
                             </div>
                             <div class="comment-text">
                                 การศึกษาครบถ้วนดี ควรเน้นไปที่เทคโนโลยีที่เหมาะสมกับขนาดของโครงงาน 
@@ -1405,12 +1429,12 @@
                         </div>
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)</div>
-                                <div class="comment-date">20 กันยายน 2568</div>
+                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
+                                <div class="comment-date">19 กันยายน 2568</div>
                             </div>
                             <div class="comment-text">
-                                การเปรียบเทียบเทคโนโลยีต่างๆ เป็นสิ่งที่ดี ควรบันทึกเหตุผลในการเลือกเทคโนโลยี 
-                                แต่ละอย่างไว้ในเอกสารประกอบ
+                                การศึกษาครบถ้วนดี ควรเน้นไปที่เทคโนโลยีที่เหมาะสมกับขนาดของโครงงาน 
+                                และพิจารณาเรื่องความปลอดภัยของระบบด้วย
                             </div>
                         </div>
                     </div>
@@ -1445,8 +1469,8 @@
                     <div class="comments-section">
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
-                                <div class="comment-date">12 กันยายน 2568</div>
+                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-date">11 กันยายน 2568</div>
                             </div>
                             <div class="comment-text">
                                 การวางแผนมีความชัดเจนดี ควรระบุระยะเวลาการทำงานให้ชัดเจนยิ่งขึ้น 
@@ -1455,12 +1479,12 @@
                         </div>
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)</div>
-                                <div class="comment-date">13 กันยายน 2568</div>
+                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
+                                <div class="comment-date">12 กันยายน 2568</div>
                             </div>
                             <div class="comment-text">
-                                การกำหนดขอบเขตโครงการมีความเหมาะสม ควรบันทึกสมมติฐานและข้อจำกัดต่างๆ 
-                                ไว้ในเอกสารโครงการให้ชัดเจน
+                                การวางแผนมีความชัดเจนดี ควรระบุระยะเวลาการทำงานให้ชัดเจนยิ่งขึ้น 
+                                และเพิ่มรายละเอียดการประเมินความเสี่ยงของโครงการ
                             </div>
                         </div>
                     </div>
@@ -1851,17 +1875,17 @@
                         ความคิดเห็นจากอาจารย์
                     </h2>
 
-                    <!-- Advisor Comment -->
+                    <!-- Advisor Comment - แสดงก่อน -->
                     <div class="comment-item advisor">
                         <div class="comment-header">
                             <div class="comment-author-info">
                                 <div class="comment-avatar advisor">อ</div>
                                 <div class="author-details">
-                                    <div class="author-name">รศ.ดร.อนิราช มิ่งขวัญ</div>
+                                    <div class="author-name">ผศ.อรบุษป์ วุฒิกมลชัย</div>
                                     <div class="author-role">อาจารย์ที่ปรึกษา</div>
                                 </div>
                             </div>
-                            <div class="comment-date">24 ตุลาคม 2568 | 14:30</div>
+                            <div class="comment-date">23 ตุลาคม 2568 | 14:30</div>
                         </div>
                         <p class="comment-text">
                             การทดสอบระบบมีผลลัพธ์ที่ดี การเพิ่มฟีเจอร์แนะนำหนังสือตามบริบทเป็นแนวทางที่น่าสนใจ 
@@ -1871,23 +1895,23 @@
                         </p>
                     </div>
 
-                    <!-- Instructor Comment -->
+                    <!-- Instructor Comment - แสดงหลัง -->
                     <div class="comment-item instructor">
                         <div class="comment-header">
                             <div class="comment-author-info">
                                 <div class="comment-avatar instructor">อ</div>
                                 <div class="author-details">
-                                    <div class="author-name">ผศ.อรบุษป์ วุฒิกมลชัย</div>
+                                    <div class="author-name">รศ.ดร.อนิราช มิ่งขวัญ</div>
                                     <div class="author-role">อาจารย์ประจำวิชา</div>
                                 </div>
                             </div>
-                            <div class="comment-date">25 ตุลาคม 2568 | 09:15</div>
+                            <div class="comment-date">24 ตุลาคม 2568 | 10:15</div>
                         </div>
                         <p class="comment-text">
-                            ระบบมีประสิทธิภาพดี แต่ควรเพิ่มการประมวลผลข้อมูลแบบ real-time 
-                            และปรับปรุงอัลกอริทึมให้ทำงานได้เร็วขึ้น การรวบรวมข้อมูล feedback 
-                            จากผู้ใช้เป็นสิ่งสำคัญสำหรับการพัฒนาระบบต่อไป ควรพิจารณาการใช้เทคนิค
-                            A/B testing เพื่อเปรียบเทียบประสิทธิภาพของโมเดลต่างๆ
+                            การทดสอบระบบมีผลลัพธ์ที่ดี การเพิ่มฟีเจอร์แนะนำหนังสือตามบริบทเป็นแนวทางที่น่าสนใจ 
+                            ควรพัฒนาโมเดลให้มีความแม่นยำมากขึ้นและพิจารณาการประมวลผลแบบ real-time 
+                            เพื่อประสบการณ์ผู้ใช้ที่ดีขึ้น การรวบรวมข้อมูล feedback จากผู้ใช้เป็นสิ่งสำคัญ
+                            และควรนำมาประมวลผลเพื่อปรับปรุงระบบอย่างต่อเนื่อง
                         </p>
                     </div>
                 </div>
@@ -2165,7 +2189,7 @@
                 newComment.className = 'comment';
                 newComment.innerHTML = `
                     <div class="comment-header">
-                        <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
+                        <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
                         <div class="comment-date">${new Date().toLocaleDateString('th-TH')}</div>
                     </div>
                     <div class="comment-text">
@@ -2203,15 +2227,15 @@
             }
         });
 
-        // Initialize progress circle with the latest progress (60% for week 7)
+        // Initialize progress circle with the latest progress (75% for week 8)
         document.addEventListener('DOMContentLoaded', function() {
-            updateProgressCircle(70);
+            updateProgressCircle(75);
             
             // Add CSS rule for progress circle text
             const style = document.createElement('style');
             style.textContent = `
                 .progress-circle::before {
-                    content: var(--progress-text, "70%");
+                    content: var(--progress-text, "75%");
                 }
             `;
             document.head.appendChild(style);
