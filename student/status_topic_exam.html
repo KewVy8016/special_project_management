@@ -373,6 +373,7 @@
             <span class="user-name">ธนบูลย์ อิ่มเจริญ</span>
             <div class="user-avatar">T</div>
           </a>
+          <button onclick="logout()" style="background: #f44336; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer;">ออกจากระบบ</button>
         </div>
       </div>
     </header>
@@ -506,6 +507,11 @@
       // อัพเดทนับถอยหลังทุกนาที
       setInterval(updateCountdown, 60000);
       updateCountdown();
+
+      function logout() {
+        try { localStorage.clear(); sessionStorage.clear(); } catch (e) {}
+        window.location.href = '../index.html';
+      }
     </script>
   </body>
 </html>
