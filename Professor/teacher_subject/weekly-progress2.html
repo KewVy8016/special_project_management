@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>รายละเอียดโครงงาน - อาจารย์ที่ปรึกษา</title>
+    <title>รายละเอียดโครงงาน - อาจารย์ประจำวิชา</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* สไตล์ทั้งหมดเหมือนเดิม */
@@ -132,7 +132,7 @@
         }
 
         .progress-circle::before {
-            content: '50%';
+            content: '35%';
             width: 60px;
             height: 60px;
             background: white;
@@ -519,19 +519,6 @@
         textarea.form-control {
             min-height: 120px;
             resize: vertical;
-        }
-
-        .progress-slider {
-            width: 100%;
-            margin: 1rem 0;
-        }
-
-        .progress-value {
-            text-align: center;
-            font-weight: 700;
-            color: #48bb78;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
         }
 
         .file-preview {
@@ -1030,7 +1017,7 @@
             <div class="breadcrumb">
                 <a href="../teacher_main_dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
                 <i class="fas fa-chevron-right"></i>
-                <a href="../advisor-projects.html">อาจารย์ที่ปรึกษา</a>
+                <a href="../teacher_subject.html">อาจารย์ประจำวิชา</a>
                 <i class="fas fa-chevron-right"></i>
                 <span>รายละเอียดโครงงาน</span>
             </div>
@@ -1093,6 +1080,34 @@
         <div class="card">
             <h2><i class="fas fa-calendar-week"></i> ความคืบหน้ารายสัปดาห์</h2>
             <div class="timeline">
+                <!-- Week 4 - Current/Pending -->
+                <div class="timeline-item delayed">
+                    <div class="timeline-dot"></div>
+                    <div class="week-header">
+                        <div class="week-title">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            สัปดาห์ที่ 4: พัฒนาส่วนติดต่อผู้ใช้เบื้องต้น
+                        </div>
+                        <div class="week-status status-waiting">รอความเห็นจากอาจารย์ประจำวิชา</div>
+                    </div>
+                    <div class="week-description">
+                        พัฒนาส่วนติดต่อผู้ใช้เบื้องต้นด้วย Flutter และทดสอบการเชื่อมต่อกับ Firebase
+                        <br><strong>กำหนดส่ง:</strong> 1 สิงหาคม 2568
+                    </div>
+                    <div class="week-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-percent">0%</div>
+                    </div>
+                    <div class="week-actions">
+                        <button class="btn btn-primary btn-sm" onclick="openProgressModal(4)">
+                            <i class="fas fa-comment"></i>
+                            ให้ความเห็น
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Week 3 - Completed -->
                 <div class="timeline-item completed">
                     <div class="timeline-dot"></div>
@@ -1101,7 +1116,7 @@
                             <i class="fas fa-check-circle"></i>
                             สัปดาห์ที่ 3: ออกแบบฐานข้อมูลและโครงสร้างระบบ
                         </div>
-                        <div class="week-status status-completed">กำหนดความคืบหน้าสำเร็จ</div>
+                        <div class="week-status status-completed">ให้ความเห็นแล้ว</div>
                     </div>
                     <div class="week-description">
                         ออกแบบโครงสร้างฐานข้อมูลและ ER Diagram สำหรับระบบจัดการสต๊อก
@@ -1123,7 +1138,7 @@
                     <div class="comments-section">
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
                                 <div class="comment-date">27 กรกฎาคม 2568</div>
                             </div>
                             <div class="comment-text">
@@ -1132,7 +1147,7 @@
                         </div>
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)</div>
+                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
                                 <div class="comment-date">28 กรกฎาคม 2568</div>
                             </div>
                             <div class="comment-text">
@@ -1150,7 +1165,7 @@
                             <i class="fas fa-check-circle"></i>
                             สัปดาห์ที่ 2: ศึกษาเทคโนโลยีและเครื่องมือ
                         </div>
-                        <div class="week-status status-completed">กำหนดความคืบหน้าสำเร็จ</div>
+                        <div class="week-status status-completed">ให้ความเห็นแล้ว</div>
                     </div>
                     <div class="week-description">
                         ศึกษา Flutter สำหรับพัฒนาแอปพลิเคชันมือถือและ Firebase สำหรับฐานข้อมูล
@@ -1172,7 +1187,7 @@
                     <div class="comments-section">
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
                                 <div class="comment-date">20 กรกฎาคม 2568</div>
                             </div>
                             <div class="comment-text">
@@ -1181,11 +1196,11 @@
                         </div>
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)</div>
+                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
                                 <div class="comment-date">21 กรกฎาคม 2568</div>
                             </div>
                             <div class="comment-text">
-                                เห็นด้วยกับอาจารย์อนิราช การเลือกใช้ Flutter และ Firebase เหมาะสมกับโครงงานนี้ ควรวางแผนการจัดการข้อมูลแบบ real-time ให้ดีเพื่อรองรับการใช้งานพร้อมกันหลายผู้ใช้
+                                เห็นด้วยกับอาจารย์ที่ปรึกษา การเลือกใช้ Flutter และ Firebase เหมาะสมกับโครงงานนี้ ควรวางแผนการจัดการข้อมูลแบบ real-time ให้ดีเพื่อรองรับการใช้งานพร้อมกันหลายผู้ใช้
                             </div>
                         </div>
                     </div>
@@ -1199,7 +1214,7 @@
                             <i class="fas fa-check-circle"></i>
                             สัปดาห์ที่ 1: กำหนดขอบเขตและวางแผนโครงงาน
                         </div>
-                        <div class="week-status status-completed">กำหนดความคืบหน้าสำเร็จ</div>
+                        <div class="week-status status-completed">ให้ความเห็นแล้ว</div>
                     </div>
                     <div class="week-description">
                         กำหนดขอบเขตของระบบจัดการสต๊อกสินค้าและวางแผนการทำงานทั้งหมด
@@ -1220,7 +1235,7 @@
                     <div class="comments-section">
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
+                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
                                 <div class="comment-date">12 กรกฎาคม 2568</div>
                             </div>
                             <div class="comment-text">
@@ -1229,7 +1244,7 @@
                         </div>
                         <div class="comment">
                             <div class="comment-header">
-                                <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)</div>
+                                <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
                                 <div class="comment-date">13 กรกฎาคม 2568</div>
                             </div>
                             <div class="comment-text">
@@ -1246,7 +1261,7 @@
     <div class="modal" id="progressModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">ให้ความคืบหน้า - สัปดาห์ที่ <span id="weekNumber"></span></h3>
+                <h3 class="modal-title">ให้ความเห็น - สัปดาห์ที่ <span id="weekNumber"></span></h3>
                 <button class="close-modal" onclick="closeProgressModal()">&times;</button>
             </div>
             
@@ -1254,15 +1269,15 @@
             <div id="reportContentSection">
                 <!-- Report Header -->
                 <div class="report-header">
-                    <h1 class="report-title">รายงานสัปดาห์ที่ <span id="reportWeekNumber">3</span></h1>
+                    <h1 class="report-title">รายงานสัปดาห์ที่ <span id="reportWeekNumber">4</span></h1>
                     <div class="report-meta">
                         <div class="meta-item">
                             <span class="meta-label">ระยะเวลา</span>
-                            <span class="meta-value" id="reportPeriod">18 - 25 กรกฎาคม 2568</span>
+                            <span class="meta-value" id="reportPeriod">25 กรกฎาคม - 1 สิงหาคม 2568</span>
                         </div>
                         <div class="meta-item">
                             <span class="meta-label">วันที่ส่ง</span>
-                            <span class="meta-value" id="reportSubmitDate">25 กรกฎาคม 2568</span>
+                            <span class="meta-value" id="reportSubmitDate">1 สิงหาคม 2568</span>
                         </div>
                         <div class="meta-item">
                             <span class="meta-label">สถานะ</span>
@@ -1277,10 +1292,10 @@
                             หัวข้อการทำงานสัปดาห์นี้
                         </div>
                         <div class="topic-content" id="reportTopic">
-                            ออกแบบฐานข้อมูลและโครงสร้างระบบ
+                            พัฒนาส่วนติดต่อผู้ใช้เบื้องต้น
                         </div>
                         <div class="topic-description" id="reportTopicDescription">
-                            ออกแบบโครงสร้างฐานข้อมูลและ ER Diagram สำหรับระบบจัดการสต๊อก
+                            พัฒนาส่วนติดต่อผู้ใช้เบื้องต้นด้วย Flutter และทดสอบการเชื่อมต่อกับ Firebase
                         </div>
                     </div>
                 </div>
@@ -1298,7 +1313,7 @@
                             สิ่งที่ทำสำเร็จในสัปดาห์นี้
                         </div>
                         <div class="work-detail-content" id="reportCompletedWork">
-                            ในสัปดาห์นี้ได้ออกแบบโครงสร้างฐานข้อมูลเบื้องต้นสำหรับระบบจัดการสต๊อกสินค้า โดยกำหนด entity หลักได้แก่ สินค้า, หมวดหมู่, ผู้ใช้, และประวัติการเคลื่อนไหวสินค้า รวมถึงออกแบบ ER Diagram เพื่อแสดงความสัมพันธ์ระหว่าง entities
+                            ในสัปดาห์นี้ได้เริ่มพัฒนาส่วนติดต่อผู้ใช้เบื้องต้นด้วย Flutter โดยออกแบบหน้าแรกของแอปพลิเคชันและทดสอบการเชื่อมต่อกับ Firebase Realtime Database สำเร็จ รวมถึงสร้างฟอร์มสำหรับเพิ่มและแก้ไขข้อมูลสินค้า
                         </div>
                     </div>
 
@@ -1308,7 +1323,7 @@
                             ปัญหาและอุปสรรคที่พบ
                         </div>
                         <div class="work-detail-content" id="reportProblems">
-                            พบปัญหาในการออกแบบโครงสร้างฐานข้อมูลเพื่อรองรับการจัดการสต๊อกหลายสาขา และการคำนวณยอดคงเหลือแบบ real-time กำลังพิจารณาการใช้ transaction และการออกแบบ normalized database schema
+                            พบปัญหาเรื่อง state management ใน Flutter เมื่อมีการอัพเดทข้อมูลแบบ real-time และปัญหาเรื่องการจัดการ asynchronous operations กำลังศึกษาเพิ่มเติมเกี่ยวกับการใช้ Provider และ FutureBuilder เพื่อแก้ไขปัญหาเหล่านี้
                         </div>
                     </div>
 
@@ -1318,7 +1333,7 @@
                             แผนงานสำหรับสัปดาห์หน้า
                         </div>
                         <div class="work-detail-content" id="reportNextPlan">
-                            สัปดาห์หน้าจะเริ่มพัฒนาส่วนติดต่อผู้ใช้เบื้องต้นด้วย Flutter และทดสอบการเชื่อมต่อกับ Firebase Database รวมถึงเริ่มออกแบบ UI/UX สำหรับแอปพลิเคชัน
+                            สัปดาห์หน้าจะพัฒนาหน้าจอจัดการหมวดหมู่สินค้าและระบบการค้นหา รวมถึงเริ่มพัฒนาหน้าจอรายงานสรุปและแดชบอร์ดสำหรับแสดงข้อมูลสต๊อก
                         </div>
                     </div>
                 </div>
@@ -1342,8 +1357,8 @@
                                     <i class="fas fa-file-pdf"></i>
                                 </div>
                                 <div class="file-info">
-                                    <div class="file-name">รายงานสัปดาห์ที่ 3 - Database Design.pdf</div>
-                                    <div class="file-size">1.5 MB</div>
+                                    <div class="file-name">รายงานสัปดาห์ที่ 4 - UI Development.pdf</div>
+                                    <div class="file-size">1.8 MB</div>
                                 </div>
                                 <div class="file-actions">
                                     <button class="file-action file-download">
@@ -1360,8 +1375,8 @@
                                     <i class="fas fa-file-word"></i>
                                 </div>
                                 <div class="file-info">
-                                    <div class="file-name">Database Schema Documentation.docx</div>
-                                    <div class="file-size">980 KB</div>
+                                    <div class="file-name">Flutter Implementation Notes.docx</div>
+                                    <div class="file-size">1.2 MB</div>
                                 </div>
                                 <div class="file-actions">
                                     <button class="file-action file-download">
@@ -1387,8 +1402,8 @@
                                     <i class="fas fa-image"></i>
                                 </div>
                                 <div class="image-info">
-                                    <div class="image-name">er-diagram.png</div>
-                                    <div class="image-size">756 KB</div>
+                                    <div class="image-name">app-screens.png</div>
+                                    <div class="image-size">856 KB</div>
                                 </div>
                             </div>
                             
@@ -1397,7 +1412,7 @@
                                     <i class="fas fa-image"></i>
                                 </div>
                                 <div class="image-info">
-                                    <div class="image-name">database-tables.jpg</div>
+                                    <div class="image-name">firebase-connection.jpg</div>
                                     <div class="image-size">1.1 MB</div>
                                 </div>
                             </div>
@@ -1406,21 +1421,42 @@
                 </div>
             </div>
             
+            <!-- Comments Section for Week 4 -->
+            <div class="comments-section-modal" id="week4CommentsSection">
+                <h2 class="comments-title">
+                    <i class="fas fa-comments"></i>
+                    ความคิดเห็นจากอาจารย์
+                </h2>
+
+                <!-- Advisor Comment for Week 4 -->
+                <div class="comment-item advisor">
+                    <div class="comment-header">
+                        <div class="comment-author-info">
+                            <div class="comment-avatar advisor">อ</div>
+                            <div class="author-details">
+                                <div class="author-name">ผศ.อรบุษป์ วุฒิกมลชัย</div>
+                                <div class="author-role">อาจารย์ที่ปรึกษา</div>
+                            </div>
+                        </div>
+                        <div class="comment-date">2 สิงหาคม 2568 | 14:30</div>
+                    </div>
+                    <p class="comment-text">
+                        การพัฒนาส่วนติดต่อผู้ใช้มีความคืบหน้าดี การออกแบบ UI มีความทันสมัยและใช้งานง่าย 
+                        แต่ควรเพิ่มการจัดการ error handling และ loading states ให้ครบถ้วนมากขึ้น 
+                        รวมถึงพิจารณาเพิ่ม accessibility features สำหรับผู้ใช้พิการด้วย
+                    </p>
+                </div>
+            </div>
+            
             <!-- Progress Form Section -->
             <div class="progress-form-section">
                 <h3 class="progress-form-title">
-                    <i class="fas fa-sliders-h"></i>
-                    กำหนดความคืบหน้าและความคิดเห็น
+                    <i class="fas fa-comment"></i>
+                    ให้ความเห็น (อาจารย์ประจำวิชา)
                 </h3>
                 
                 <form id="progressForm">
                     <input type="hidden" id="selectedWeek" name="week">
-                    
-                    <div class="form-group">
-                        <label class="form-label">ความคืบหน้า (%)</label>
-                        <div class="progress-value" id="progressDisplay">30%</div>
-                        <input type="range" id="progressSlider" class="progress-slider" min="0" max="100" value="30" step="5">
-                    </div>
                     
                     <div class="form-group">
                         <label class="form-label">ความคิดเห็น</label>
@@ -1429,7 +1465,7 @@
                     
                     <div class="modal-actions">
                         <button type="button" class="btn btn-outline" onclick="closeProgressModal()">ยกเลิก</button>
-                        <button type="submit" class="btn btn-primary">บันทึกความคืบหน้า</button>
+                        <button type="submit" class="btn btn-primary">บันทึกความเห็น</button>
                     </div>
                 </form>
             </div>
@@ -1612,7 +1648,7 @@
                             <div class="comment-author-info">
                                 <div class="comment-avatar advisor">อ</div>
                                 <div class="author-details">
-                                    <div class="author-name">รศ.ดร.อนิราช มิ่งขวัญ</div>
+                                    <div class="author-name">ผศ.อรบุษป์ วุฒิกมลชัย</div>
                                     <div class="author-role">อาจารย์ที่ปรึกษา</div>
                                 </div>
                             </div>
@@ -1629,7 +1665,7 @@
                             <div class="comment-author-info">
                                 <div class="comment-avatar instructor">อ</div>
                                 <div class="author-details">
-                                    <div class="author-name">ผศ.อรบุษป์ วุฒิกมลชัย</div>
+                                    <div class="author-name">รศ.ดร.อนิราช มิ่งขวัญ</div>
                                     <div class="author-role">อาจารย์ประจำวิชา</div>
                                 </div>
                             </div>
@@ -1645,16 +1681,6 @@
     </div>
 
     <script>
-        // Progress slider functionality
-        const progressSlider = document.getElementById('progressSlider');
-        const progressDisplay = document.getElementById('progressDisplay');
-        
-        if (progressSlider) {
-            progressSlider.addEventListener('input', function() {
-                progressDisplay.textContent = this.value + '%';
-            });
-        }
-
         // Modal functionality
         function openProgressModal(weekNumber) {
             document.getElementById('weekNumber').textContent = weekNumber;
@@ -1666,8 +1692,6 @@
             setProgressReportData(weekNumber);
             
             // Reset form values
-            document.getElementById('progressSlider').value = 30;
-            document.getElementById('progressDisplay').textContent = '30%';
             document.getElementById('comment').value = '';
             
             // Add event listeners for file actions
@@ -1697,18 +1721,18 @@
         // Set report data for progress modal
         function setProgressReportData(weekNumber) {
             const reportData = {
-                3: {
-                    period: "18 - 25 กรกฎาคม 2568",
-                    submitDate: "25 กรกฎาคม 2568",
-                    topic: "ออกแบบฐานข้อมูลและโครงสร้างระบบ",
-                    topicDescription: "ออกแบบโครงสร้างฐานข้อมูลและ ER Diagram สำหรับระบบจัดการสต๊อก",
-                    completedWork: "ในสัปดาห์นี้ได้ออกแบบโครงสร้างฐานข้อมูลเบื้องต้นสำหรับระบบจัดการสต๊อกสินค้า โดยกำหนด entity หลักได้แก่ สินค้า, หมวดหมู่, ผู้ใช้, และประวัติการเคลื่อนไหวสินค้า รวมถึงออกแบบ ER Diagram เพื่อแสดงความสัมพันธ์ระหว่าง entities",
-                    problems: "พบปัญหาในการออกแบบโครงสร้างฐานข้อมูลเพื่อรองรับการจัดการสต๊อกหลายสาขา และการคำนวณยอดคงเหลือแบบ real-time กำลังพิจารณาการใช้ transaction และการออกแบบ normalized database schema",
-                    nextPlan: "สัปดาห์หน้าจะเริ่มพัฒนาส่วนติดต่อผู้ใช้เบื้องต้นด้วย Flutter และทดสอบการเชื่อมต่อกับ Firebase Database รวมถึงเริ่มออกแบบ UI/UX สำหรับแอปพลิเคชัน"
+                4: {
+                    period: "25 กรกฎาคม - 1 สิงหาคม 2568",
+                    submitDate: "1 สิงหาคม 2568",
+                    topic: "พัฒนาส่วนติดต่อผู้ใช้เบื้องต้น",
+                    topicDescription: "พัฒนาส่วนติดต่อผู้ใช้เบื้องต้นด้วย Flutter และทดสอบการเชื่อมต่อกับ Firebase",
+                    completedWork: "ในสัปดาห์นี้ได้เริ่มพัฒนาส่วนติดต่อผู้ใช้เบื้องต้นด้วย Flutter โดยออกแบบหน้าแรกของแอปพลิเคชันและทดสอบการเชื่อมต่อกับ Firebase Realtime Database สำเร็จ รวมถึงสร้างฟอร์มสำหรับเพิ่มและแก้ไขข้อมูลสินค้า",
+                    problems: "พบปัญหาเรื่อง state management ใน Flutter เมื่อมีการอัพเดทข้อมูลแบบ real-time และปัญหาเรื่องการจัดการ asynchronous operations กำลังศึกษาเพิ่มเติมเกี่ยวกับการใช้ Provider และ FutureBuilder เพื่อแก้ไขปัญหาเหล่านี้",
+                    nextPlan: "สัปดาห์หน้าจะพัฒนาหน้าจอจัดการหมวดหมู่สินค้าและระบบการค้นหา รวมถึงเริ่มพัฒนาหน้าจอรายงานสรุปและแดชบอร์ดสำหรับแสดงข้อมูลสต๊อก"
                 }
             };
             
-            const data = reportData[weekNumber] || reportData[3];
+            const data = reportData[weekNumber] || reportData[4];
             
             document.getElementById('reportPeriod').textContent = data.period;
             document.getElementById('reportSubmitDate').textContent = data.submitDate;
@@ -1794,7 +1818,6 @@
             e.preventDefault();
             
             const weekNumber = document.getElementById('selectedWeek').value;
-            const progressValue = document.getElementById('progressSlider').value;
             const comment = document.getElementById('comment').value;
             
             if (!comment.trim()) {
@@ -1803,21 +1826,21 @@
             }
             
             // In a real application, you would send this data to the server
-            console.log(`บันทึกความคืบหน้าสำหรับสัปดาห์ที่ ${weekNumber}: ${progressValue}%`);
+            console.log(`บันทึกความเห็นสำหรับสัปดาห์ที่ ${weekNumber}`);
             console.log(`ความคิดเห็น: ${comment}`);
             
             // Simulate successful submission
-            alert(`บันทึกความคืบหน้าสำหรับสัปดาห์ที่ ${weekNumber} เรียบร้อยแล้ว!`);
+            alert(`บันทึกความเห็นสำหรับสัปดาห์ที่ ${weekNumber} เรียบร้อยแล้ว!`);
             
             // Close modal
             closeProgressModal();
             
             // Update the timeline item
-            updateTimelineItem(weekNumber, progressValue, comment);
+            updateTimelineItem(weekNumber, comment);
         });
 
         // Update timeline item after submission
-        function updateTimelineItem(weekNumber, progressValue, comment) {
+        function updateTimelineItem(weekNumber, comment) {
             // Find the timeline item for the specified week
             const timelineItems = document.querySelectorAll('.timeline-item');
             let targetItem = null;
@@ -1837,27 +1860,8 @@
                 // Update status
                 const statusElement = targetItem.querySelector('.week-status');
                 if (statusElement) {
-                    statusElement.textContent = 'กำหนดความคืบหน้าสำเร็จ';
+                    statusElement.textContent = 'ให้ความเห็นแล้ว';
                     statusElement.className = 'week-status status-completed';
-                }
-                
-                // Update progress bar
-                const progressFill = targetItem.querySelector('.progress-fill');
-                const progressPercent = targetItem.querySelector('.progress-percent');
-                if (progressFill && progressPercent) {
-                    progressFill.style.width = `${progressValue}%`;
-                    progressPercent.textContent = `${progressValue}%`;
-                }
-                
-                // Update actions - เปลี่ยนเป็นปุ่ม "ดูรายงาน" เท่านั้น
-                const actionsContainer = targetItem.querySelector('.week-actions');
-                if (actionsContainer) {
-                    actionsContainer.innerHTML = `
-                        <button class="btn btn-outline btn-sm" onclick="openReportModal(${weekNumber})">
-                            <i class="fas fa-eye"></i>
-                            ดูรายงาน
-                        </button>
-                    `;
                 }
                 
                 // Update timeline dot
@@ -1874,11 +1878,30 @@
                     targetItem.appendChild(commentsSection);
                 }
                 
+                // Add advisor comment first (for week 4)
+                if (weekNumber == 4) {
+                    const advisorComment = document.createElement('div');
+                    advisorComment.className = 'comment';
+                    advisorComment.innerHTML = `
+                        <div class="comment-header">
+                            <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
+                            <div class="comment-date">2 สิงหาคม 2568</div>
+                        </div>
+                        <div class="comment-text">
+                            การพัฒนาส่วนติดต่อผู้ใช้มีความคืบหน้าดี การออกแบบ UI มีความทันสมัยและใช้งานง่าย 
+                            แต่ควรเพิ่มการจัดการ error handling และ loading states ให้ครบถ้วนมากขึ้น 
+                            รวมถึงพิจารณาเพิ่ม accessibility features สำหรับผู้ใช้พิการด้วย
+                        </div>
+                    `;
+                    commentsSection.appendChild(advisorComment);
+                }
+                
+                // Add instructor comment
                 const newComment = document.createElement('div');
                 newComment.className = 'comment';
                 newComment.innerHTML = `
                     <div class="comment-header">
-                        <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
+                        <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)</div>
                         <div class="comment-date">${new Date().toLocaleDateString('th-TH')}</div>
                     </div>
                     <div class="comment-text">
@@ -1888,19 +1911,17 @@
                 
                 commentsSection.appendChild(newComment);
                 
-                // Update progress circle with the latest progress value
-                updateProgressCircle(progressValue);
+                // Update actions - เปลี่ยนเป็นปุ่ม "ดูรายงาน" เท่านั้น
+                const actionsContainer = targetItem.querySelector('.week-actions');
+                if (actionsContainer) {
+                    actionsContainer.innerHTML = `
+                        <button class="btn btn-outline btn-sm" onclick="openReportModal(${weekNumber})">
+                            <i class="fas fa-eye"></i>
+                            ดูรายงาน
+                        </button>
+                    `;
+                }
             }
-        }
-
-        // Update progress circle with the latest progress value
-        function updateProgressCircle(percentage) {
-            const circle = document.querySelector('.progress-circle');
-            const degrees = (percentage / 100) * 360;
-            circle.style.background = `conic-gradient(#48bb78 0deg, #48bb78 ${degrees}deg, #e2e8f0 ${degrees}deg)`;
-            
-            // Update the text content
-            circle.style.setProperty('--progress-text', `"${percentage}%"`);
         }
 
         // Close modal when clicking outside
@@ -1918,8 +1939,6 @@
 
         // Initialize progress circle with the latest progress (35% for week 3)
         document.addEventListener('DOMContentLoaded', function() {
-            updateProgressCircle(35);
-            
             // Add CSS rule for progress circle text
             const style = document.createElement('style');
             style.textContent = `

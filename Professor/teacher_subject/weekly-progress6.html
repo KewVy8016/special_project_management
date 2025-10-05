@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>รายละเอียดโครงงาน - อาจารย์ที่ปรึกษา</title>
@@ -1029,8 +1029,8 @@
         }
       }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
       <!-- Header -->
       <div class="header">
@@ -1094,6 +1094,58 @@
         </div>
       </div>
 
+      <!-- Weekly Progress Timeline -->
+      <div class="card">
+        <h2><i class="fas fa-chart-line"></i> ความคืบหน้าตามสัปดาห์</h2>
+        <div class="timeline">
+          <!-- Week 5 - Waiting for Instructor Comment -->
+          <div class="timeline-item delayed">
+            <div class="timeline-dot"></div>
+            <div class="week-header">
+              <div class="week-title">
+                <i class="fas fa-clock"></i>
+                สัปดาห์ที่ 5: พัฒนาโมเดล NLP ขั้นสูง
+              </div>
+              <div class="week-status status-waiting">
+                รอให้ความเห็นจากอาจารย์ประจำวิชา
+              </div>
+            </div>
+            <div class="week-description">
+              พัฒนาโมเดล NLP สำหรับการเข้าใจบริบทและการตอบคำถามที่ซับซ้อน
+              <br /><strong>ส่งเมื่อ:</strong> 5 กันยายน 2568
+            </div>
+            <div class="week-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 60%"></div>
+              </div>
+              <div class="progress-percent">60%</div>
+            </div>
+            <div class="week-actions">
+              <button
+                class="btn btn-outline btn-sm"
+                onclick="openReportModal(5)"
+              >
+                <i class="fas fa-eye"></i>
+                ดูรายงาน
+              </button>
+            </div>
+            <!-- Comments Section for Week 5 -->
+            <div class="comments-section">
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)
+                  </div>
+                  <div class="comment-date">6 กันยายน 2568</div>
+                </div>
+                <div class="comment-text">
+                  การพัฒนาโมเดล NLP ขั้นสูงเป็นไปด้วยดี
+                  การใช้ attention mechanisms ช่วยเพิ่มความสามารถในการเข้าใจบริบทได้ดี
+                  ควรทดสอบโมเดลกับชุดข้อมูลที่หลากหลายมากขึ้น
+                </div>
+              </div>
+            </div>
+          </div>
 
           <!-- Week 4 - Completed -->
           <div class="timeline-item completed">
@@ -1104,7 +1156,7 @@
                 สัปดาห์ที่ 4: พัฒนาโมเดลพื้นฐาน NLP
               </div>
               <div class="week-status status-completed">
-                กำหนดความคืบหน้าสำเร็จ
+                ให้ความเห็นสำเร็จ
               </div>
             </div>
             <div class="week-description">
@@ -1131,19 +1183,7 @@
               <div class="comment">
                 <div class="comment-header">
                   <div class="comment-author">
-                    รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)
-                  </div>
-                  <div class="comment-date">31 สิงหาคม 2568</div>
-                </div>
-                <div class="comment-text">
-                  การพัฒนาโมเดล NLP พื้นฐานเป็นไปด้วยดี
-                  ควรพิจารณาเพิ่มความสามารถในการเข้าใจบริบทและการจัดการกับคำถามที่ซับซ้อนมากขึ้น
-                </div>
-              </div>
-              <div class="comment">
-                <div class="comment-header">
-                  <div class="comment-author">
-                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)
+                    อ.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)
                   </div>
                   <div class="comment-date">1 กันยายน 2568</div>
                 </div>
@@ -1151,6 +1191,18 @@
                   โมเดลพื้นฐานทำงานได้ดี
                   ควรเพิ่มการทดสอบกับชุดข้อมูลที่หลากหลายและพิจารณาการใช้เทคนิค
                   deep learning เพื่อเพิ่มความแม่นยำ
+                </div>
+              </div>
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)
+                  </div>
+                  <div class="comment-date">31 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  การพัฒนาโมเดล NLP พื้นฐานเป็นไปด้วยดี
+                  ควรพิจารณาเพิ่มความสามารถในการเข้าใจบริบทและการจัดการกับคำถามที่ซับซ้อนมากขึ้น
                 </div>
               </div>
             </div>
@@ -1165,7 +1217,7 @@
                 สัปดาห์ที่ 3: ออกแบบสถาปัตยกรรมระบบ
               </div>
               <div class="week-status status-completed">
-                กำหนดความคืบหน้าสำเร็จ
+                ให้ความเห็นสำเร็จ
               </div>
             </div>
             <div class="week-description">
@@ -1191,25 +1243,25 @@
               <div class="comment">
                 <div class="comment-header">
                   <div class="comment-author">
-                    รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)
-                  </div>
-                  <div class="comment-date">24 สิงหาคม 2568</div>
-                </div>
-                <div class="comment-text">
-                  การออกแบบสถาปัตยกรรมมีความเหมาะสม ควรพิจารณาการจัดการ state
-                  ของการสนทนาและความสามารถในการเรียนรู้จากบทสนทนาก่อนหน้า
-                </div>
-              </div>
-              <div class="comment">
-                <div class="comment-header">
-                  <div class="comment-author">
-                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)
+                    อ.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)
                   </div>
                   <div class="comment-date">25 สิงหาคม 2568</div>
                 </div>
                 <div class="comment-text">
                   การออกแบบโมเดล NLP คำนึงถึงประสิทธิภาพได้ดี
                   ควรเพิ่มแผนสำหรับการปรับปรุงโมเดลอย่างต่อเนื่องตามข้อมูลที่ได้รับ
+                </div>
+              </div>
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)
+                  </div>
+                  <div class="comment-date">24 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  การออกแบบสถาปัตยกรรมมีความเหมาะสม ควรพิจารณาการจัดการ state
+                  ของการสนทนาและความสามารถในการเรียนรู้จากบทสนทนาก่อนหน้า
                 </div>
               </div>
             </div>
@@ -1224,7 +1276,7 @@
                 สัปดาห์ที่ 2: ศึกษาเทคโนโลยี NLP
               </div>
               <div class="week-status status-completed">
-                กำหนดความคืบหน้าสำเร็จ
+                ให้ความเห็นสำเร็จ
               </div>
             </div>
             <div class="week-description">
@@ -1250,7 +1302,19 @@
               <div class="comment">
                 <div class="comment-header">
                   <div class="comment-author">
-                    รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)
+                    อ.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)
+                  </div>
+                  <div class="comment-date">18 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  การเปรียบเทียบเครื่องมือต่างๆ เป็นสิ่งที่ดี
+                  ควรบันทึกข้อดีข้อเสียของแต่ละเครื่องมือเพื่อใช้ในการตัดสินใจเลือกใช้
+                </div>
+              </div>
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)
                   </div>
                   <div class="comment-date">17 สิงหาคม 2568</div>
                 </div>
@@ -1258,18 +1322,6 @@
                   การศึกษาเทคโนโลยี NLP เป็นไปด้วยดี
                   ควรเน้นไปที่เทคนิคที่เหมาะสมกับภาษาไทยและพิจารณาการใช้
                   pre-trained models
-                </div>
-              </div>
-              <div class="comment">
-                <div class="comment-header">
-                  <div class="comment-author">
-                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)
-                  </div>
-                  <div class="comment-date">18 สิงหาคม 2568</div>
-                </div>
-                <div class="comment-text">
-                  การเปรียบเทียบเครื่องมือต่างๆ เป็นสิ่งที่ดี
-                  ควรบันทึกข้อดีข้อเสียของแต่ละเครื่องมือเพื่อใช้ในการตัดสินใจเลือกใช้
                 </div>
               </div>
             </div>
@@ -1284,7 +1336,7 @@
                 สัปดาห์ที่ 1: กำหนดขอบเขตและวางแผนโครงงาน
               </div>
               <div class="week-status status-completed">
-                กำหนดความคืบหน้าสำเร็จ
+                ให้ความเห็นสำเร็จ
               </div>
             </div>
             <div class="week-description">
@@ -1310,19 +1362,7 @@
               <div class="comment">
                 <div class="comment-header">
                   <div class="comment-author">
-                    รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)
-                  </div>
-                  <div class="comment-date">11 สิงหาคม 2568</div>
-                </div>
-                <div class="comment-text">
-                  การวางแผนมีความชัดเจนดี
-                  ควรระบุประเภทของคำถามที่แชทบอทจะสามารถตอบได้และขอบเขตความรู้ของระบบให้ชัดเจน
-                </div>
-              </div>
-              <div class="comment">
-                <div class="comment-header">
-                  <div class="comment-author">
-                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ประจำวิชา)
+                    อ.อนิราช มิ่งขวัญ (อาจารย์ประจำวิชา)
                   </div>
                   <div class="comment-date">12 สิงหาคม 2568</div>
                 </div>
@@ -1331,20 +1371,32 @@
                   ควรเพิ่มการวิเคราะห์ผู้ใช้และสถานการณ์การใช้งานเพื่อให้ระบบตอบโจทย์ความต้องการของผู้ใช้มากขึ้น
                 </div>
               </div>
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)
+                  </div>
+                  <div class="comment-date">11 สิงหาคม 2568</div>
+                </div>
+                <div class="comment-text">
+                  การวางแผนมีความชัดเจนดี
+                  ควรระบุประเภทของคำถามที่แชทบอทจะสามารถตอบได้และขอบเขตความรู้ของระบบให้ชัดเจน
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Progress Modal -->
-    <div class="modal" id="progressModal">
+    <!-- Comment Modal -->
+    <div class="modal" id="commentModal">
       <div class="modal-content">
         <div class="modal-header">
           <h3 class="modal-title">
-            ให้ความคืบหน้า - สัปดาห์ที่ <span id="weekNumber"></span>
+            ให้ความเห็น - สัปดาห์ที่ <span id="weekNumber"></span>
           </h3>
-          <button class="close-modal" onclick="closeProgressModal()">
+          <button class="close-modal" onclick="closeCommentModal()">
             &times;
           </button>
         </div>
@@ -1519,29 +1571,15 @@
           </div>
         </div>
 
-        <!-- Progress Form Section -->
+        <!-- Comment Form Section -->
         <div class="progress-form-section">
           <h3 class="progress-form-title">
-            <i class="fas fa-sliders-h"></i>
-            กำหนดความคืบหน้าและความคิดเห็น
+            <i class="fas fa-comment"></i>
+            ให้ความเห็น
           </h3>
 
-          <form id="progressForm">
+          <form id="commentForm">
             <input type="hidden" id="selectedWeek" name="week" />
-
-            <div class="form-group">
-              <label class="form-label">ความคืบหน้า (%)</label>
-              <div class="progress-value" id="progressDisplay">60%</div>
-              <input
-                type="range"
-                id="progressSlider"
-                class="progress-slider"
-                min="0"
-                max="100"
-                value="60"
-                step="5"
-              />
-            </div>
 
             <div class="form-group">
               <label class="form-label">ความคิดเห็น</label>
@@ -1556,12 +1594,12 @@
               <button
                 type="button"
                 class="btn btn-outline"
-                onclick="closeProgressModal()"
+                onclick="closeCommentModal()"
               >
                 ยกเลิก
               </button>
               <button type="submit" class="btn btn-primary">
-                บันทึกความคืบหน้า
+                บันทึกความเห็น
               </button>
             </div>
           </form>
@@ -1760,33 +1798,13 @@
               ความคิดเห็นจากอาจารย์
             </h2>
 
-            <!-- Advisor Comment -->
-            <div class="comment-item advisor">
-              <div class="comment-header">
-                <div class="comment-author-info">
-                  <div class="comment-avatar advisor">อ</div>
-                  <div class="author-details">
-                    <div class="author-name">รศ.ดร.อนิราช มิ่งขวัญ</div>
-                    <div class="author-role">อาจารย์ที่ปรึกษา</div>
-                  </div>
-                </div>
-                <div class="comment-date">31 สิงหาคม 2568 | 14:30</div>
-              </div>
-              <p class="comment-text">
-                การพัฒนาโมเดล NLP พื้นฐานเป็นไปด้วยดี
-                ควรพิจารณาเพิ่มความสามารถในการเข้าใจบริบทและการจัดการกับคำถามที่ซับซ้อนมากขึ้น
-                การใช้ word embedding สำหรับภาษาไทยเป็นแนวทางที่ดี
-                แต่ควรทดสอบกับหลายๆ วิธีเพื่อหาวิธีที่เหมาะสมที่สุด
-              </p>
-            </div>
-
             <!-- Instructor Comment -->
             <div class="comment-item instructor">
               <div class="comment-header">
                 <div class="comment-author-info">
                   <div class="comment-avatar instructor">อ</div>
                   <div class="author-details">
-                    <div class="author-name">ผศ.อรบุษป์ วุฒิกมลชัย</div>
+                    <div class="author-name">อ.อนิราช มิ่งขวัญ</div>
                     <div class="author-role">อาจารย์ประจำวิชา</div>
                   </div>
                 </div>
@@ -1799,43 +1817,51 @@
                 การจัดการกับข้อมูลภาษาไทยต้องคำนึงถึงความซับซ้อนของไวยากรณ์และบริบททางวัฒนธรรม
               </p>
             </div>
+
+            <!-- Advisor Comment -->
+            <div class="comment-item advisor">
+              <div class="comment-header">
+                <div class="comment-author-info">
+                  <div class="comment-avatar advisor">อ</div>
+                  <div class="author-details">
+                    <div class="author-name">ผศ.อรบุษป์ วุฒิกมลชัย</div>
+                    <div class="author-role">อาจารย์ที่ปรึกษา</div>
+                  </div>
+                </div>
+                <div class="comment-date">31 สิงหาคม 2568 | 14:30</div>
+              </div>
+              <p class="comment-text">
+                การพัฒนาโมเดล NLP พื้นฐานเป็นไปด้วยดี
+                ควรพิจารณาเพิ่มความสามารถในการเข้าใจบริบทและการจัดการกับคำถามที่ซับซ้อนมากขึ้น
+                การใช้ word embedding สำหรับภาษาไทยเป็นแนวทางที่ดี
+                แต่ควรทดสอบกับหลายๆ วิธีเพื่อหาวิธีที่เหมาะสมที่สุด
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <script>
-      // Progress slider functionality
-      const progressSlider = document.getElementById("progressSlider");
-      const progressDisplay = document.getElementById("progressDisplay");
-
-      if (progressSlider) {
-        progressSlider.addEventListener("input", function () {
-          progressDisplay.textContent = this.value + "%";
-        });
-      }
-
       // Modal functionality
-      function openProgressModal(weekNumber) {
+      function openCommentModal(weekNumber) {
         document.getElementById("weekNumber").textContent = weekNumber;
         document.getElementById("reportWeekNumber").textContent = weekNumber;
         document.getElementById("selectedWeek").value = weekNumber;
-        document.getElementById("progressModal").style.display = "flex";
+        document.getElementById("commentModal").style.display = "flex";
 
         // Set report data based on week
-        setProgressReportData(weekNumber);
+        setCommentReportData(weekNumber);
 
         // Reset form values
-        document.getElementById("progressSlider").value = 60;
-        document.getElementById("progressDisplay").textContent = "60%";
         document.getElementById("comment").value = "";
 
         // Add event listeners for file actions
         addFileEventListeners();
       }
 
-      function closeProgressModal() {
-        document.getElementById("progressModal").style.display = "none";
+      function closeCommentModal() {
+        document.getElementById("commentModal").style.display = "none";
       }
 
       function openReportModal(weekNumber) {
@@ -1856,8 +1882,8 @@
         document.getElementById("reportModal").style.display = "none";
       }
 
-      // Set report data for progress modal
-      function setProgressReportData(weekNumber) {
+      // Set report data for comment modal
+      function setCommentReportData(weekNumber) {
         const reportData = {
           5: {
             period: "29 สิงหาคม - 5 กันยายน 2568",
@@ -1942,6 +1968,19 @@
             nextPlan:
               "สัปดาห์หน้าจะพัฒนาต่อยอดโมเดลให้มีความสามารถในการเข้าใจบริบทและการตอบคำถามที่ซับซ้อนมากขึ้น โดยจะทดลองใช้เทคนิค deep learning และเพิ่มข้อมูลฝึกฝนที่มีความหลากหลายมากขึ้น",
           },
+          5: {
+            period: "29 สิงหาคม - 5 กันยายน 2568",
+            submitDate: "5 กันยายน 2568",
+            topic: "พัฒนาโมเดล NLP ขั้นสูง",
+            topicDescription:
+              "พัฒนาโมเดล NLP สำหรับการเข้าใจบริบทและการตอบคำถามที่ซับซ้อน",
+            completedWork:
+              "ในสัปดาห์นี้ได้เริ่มพัฒนาโมเดล NLP ขั้นสูงสำหรับการเข้าใจบริบทและการตอบคำถามที่ซับซ้อน โดยได้ทดลองใช้เทคนิค deep learning และ attention mechanisms เพื่อเพิ่มความสามารถในการเข้าใจความหมายของประโยคในบริบทที่กว้างขึ้น",
+            problems:
+              "พบปัญหาเรื่องความซับซ้อนของโมเดลที่ส่งผลต่อเวลาในการฝึกฝน และปัญหาด้านความแม่นยำเมื่อเผชิญกับประโยคที่มีโครงสร้างซับซ้อน กำลังพิจารณาการใช้ transfer learning และการเพิ่มข้อมูลฝึกฝน",
+            nextPlan:
+              "สัปดาห์หน้าจะทำการทดสอบโมเดลกับชุดข้อมูลทดสอบและปรับปรุงประสิทธิภาพ รวมถึงเริ่มพัฒนาส่วนติดต่อผู้ใช้สำหรับแชทบอท",
+          },
         };
 
         const data = reportData[weekNumber] || reportData[4];
@@ -1993,14 +2032,13 @@
         });
       }
 
-      // Form submission for setting progress
+      // Form submission for setting comment
       document
-        .getElementById("progressForm")
+        .getElementById("commentForm")
         .addEventListener("submit", function (e) {
           e.preventDefault();
 
           const weekNumber = document.getElementById("selectedWeek").value;
-          const progressValue = document.getElementById("progressSlider").value;
           const comment = document.getElementById("comment").value;
 
           if (!comment.trim()) {
@@ -2009,25 +2047,21 @@
           }
 
           // In a real application, you would send this data to the server
-          console.log(
-            `บันทึกความคืบหน้าสำหรับสัปดาห์ที่ ${weekNumber}: ${progressValue}%`
-          );
+          console.log(`บันทึกความเห็นสำหรับสัปดาห์ที่ ${weekNumber}`);
           console.log(`ความคิดเห็น: ${comment}`);
 
           // Simulate successful submission
-          alert(
-            `บันทึกความคืบหน้าสำหรับสัปดาห์ที่ ${weekNumber} เรียบร้อยแล้ว!`
-          );
+          alert(`บันทึกความเห็นสำหรับสัปดาห์ที่ ${weekNumber} เรียบร้อยแล้ว!`);
 
           // Close modal
-          closeProgressModal();
+          closeCommentModal();
 
           // Update the timeline item
-          updateTimelineItem(weekNumber, progressValue, comment);
+          updateTimelineItem(weekNumber, comment);
         });
 
       // Update timeline item after submission
-      function updateTimelineItem(weekNumber, progressValue, comment) {
+      function updateTimelineItem(weekNumber, comment) {
         // Find the timeline item for the specified week
         const timelineItems = document.querySelectorAll(".timeline-item");
         let targetItem = null;
@@ -2051,27 +2085,8 @@
           // Update status
           const statusElement = targetItem.querySelector(".week-status");
           if (statusElement) {
-            statusElement.textContent = "กำหนดความคืบหน้าสำเร็จ";
+            statusElement.textContent = "ให้ความเห็นสำเร็จ";
             statusElement.className = "week-status status-completed";
-          }
-
-          // Update progress bar
-          const progressFill = targetItem.querySelector(".progress-fill");
-          const progressPercent = targetItem.querySelector(".progress-percent");
-          if (progressFill && progressPercent) {
-            progressFill.style.width = `${progressValue}%`;
-            progressPercent.textContent = `${progressValue}%`;
-          }
-
-          // Update actions - เปลี่ยนเป็นปุ่ม "ดูรายงาน" เท่านั้น
-          const actionsContainer = targetItem.querySelector(".week-actions");
-          if (actionsContainer) {
-            actionsContainer.innerHTML = `
-                    <button class="btn btn-outline btn-sm" onclick="openReportModal(${weekNumber})">
-                        <i class="fas fa-eye"></i>
-                        ดูรายงาน
-                    </button>
-                `;
           }
 
           // Update timeline dot
@@ -2092,7 +2107,7 @@
           newComment.className = "comment";
           newComment.innerHTML = `
                 <div class="comment-header">
-                    <div class="comment-author">รศ.ดร.อนิราช มิ่งขวัญ (อาจารย์ที่ปรึกษา)</div>
+                    <div class="comment-author">ผศ.อรบุษป์ วุฒิกมลชัย (อาจารย์ที่ปรึกษา)</div>
                     <div class="comment-date">${new Date().toLocaleDateString(
                       "th-TH"
                     )}</div>
@@ -2103,29 +2118,16 @@
             `;
 
           commentsSection.appendChild(newComment);
-
-          // Update progress circle with the latest progress value
-          updateProgressCircle(progressValue);
         }
-      }
-
-      // Update progress circle with the latest progress value
-      function updateProgressCircle(percentage) {
-        const circle = document.querySelector(".progress-circle");
-        const degrees = (percentage / 100) * 360;
-        circle.style.background = `conic-gradient(#48bb78 0deg, #48bb78 ${degrees}deg, #e2e8f0 ${degrees}deg)`;
-
-        // Update the text content
-        circle.style.setProperty("--progress-text", `"${percentage}%"`);
       }
 
       // Close modal when clicking outside
       window.addEventListener("click", function (e) {
-        const progressModal = document.getElementById("progressModal");
+        const commentModal = document.getElementById("commentModal");
         const reportModal = document.getElementById("reportModal");
 
-        if (e.target === progressModal) {
-          closeProgressModal();
+        if (e.target === commentModal) {
+          closeCommentModal();
         }
         if (e.target === reportModal) {
           closeReportModal();
@@ -2134,8 +2136,6 @@
 
       // Initialize progress circle with the latest progress (50% for week 4)
       document.addEventListener("DOMContentLoaded", function () {
-        updateProgressCircle(50);
-
         // Add CSS rule for progress circle text
         const style = document.createElement("style");
         style.textContent = `
@@ -2243,5 +2243,5 @@
         });
       }
     </script>
-  </body>
+</body>
 </html>
